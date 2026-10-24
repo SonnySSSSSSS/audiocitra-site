@@ -1,0 +1,271 @@
+{
+ "spanda": {
+  "eyebrow": "Taken apart",
+  "title": "Seven modules, <em>one at a time.</em>",
+  "aspect": "1600/840",
+  "layers": [
+   {
+    "name": "Console",
+    "img": "img/smart-console.jpg",
+    "head": "Tracks that know about each other",
+    "body": "Set each strip to Stem, Bus or Master and it links with the strips on other tracks. The Rail Link meter lights when the link is live.",
+    "spec": "STEM · BUS · MASTER",
+    "w": 1600,
+    "h": 840
+   },
+   {
+    "name": "Rail",
+    "img": "img/smart-rail.jpg",
+    "head": "Shared flow between instances",
+    "body": "Rail coupling passes level and energy between linked strips, so the mix moves together like one console.",
+    "spec": "Rail coupling · flow display",
+    "w": 1600,
+    "h": 840
+   },
+   {
+    "name": "Neural",
+    "img": "img/smart-neural.jpg",
+    "head": "Bring your own captures",
+    "body": "Swap the Console's built-in saturation for a neural capture. Load .nam or .json capture files through the tone browser, or import files and packs. Drive sets how hard the capture is hit; Mix blends it against the Console's own saturation. No captures are included.",
+    "spec": "Drive · Mix · .nam / .json",
+    "w": 1600,
+    "h": 840
+   },
+   {
+    "name": "Dynamics",
+    "img": "img/smart-dynamics.jpg",
+    "head": "Voicings, or build your own",
+    "body": "Pick a compressor voicing, or switch to CUSTOM and assemble one from 35 parts in seven slots. Many of the parts are fitted to measurements of real units.",
+    "spec": "Voicings · CUSTOM parts",
+    "link": [
+     "#parts",
+     "See the parts"
+    ],
+    "w": 1600,
+    "h": 840
+   },
+   {
+    "name": "EQ",
+    "img": "img/smart-eq.jpg",
+    "head": "Classic curves, band by band",
+    "body": "Bells and shelves follow curves fitted to measurements of classic EQs. In CUSTOM, each of the four bands takes its own part.",
+    "spec": "4 bands · 26 band parts",
+    "link": [
+     "#parts",
+     "See the parts"
+    ],
+    "w": 1600,
+    "h": 840
+   },
+   {
+    "name": "Finisher",
+    "img": "img/smart-finisher.jpg",
+    "head": "Colour, tape and clipping",
+    "body": "Lysium adds preamp-style colour: even or odd harmonics, low-end weight, treble that softens with level. Logos is a tube-style saturator, A-Roll a tape stage, Tarus a clipper, and Kill a clipper at the output. Lysium, Logos, Tarus and Kill oversample up to 16x; tape does not.",
+    "spec": "Lysium · Logos · A-Roll · Tarus · Kill",
+    "w": 1600,
+    "h": 840
+   },
+   {
+    "name": "Limiter",
+    "img": "img/smart-limiter.jpg",
+    "head": "True-peak limiting",
+    "body": "Three modes for three jobs. Driven 18 dB past full scale, the output still stops at the −1 dBTP ceiling.",
+    "spec": "TRANSPARENT · TRANSIENT · SMOOTH",
+    "w": 1600,
+    "h": 840
+   }
+  ]
+ },
+ "galana": {
+  "eyebrow": "Taken apart",
+  "title": "Inside <em>the box.</em>",
+  "schematic": true,
+  "layers": [
+   {
+    "name": "Filter types",
+    "draw": "lp",
+    "head": "Twelve filters of our own design",
+    "body": "Drive, Bite, Comb +, Comb −, Formant, Twin, Wave, Fold, Square, Crush, Ladder and Cascade. A Movement section (envelope, LFO and follower) sweeps the cutoff.",
+    "spec": "12 filter types · Movement"
+   },
+   {
+    "name": "Modes",
+    "draw": "io",
+    "head": "Eight modes",
+    "body": "Drive, Bite, Twin and Wave offer LP 24, LP 12, BP 12, HP 12, HP 24, BP 24, Notch and All-pass. Bite builds its 24 dB modes from two stacked state-variable stages, with a clipped resonance.",
+    "spec": "LP · HP · BP · Notch · All-pass"
+   },
+   {
+    "name": "Resonance",
+    "draw": "res",
+    "head": "A peak that sings",
+    "body": "Resonance raises a peak at the cutoff, and on the Drive filter the bass thins as it rises. The measurements below show the curves.",
+    "spec": "Resonance",
+    "link": [
+     "#measurements",
+     "See the measurements"
+    ]
+   },
+   {
+    "name": "Comb ±",
+    "draw": "comb",
+    "head": "Two combs in one",
+    "body": "Crossfade from a feedforward comb to a feedback comb, with a soft ceiling in the feedback loop to keep it under control.",
+    "spec": "FF → FB · soft ceiling"
+   },
+   {
+    "name": "Stage order",
+    "draw": "slots",
+    "head": "Six orders",
+    "body": "Filter, Chorus and Delay run in one of six orders, picked from a list. Chorus has four styles; the delay is set in note lengths, with feedback, tone and ping-pong.",
+    "spec": "6 stage orders · 4 chorus styles"
+   },
+   {
+    "name": "Drive",
+    "draw": "shape",
+    "head": "Drive and a soft ceiling",
+    "body": "Drive pushes the signal into one of nine saturation curves. The output ends in a soft ceiling, with an optional Auto Gain. Oversampling on the filter can be Off, 2x, 4x or 8x.",
+    "spec": "9 curves · soft ceiling · Auto Gain"
+   }
+  ]
+ },
+ "agni": {
+  "eyebrow": "Taken apart",
+  "title": "Between clean <em>and gone.</em>",
+  "schematic": true,
+  "layers": [
+   {
+    "name": "Engine A",
+    "draw": "shape",
+    "head": "Ten shapes",
+    "body": "Pick a shape and set Drive and Bias. The scope draws the transfer curve live as you turn them.",
+    "spec": "10 shapes · Drive · Bias"
+   },
+   {
+    "name": "Engine B",
+    "draw": "shape2",
+    "head": "The same ten shapes, picked independently",
+    "body": "Engine B offers the same ten shapes as Engine A, with its own selector and controls. Diode bends harder on one side than the other; Rectify moves from half-wave to full-wave as you raise Bias.",
+    "spec": "Same 10 shapes · own controls"
+   },
+   {
+    "name": "Routing",
+    "draw": "routing",
+    "head": "Five ways to wire them",
+    "body": "Serial, Parallel, Stereo (A left, B right), Mid/Side (A mid, B side) or Band Split (A low, B high), with a feedback loop around the pair.",
+    "spec": "5 routings · feedback"
+   },
+   {
+    "name": "Oversampling",
+    "draw": "alias",
+    "head": "Clean at the top",
+    "body": "Quality sets oversampling from 1x to 8x, so hard-driven tones alias less. The Crush shape is the exception: it aliases on purpose.",
+    "spec": "Quality 1x · 2x · 4x · 8x",
+    "link": [
+     "#measurements",
+     "See the measurement"
+    ]
+   },
+   {
+    "name": "Capture",
+    "draw": "capture",
+    "head": "A capture after the engines",
+    "body": "Load a neural capture (.nam) of an amp or pedal to follow the two engines, with a gate and a tight, mid and bright voicing in front of it.",
+    "spec": "Capture slot · amp front end"
+   },
+   {
+    "name": "Cab",
+    "draw": "cab",
+    "head": "Two cabs, blended",
+    "body": "Load two cab impulse responses and blend between them, with low and high cuts.",
+    "spec": "Cab A / B · low cut · high cut"
+   }
+  ]
+ },
+ "akasa": {
+  "eyebrow": "Taken apart",
+  "title": "Six units, <em>three slots.</em>",
+  "schematic": true,
+  "layers": [
+   {
+    "name": "Units",
+    "draw": "tail",
+    "head": "Six units, fitted to measurements",
+    "body": "Each unit is our own reverb, fitted to the measured decay and colour of a classic digital reverb: Megha, Guha, Vayu, Dvaya, Valuka and Adi. The plots below show their reverb time band by band.",
+    "spec": "Megha · Guha · Vayu · Dvaya · Valuka · Adi",
+    "link": [
+     "#measurements",
+     "See the measurements"
+    ]
+   },
+   {
+    "name": "Converters",
+    "draw": "conv",
+    "head": "Optional vintage converters",
+    "body": "Set Converters to Vintage and a unit adds the word length, word noise, idle floor and DC of vintage converters, so quiet tails fade into a floor. It is on Megha (on by default), Valuka and Adi (off by default).",
+    "spec": "Converters: Off · Vintage"
+   },
+   {
+    "name": "Slots",
+    "draw": "early",
+    "head": "Three slots in a row",
+    "body": "Early, Mid and Late each hold any unit and feed the next. Each slot has pre-delay, width, low and high cuts, shimmer and freeze. Late is always on; Early and Mid start switched off.",
+    "spec": "Early · Mid · Late"
+   },
+   {
+    "name": "Wet bus",
+    "draw": "eq",
+    "head": "Shape the wet signal",
+    "body": "After the slots come a four-band wet EQ, ducking, chorus and a fidelity control, with presets and A/B to compare settings.",
+    "spec": "Wet EQ · ducking · chorus · A/B"
+   }
+  ]
+ },
+ "shunya": {
+  "eyebrow": "Taken apart",
+  "title": "Nothing added, <em>only space.</em>",
+  "schematic": true,
+  "layers": [
+   {
+    "name": "No colour",
+    "draw": "flat",
+    "head": "No grain added",
+    "body": "Shunya's units add no saturation, drive or converter grain of their own. That is what transparent means here: the space, with nothing layered on top.",
+    "spec": "No drive · no grain"
+   },
+   {
+    "name": "Units",
+    "draw": "tail",
+    "head": "Six units, fitted to measurements",
+    "body": "Each unit is our own reverb, fitted to the measured behaviour of a classic reverb: Mandapa, Vistara, Taranga, Dhvani, Kosha and Chatur. Some add motion or a chorus; Dhvani and Kosha can feed theirs into the reverb.",
+    "spec": "Mandapa · Vistara · Taranga · Dhvani · Kosha · Chatur"
+   },
+   {
+    "name": "Decay",
+    "draw": "tail2",
+    "head": "Decay band by band",
+    "body": "In most units the highs fade faster than the lows, as in a real room. The plots below show reverb time per band for each unit.",
+    "spec": "Reverb time per band",
+    "link": [
+     "#measurements",
+     "See the measurements"
+    ]
+   },
+   {
+    "name": "Slots",
+    "draw": "early",
+    "head": "Three slots in a row",
+    "body": "Early, Mid and Late each hold any unit and feed the next, so you can chain a room into a hall.",
+    "spec": "Early · Mid · Late"
+   },
+   {
+    "name": "Wet EQ",
+    "draw": "eq",
+    "head": "Shape the wet signal",
+    "body": "A four-band wet EQ after the slots, with presets and A/B to compare settings.",
+    "spec": "Wet EQ · presets · A/B"
+   }
+  ]
+ }
+}

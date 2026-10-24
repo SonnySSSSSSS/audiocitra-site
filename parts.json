@@ -1,0 +1,806 @@
+{
+ "comp": {
+  "tab": "Compressor",
+  "slots": [
+   {
+    "id": "sense",
+    "name": "Sense",
+    "guide": "What the detector listens to.",
+    "options": [
+     {
+      "name": "Peak",
+      "img": "img/parts/comp_sense_0.jpg",
+      "note": "Follows every peak: fast and tight.",
+      "use": "drums, percussion, plucked bass: anything whose hits must be caught.",
+      "bg": "peak sensing is how fast VCA and FET compressors catch transients.",
+      "w": 800,
+      "h": 269
+     },
+     {
+      "name": "RMS",
+      "img": "img/parts/comp_sense_1.jpg",
+      "note": "Follows the average level over about 10 ms: smoother.",
+      "use": "vocals, bass, full mixes; it follows loudness the way the ear does.",
+      "bg": "RMS detection became the standard of VCA bus compressors from the late 1970s.",
+      "w": 800,
+      "h": 382
+     },
+     {
+      "name": "Opto",
+      "img": "img/parts/comp_sense_2.jpg",
+      "note": "A slower average, about 40 ms, like an optical cell.",
+      "use": "vocals, bass guitar, strings: smooth, program-dependent levelling.",
+      "bg": "optical cells (a lamp or LED lighting a photo-resistor) made 1960s levelling amplifiers famous.",
+      "w": 800,
+      "h": 389
+     },
+     {
+      "name": "Feedback",
+      "img": "img/parts/comp_sense_3.jpg",
+      "note": "Listens to its own compressed output: it can never fully catch up, so it eases in and sounds smoother. Ratio tops out at 5:1.",
+      "use": "mix bus, acoustic instruments, gentle vocal levelling.",
+      "bg": "most vintage tube and optical compressors are feedback designs; hearing their own output gives their relaxed feel.",
+      "w": 800,
+      "h": 388
+     }
+    ]
+   },
+   {
+    "id": "curve",
+    "name": "Curve",
+    "guide": "How the gain reduction grows above the threshold.",
+    "options": [
+     {
+      "name": "Hard",
+      "img": "img/parts/comp_curve_0.jpg",
+      "note": "No knee: the full ratio starts right at the threshold.",
+      "use": "drum bus, parallel smash, peak control: obvious and punchy.",
+      "bg": "hard knees are typical of fast VCA and FET units.",
+      "w": 800,
+      "h": 222
+     },
+     {
+      "name": "Soft",
+      "img": "img/parts/comp_curve_1.jpg",
+      "note": "Eases in over the width set by the Knee control.",
+      "use": "vocals and the mix bus, where the start of compression should not be heard.",
+      "bg": "soft knees spread with the 'over-easy' VCA designs of the late 1970s.",
+      "w": 800,
+      "h": 224
+     },
+     {
+      "name": "Ratio-linked knee",
+      "img": "img/parts/comp_curve_2.jpg",
+      "note": "The knee width follows the ratio, widest at middle ratios.",
+      "use": "general duty when you move the ratio a lot; it stays natural at every setting.",
+      "bg": "",
+      "w": 800,
+      "h": 219
+     },
+     {
+      "name": "Rising",
+      "img": "img/parts/comp_curve_3.jpg",
+      "note": "The ratio climbs as it compresses harder.",
+      "use": "bass and vocals that swing between soft and loud: gentle on quiet parts, firm on loud ones.",
+      "bg": "a ratio that rises with level is a trait of many tube and optical designs.",
+      "w": 800,
+      "h": 235
+     },
+     {
+      "name": "Drive into knee",
+      "img": "img/parts/comp_curve_4.jpg",
+      "note": "A fixed 3.5:1 with a wide 11 dB knee.",
+      "use": "vocals and guitars for a classic levelling sound.",
+      "bg": "a moderate fixed ratio over a wide knee is the optical levelling-amplifier recipe.",
+      "w": 800,
+      "h": 255
+     },
+     {
+      "name": "Limit",
+      "img": "img/parts/comp_curve_5.jpg",
+      "note": "A fixed 6.5:1 limiter curve with a 7 dB knee.",
+      "use": "vocal peaks, room mics, loud drums: limiting with a soft edge.",
+      "bg": "fixed high ratios with a knee are typical of broadcast limiters.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Vari-mu",
+      "img": "img/parts/comp_curve_6.jpg",
+      "note": "A gentle 2.3:1 with a short 4 dB knee, like a variable-mu tube.",
+      "use": "mix bus and mastering glue: gentle, low-ratio compression.",
+      "bg": "a variable-mu tube's gain falls smoothly as its bias changes, which keeps the ratio low.",
+      "w": 800,
+      "h": 250
+     }
+    ]
+   },
+   {
+    "id": "grab",
+    "name": "Grab",
+    "guide": "How it clamps down when the level jumps.",
+    "options": [
+     {
+      "name": "Single",
+      "img": "img/parts/comp_grab_0.jpg",
+      "note": "One smooth attack at the Attack time.",
+      "use": "anything; the standard attack.",
+      "bg": "",
+      "w": 800,
+      "h": 299
+     },
+     {
+      "name": "Two-step",
+      "img": "img/parts/comp_grab_1.jpg",
+      "note": "Two attack stages in a row, for a softer start.",
+      "use": "kick and snare when the click should pass but the body be held.",
+      "bg": "a two-stage onset imitates the softer start of optical and tube gain cells.",
+      "w": 800,
+      "h": 290
+     },
+     {
+      "name": "Instant",
+      "img": "img/parts/comp_grab_2.jpg",
+      "note": "Much faster: about a sixth of the Attack time.",
+      "use": "peak catching, aggressive drums, room mics.",
+      "bg": "very fast attack is the FET compressor's signature.",
+      "w": 800,
+      "h": 268
+     },
+     {
+      "name": "Knock",
+      "img": "img/parts/comp_grab_3.jpg",
+      "note": "Knock is the plugin's FET-style compressor voicing. This part runs its own grab and curve (Curve is set aside).",
+      "use": "drums and bass that need bite and punch.",
+      "bg": "measured from a classic FET compressor.",
+      "w": 800,
+      "h": 263
+     },
+     {
+      "name": "Vari-mu build",
+      "img": "img/parts/comp_grab_4.jpg",
+      "note": "A slow build over about 90 ms, whatever the Attack control says.",
+      "use": "mix bus and pads: transients pass, then it settles slowly.",
+      "bg": "variable-mu tubes respond slowly by nature.",
+      "w": 800,
+      "h": 250
+     }
+    ]
+   },
+   {
+    "id": "letgo",
+    "name": "Let go",
+    "guide": "How it recovers after the level drops.",
+    "options": [
+     {
+      "name": "Plain",
+      "img": "img/parts/comp_letgo_0.jpg",
+      "note": "One smooth release at the Release time.",
+      "use": "anything; the standard release.",
+      "bg": "",
+      "w": 800,
+      "h": 234
+     },
+     {
+      "name": "Snap",
+      "img": "img/parts/comp_letgo_1.jpg",
+      "note": "A fast release, 40 ms at most.",
+      "use": "drum rooms and aggressive parallel compression: pumping and loudness.",
+      "bg": "",
+      "w": 800,
+      "h": 218
+     },
+     {
+      "name": "Glide",
+      "img": "img/parts/comp_letgo_2.jpg",
+      "note": "Recovers at a steady rate, then eases out.",
+      "use": "vocals and bass for an even, predictable recovery.",
+      "bg": "a steady recovery rate is how many optical and VCA circuits let go.",
+      "w": 800,
+      "h": 220
+     },
+     {
+      "name": "Two-stage",
+      "img": "img/parts/comp_letgo_3.jpg",
+      "note": "A fast 60 ms recovery, then a slow tail that builds only while it works hard.",
+      "use": "the mix bus and full mixes: quick after transients, slow under sustained loudness.",
+      "bg": "a dual-time-constant ('auto') release is the classic bus-compressor trick.",
+      "w": 800,
+      "h": 220
+     },
+     {
+      "name": "Release B",
+      "img": "img/parts/comp_letgo_4.jpg",
+      "note": "Release B is the plugin's name for a release that depends on depth: it recovers more slowly than the Release time after light compression, and faster after heavy compression.",
+      "use": "dense material and vocals; it avoids long holes after big hits.",
+      "bg": "program-dependent release is a hallmark of optical cells.",
+      "w": 800,
+      "h": 223
+     }
+    ]
+   },
+   {
+    "id": "colour",
+    "name": "Colour",
+    "guide": "Harmonic colour added by the compressor.",
+    "options": [
+     {
+      "name": "Clean",
+      "img": "img/parts/comp_colour_0.jpg",
+      "note": "No colour.",
+      "use": "classical, acoustic and mastering work, where the dynamics should be invisible.",
+      "bg": "",
+      "w": 800,
+      "h": 383
+     },
+     {
+      "name": "Triode",
+      "img": "img/parts/comp_colour_1.jpg",
+      "note": "Even-harmonic tube warmth.",
+      "use": "vocals, bass, keys: warmth and fullness.",
+      "bg": "triode stages produce mostly second harmonic, the 'tube warmth' of classic preamps.",
+      "w": 800,
+      "h": 377
+     },
+     {
+      "name": "Pentode",
+      "img": "img/parts/comp_colour_2.jpg",
+      "note": "Tube saturation that gets edgier as it is driven.",
+      "use": "guitars, synths, drum bus: bite when pushed.",
+      "bg": "pentode stages add more odd harmonics as they are driven.",
+      "w": 800,
+      "h": 401
+     },
+     {
+      "name": "Transformer",
+      "img": "img/parts/comp_colour_3.jpg",
+      "note": "Saturates the lows (below about 120 Hz) more.",
+      "use": "kick, bass, 808s: weight and thickness in the lows.",
+      "bg": "audio transformers saturate first at low frequencies, where the core's flux is highest.",
+      "w": 800,
+      "h": 381
+     },
+     {
+      "name": "Tape",
+      "img": "img/parts/comp_colour_4.jpg",
+      "note": "Saturates the highs (above about 3 kHz) more.",
+      "use": "drums, mix bus, acoustic guitar: softened, glued highs.",
+      "bg": "hit hard, magnetic tape saturates and partly erases its own high frequencies.",
+      "w": 800,
+      "h": 388
+     },
+     {
+      "name": "Dense",
+      "img": "img/parts/comp_colour_5.jpg",
+      "note": "Thickens the peaks: gentle odd-harmonic density.",
+      "use": "drums and loud rock: fatter peaks without obvious distortion.",
+      "bg": "",
+      "w": 800,
+      "h": 361
+     },
+     {
+      "name": "FET",
+      "img": "img/parts/comp_colour_6.jpg",
+      "note": "A touch of even harmonics, like a FET stage.",
+      "use": "vocals and snare: subtle presence.",
+      "bg": "FET gain stages add a little, mostly even, harmonic content.",
+      "w": 800,
+      "h": 591
+     },
+     {
+      "name": "Knock",
+      "img": "img/parts/comp_colour_7.jpg",
+      "note": "The Knock voicing's own harmonics.",
+      "use": "drums and bass.",
+      "bg": "the measured harmonics of a classic FET compressor.",
+      "w": 800,
+      "h": 544
+     }
+    ]
+   },
+   {
+    "id": "place",
+    "name": "Colour place",
+    "guide": "Where the colour sits in the chain.",
+    "options": [
+     {
+      "name": "After gain",
+      "img": "img/parts/comp_place_0.jpg",
+      "note": "Colours the compressed signal.",
+      "use": "the classic outboard sound; the colour sits after the gain, as in most hardware.",
+      "bg": "",
+      "w": 800,
+      "h": 383
+     },
+     {
+      "name": "Before detector",
+      "img": "img/parts/comp_place_1.jpg",
+      "note": "Colours the input, so the compressor reacts to the coloured sound.",
+      "use": "thicker, more interactive compression; the compressor reacts to the colour, like driving a unit's input stage.",
+      "bg": "",
+      "w": 800,
+      "h": 360
+     }
+    ]
+   },
+   {
+    "id": "driver",
+    "name": "Colour driver",
+    "guide": "What makes the colour stronger.",
+    "options": [
+     {
+      "name": "Input",
+      "img": "img/parts/comp_driver_0.jpg",
+      "note": "Steady, set by Colour amount.",
+      "use": "a constant flavour, whatever the music does.",
+      "bg": "",
+      "w": 800,
+      "h": 384
+     },
+     {
+      "name": "Gain reduction",
+      "img": "img/parts/comp_driver_1.jpg",
+      "note": "More colour the harder it compresses.",
+      "use": "drums and the bus: the harder it works, the more it colours, like a tube compressor running out of headroom.",
+      "bg": "",
+      "w": 800,
+      "h": 390
+     },
+     {
+      "name": "Output level",
+      "img": "img/parts/comp_driver_2.jpg",
+      "note": "More colour on louder output.",
+      "use": "loud sections: colour that blooms with the music.",
+      "bg": "",
+      "w": 800,
+      "h": 371
+     },
+     {
+      "name": "Knee position",
+      "img": "img/parts/comp_driver_3.jpg",
+      "note": "More colour as the signal passes through the knee.",
+      "use": "vocals: colour appears where compression starts, and quiet parts stay clean.",
+      "bg": "",
+      "w": 800,
+      "h": 366
+     }
+    ]
+   }
+  ],
+  "note": "Threshold, Ratio, Knee, Attack, Release and Makeup stay on the panel. A part that sets one of them locks it there.",
+  "default": [
+   1,
+   1,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "recipes": [
+   [
+    "Bus Glue",
+    [
+     1,
+     1,
+     0,
+     4,
+     0,
+     0,
+     0
+    ]
+   ],
+   [
+    "Opto Level",
+    [
+     2,
+     4,
+     1,
+     3,
+     1,
+     0,
+     1
+    ]
+   ],
+   [
+    "Thick Bus",
+    [
+     1,
+     3,
+     0,
+     3,
+     3,
+     0,
+     0
+    ]
+   ],
+   [
+    "Knee Tube",
+    [
+     1,
+     1,
+     0,
+     3,
+     1,
+     0,
+     3
+    ]
+   ],
+   [
+    "Knock-like",
+    [
+     0,
+     0,
+     2,
+     1,
+     6,
+     0,
+     1
+    ]
+   ]
+  ],
+  "unused": [
+   [
+    1,
+    2,
+    [
+     3
+    ],
+    "The Knock grab brings its own curve."
+   ],
+   [
+    5,
+    4,
+    [
+     0
+    ],
+    "No colour is picked."
+   ],
+   [
+    5,
+    4,
+    [
+     7
+    ],
+    "The Knock colour sets its own drive."
+   ],
+   [
+    6,
+    4,
+    [
+     0
+    ],
+    "No colour is picked."
+   ],
+   [
+    6,
+    4,
+    [
+     7
+    ],
+    "The Knock colour sets its own drive."
+   ]
+  ]
+ },
+ "eq": {
+  "tab": "EQ",
+  "slots": [
+   {
+    "id": "low",
+    "name": "Low band",
+    "guide": "How the low band's shelf turns. In bell mode, Passive is a plain bell.",
+    "options": [
+     {
+      "name": "Plain",
+      "img": "img/parts/eq_low_0.jpg",
+      "note": "The shelf exactly as dialled.",
+      "use": "you want exactly what you dial, for surgical and mastering moves.",
+      "bg": "",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "British",
+      "img": "img/parts/eq_low_1.jpg",
+      "note": "British console: a softer shelf that turns about an octave from the knob.",
+      "use": "drums, vocals, modern pop and rock: punchy and a little hyped.",
+      "bg": "the EQ of British large-format consoles from the late 1970s and 1980s.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Passive",
+      "img": "img/parts/eq_low_2.jpg",
+      "note": "Passive tube program EQ: a very gentle low shelf.",
+      "use": "kick, bass, vocals, the mix bus: huge, gentle lows.",
+      "bg": "a 1950s passive tube program equalizer; boosting and cutting the same low band was its famous trick.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Class-A",
+      "img": "img/parts/eq_low_3.jpg",
+      "note": "British class-A module: a firm shelf that turns well past the knob; cuts slope gently.",
+      "use": "vocals, guitars, drums: thick, musical shelves.",
+      "bg": "1970s British class-A console modules with inductor EQ.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "American",
+      "img": "img/parts/eq_low_4.jpg",
+      "note": "American console module: a broad, smooth shelf that reaches well past the knob.",
+      "use": "drums, guitars, bass: forward and punchy.",
+      "bg": "American console modules known for their proportional-Q EQ.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Mastering",
+      "img": "img/parts/eq_low_5.jpg",
+      "note": "Passive tube mastering EQ: raise Q for a resonant shelf with a dip beside it.",
+      "use": "mastering and the mix bus: big, smooth shelves; raise Q for the resonant bump.",
+      "bg": "a modern passive tube mastering EQ with adjustable shelf bandwidth.",
+      "w": 800,
+      "h": 250
+     }
+    ]
+   },
+   {
+    "id": "lowmid",
+    "name": "Low-mid band",
+    "guide": "How wide the low-mid bell is.",
+    "options": [
+     {
+      "name": "Plain",
+      "img": "img/parts/eq_lowmid_0.jpg",
+      "note": "The bell exactly as dialled.",
+      "use": "you want exactly what you dial, for surgical cuts and precise boosts.",
+      "bg": "",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "British",
+      "img": "img/parts/eq_lowmid_1.jpg",
+      "note": "British console: much broader than its Q says, tighter as you boost.",
+      "use": "snare crack, vocal presence, guitar bite: broad and forgiving.",
+      "bg": "British large-format console mids, wider than their Q markings suggest.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Class-A",
+      "img": "img/parts/eq_lowmid_2.jpg",
+      "note": "British class-A module: one broad fixed width, tighter as you boost. Q is not used.",
+      "use": "vocals and guitars: broad, musical boosts that tighten as you push.",
+      "bg": "1970s British class-A console modules with a fixed-width mid.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "American",
+      "img": "img/parts/eq_lowmid_3.jpg",
+      "note": "American console module: proportional Q, cuts mirror boosts. Q is not used.",
+      "use": "snare, toms, guitars: boosts that narrow as you push, so big moves stay focused.",
+      "bg": "proportional-Q, the signature of American console EQ.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Precision",
+      "img": "img/parts/eq_lowmid_4.jpg",
+      "note": "Mastering parametric: a clean bell whose width follows the Q you dial.",
+      "use": "mastering and the mix bus: narrow, exact moves that keep the width you set.",
+      "bg": "a 1970s American mastering parametric equalizer, measured from a sampled copy (up to 6 dB).",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Passive",
+      "img": "img/parts/eq_lowmid_5.jpg",
+      "note": "Passive tube mid EQ: broad boosts low down, tighter up top; the cut is deeper and narrower. Q is not used.",
+      "use": "vocals, guitars, the mix bus: a gentle presence lift or a mud dip with tube-EQ manners.",
+      "bg": "the 1950s passive tube mid-range equalizer that partnered the program EQ, measured from a sampled copy.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Mastering",
+      "img": "img/parts/eq_lowmid_6.jpg",
+      "note": "Passive tube mastering EQ: a very broad bell that narrows as you boost; Q sets how broad.",
+      "use": "mastering and the mix bus: wide, gentle tone moves that never sound like an EQ.",
+      "bg": "a modern passive tube mastering EQ's mid band, measured on the unit.",
+      "w": 800,
+      "h": 250
+     }
+    ]
+   },
+   {
+    "id": "highmid",
+    "name": "High-mid band",
+    "guide": "How wide the high-mid bell is.",
+    "options": [
+     {
+      "name": "Plain",
+      "img": "img/parts/eq_highmid_0.jpg",
+      "note": "The bell exactly as dialled.",
+      "use": "you want exactly what you dial, for surgical cuts and precise boosts.",
+      "bg": "",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "British",
+      "img": "img/parts/eq_highmid_1.jpg",
+      "note": "British console: much broader than its Q says, tighter as you boost.",
+      "use": "snare crack, vocal presence, guitar bite: broad and forgiving.",
+      "bg": "British large-format console mids, wider than their Q markings suggest.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Class-A",
+      "img": "img/parts/eq_highmid_2.jpg",
+      "note": "British class-A module: one broad fixed width, tighter as you boost. Q is not used.",
+      "use": "vocals and guitars: broad, musical boosts that tighten as you push.",
+      "bg": "1970s British class-A console modules with a fixed-width mid.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "American",
+      "img": "img/parts/eq_highmid_3.jpg",
+      "note": "American console module: proportional Q, cuts mirror boosts. Q is not used.",
+      "use": "snare, toms, guitars: boosts that narrow as you push, so big moves stay focused.",
+      "bg": "proportional-Q, the signature of American console EQ.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Precision",
+      "img": "img/parts/eq_highmid_4.jpg",
+      "note": "Mastering parametric: a clean bell whose width follows the Q you dial.",
+      "use": "mastering and the mix bus: narrow, exact moves that keep the width you set.",
+      "bg": "a 1970s American mastering parametric equalizer, measured from a sampled copy (up to 6 dB).",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Passive",
+      "img": "img/parts/eq_highmid_5.jpg",
+      "note": "Passive tube mid EQ: broad boosts low down, tighter up top; the cut is deeper and narrower. Q is not used.",
+      "use": "vocals, guitars, the mix bus: a gentle presence lift or a mud dip with tube-EQ manners.",
+      "bg": "the 1950s passive tube mid-range equalizer that partnered the program EQ, measured from a sampled copy.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Mastering",
+      "img": "img/parts/eq_highmid_6.jpg",
+      "note": "Passive tube mastering EQ: a very broad bell that narrows as you boost; Q sets how broad.",
+      "use": "mastering and the mix bus: wide, gentle tone moves that never sound like an EQ.",
+      "bg": "a modern passive tube mastering EQ's mid band, measured on the unit.",
+      "w": 800,
+      "h": 250
+     }
+    ]
+   },
+   {
+    "id": "high",
+    "name": "High band",
+    "guide": "How the high band's shelf turns. In bell mode, Passive is a plain bell.",
+    "options": [
+     {
+      "name": "Plain",
+      "img": "img/parts/eq_high_0.jpg",
+      "note": "The shelf exactly as dialled.",
+      "use": "you want exactly what you dial, for surgical and mastering moves.",
+      "bg": "",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "British",
+      "img": "img/parts/eq_high_1.jpg",
+      "note": "British console: a softer shelf that turns about an octave from the knob.",
+      "use": "drums, vocals, modern pop and rock: punchy and a little hyped.",
+      "bg": "the EQ of British large-format consoles from the late 1970s and 1980s.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Passive",
+      "img": "img/parts/eq_high_2.jpg",
+      "note": "Passive tube program EQ: the high boost is a broad bell, not a shelf.",
+      "use": "vocals, the mix bus: a silky top.",
+      "bg": "a 1950s passive tube program equalizer; its high boost is a broad bell.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Class-A",
+      "img": "img/parts/eq_high_3.jpg",
+      "note": "British class-A module: a firm shelf that turns well past the knob; cuts slope gently.",
+      "use": "vocals, guitars, drums: thick, musical shelves.",
+      "bg": "1970s British class-A console modules with inductor EQ.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "American",
+      "img": "img/parts/eq_high_4.jpg",
+      "note": "American console module: a broad, smooth shelf.",
+      "use": "drums, guitars, bass: forward and punchy.",
+      "bg": "American console modules known for their proportional-Q EQ.",
+      "w": 800,
+      "h": 250
+     },
+     {
+      "name": "Mastering",
+      "img": "img/parts/eq_high_5.jpg",
+      "note": "Passive tube mastering EQ: raise Q for a resonant shelf with a dip beside it.",
+      "use": "mastering and the mix bus: big, smooth shelves; raise Q for the resonant bump.",
+      "bg": "a modern passive tube mastering EQ with adjustable shelf bandwidth.",
+      "w": 800,
+      "h": 250
+     }
+    ]
+   }
+  ],
+  "note": "Frequency, Gain, Q and the shelf switches stay on the panel. Each band takes its own part.",
+  "default": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "recipes": [
+   [
+    "Clean",
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   [
+    "British class-A",
+    [
+     3,
+     2,
+     2,
+     3
+    ]
+   ],
+   [
+    "American",
+    [
+     4,
+     3,
+     3,
+     4
+    ]
+   ],
+   [
+    "Passive ends, British mids",
+    [
+     2,
+     1,
+     1,
+     2
+    ]
+   ],
+   [
+    "Mastering shelves, American mids",
+    [
+     5,
+     3,
+     3,
+     5
+    ]
+   ]
+  ]
+ }
+}
