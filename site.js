@@ -1,6 +1,6 @@
 // Shared nav/footer, Spanda module tabs, skin compare sliders, listen players, teardown, parts builder.
 (() => {
-  const pages = [["spanda.html","Spanda"],["galana.html","Gālana"],["agni.html","Agni"],["akasa.html","Ākāśa"],["shunya.html","Shunya"]];
+  const pages = [["spanda.html","Spanda"],["galana.html","Gālana"],["agni.html","Agni"],["akasa.html","Ākāśa"],["shunya.html","Shunya"],["lahari.html","Lahari"]];
   // "" and "/" are the index, "spanda" or "spanda/" are spanda.html
   let here = location.pathname.replace(/\/+$/, "").split("/").pop() || "index.html";
   if (!/\./.test(here)) here += ".html";
