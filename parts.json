@@ -367,7 +367,7 @@
     ]
    }
   ],
-  "note": "Threshold, Ratio, Knee, Attack, Release and Makeup stay on the panel. A part that sets one of them locks it there.",
+  "note": "Threshold, Ratio, Knee, Attack, Release and Makeup stay on the panel. If a part sets one of them, it locks it there.. that's the part doing its job.",
   "default": [
    1,
    1,
@@ -748,7 +748,7 @@
     ]
    }
   ],
-  "note": "Frequency, Gain, Q and the shelf switches stay on the panel. Each band takes its own part.",
+  "note": "Frequency, Gain, Q and the shelf switches stay on the panel. Each band takes its own part, so go wild.",
   "default": [
    0,
    0,

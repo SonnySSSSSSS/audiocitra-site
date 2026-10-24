@@ -136,7 +136,7 @@ eq = [
 
 out = {
     'comp': {'tab': 'Compressor', 'slots': comp,
-             'note': 'Threshold, Ratio, Knee, Attack, Release and Makeup stay on the panel. A part that sets one of them locks it there.',
+             'note': 'Threshold, Ratio, Knee, Attack, Release and Makeup stay on the panel. If a part sets one of them, it locks it there.. that's the part doing its job.',
              'default': [1, 1, 0, 0, 0, 0, 0],
              # recipes from compressorRecipes() (sense, curve, grab, letGo, colour, place, driver)
              'recipes': [['Bus Glue', [1, 1, 0, 4, 0, 0, 0]], ['Opto Level', [2, 4, 1, 3, 1, 0, 1]],
@@ -144,7 +144,7 @@ out = {
                          ['Knock-like', [0, 0, 2, 1, 6, 0, 1]]]},
     # eqRecipes(): low, lowMid, highMid, high
     'eq': {'tab': 'EQ', 'slots': eq,
-           'note': 'Frequency, Gain, Q and the shelf switches stay on the panel. Each band takes its own part.',
+           'note': 'Frequency, Gain, Q and the shelf switches stay on the panel. Each band takes its own part, so go wild.',
            'default': [0, 0, 0, 0],
            'recipes': [['Clean', [0, 0, 0, 0]], ['British class-A', [3, 2, 2, 3]], ['American', [4, 3, 3, 4]],
                        ['Passive ends, British mids', [2, 1, 1, 2]], ['Mastering shelves, American mids', [5, 3, 3, 5]]]},
