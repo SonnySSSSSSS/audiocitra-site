@@ -94,9 +94,10 @@ section{padding-block:88px;border-top:1px solid var(--line)}
   display:grid;place-content:center;text-align:center;gap:8px;padding:24px}
 .pending b{font:700 clamp(20px,3vw,30px) var(--display)}
 .pending span{font:400 12px var(--mono);color:var(--mute);letter-spacing:.06em;max-width:46ch}
-.skins{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.skins span{font:500 12px var(--mono);padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--mute)}
-.skins span.d3{border-color:var(--accent);color:var(--fg)}
+.skins{display:flex;gap:0;flex-wrap:wrap;margin-top:14px;font:500 12px var(--mono);color:var(--mute);cursor:default}
+.skins span{padding:0}
+.skins span+span::before{content:"·";margin:0 10px;color:var(--line)}
+.skins span.d3{color:var(--fg)}
 
 /* measurements */
 .meas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:20px}
