@@ -252,3 +252,10 @@ body.pale .plate,body.pale .compare{box-shadow:0 30px 60px -30px #0004}
 .credits a,.hero p a{color:var(--accent)}
 footer a{color:var(--mute)}
 footer a:hover{color:var(--fg)}
+
+/* Coming soon: big banner on unreleased plugin pages, badge on their home cards */
+.soon-banner{margin-top:24px;padding:28px 24px;border:2px dashed var(--accent);border-radius:18px;background:var(--panel);text-align:center;display:grid;gap:10px}
+.soon-banner b{font:800 clamp(40px,9vw,96px)/1 var(--display);letter-spacing:-.02em;text-transform:uppercase;color:var(--accent)}
+.soon-banner p{margin:0 auto;max-width:56ch;color:var(--mute)}
+.pale .soon-banner{background:transparent}
+.soon-tag{justify-self:start;font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px dashed var(--c);color:var(--c)}

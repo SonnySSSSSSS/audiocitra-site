@@ -69,6 +69,10 @@ def skins(d3, flat, key=None):
             f'<div class="seg" data-swap="i-skin" aria-label="Skin" style="margin-top:12px">{btns}</div>')
 
 
+SOON_BANNER = '''<div class="wrap"><div class="soon-banner" role="note"><b>Coming soon</b><p>I&#39;m launching with Spanda and Ākāśa first so I can test them properly. {name} is next.. have a look around, it&#39;s all real, it just isn&#39;t out yet.</p></div></div>'''
+SOON = {'galana', 'agni', 'shunya', 'lahari'}
+
+
 def cta(name):
     return (f'<section><div class="wrap cta"><h2>Want to try {name}?</h2>'
             '<p class="soon">Trial&#39;s coming soon.. I&#39;m almost there</p><p class="lede req">VST3 · Windows 64-bit · licence, trial and signed updates right inside the plugin</p></div></section>')
@@ -79,7 +83,8 @@ def page(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_cap, 
     key = fn.split('.')[0]
     n = len(TD[key]['layers'])
     grid = ('<div class="grid2">' + ''.join(plate(s, a) for s, a in closeups) + '</div>') if closeups else ''
-    out = HEAD.format(title=title, desc=e(desc), ogimg=hero_src, icon=ICON, acc=acc, cls=cls) + f'''<div class="wrap">
+    soon = SOON_BANNER.format(name=name) if key in SOON else ''
+    out = HEAD.format(title=title, desc=e(desc), ogimg=hero_src, icon=ICON, acc=acc, cls=cls) + soon + f'''<div class="wrap">
   <header class="hero hero-tight"><span class="eyebrow">{eyebrow}</span><h1>{h1}</h1><p>{lede}</p>
   <div class="row"><a class="btn solid" href="#inside">Take it apart</a><a class="btn" href="#listen">Have a listen</a><a class="btn" href="#measurements">The plots</a></div></header>
   {plate(hero_src, hero_alt, False)}<p class="cap">{hero_cap}</p>
@@ -177,7 +182,8 @@ page('shunya.html', 'Shunya Reverb',
 def page_lite(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_cap, feat_head, fs, sk, extra=''):
     # A product page without teardown, audio or measurements yet (a new plugin): hero, features, skins, call to action.
     name = title.split()[0]
-    out = HEAD.format(title=title, desc=e(desc), ogimg=hero_src, icon=ICON, acc=acc, cls='') + f'''<div class="wrap">
+    soon = SOON_BANNER.format(name=name) if fn.split('.')[0] in SOON else ''
+    out = HEAD.format(title=title, desc=e(desc), ogimg=hero_src, icon=ICON, acc=acc, cls='') + soon + f'''<div class="wrap">
   <header class="hero hero-tight"><span class="eyebrow">{eyebrow}</span><h1>{h1}</h1><p>{lede}</p>
   <div class="row"><a class="btn solid" href="#features">What's in here</a><a class="btn" href="#skins">Skins</a></div></header>
   {plate(hero_src, hero_alt, False)}<p class="cap">{hero_cap}</p>
@@ -225,7 +231,8 @@ cards = [
 def card(h, c, t, n, p, src):
     w, hh = Image.open(src).size
     th = f'<div class="thumb"><img src="{src}" alt="" width="{w}" height="{hh}" loading="lazy"></div>'
-    return f'<a class="bay" href="{h}" style="--c:var(--{c})">{th}<span class="tag">{t}</span><h3>{n}</h3><p>{p}</p></a>'
+    badge = '<span class="soon-tag">Coming soon</span>' if c in SOON else ''
+    return f'<a class="bay" href="{h}" style="--c:var(--{c})">{th}<span class="tag">{t}</span>{badge}<h3>{n}</h3><p>{p}</p></a>'
 
 
 home = HEAD.format(title='Audio Citra', desc=e('Audio Citra makes six VST3 plugins for Windows: Spanda, Gālana, Agni, Ākāśa, Shunya and Lahari.'),
