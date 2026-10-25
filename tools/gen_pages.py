@@ -71,7 +71,7 @@ def skins(d3, flat, key=None):
 
 def cta(name):
     return (f'<section><div class="wrap cta"><h2>Want to try {name}?</h2>'
-            '<p class="soon">Trial&#39;s coming soon.. I&#39;m almost there</p><p class="lede req">VST3 · Windows 64-bit</p></div></section>')
+            '<p class="soon">Trial&#39;s coming soon.. I&#39;m almost there</p><p class="lede req">VST3 · Windows 64-bit · licence, trial and signed updates right inside the plugin</p></div></section>')
 
 
 def page(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_cap, feat_head, fs, closeups, sk, cls=''):
@@ -113,9 +113,11 @@ page('galana.html', 'Gālana Effects Box',
      'img/galana-hero.jpg', 'Gālana Field Radio skin rendered in 3D', 'Field Radio skin · 3D render',
      'Ok, here\'s <em>what\'s inside.</em>',
      [('Twelve filter types', 'Drive, Bite, Comb +, Comb −, Formant, Twin, Wave, Fold, Square, Crush, Ladder and Cascade. Drive, Bite, Twin and Wave each get eight modes: LP, HP and BP at 12 and 24 dB, plus Notch and All-pass. Nerd note: Bite gets its 24 dB modes by stacking two state-variable stages, which is a big part of why it bites.', '12 types · 8 modes'),
-      ('Movement', 'An envelope, an LFO and a follower, all pushing the cutoff around. The LFO goes from a 1/16 note up to 2 bars, or free from 0.02 to 20 Hz, in seven shapes.. Steps, Glide and S&amp;H are my favourites. And you can have it follow the input or a sidechain.', 'Envelope · LFO · follower'),
+      ('Movement', 'An envelope, an LFO and a follower, all pushing the cutoff around. The LFO goes from a 1/16 note up to 2 bars, or free from 0.02 to 20 Hz, in seven shapes.. Steps, Glide and S&amp;H are my favourites. There\'s a step LFO too, with 4, 8 or 16 steps you draw yourself and a Glide to smooth them out. The envelope and the follower have their own attack, decay or release, and Movement can follow the input or a sidechain.', 'Envelope · LFO · follower'),
       ('Comb ±', 'One knob slides you from a feedforward comb into a feedback comb. I put a soft ceiling inside the feedback loop so it can ring like crazy without blowing up on you.', 'FF → FB · soft ceiling'),
       ('Chorus and delay', 'Four chorus styles: Classic, Wide, Slow and Fast. The delay works in note lengths, with feedback, tone and ping-pong.', '4 chorus styles · ping-pong'),
+      ('Drive and saturation', 'Drive goes from -12 to +24 dB into one of nine saturation curves: Clean, Warm, Hard, Fold, Thick and four flavours of Asym. Hit Glue to pull it together, link Drive and Output if you want to push without getting louder, or let Auto Gain handle it.', '9 curves · Glue · Auto Gain'),
+      ('Presets, A/B and undo', 'Presets with Previous/Next and folders, an A/B compare with a Copy button, and real undo/redo (Ctrl+Z) one move at a time. Presets only hold the sound, never your skin or size. Click the lotus for size (60–200%) and a separate oversampling setting just for offline bounces.', 'Presets · A/B · undo · render oversampling'),
       ('Six stage orders', 'Filter, Chorus and Delay can go in any of the six possible orders.. just pick one from the list. Delay into filter is a whole different animal than filter into delay, trust me. Filter oversampling goes Off, 2x, 4x or 8x.', '6 orders · oversampling')],
      [('img/galana-knobs.jpg', 'Cutoff, Resonance, Drive and Output chicken-head knobs'),
       ('img/galana-crt.jpg', 'The CRT showing the Comb + response')],
@@ -124,12 +126,13 @@ page('galana.html', 'Gālana Effects Box',
 page('agni.html', 'Agni Distortion',
      'Agni is a VST3 distortion for Windows: two engines that share ten shapes, five routings, a capture slot and cab impulse responses.',
      'agni', 'Agni · distortion', 'Two engines. <em>Ten shapes.</em>',
-     'Two distortion engines, and each one picks from the same ten shapes. Then five ways to wire them, a feedback loop, a capture slot and cab IRs. I basically wanted my whole dirt rack in one box.',
+     'Two distortion engines, and each one picks from the same ten shapes. Then five ways to wire them, a feedback loop, a capture slot and cab IRs. Engine A can also turn into one of eight pedals.. I basically wanted my whole dirt rack in one box.',
      'img/agni-hero.jpg', 'Agni Valve rack skin rendered in 3D', 'Valve skin · rendered from the skin&#39;s own 3D plate',
      'Everything between <em>clean and totally gone.</em>',
-     [('Two engines, ten shapes', 'Each engine grabs its own shape from the same ten: Soft, Hard, Diode, Fold, Rectify, Tube, Transistor, Germanium, Tape and Crush. Turn Drive and Bias and the scope draws the transfer curve live.. honestly I could watch that thing all day.', '2 engines · 10 shapes'),
+     [('Pedal models', 'Flip Engine A from Custom to a pedal: Clean Boost, Tight Boost, Overdrive, Fuzz, Filter Distortion, Distortion, Metal or Octave Fuzz. Each one gets the three knobs you expect, Drive, Tone and Level, from 0 to 10. I fitted them to measurements and community captures of real pedals, clean blend and tone circuits included. Octave Fuzz even has its own octave-up stage. Switch back to Custom and your own engine settings come right back.', '8 pedals · Drive · Tone · Level'),
+      ('Two engines, ten shapes', 'Each engine grabs its own shape from the same ten: Soft, Hard, Diode, Fold, Rectify, Tube, Transistor, Germanium, Tape and Crush. Turn Drive and Bias and the scope draws the transfer curve live.. honestly I could watch that thing all day.', '2 engines · 10 shapes'),
       ('Routings, feedback and modulation', 'Five ways to wire the two engines together, and a feedback loop wrapped around both. Two modulators (LFO or envelope) can push drive, tone, bias or balance around while you play.', '5 routings · feedback · 2 mods'),
-      ('Capture and cab', 'Drop a neural capture (.nam) in after the engines, with a gate and a tight, mid or bright voicing in front of it. Then blend two cab IRs to taste.', 'Capture slot · cab A/B')],
+      ('Capture and cab', 'Drop a neural capture (.nam) in after the engines, with a gate and a tight, mid or bright voicing in front of it. Then blend two cab IRs to taste. Oh, and Render Quality lets offline bounces run at a higher oversampling than you play at.', 'Capture slot · cab A/B')],
      [('img/agni-engine.jpg', 'Engine A: shape selector and Drive knob'),
       ('img/agni-master.jpg', 'Master section with twin VU meters')],
      skins(['Valve'], ['Forge', 'Slate', 'Citra', 'Pyre'], 'agni'))
@@ -146,7 +149,9 @@ page('akasa.html', 'Ākāśa Reverb',
       ('Dvaya', '77 two-effect presets that pair the reverb with delay, modulation, phaser or pitch blocks.', '77 presets'),
       ('Valuka and Adi', 'Simple little reverbs from the early digital days. Valuka has 100 programs (flanges and choruses in there too), Adi has 64. Lo-fi and charming.', '100 + 64 programs'),
       ('Optional converters', 'Set Converters to Vintage and you get the word length, word noise, idle floor and DC of old converters.. the grit nobody asked for but everybody misses. It\'s on Megha (on by default), Valuka and Adi (off by default).', 'Converters: Off · Vintage'),
-      ('Three slots', 'Early, Mid and Late each hold any unit, and each feeds the next. Every slot gets pre-delay, width, cuts, shimmer and freeze. After those: a four-band wet EQ, ducking, chorus and a fidelity control, plus presets and A/B.', 'Early · Mid · Late · A/B')],
+      ('Three slots', 'Early, Mid and Late each hold any unit, and each feeds the next. Every slot gets pre-delay, width, cuts, shimmer and freeze. After those: a four-band wet EQ, ducking, chorus and a fidelity control, plus presets and A/B.', 'Early · Mid · Late · A/B'),
+      ('FIT: Classic or Measured', 'This one is pure nerd stuff. I went back and refitted the late reverb of the clean units against my measurements with gradient descent. The FIT switch in the lotus panel lets you flip between Classic (the original fit) and Measured (the new one), with a crossfade, so you can judge for yourself.', 'FIT: Classic · Measured'),
+      ('Auto Gain', 'On by default: the output sits at the same loudness as the input, so you\'re never fooled by a louder reverb.', 'Auto Gain')],
      [],
      skins(['Walnut', 'Orb', 'Oxblood'], ['Watercolor'], 'akasa'))
 
@@ -162,7 +167,9 @@ page('shunya.html', 'Shunya Reverb',
       ('Dhvani', 'Eight types of room, stage, hall and echo, with delay feedback and three chorus types. And the chorus can feed into the reverb.', 'Chorus → reverb'),
       ('Kosha', 'Chambers, halls, a sheet and echoes, eight chorus types, and a send that pushes the chorus into the reverb.', 'Chorus → reverb'),
       ('Chatur', 'Rooms, sheets and shaped programs, plus Backward Swell and Gate Burst. 10 programs in all.', '10 programs'),
-      ('Three slots', 'Early, Mid and Late each hold any unit and feed the next, so you can chain a room into a hall.. which I do constantly. After them: a four-band wet EQ, presets and A/B.', 'Early · Mid · Late · A/B')],
+      ('Three slots', 'Early, Mid and Late each hold any unit and feed the next, so you can chain a room into a hall.. which I do constantly. After them: a four-band wet EQ, presets and A/B.', 'Early · Mid · Late · A/B'),
+      ('FIT: Classic or Measured', 'Same nerd switch as Ākāśa. I refitted the late reverb against my measurements with gradient descent, and the FIT switch in the lotus panel flips between Classic and Measured with a crossfade. Mandapa also got new edge depths and a refit of its top-end damping.', 'FIT: Classic · Measured'),
+      ('Auto Gain', 'On by default, so the output sits at the input\'s loudness.', 'Auto Gain')],
      [('img/shunya-crt.jpg', 'The phosphor tube showing Mandapa and its decay trace'),
       ('img/shunya-knobs.jpg', 'Mix knob close-up')],
      skins(['Graticule', 'Eclipse'], ['Washi', 'Blueprint'], 'shunya'), cls=' class="pale"')
@@ -189,27 +196,29 @@ def page_lite(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_
 
 
 page_lite('lahari.html', 'Lahari Modulation',
-     'Lahari is a VST3 modulation plugin for Windows: chorus, celeste, flanger and phaser in five units.',
+     'Lahari is a VST3 modulation plugin for Windows: chorus, ensemble, celeste, flanger and phaser in six units.',
      'lahari', 'Lahari · modulation', 'Chorus, flanger, phaser. <em>Movement, in waves.</em>',
-     'Five modulation units in one plugin: two choruses, a celeste, a flanger and a phaser. I fitted the choruses, celeste and flanger to the chorus sections of classic digital units.. the phaser is my own thing. Every program plays exactly as fitted until you touch a knob.',
+     'Six modulation units in one plugin: two choruses, an ensemble, a celeste, a flanger and a phaser. I fitted the choruses, ensemble, celeste and flanger to the chorus sections of classic digital units.. the phaser is my own thing. Every program plays exactly as fitted until you touch a knob.',
      'img/lahari-hero-analog.jpg', 'Lahari in the Analog skin, rendered in 3D', 'Analog skin &middot; 3D render',
-     'Five units, <em>one set of hands.</em>',
+     'Six units, <em>one set of hands.</em>',
      [('Nadi', 'A chorus with three programs: Stream, Ripple and Shiver.', 'Chorus · 3 programs'),
       ('Sarita', 'A big wide ensemble chorus, three programs, Ensemble I to III.', 'Chorus · 3 programs'),
       ('Yugala', 'A celeste.. that slow, detuned shimmer. Three programs, Shimmer I to III.', 'Celeste · 3 programs'),
       ('Bhramara', 'A flanger with two programs, Sweep I and II. Crank Feedback and it starts to ring all metallic.', 'Flanger · 2 programs'),
+      ('Vrinda', 'The newest one: a big ensemble with seven programs, Octet, Drift, Echo, Throng, Weave, Spread and Choir. Lots of modulated taps, an optional amplitude swing and a crossed feedback echo. It gets thick fast.', 'Ensemble · 7 programs'),
       ('Chakra', 'My own phaser. Chains of 4 to 12 allpass stages, swept on a log scale, in four programs from Wheel to Whirl.', 'Phaser · 4 programs'),
-      ('Shared controls', 'Rate and Depth scale the program\'s own values, Delay shifts its base delay or sweep range, and Feedback adds to its loop. Then Tone, Width, Mix and Output.', 'Rate ×0.25–×4 · Depth 0–200%')],
+      ('Shared controls', 'Rate and Depth scale the program\'s own values, Delay shifts its base delay or sweep range, and Feedback adds to its loop. Then Tone, Width, Mix and Output. Oversampling goes Off, 2x or 4x.', 'Rate ×0.25–×4 · Depth 0–200%'),
+      ('Presets and size', '16 factory presets to start from: 6 chorus, 3 celeste, 3 flanger and 4 phaser. Click the logo for presets, skin, size (75–200%, or Ctrl +/−) and oversampling.', '16 presets · 75–200%')],
      skins([], ['Analog', 'Clean', 'Fantasy', 'Creative', 'Pedal'], 'lahari'),
      extra=plate('img/lahari-hero-pedal.jpg', 'Lahari in the Pedal skin, rendered in 3D') + '<p class="cap">Pedal skin &middot; 3D render</p>')
 
 cards = [
     ('spanda.html', 'spanda', 'Channel strip', 'Spanda', 'Seven modules in one strip. Lots of it fitted to measurements, and parts you can mix and match.', 'img/con-cin-hero.jpg'),
-    ('galana.html', 'galana', 'Effects box', 'Gālana', 'Twelve filters, a Movement LFO, chorus and delay, in any of six orders.', 'img/galana-hero.jpg'),
-    ('agni.html', 'agni', 'Distortion', 'Agni', 'Two engines, ten shapes, five routings, a capture slot and cab IRs.', 'img/agni-hero.jpg'),
+    ('galana.html', 'galana', 'Effects box', 'Gālana', 'Twelve filters, a Movement section, chorus and delay, in any of six orders. Presets, A/B and undo.', 'img/galana-hero.jpg'),
+    ('agni.html', 'agni', 'Distortion', 'Agni', 'Two engines, ten shapes, eight pedal models, five routings, a capture slot and cab IRs.', 'img/agni-hero.jpg'),
     ('akasa.html', 'akasa', 'Coloured reverb', 'Ākāśa', 'Six reverbs fitted to the decay and colour of classic digital units.. vintage converters optional.', 'img/akasa-b-detail.jpg'),
     ('shunya.html', 'shunya', 'Transparent reverb', 'Shunya', 'Six clean reverbs. No saturation, no drive, no grain. Just space.', 'img/shunya-hero.jpg'),
-    ('lahari.html', 'lahari', 'Modulation', 'Lahari', 'Chorus, celeste, flanger and phaser, five units, fitted to classic digital chorus sections.', 'img/lahari-hero-analog.jpg'),
+    ('lahari.html', 'lahari', 'Modulation', 'Lahari', 'Chorus, ensemble, celeste, flanger and phaser, six units, fitted to classic digital chorus sections.', 'img/lahari-hero-analog.jpg'),
 ]
 
 

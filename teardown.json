@@ -8,7 +8,7 @@
     "name": "Console",
     "img": "img/smart-console.jpg",
     "head": "Tracks that know about each other",
-    "body": "Set each strip to Stem, Bus or Master and it links up with the strips on your other tracks. The Rail Link meter lights up when the link is live.. I still get a kick out of watching that.",
+    "body": "Set each strip to Stem, Bus or Master and it links up with the strips on your other tracks. The Rail Link meter lights up when the link is live.. I still get a kick out of watching that. Pick a console flavour (Signature, Vintage British, Discrete American, Modern Ultra-Linear or Custom), and every Stem gets its own Mixer, so you can tweak one track from another.",
     "spec": "STEM · BUS · MASTER",
     "w": 1600,
     "h": 840
@@ -17,8 +17,8 @@
     "name": "Rail",
     "img": "img/smart-rail.jpg",
     "head": "Shared flow between instances",
-    "body": "Rail coupling passes level and energy between linked strips, so the whole mix moves together like it's running through one console.",
-    "spec": "Rail coupling · flow display",
+    "body": "Rail coupling passes level and energy between linked strips, so the whole mix moves together like it's running through one console. The display has 11 analyzer styles, from Ribbon and Waterfall to SPIRALS: a spectrum fountain with a resonance finder that points at the trouble spots.",
+    "spec": "Rail coupling · 11 analyzer styles",
     "w": 1600,
     "h": 840
    },
@@ -35,8 +35,8 @@
     "name": "Dynamics",
     "img": "img/smart-dynamics.jpg",
     "head": "Voicings, or build your own",
-    "body": "Pick a compressor voicing, or switch to CUSTOM and put one together from 35 parts in seven slots. A lot of those parts I fitted to measurements of real units.",
-    "spec": "Voicings · CUSTOM parts",
+    "body": "Pick a compressor voicing, or switch to CUSTOM and put one together from 35 parts in seven slots. A lot of those parts I fitted to measurements of real units. The voicings are VCA, FET, Opto, Tube and Diode, and most have sub-modes of their own. There's also a Gate/Expand and De-Ess section with five voicings (wideband or split-band de-essing), an external sidechain, and everything runs stereo or mid-side.",
+    "spec": "5 voicings · CUSTOM parts · gate · de-ess · M/S",
     "link": [
      "#parts",
      "See the parts"
@@ -48,8 +48,8 @@
     "name": "EQ",
     "img": "img/smart-eq.jpg",
     "head": "Classic curves, band by band",
-    "body": "The bells and shelves follow curves fitted to measurements of classic EQs. In CUSTOM, each of the four bands takes its own part, so you can mix and match per band.",
-    "spec": "4 bands · 26 band parts",
+    "body": "The bells and shelves follow curves fitted to measurements of classic EQs. In CUSTOM, each of the four bands takes its own part, so you can mix and match per band. On top of that: six EQ voicings, series or parallel, stereo or mid-side. And the new Macro curve sits before the bands.. one pivot, Tilt and Smile, with its own slope and spread, four parts (Clean, Iron, Shelf Pair and Passive Lift), an optional dynamic mode, and a handle right on the graph.",
+    "spec": "4 bands · 26 band parts · Macro curve",
     "link": [
      "#parts",
      "See the parts"
@@ -61,7 +61,7 @@
     "name": "Finisher",
     "img": "img/smart-finisher.jpg",
     "head": "Colour, tape and clipping",
-    "body": "Lysium is preamp-style colour: even or odd harmonics, low-end weight, and treble that softens as you push it. Logos is a tube-style saturator, A-Roll is tape, Tarus is a clipper, and Kill is a clipper at the very end. Nerd note: Lysium, Logos, Tarus and Kill oversample up to 16x.. tape doesn't.",
+    "body": "Lysium is preamp-style colour: even or odd harmonics, low-end weight, and treble that softens as you push it. Logos is a tube-style saturator, A-Roll is tape (15 or 30 IPS, with a heat control), Tarus is a clipper, and Kill is a clipper at the very end. Nerd note: Lysium, Logos, Tarus and Kill oversample up to 16x.. tape doesn't.",
     "spec": "Lysium · Logos · A-Roll · Tarus · Kill",
     "w": 1600,
     "h": 840
@@ -138,9 +138,9 @@
    {
     "name": "Engine A",
     "draw": "shape",
-    "head": "Ten shapes",
-    "body": "Pick a shape, set Drive and Bias, and the scope draws the transfer curve live as you turn them.",
-    "spec": "10 shapes · Drive · Bias"
+    "head": "Ten shapes, or eight pedals",
+    "body": "Pick a shape, set Drive and Bias, and the scope draws the transfer curve live as you turn them. Or switch Engine A to a pedal: Clean Boost, Tight Boost, Overdrive, Fuzz, Filter Distortion, Distortion, Metal or Octave Fuzz, each with Drive, Tone and Level. I fitted those to measurements and community captures of real pedals.",
+    "spec": "10 shapes · 8 pedals · Drive · Tone · Level"
    },
    {
     "name": "Engine B",
@@ -192,7 +192,7 @@
     "name": "Units",
     "draw": "tail",
     "head": "Six units, fitted to measurements",
-    "body": "Each unit is my own reverb, fitted to the measured decay and colour of a classic digital reverb: Megha, Guha, Vayu, Dvaya, Valuka and Adi. The plots below show their reverb time band by band.",
+    "body": "Each unit is my own reverb, fitted to the measured decay and colour of a classic digital reverb: Megha, Guha, Vayu, Dvaya, Valuka and Adi. The plots below show their reverb time band by band. And the FIT switch lets you compare the original fit with my newer, measured refit of the late reverb.",
     "spec": "Megha · Guha · Vayu · Dvaya · Valuka · Adi",
     "link": [
      "#measurements",
@@ -238,7 +238,7 @@
     "name": "Units",
     "draw": "tail",
     "head": "Six units, fitted to measurements",
-    "body": "Each unit is my own reverb, fitted to the measured behaviour of a classic reverb: Mandapa, Vistara, Taranga, Dhvani, Kosha and Chatur. Some add motion or a chorus, and Dhvani and Kosha can feed theirs into the reverb.",
+    "body": "Each unit is my own reverb, fitted to the measured behaviour of a classic reverb: Mandapa, Vistara, Taranga, Dhvani, Kosha and Chatur. Some add motion or a chorus, and Dhvani and Kosha can feed theirs into the reverb. And the FIT switch lets you compare the original fit with my newer, measured refit of the late reverb.",
     "spec": "Mandapa · Vistara · Taranga · Dhvani · Kosha · Chatur"
    },
    {
