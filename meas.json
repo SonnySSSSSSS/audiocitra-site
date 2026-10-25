@@ -2,7 +2,7 @@
  "spanda": [
   {
    "src": "img/meas/spanda_eq_curves.png",
-   "title": "EQ: four bands, measured",
+   "title": "EQ: four bands, analyzed",
    "caption": "The shelves and bells land where the knobs say.",
    "settings": "Low shelf 100 Hz, bells 500 Hz and 3 kHz, high shelf 8 kHz · each band alone at ±6 and ±12 dB · −18 dBFS sweep",
    "w": 1200,
@@ -19,7 +19,7 @@
   {
    "src": "img/meas/spanda_dynamics_static_curve.png",
    "title": "Dynamics: static curve",
-   "caption": "Measured input against output for four ratios.",
+   "caption": "Analyzed input against output for four ratios.",
    "settings": "Threshold −24 dB, knee 6 dB, ratios 2, 4, 10 and 20 · stepped 1 kHz sine",
    "w": 1200,
    "h": 675

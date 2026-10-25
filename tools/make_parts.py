@@ -59,7 +59,7 @@ comp = [
          ['Use on: anything; the standard attack.',
           'Use on: kick and snare when the click should pass but the body be held. | Background: a two-stage onset imitates the softer start of optical and tube gain cells.',
           "Use on: peak catching, aggressive drums, room mics. | Background: very fast attack is the FET compressor's signature.",
-          'Use on: drums and bass that need bite and punch. | Background: measured from a classic FET compressor.',
+          'Use on: drums and bass that need bite and punch. | Background: analyzed from a classic FET compressor.',
           'Use on: mix bus and pads: transients pass, then it settles slowly. | Background: variable-mu tubes respond slowly by nature.']),
     slot('letgo', 'comp_letgo', 'Let go', 'How it recovers after the level drops.',
          ['Plain', 'Snap', 'Glide', 'Two-stage', 'Release B'],
@@ -83,7 +83,7 @@ comp = [
           'Use on: drums, mix bus, acoustic guitar: softened, glued highs. | Background: hit hard, magnetic tape saturates and partly erases its own high frequencies.',
           'Use on: drums and loud rock: fatter peaks without obvious distortion.',
           'Use on: vocals and snare: subtle presence. | Background: FET gain stages add a little, mostly even, harmonic content.',
-          'Use on: drums and bass. | Background: the measured harmonics of a classic FET compressor.']),
+          'Use on: drums and bass. | Background: the analyzed harmonics of a classic FET compressor.']),
     slot('place', 'comp_place', 'Colour place', 'Where the colour sits in the chain.',
          ['After gain', 'Before detector'],
          ['Colours the compressed signal.', 'Colours the input, so the compressor reacts to the coloured sound.'],
@@ -124,9 +124,9 @@ bell_lessons = ['Use when: you want exactly what you dial, for surgical cuts and
                 'Use on: snare crack, vocal presence, guitar bite: broad and forgiving. | Background: British large-format console mids, wider than their Q markings suggest.',
                 'Use on: vocals and guitars: broad, musical boosts that tighten as you push. | Background: 1970s British class-A console modules with a fixed-width mid.',
                 'Use on: snare, toms, guitars: boosts that narrow as you push, so big moves stay focused. | Background: proportional-Q, the signature of American console EQ.',
-                'Use on: mastering and the mix bus: narrow, exact moves that keep the width you set. | Background: a 1970s American mastering parametric equalizer, measured from a sampled copy (up to 6 dB).',
-                'Use on: vocals, guitars, the mix bus: a gentle presence lift or a mud dip with tube-EQ manners. | Background: the 1950s passive tube mid-range equalizer that partnered the program EQ, measured from a sampled copy.',
-                "Use on: mastering and the mix bus: wide, gentle tone moves that never sound like an EQ. | Background: a modern passive tube mastering EQ's mid band, measured on the unit."]
+                'Use on: mastering and the mix bus: narrow, exact moves that keep the width you set. | Background: a 1970s American mastering parametric equalizer, analyzed from a sampled copy (up to 6 dB).',
+                'Use on: vocals, guitars, the mix bus: a gentle presence lift or a mud dip with tube-EQ manners. | Background: the 1950s passive tube mid-range equalizer that partnered the program EQ, analyzed from a sampled copy.',
+                "Use on: mastering and the mix bus: wide, gentle tone moves that never sound like an EQ. | Background: a modern passive tube mastering EQ's mid band, analyzed on the unit."]
 eq = [
     slot('low', 'eq_low', 'Low band', "How the low band's shelf turns.", shelf, shelf_notes, shelf_lessons),
     slot('lowmid', 'eq_lowmid', 'Low-mid band', 'How wide the low-mid bell is.', bell, bell_notes, bell_lessons),

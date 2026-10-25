@@ -98,7 +98,7 @@ def page(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_cap, 
   <p class="lede">Hit play and flip between Dry and {name}. I matched the loudness on both, so you're hearing what it actually does.. not just "louder sounds better".</p></div>
   <div class="listen" data-listen="{key}" data-name="{name}"></div>
 </div></section>
-<section id="measurements"><div class="wrap"><div class="head"><span class="eyebrow">Measurements</span><h2>I'd rather show you than tell you.</h2>
+<section id="measurements"><div class="wrap"><div class="head"><span class="eyebrow">Analysis</span><h2>I'd rather show you than tell you.</h2>
   <p class="lede">I ran every one of these offline through the plugin itself at 48 kHz. The settings I used are under each plot, so you can check my work.</p></div>
   <div class="meas-grid" data-meas="{key}"></div>
 </div></section>
@@ -134,7 +134,7 @@ page('agni.html', 'Agni Distortion',
      'Two distortion engines, and each one picks from the same ten shapes. Then five ways to wire them, a feedback loop, a capture slot and cab IRs. Engine A can also turn into one of eight pedals.. I basically wanted my whole dirt rack in one box.',
      'img/agni-hero.jpg', 'Agni Valve rack skin rendered in 3D', 'Valve skin · rendered from the skin&#39;s own 3D plate',
      'Everything between <em>clean and totally gone.</em>',
-     [('Pedal models', 'Flip Engine A from Custom to a pedal: Clean Boost, Tight Boost, Overdrive, Fuzz, Filter Distortion, Distortion, Metal or Octave Fuzz. Each one gets the three knobs you expect, Drive, Tone and Level, from 0 to 10. I fitted them to measurements and community captures of real pedals, clean blend and tone circuits included. Octave Fuzz even has its own octave-up stage. Switch back to Custom and your own engine settings come right back.', '8 pedals · Drive · Tone · Level'),
+     [('Pedal models', 'Flip Engine A from Custom to a pedal: Clean Boost, Tight Boost, Overdrive, Fuzz, Filter Distortion, Distortion, Metal or Octave Fuzz. Each one gets the three knobs you expect, Drive, Tone and Level, from 0 to 10. I fitted them to analysis and community captures of real pedals, clean blend and tone circuits included. Octave Fuzz even has its own octave-up stage. Switch back to Custom and your own engine settings come right back.', '8 pedals · Drive · Tone · Level'),
       ('Two engines, ten shapes', 'Each engine grabs its own shape from the same ten: Soft, Hard, Diode, Fold, Rectify, Tube, Transistor, Germanium, Tape and Crush. Turn Drive and Bias and the scope draws the transfer curve live.. honestly I could watch that thing all day.', '2 engines · 10 shapes'),
       ('Routings, feedback and modulation', 'Five ways to wire the two engines together, and a feedback loop wrapped around both. Two modulators (LFO or envelope) can push drive, tone, bias or balance around while you play.', '5 routings · feedback · 2 mods'),
       ('Capture and cab', 'Drop a neural capture (.nam) in after the engines, with a gate and a tight, mid or bright voicing in front of it. Then blend two cab IRs to taste. Oh, and Render Quality lets offline bounces run at a higher oversampling than you play at.', 'Capture slot · cab A/B')],
@@ -143,11 +143,11 @@ page('agni.html', 'Agni Distortion',
      skins(['Valve'], ['Forge', 'Slate', 'Citra', 'Pyre'], 'agni'))
 
 page('akasa.html', 'Ākāśa Reverb',
-     'Ākāśa is a VST3 reverb for Windows: six units fitted to the measured decay and colour of classic digital reverbs, with optional vintage converters.',
+     'Ākāśa is a VST3 reverb for Windows: six units fitted to the analyzed decay and colour of classic digital reverbs, with optional vintage converters.',
      'akasa', 'Ākāśa · coloured reverb', 'The rooms <em>you remember.</em>',
-     'I measured how classic digital reverbs decay and colour the sound, and fitted these to that. Six units, three slots you can chain, wet EQ, presets and A/B. If you grew up on those old racks.. you\'ll hear it.',
+     'I analyzed how classic digital reverbs decay and colour the sound, and fitted these to that. Six units, three slots you can chain, wet EQ, presets and A/B. If you grew up on those old racks.. you\'ll hear it.',
      'img/akasa-b-detail.jpg', 'Oxblood skin close-up: reverb time knob and type display', 'Oxblood skin · close-up · 3D render',
-     'Fitted to <em>what I measured.</em>',
+     'Fitted to <em>what I analyzed.</em>',
      [('Megha', 'Halls, rooms, chambers and sheets, 22 programs, all true stereo. Flip on Motion and the tail starts to drift.', '22 programs · true stereo · Motion'),
       ('Guha', '14 programs.. halls, rooms and sheets, plus the fun ones: backward, echo and hold.', '14 programs'),
       ('Vayu', 'A synth-style reverb, with pre-delay, a colour filter and feedback routed back into the reverb. Weird in the best way.', 'Colour filter · feedback'),
@@ -155,7 +155,7 @@ page('akasa.html', 'Ākāśa Reverb',
       ('Valuka and Adi', 'Simple little reverbs from the early digital days. Valuka has 100 programs (flanges and choruses in there too), Adi has 64. Lo-fi and charming.', '100 + 64 programs'),
       ('Optional converters', 'Set Converters to Vintage and you get the word length, word noise, idle floor and DC of old converters.. the grit nobody asked for but everybody misses. It\'s on Megha (on by default), Valuka and Adi (off by default).', 'Converters: Off · Vintage'),
       ('Three slots', 'Early, Mid and Late each hold any unit, and each feeds the next. Every slot gets pre-delay, width, cuts, shimmer and freeze. After those: a four-band wet EQ, ducking, chorus and a fidelity control, plus presets and A/B.', 'Early · Mid · Late · A/B'),
-      ('FIT: Classic or Measured', 'This one is pure nerd stuff. I went back and refitted the late reverb of the clean units against my measurements with gradient descent. The FIT switch in the lotus panel lets you flip between Classic (the original fit) and Measured (the new one), with a crossfade, so you can judge for yourself.', 'FIT: Classic · Measured'),
+      ('FIT: Classic or Measured', 'This one is pure nerd stuff. I went back and refitted the late reverb of the clean units against my analysis with gradient descent. The FIT switch in the lotus panel lets you flip between Classic (the original fit) and Measured (the new one), with a crossfade, so you can judge for yourself.', 'FIT: Classic · Measured'),
       ('Auto Gain', 'On by default: the output sits at the same loudness as the input, so you\'re never fooled by a louder reverb.', 'Auto Gain')],
      [],
      skins(['Walnut', 'Orb', 'Oxblood'], ['Watercolor'], 'akasa'))
@@ -163,7 +163,7 @@ page('akasa.html', 'Ākāśa Reverb',
 page('shunya.html', 'Shunya Reverb',
      'Shunya is a VST3 reverb for Windows: six clean reverb units with no saturation, drive or converter grain of their own.',
      'shunya', 'Shunya · transparent reverb', 'Clear space, <em>no grain added.</em>',
-     'Ākāśa\'s quiet sibling. Shunya adds no saturation, drive or converter grain of its own.. just the space. Six units fitted to how classic reverbs measured, three slots you can chain, wet EQ, presets and A/B.',
+     'Ākāśa\'s quiet sibling. Shunya adds no saturation, drive or converter grain of its own.. just the space. Six units fitted to my analysis of classic reverbs, three slots you can chain, wet EQ, presets and A/B.',
      'img/shunya-hero.jpg', 'Shunya Graticule skin rendered in 3D, Mandapa on the display', 'Graticule skin &middot; Mandapa on the tube &middot; 3D render',
      'Six spaces, <em>one clean path.</em>',
      [('Mandapa', 'Hall, plate, room, chamber, ambience and space programs, true stereo, with a Motion control for the tail.', 'True stereo · Motion'),
@@ -173,14 +173,14 @@ page('shunya.html', 'Shunya Reverb',
       ('Kosha', 'Chambers, halls, a sheet and echoes, eight chorus types, and a send that pushes the chorus into the reverb.', 'Chorus → reverb'),
       ('Chatur', 'Rooms, sheets and shaped programs, plus Backward Swell and Gate Burst. 10 programs in all.', '10 programs'),
       ('Three slots', 'Early, Mid and Late each hold any unit and feed the next, so you can chain a room into a hall.. which I do constantly. After them: a four-band wet EQ, presets and A/B.', 'Early · Mid · Late · A/B'),
-      ('FIT: Classic or Measured', 'Same nerd switch as Ākāśa. I refitted the late reverb against my measurements with gradient descent, and the FIT switch in the lotus panel flips between Classic and Measured with a crossfade. Mandapa also got new edge depths and a refit of its top-end damping.', 'FIT: Classic · Measured'),
+      ('FIT: Classic or Measured', 'Same nerd switch as Ākāśa. I refitted the late reverb against my analysis with gradient descent, and the FIT switch in the lotus panel flips between Classic and Measured with a crossfade. Mandapa also got new edge depths and a refit of its top-end damping.', 'FIT: Classic · Measured'),
       ('Auto Gain', 'On by default, so the output sits at the input\'s loudness.', 'Auto Gain')],
      [('img/shunya-crt.jpg', 'The phosphor tube showing Mandapa and its decay trace'),
       ('img/shunya-knobs.jpg', 'Mix knob close-up')],
      skins(['Graticule', 'Eclipse'], ['Washi', 'Blueprint'], 'shunya'), cls=' class="pale"')
 
 def page_lite(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_cap, feat_head, fs, sk, extra=''):
-    # A product page without teardown, audio or measurements yet (a new plugin): hero, features, skins, call to action.
+    # A product page without teardown, audio or analysis yet (a new plugin): hero, features, skins, call to action.
     name = title.split()[0]
     soon = SOON_BANNER.format(name=name) if fn.split('.')[0] in SOON else ''
     out = HEAD.format(title=title, desc=e(desc), ogimg=hero_src, icon=ICON, acc=acc, cls='') + soon + f'''<div class="wrap">
@@ -219,7 +219,7 @@ page_lite('lahari.html', 'Lahari Modulation',
      extra=plate('img/lahari-hero-pedal.jpg', 'Lahari in the Pedal skin, rendered in 3D') + '<p class="cap">Pedal skin &middot; 3D render</p>')
 
 cards = [
-    ('spanda.html', 'spanda', 'Channel strip', 'Spanda', 'Seven modules in one strip. Lots of it fitted to measurements, and parts you can mix and match.', 'img/con-cin-hero.jpg'),
+    ('spanda.html', 'spanda', 'Channel strip', 'Spanda', 'Seven modules in one strip. Lots of it fitted to analysis, and parts you can mix and match.', 'img/con-cin-hero.jpg'),
     ('galana.html', 'galana', 'Effects box', 'Gālana', 'Twelve filters, a Movement section, chorus and delay, in any of six orders. Presets, A/B and undo.', 'img/galana-hero.jpg'),
     ('agni.html', 'agni', 'Distortion', 'Agni', 'Two engines, ten shapes, eight pedal models, five routings, a capture slot and cab IRs.', 'img/agni-hero.jpg'),
     ('akasa.html', 'akasa', 'Coloured reverb', 'Ākāśa', 'Six reverbs fitted to the decay and colour of classic digital units.. vintage converters optional.', 'img/akasa-b-detail.jpg'),
@@ -239,13 +239,13 @@ home = HEAD.format(title='Audio Citra', desc=e('Audio Citra makes six VST3 plugi
                    ogimg='img/lim-cin-hero.jpg', icon=ICON, acc='spanda', cls='') + f'''<div class="wrap">
   <header class="hero hero-tight"><span class="eyebrow">Hey, welcome in</span>
   <h1>I build plugins, <em>and this is where I keep them.</em></h1>
-  <p>Pull up a chair. This is my little museum.. a channel strip, an effects box, a distortion, two reverbs and a modulation box. A lot of what they do is fitted to stuff I measured myself, and I built every one of them to feel good under your hands. All VST3, all Windows.</p>
+  <p>Pull up a chair. This is my little museum.. a channel strip, an effects box, a distortion, two reverbs and a modulation box. A lot of what they do is fitted to stuff I analyzed myself, and I built every one of them to feel good under your hands. All VST3, all Windows.</p>
   <div class="row"><a class="btn solid" href="spanda.html">start with Spanda</a><a class="btn" href="#plugins">see them all</a></div></header>
   {plate('img/lim-cin-hero.jpg', 'Spanda Limiter in the Cinematic skin, rendered in 3D', False)}
   <p class="cap">Spanda Limiter · Cinematic skin</p>
   <h2 class="sr">The plugins</h2>
   <div class="bays" id="plugins" style="padding-top:64px">{''.join(card(*c) for c in cards)}</div>
-  <p class="proof">One thing I care about: every plot here I measured offline from the actual plugin, with the settings printed right next to it. And every audio clip is level-matched, dry vs processed. No tricks.. you hear what it does.</p>
+  <p class="proof">One thing I care about: every plot here I analyzed offline from the actual plugin, with the settings printed right next to it. And every audio clip is level-matched, dry vs processed. No tricks.. you hear what it does.</p>
 </div>
 ''' + TAIL
 open('index.html', 'w', encoding='utf-8').write(home)

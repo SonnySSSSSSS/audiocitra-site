@@ -35,7 +35,7 @@
     "name": "Dynamics",
     "img": "img/smart-dynamics.jpg",
     "head": "Voicings, or build your own",
-    "body": "Pick a compressor voicing, or switch to CUSTOM and put one together from 35 parts in seven slots. A lot of those parts I fitted to measurements of real units. The voicings are VCA, FET, Opto, Tube and Diode, and most have sub-modes of their own. There's also a Gate/Expand and De-Ess section with five voicings (wideband or split-band de-essing), an external sidechain, and everything runs stereo or mid-side.",
+    "body": "Pick a compressor voicing, or switch to CUSTOM and put one together from 35 parts in seven slots. A lot of those parts I fitted to analysis of real units. The voicings are VCA, FET, Opto, Tube and Diode, and most have sub-modes of their own. There's also a Gate/Expand and De-Ess section with five voicings (wideband or split-band de-essing), an external sidechain, and everything runs stereo or mid-side.",
     "spec": "5 voicings · CUSTOM parts · gate · de-ess · M/S",
     "link": [
      "#parts",
@@ -48,7 +48,7 @@
     "name": "EQ",
     "img": "img/smart-eq.jpg",
     "head": "Classic curves, band by band",
-    "body": "The bells and shelves follow curves fitted to measurements of classic EQs. In CUSTOM, each of the four bands takes its own part, so you can mix and match per band. On top of that: six EQ voicings, series or parallel, stereo or mid-side. And the new Macro curve sits before the bands.. one pivot, Tilt and Smile, with its own slope and spread, four parts (Clean, Iron, Shelf Pair and Passive Lift), an optional dynamic mode, and a handle right on the graph.",
+    "body": "The bells and shelves follow curves fitted to analysis of classic EQs. In CUSTOM, each of the four bands takes its own part, so you can mix and match per band. On top of that: six EQ voicings, series or parallel, stereo or mid-side. And the new Macro curve sits before the bands.. one pivot, Tilt and Smile, with its own slope and spread, four parts (Clean, Iron, Shelf Pair and Passive Lift), an optional dynamic mode, and a handle right on the graph.",
     "spec": "4 bands · 26 band parts · Macro curve",
     "link": [
      "#parts",
@@ -104,7 +104,7 @@
     "spec": "Resonance",
     "link": [
      "#measurements",
-     "See the measurements"
+     "See the analysis"
     ]
    },
    {
@@ -139,7 +139,7 @@
     "name": "Engine A",
     "draw": "shape",
     "head": "Ten shapes, or eight pedals",
-    "body": "Pick a shape, set Drive and Bias, and the scope draws the transfer curve live as you turn them. Or switch Engine A to a pedal: Clean Boost, Tight Boost, Overdrive, Fuzz, Filter Distortion, Distortion, Metal or Octave Fuzz, each with Drive, Tone and Level. I fitted those to measurements and community captures of real pedals.",
+    "body": "Pick a shape, set Drive and Bias, and the scope draws the transfer curve live as you turn them. Or switch Engine A to a pedal: Clean Boost, Tight Boost, Overdrive, Fuzz, Filter Distortion, Distortion, Metal or Octave Fuzz, each with Drive, Tone and Level. I fitted those to analysis and community captures of real pedals.",
     "spec": "10 shapes · 8 pedals · Drive · Tone · Level"
    },
    {
@@ -164,7 +164,7 @@
     "spec": "Quality 1x · 2x · 4x · 8x",
     "link": [
      "#measurements",
-     "See the measurement"
+     "See the analysis"
     ]
    },
    {
@@ -191,12 +191,12 @@
    {
     "name": "Units",
     "draw": "tail",
-    "head": "Six units, fitted to measurements",
-    "body": "Each unit is my own reverb, fitted to the measured decay and colour of a classic digital reverb: Megha, Guha, Vayu, Dvaya, Valuka and Adi. The plots below show their reverb time band by band. And the FIT switch lets you compare the original fit with my newer, measured refit of the late reverb.",
+    "head": "Six units, fitted to analysis",
+    "body": "Each unit is my own reverb, fitted to the analyzed decay and colour of a classic digital reverb: Megha, Guha, Vayu, Dvaya, Valuka and Adi. The plots below show their reverb time band by band. And the FIT switch lets you compare the original fit with my newer refit of the late reverb, done from analysis.",
     "spec": "Megha · Guha · Vayu · Dvaya · Valuka · Adi",
     "link": [
      "#measurements",
-     "See the measurements"
+     "See the analysis"
     ]
    },
    {
@@ -237,8 +237,8 @@
    {
     "name": "Units",
     "draw": "tail",
-    "head": "Six units, fitted to measurements",
-    "body": "Each unit is my own reverb, fitted to the measured behaviour of a classic reverb: Mandapa, Vistara, Taranga, Dhvani, Kosha and Chatur. Some add motion or a chorus, and Dhvani and Kosha can feed theirs into the reverb. And the FIT switch lets you compare the original fit with my newer, measured refit of the late reverb.",
+    "head": "Six units, fitted to analysis",
+    "body": "Each unit is my own reverb, fitted to the analyzed behaviour of a classic reverb: Mandapa, Vistara, Taranga, Dhvani, Kosha and Chatur. Some add motion or a chorus, and Dhvani and Kosha can feed theirs into the reverb. And the FIT switch lets you compare the original fit with my newer refit of the late reverb, done from analysis.",
     "spec": "Mandapa · Vistara · Taranga · Dhvani · Kosha · Chatur"
    },
    {
@@ -249,7 +249,7 @@
     "spec": "Reverb time per band",
     "link": [
      "#measurements",
-     "See the measurements"
+     "See the analysis"
     ]
    },
    {

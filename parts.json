@@ -152,7 +152,7 @@
       "img": "img/parts/comp_grab_3.jpg",
       "note": "Knock is the plugin's FET-style compressor voicing. This part runs its own grab and curve (Curve is set aside).",
       "use": "drums and bass that need bite and punch.",
-      "bg": "measured from a classic FET compressor.",
+      "bg": "analyzed from a classic FET compressor.",
       "w": 800,
       "h": 263
      },
@@ -292,7 +292,7 @@
       "img": "img/parts/comp_colour_7.jpg",
       "note": "The Knock voicing's own harmonics.",
       "use": "drums and bass.",
-      "bg": "the measured harmonics of a classic FET compressor.",
+      "bg": "the analyzed harmonics of a classic FET compressor.",
       "w": 800,
       "h": 544
      }
@@ -592,7 +592,7 @@
       "img": "img/parts/eq_lowmid_4.jpg",
       "note": "Mastering parametric: a clean bell whose width follows the Q you dial.",
       "use": "mastering and the mix bus: narrow, exact moves that keep the width you set.",
-      "bg": "a 1970s American mastering parametric equalizer, measured from a sampled copy (up to 6 dB).",
+      "bg": "a 1970s American mastering parametric equalizer, analyzed from a sampled copy (up to 6 dB).",
       "w": 800,
       "h": 250
      },
@@ -601,7 +601,7 @@
       "img": "img/parts/eq_lowmid_5.jpg",
       "note": "Passive tube mid EQ: broad boosts low down, tighter up top; the cut is deeper and narrower. Q is not used.",
       "use": "vocals, guitars, the mix bus: a gentle presence lift or a mud dip with tube-EQ manners.",
-      "bg": "the 1950s passive tube mid-range equalizer that partnered the program EQ, measured from a sampled copy.",
+      "bg": "the 1950s passive tube mid-range equalizer that partnered the program EQ, analyzed from a sampled copy.",
       "w": 800,
       "h": 250
      },
@@ -610,7 +610,7 @@
       "img": "img/parts/eq_lowmid_6.jpg",
       "note": "Passive tube mastering EQ: a very broad bell that narrows as you boost; Q sets how broad.",
       "use": "mastering and the mix bus: wide, gentle tone moves that never sound like an EQ.",
-      "bg": "a modern passive tube mastering EQ's mid band, measured on the unit.",
+      "bg": "a modern passive tube mastering EQ's mid band, analyzed on the unit.",
       "w": 800,
       "h": 250
      }
@@ -662,7 +662,7 @@
       "img": "img/parts/eq_highmid_4.jpg",
       "note": "Mastering parametric: a clean bell whose width follows the Q you dial.",
       "use": "mastering and the mix bus: narrow, exact moves that keep the width you set.",
-      "bg": "a 1970s American mastering parametric equalizer, measured from a sampled copy (up to 6 dB).",
+      "bg": "a 1970s American mastering parametric equalizer, analyzed from a sampled copy (up to 6 dB).",
       "w": 800,
       "h": 250
      },
@@ -671,7 +671,7 @@
       "img": "img/parts/eq_highmid_5.jpg",
       "note": "Passive tube mid EQ: broad boosts low down, tighter up top; the cut is deeper and narrower. Q is not used.",
       "use": "vocals, guitars, the mix bus: a gentle presence lift or a mud dip with tube-EQ manners.",
-      "bg": "the 1950s passive tube mid-range equalizer that partnered the program EQ, measured from a sampled copy.",
+      "bg": "the 1950s passive tube mid-range equalizer that partnered the program EQ, analyzed from a sampled copy.",
       "w": 800,
       "h": 250
      },
@@ -680,7 +680,7 @@
       "img": "img/parts/eq_highmid_6.jpg",
       "note": "Passive tube mastering EQ: a very broad bell that narrows as you boost; Q sets how broad.",
       "use": "mastering and the mix bus: wide, gentle tone moves that never sound like an EQ.",
-      "bg": "a modern passive tube mastering EQ's mid band, measured on the unit.",
+      "bg": "a modern passive tube mastering EQ's mid band, analyzed on the unit.",
       "w": 800,
       "h": 250
      }
