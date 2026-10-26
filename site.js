@@ -366,3 +366,32 @@
     }));
   });
 })();
+
+// Walkthrough videos. Plays the local draft MP4; once data-youtube holds a video id, the same
+// block loads the YouTube player instead (only after a click, so pages stay light).
+document.querySelectorAll(".walk").forEach(el => {
+  const yt = el.dataset.youtube, poster = el.querySelector(".walk-play");
+  let video = null;
+  const start = (t = 0) => {
+    if (yt) {
+      const f = document.createElement("iframe");
+      f.src = `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&start=${t}`;
+      f.allow = "autoplay; encrypted-media; picture-in-picture"; f.allowFullscreen = true; f.title = poster.getAttribute("aria-label");
+      el.querySelector("iframe, .walk-play").replaceWith(f); return;
+    }
+    if (!video) {
+      video = document.createElement("video");
+      video.src = el.dataset.src; video.controls = true; video.preload = "metadata";
+      poster.replaceWith(video);
+      const marks = [...el.querySelectorAll(".walk-ch button")];
+      video.addEventListener("timeupdate", () => {
+        let cur = 0; marks.forEach((b, i) => { if (video.currentTime >= +b.dataset.t) cur = i; });
+        marks.forEach((b, i) => b.classList.toggle("on", i === cur));
+      });
+    }
+    const go = () => { video.currentTime = t; video.play(); };
+    video.readyState >= 1 ? go() : video.addEventListener("loadedmetadata", go, { once: true });
+  };
+  poster.addEventListener("click", () => start(0));
+  el.querySelectorAll(".walk-ch button").forEach(b => b.addEventListener("click", () => start(+b.dataset.t)));
+});
