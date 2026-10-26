@@ -10,7 +10,7 @@
     pages.map(([h,t]) => `<li><a href="${h}"${h===here?' aria-current="page"':""}>${t}</a></li>`).join("")}</ul></div>`;
   document.body.prepend(nav);
   const foot = document.createElement("footer");
-  foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><a href="credits.html">Credits</a></div>`;
+  foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
   document.body.append(foot);
 
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
