@@ -369,6 +369,14 @@
 
 // Walkthrough videos. Plays the local draft MP4; once data-youtube holds a video id, the same
 // block loads the YouTube player instead (only after a click, so pages stay light).
+// Draft: the local MP4s aren't published, so off localhost the walkthrough section
+// shows only once every video in it has a YouTube id.
+if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+  const sec = document.getElementById("walkthrough");
+  if (sec && [...sec.querySelectorAll(".walk")].some(w => !w.dataset.youtube)) {
+    sec.remove(); document.querySelectorAll('a[href="#walkthrough"]').forEach(a => a.remove());
+  }
+}
 document.querySelectorAll(".walk").forEach(el => {
   const yt = el.dataset.youtube, poster = el.querySelector(".walk-play");
   let video = null;
