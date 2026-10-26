@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Buy · Audio Citra</title>
+<meta name="description" content="Buy Audio Citra plug-ins: singles or the full bundle, 14-day trial, 14-day refunds.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0b10'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c58bff' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>body{--accent:var(--spanda)}
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:8px 0 24px}
+.pick{display:block;text-align:left;padding:18px;border:1px solid var(--line);border-radius:14px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.pick[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.pick b{display:block;font-size:20px;margin-bottom:4px}.pick span{color:var(--mute);font-size:14px}.pick .pr{display:block;margin-top:10px;font:500 15px var(--mono);color:var(--fg)}
+.pick.all{grid-column:1/-1}
+#status{color:var(--mute);margin-top:14px;min-height:1.5em}
+.faq{max-width:720px;margin-top:56px}.faq h2{font-size:1.25rem;margin:28px 0 8px}.faq p{color:var(--mute);line-height:1.6;margin:0}
+</style>
+</head><body>
+<main id="main">
+<div class="wrap">
+  <header class="hero hero-tight"><span class="eyebrow">Buy</span><h1>Pick what you <em>want to keep.</em></h1>
+    <p>Every plug-in runs fully for 14 days first, so only buy what you're already using. One licence covers all your own computers.</p></header>
+  <div class="picks" id="picks">
+    <button class="pick all" data-id="bundle" type="button"><b>Everything</b><span>Spanda, Agni, Ākāśa, Shunya and Gālana in one licence.</span><span class="pr" data-price="bundle"></span></button>
+    <button class="pick" data-id="spanda" type="button"><b>Spanda</b><span>Channel strip</span><span class="pr" data-price="spanda"></span></button>
+    <button class="pick" data-id="agni" type="button"><b>Agni</b><span>Distortion</span><span class="pr" data-price="agni"></span></button>
+    <button class="pick" data-id="akasa" type="button"><b>Ākāśa</b><span>Reverb</span><span class="pr" data-price="akasa"></span></button>
+    <button class="pick" data-id="shunya" type="button"><b>Shunya</b><span>Reverb</span><span class="pr" data-price="shunya"></span></button>
+    <button class="pick" data-id="galana" type="button"><b>Gālana</b><span>Effects box</span><span class="pr" data-price="galana"></span></button>
+  </div>
+  <a class="btn solid" id="go" href="#" role="button">Checkout</a>
+  <p id="status" role="status"></p>
+
+  <div class="faq">
+    <h2>How do I get the licence?</h2>
+    <p>It's e-mailed to you right after checkout. If you clicked Buy inside the plug-in, you can also just click <b>Fetch licence</b> there and it installs itself.</p>
+    <h2>Who handles the payment?</h2>
+    <p>Paddle, our reseller and merchant of record. They take the card or PayPal, add the right sales tax or VAT for your country, and send the receipt. We never see card details.</p>
+    <h2>What do I need?</h2>
+    <p>Windows 10 or 11, 64-bit, and a DAW that loads VST3 (Studio One, Ableton Live, Reaper, FL Studio, Cubase and others). Mac isn't supported yet.</p>
+    <h2>How many computers?</h2>
+    <p>All the computers you personally use. The licence is a file checked offline: no activation server, no dongle, no account.</p>
+    <h2>Can I get a refund?</h2>
+    <p>Yes, within 14 days, for any reason. See the <a href="refund.html">refund policy</a>.</p>
+    <h2>Are updates free?</h2>
+    <p>Yes, within the same major version. The plug-ins tell you when one is out. See the <a href="terms.html">terms</a> for the rest.</p>
+  </div>
+</div>
+</main>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script src="site.js"></script>
+<script>
+// Fill these from the Paddle dashboard. Until `token` is set the page says checkout opens at launch.
+const PADDLE = {
+  env: "sandbox",          // "production" at launch
+  token: "",               // client-side token (test_... for the sandbox, live_... at launch)
+  prices: { bundle: "", spanda: "", agni: "", akasa: "", shunya: "", galana: "" },   // pri_... ids
+  show: { bundle: "", spanda: "", agni: "", akasa: "", shunya: "", galana: "" },     // display text, e.g. "$49"
+};
+(() => {
+  const q = new URLSearchParams(location.search);
+  // ref comes from the plug-in's Buy button; the webhook uses it so Fetch licence works.
+  const ref = /^[0-9a-f]{32}$/.test(q.get("ref") || "") ? q.get("ref") : "";
+  let pick = PADDLE.prices[q.get("product")] !== undefined ? q.get("product") : "bundle";
+  const status = document.getElementById("status"), go = document.getElementById("go");
+  const ready = !!PADDLE.token && typeof Paddle !== "undefined";
+  document.querySelectorAll("[data-price]").forEach(el => el.textContent = PADDLE.show[el.dataset.price] || "");
+  const sel = () => document.querySelectorAll(".pick").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === pick));
+  document.querySelectorAll(".pick").forEach(b => b.addEventListener("click", () => { pick = b.dataset.id; sel(); }));
+  sel();
+  if (ready) {
+    if (PADDLE.env !== "production") Paddle.Environment.set("sandbox");
+    Paddle.Initialize({ token: PADDLE.token, eventCallback: ev => {
+      if (ev.name === "checkout.completed")
+        status.textContent = ref ? "Paid, thank you. Go back to the plug-in and click Fetch licence." : "Paid, thank you. Your licence is on its way by e-mail.";
+    } });
+  } else status.textContent = "Checkout opens at launch. Until then every plug-in runs as a full 14-day trial.";
+  go.addEventListener("click", ev => {
+    ev.preventDefault();
+    if (!ready || !PADDLE.prices[pick]) { status.textContent = "Checkout isn't open yet."; return; }
+    Paddle.Checkout.open({ items: [{ priceId: PADDLE.prices[pick], quantity: 1 }], customData: ref ? { ref } : {} });
+  });
+})();
+</script>
+</body></html>
