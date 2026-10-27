@@ -13,6 +13,11 @@
 .pick[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
 .pick b{display:block;font-size:20px;margin-bottom:4px}.pick span{color:var(--mute);font-size:14px}.pick .pr{display:block;margin-top:10px;font:500 15px var(--mono);color:var(--fg)}
 .pick.all{grid-column:1/-1}
+.pick{position:relative;overflow:hidden;isolation:isolate;min-height:150px;background:#0c0b10}
+.pick::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--bg) center/cover no-repeat;opacity:.55}
+.pick::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(12,11,16,.95) 0%,rgba(12,11,16,.82) 45%,rgba(12,11,16,.35) 100%)}
+.pick span{color:#c9c5d3}.pick b,.pick .pr{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.pick.all{min-height:180px}
 .pick .pr s{color:var(--mute);margin-right:8px;font-weight:400}
 .sale{color:var(--accent);margin:0 0 16px}
 #status{color:var(--mute);margin-top:14px;min-height:1.5em}
@@ -24,14 +29,14 @@
   <header class="hero hero-tight"><span class="eyebrow">Buy</span><h1>Pick what you <em>want to keep.</em></h1>
     <p>Every plug-in runs fully for 14 days first, so only buy what you're already using. One licence covers all your own computers.</p></header>
   <div class="picks" id="picks">
-    <button class="pick all" data-id="bundle" type="button"><b>Everything</b><span>All seven: Spanda, Agni, Ākāśa, Shunya, Gālana, Lahari and Tulā in one licence.</span><span class="pr" data-price="bundle"></span></button>
-    <button class="pick" data-id="spanda" type="button"><b>Spanda</b><span>Channel strip</span><span class="pr" data-price="spanda"></span></button>
-    <button class="pick" data-id="agni" type="button"><b>Agni</b><span>Distortion</span><span class="pr" data-price="agni"></span></button>
-    <button class="pick" data-id="akasa" type="button"><b>Ākāśa</b><span>Reverb</span><span class="pr" data-price="akasa"></span></button>
-    <button class="pick" data-id="shunya" type="button"><b>Shunya</b><span>Reverb</span><span class="pr" data-price="shunya"></span></button>
-    <button class="pick" data-id="galana" type="button"><b>Gālana</b><span>Effects box</span><span class="pr" data-price="galana"></span></button>
-    <button class="pick" data-id="lahari" type="button"><b>Lahari</b><span>Modulation</span><span class="pr" data-price="lahari"></span></button>
-    <button class="pick" data-id="tula" type="button"><b>Tulā</b><span>Mix utility: level, match, pan, align</span><span class="pr" data-price="tula"></span></button>
+    <button class="pick all" data-id="bundle" type="button" style="--bg:url(img/lim-cin-hero.jpg)"><b>Everything</b><span>All seven: Spanda, Agni, Ākāśa, Shunya, Gālana, Lahari and Tulā in one licence.</span><span class="pr" data-price="bundle"></span></button>
+    <button class="pick" data-id="spanda" type="button" style="--bg:url(img/con-cin-hero.jpg)"><b>Spanda</b><span>Channel strip</span><span class="pr" data-price="spanda"></span></button>
+    <button class="pick" data-id="agni" type="button" style="--bg:url(img/agni-hero.jpg)"><b>Agni</b><span>Distortion</span><span class="pr" data-price="agni"></span></button>
+    <button class="pick" data-id="akasa" type="button" style="--bg:url(img/akasa-b-detail.jpg)"><b>Ākāśa</b><span>Reverb</span><span class="pr" data-price="akasa"></span></button>
+    <button class="pick" data-id="shunya" type="button" style="--bg:url(img/shunya-hero.jpg)"><b>Shunya</b><span>Reverb</span><span class="pr" data-price="shunya"></span></button>
+    <button class="pick" data-id="galana" type="button" style="--bg:url(img/galana-hero.jpg)"><b>Gālana</b><span>Effects box</span><span class="pr" data-price="galana"></span></button>
+    <button class="pick" data-id="lahari" type="button" style="--bg:url(img/lahari-hero-analog.jpg)"><b>Lahari</b><span>Modulation</span><span class="pr" data-price="lahari"></span></button>
+    <button class="pick" data-id="tula" type="button" style="--bg:url(img/tula-citra.jpg)"><b>Tulā</b><span>Mix utility: level, match, pan, align</span><span class="pr" data-price="tula"></span></button>
   </div>
   <p id="sale" class="sale" hidden></p>
   <a class="btn solid" id="go" href="#" role="button">Checkout</a>
