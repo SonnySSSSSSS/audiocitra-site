@@ -220,11 +220,12 @@ page_lite('lahari.html', 'Lahari Modulation',
 
 
 TULA_SKINS = [('studio', 'Studio'), ('paper', 'Paper'), ('rack', 'Rack'), ('console', 'Console'), ('citra', 'Citra')]
+ORBIT_ZOOM = {'console': '108%', 'citra': '82%'}      # the skins differ in shape: the tall strip needs the camera further back
 
 
 def viewer3d(key, label, skins_):
     # A 3D unit per skin (3d/{key}-{skin}.glb, built by AudioCitraFree/tools/skins/tula_glb.py); drag to turn it.
-    btns = ''.join(f'<button aria-pressed="{"true" if i == 0 else "false"}" data-glb="3d/{key}-{s}.glb">{n}</button>'
+    btns = ''.join(f'<button aria-pressed="{"true" if i == 0 else "false"}" data-glb="3d/{key}-{s}.glb" data-orbit="-18deg 78deg {ORBIT_ZOOM.get(s, "70%")}">{n}</button>'
                    for i, (s, n) in enumerate(skins_))
     return (f'<div class="head" style="margin-top:72px"><span class="eyebrow">In 3D</span><h2>Grab it and <em>turn it around.</em></h2>'
             f'<p class="lede">Every skin is built as a real little unit. Drag to spin it, scroll to get close.</p></div>'
@@ -235,7 +236,7 @@ def viewer3d(key, label, skins_):
             f'<div class="seg" aria-label="3D skin" style="margin-top:12px" data-model="m-{key}">{btns}</div>'
             '<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>'
             '<script>document.querySelectorAll("[data-model]").forEach(function(seg){var m=document.getElementById(seg.dataset.model);'
-            'seg.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){m.src=b.dataset.glb;'
+            'seg.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){m.src=b.dataset.glb;m.cameraOrbit=b.dataset.orbit;m.resetTurntableRotation(0);'
             'seg.querySelectorAll("button").forEach(function(o){o.setAttribute("aria-pressed",o===b?"true":"false")})})})})</script>')
 
 
@@ -249,7 +250,7 @@ page_lite('tula.html', 'Tulā Gain Utility',
       ('Listen All', 'Start it from any track and every Tulā in the session listens at once and sets its own gain. One pass and your whole session is staged.. that one still makes me happy.', 'Every linked instance'),
       ('Link, Match and A/B', 'With Link on, Out moves opposite to Trim so the track never gets louder on you. Match sets Out so what comes out is as loud as what went in, and A/B flips to the dry signal at that same level. Louder always sounds better, so I took that off the table.', 'Link · Match · A/B'),
       ('Pan and width', 'Pan with four laws: Balance (the default, so inserting it changes nothing), -3, -4.5 and -6 dB. Width goes 0 to 200 % without touching the mono sum, and Mono lets you check the fold-down, with a lamp that shows how much you lose.', '4 pan laws · width · mono check'),
-      ('Five skins', 'Studio, Paper, Rack, Console and Citra, all from the lotus menu, each with its own meter that actually moves. Resize it however you like.', '5 skins · resizable')],
+      ('Five skins', 'Studio, Paper, Rack, Console and Citra, all from the lotus menu. They are not recolours: each one has its own shape, layout, type and meter, from a ring meter to a 2U rack with twin VUs to a lotus that lights petal by petal. Resize it however you like.', '5 skins · 5 shapes · resizable')],
      skins([], [n for _, n in TULA_SKINS], 'tula'),
      extra=viewer3d('tula', 'Tulā', TULA_SKINS) + ('</div></section><section id="measurements"><div class="wrap"><div class="head"><span class="eyebrow">Analysis</span>'
            '<h2>I&#39;d rather show you than tell you.</h2><p class="lede">I rendered every one of these offline through the plugin itself at 48 kHz. '
