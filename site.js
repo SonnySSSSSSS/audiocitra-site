@@ -15,7 +15,8 @@
 
   // Cartoon me, narrating a line or two per page. [page, selector, pose, line]; "*" = every product page.
   const SAY = [
-    ["index.html", ".hero", "wave", "Hey! I built every one of these myself. Have a look around, and poke at whatever looks fun."],
+    ["index.html", ".hero", "welcome", "Hey, welcome in! I built every one of these myself. Have a look around, and poke at whatever looks fun."],
+    ["spanda.html", ".hero", "welcome", "Welcome to Spanda! Seven modules in one strip.. pick any of those tabs to dig in."],
     ["buy.html", ".hero", "thumbs", "One licence covers all your own computers. No account, no dongle, no activation server."],
     ["buy.html", ".faq", "think", "Stuck on something? E-mail support@audiocitra.com, it comes straight to me."],
     ["*", ".cta", "point", "When the trial's out, put it on a real track. If it doesn't click, no hard feelings."],
@@ -26,7 +27,7 @@
     if (!at) return;
     const say = document.createElement("aside");
     say.className = "say";
-    say.innerHTML = `<img src="img/avatar/${pose}.webp" alt="" width="120" loading="lazy"><p class="bubble">${line}</p>`;
+    say.innerHTML = `<img src="img/avatar/${pose}.webp" alt="" width="${pose === "welcome" ? 170 : 120}" loading="lazy"><p class="bubble">${line}</p>`;
     at.append(say);
   });
 
