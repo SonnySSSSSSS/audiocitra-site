@@ -63,12 +63,12 @@
 <script>
 // Fill these from the Paddle dashboard. Until `token` is set the page says checkout opens at launch.
 const PADDLE = {
-  env: "sandbox",          // "production" at launch
+  env: "production",       // the account has no sandbox; checkout opens once the token is set and the domain is approved
   token: "",               // client-side token (test_... for the sandbox, live_... at launch)
-  prices: { bundle: "", spanda: "", agni: "", akasa: "", shunya: "", galana: "", lahari: "", tula: "" },   // pri_... ids
+  prices: { bundle: "pri_01m5yq92gn6ssy7wtkggy5eybf", spanda: "pri_01m5yqewm8fs88zzsr7w9d4kqb", agni: "pri_01m5yqfs6d7qsn4jj11w6jsnd6", akasa: "pri_01m5yqgk3xcwwymrvv17vq2qg6", shunya: "pri_01m5yqhfpwhy1dpent5ya54b9j", galana: "pri_01m5yqj85ey6h070819pk5r4zc", lahari: "pri_01m5yqcvxvwjthyjhsvs41czxa", tula: "pri_01m5yqb6chmz4fcf0stn0cfxtz" },   // Paddle live price ids
   full: { bundle: 299, spanda: 129, agni: 59, akasa: 99, shunya: 89, galana: 79, lahari: 49, tula: 29 },   // USD list prices
-  // Launch sale: shown until `ends` (YYYY-MM-DD, last day). The discount itself is a Paddle discount; keep these in step with it.
-  launch: { ends: "", code: "", price: { bundle: 239, spanda: 97, agni: 44, akasa: 74, shunya: 67, galana: 59, lahari: 37, tula: 22 } },
+  // Launch sale: Paddle discounts LAUNCH25 (singles) and LAUNCH20 (bundle) expire on `ends`. Shown only once checkout is live.
+  launch: { ends: "2026-12-11", code: "LAUNCH25", bundleCode: "LAUNCH20" },
 };
 (() => {
   const q = new URLSearchParams(location.search);
@@ -77,10 +77,11 @@ const PADDLE = {
   let pick = PADDLE.prices[q.get("product")] !== undefined ? q.get("product") : "bundle";
   const status = document.getElementById("status"), go = document.getElementById("go");
   const ready = !!PADDLE.token && typeof Paddle !== "undefined";
-  const L = PADDLE.launch, onSale = !!L.ends && new Date() <= new Date(L.ends + "T23:59:59");
+  const L = PADDLE.launch, onSale = ready && !!L.ends && new Date() <= new Date(L.ends + "T23:59:59");
+  const off = id => id === "bundle" ? 0.8 : 0.75, usd = n => "$" + (Number.isInteger(n) ? n : n.toFixed(2));
   document.querySelectorAll("[data-price]").forEach(el => {
     const id = el.dataset.price, full = PADDLE.full[id];
-    if (onSale) { const s = document.createElement("s"); s.textContent = "$" + full; el.append(s, "$" + L.price[id]); }
+    if (onSale) { const s = document.createElement("s"); s.textContent = "$" + full; el.append(s, usd(Math.round(full * off(id) * 100) / 100)); }
     else el.textContent = "$" + full;
   });
   if (onSale) {
@@ -103,7 +104,7 @@ const PADDLE = {
     ev.preventDefault();
     if (!ready || !PADDLE.prices[pick]) { status.textContent = "Checkout isn't open yet."; return; }
     Paddle.Checkout.open({ items: [{ priceId: PADDLE.prices[pick], quantity: 1 }], customData: ref ? { ref } : {},
-      ...(onSale && L.code ? { discountCode: L.code } : {}) });
+      ...(onSale && L.code ? { discountCode: pick === "bundle" ? L.bundleCode : L.code } : {}) });
   });
 })();
 </script>
