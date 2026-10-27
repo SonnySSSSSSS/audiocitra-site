@@ -64,7 +64,7 @@
 // Fill these from the Paddle dashboard. Until `token` is set the page says checkout opens at launch.
 const PADDLE = {
   env: "production",       // the account has no sandbox; checkout opens once the token is set and the domain is approved
-  token: "",               // client-side token (test_... for the sandbox, live_... at launch)
+  token: "live_5dc1e2400900ce0a3dee631fd3d",               // client-side token (test_... for the sandbox, live_... at launch)
   prices: { bundle: "pri_01m5yq92gn6ssy7wtkggy5eybf", spanda: "pri_01m5yqewm8fs88zzsr7w9d4kqb", agni: "pri_01m5yqfs6d7qsn4jj11w6jsnd6", akasa: "pri_01m5yqgk3xcwwymrvv17vq2qg6", shunya: "pri_01m5yqhfpwhy1dpent5ya54b9j", galana: "pri_01m5yqj85ey6h070819pk5r4zc", lahari: "pri_01m5yqcvxvwjthyjhsvs41czxa", tula: "pri_01m5yqb6chmz4fcf0stn0cfxtz" },   // Paddle live price ids
   full: { bundle: 299, spanda: 129, agni: 59, akasa: 99, shunya: 89, galana: 79, lahari: 49, tula: 29 },   // USD list prices
   // Launch sale: Paddle discounts LAUNCH25 (singles) and LAUNCH20 (bundle) expire on `ends`. Shown only once checkout is live.
@@ -96,6 +96,8 @@ const PADDLE = {
   if (ready) {
     if (PADDLE.env !== "production") Paddle.Environment.set("sandbox");
     Paddle.Initialize({ token: PADDLE.token, eventCallback: ev => {
+      if (ev.name === "checkout.error")
+        status.textContent = "Checkout couldn't open. Try again in a minute, or e-mail support@audiocitra.com if it keeps happening.";
       if (ev.name === "checkout.completed")
         status.textContent = ref ? "Paid, thank you. Go back to the plug-in and click Fetch licence." : "Paid, thank you. Your licence is on its way by e-mail.";
     } });
