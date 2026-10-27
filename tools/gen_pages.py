@@ -179,7 +179,7 @@ page('shunya.html', 'Shunya Reverb',
       ('img/shunya-knobs.jpg', 'Mix knob close-up')],
      skins(['Graticule', 'Eclipse'], ['Washi', 'Blueprint'], 'shunya'), cls=' class="pale"')
 
-def page_lite(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_cap, feat_head, fs, sk, extra=''):
+def page_lite(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_cap, feat_head, fs, sk, extra='', cta_html=None):
     # A product page without teardown, audio or analysis yet (a new plugin): hero, features, skins, call to action.
     name = title.split()[0]
     soon = SOON_BANNER.format(name=name) if fn.split('.')[0] in SOON else ''
@@ -196,7 +196,7 @@ def page_lite(fn, title, desc, acc, eyebrow, h1, lede, hero_src, hero_alt, hero_
   <p class="lede">These are straight from the plugin, no mockups. Click around.. I spent way too long on some of these.</p></div>
   {sk}
 </div></section>
-{cta(name)}
+{cta_html or cta(name)}
 ''' + TAIL
     open(fn, 'w', encoding='utf-8').write(out)
 
@@ -218,6 +218,43 @@ page_lite('lahari.html', 'Lahari Modulation',
      skins([], ['Analog', 'Clean', 'Fantasy', 'Creative', 'Pedal'], 'lahari'),
      extra=plate('img/lahari-hero-pedal.jpg', 'Lahari in the Pedal skin, rendered in 3D') + '<p class="cap">Pedal skin &middot; 3D render</p>')
 
+
+TULA_SKINS = [('studio', 'Studio'), ('paper', 'Paper'), ('rack', 'Rack'), ('console', 'Console'), ('citra', 'Citra')]
+
+
+def viewer3d(key, label, skins_):
+    # A 3D unit per skin (3d/{key}-{skin}.glb, built by AudioCitraFree/tools/skins/tula_glb.py); drag to turn it.
+    btns = ''.join(f'<button aria-pressed="{"true" if i == 0 else "false"}" data-glb="3d/{key}-{s}.glb">{n}</button>'
+                   for i, (s, n) in enumerate(skins_))
+    return (f'<div class="head" style="margin-top:72px"><span class="eyebrow">In 3D</span><h2>Grab it and <em>turn it around.</em></h2>'
+            f'<p class="lede">Every skin is built as a real little unit. Drag to spin it, scroll to get close.</p></div>'
+            f'<model-viewer id="m-{key}" src="3d/{key}-{skins_[0][0]}.glb" alt="{label} as a 3D unit" camera-controls touch-action="pan-y" '
+            'auto-rotate auto-rotate-delay="3000" rotation-per-second="10deg" camera-orbit="-18deg 78deg 70%" min-camera-orbit="auto auto 35%" '
+            'shadow-intensity="0.9" shadow-softness="0.8" environment-image="neutral" exposure="1.05" interaction-prompt="none" '
+            'style="display:block;width:100%;height:clamp(300px,52vw,520px);background:transparent;--poster-color:transparent"></model-viewer>'
+            f'<div class="seg" aria-label="3D skin" style="margin-top:12px" data-model="m-{key}">{btns}</div>'
+            '<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>'
+            '<script>document.querySelectorAll("[data-model]").forEach(function(seg){var m=document.getElementById(seg.dataset.model);'
+            'seg.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){m.src=b.dataset.glb;'
+            'seg.querySelectorAll("button").forEach(function(o){o.setAttribute("aria-pressed",o===b?"true":"false")})})})})</script>')
+
+
+page_lite('tula.html', 'Tulā Gain Utility',
+     'Tulā is a free VST3 utility for Windows: gain staging by Peak, RMS or LUFS, level matching with A/B, and a pan section, on every track.',
+     'tula', 'Tulā · free utility', 'Every track, <em>in balance.</em>',
+     'Tulā means scale, as in the kind that balances. It\'s the little thing I put on every track first: it listens, sets your gain to a target, matches levels so your A/B is honest, and handles pan and width. And it\'s free.. no catch, I just want it on your tracks.',
+     'img/skins/tula-studio.jpg', 'Tulā editor in the Studio skin', 'Studio skin &middot; straight from the plugin',
+     'Small box, <em>does the boring stuff right.</em>',
+     [('Listen', 'Pick Peak, RMS or LUFS and a Target, hit Listen and play the loudest part. It waits for audio, listens for six seconds and sets Trim for you. LUFS is proper BS.1770, gated and K-weighted, and Peak ignores that one stray click.', 'Peak · RMS · LUFS · 6 s'),
+      ('Listen All', 'Start it from any track and every Tulā in the session listens at once and sets its own gain. One pass and your whole session is staged.. that one still makes me happy.', 'Every linked instance'),
+      ('Link, Match and A/B', 'With Link on, Out moves opposite to Trim so the track never gets louder on you. Match sets Out so what comes out is as loud as what went in, and A/B flips to the dry signal at that same level. Louder always sounds better, so I took that off the table.', 'Link · Match · A/B'),
+      ('Pan and width', 'Pan with four laws: Balance (the default, so inserting it changes nothing), -3, -4.5 and -6 dB. Width goes 0 to 200 % without touching the mono sum, and Mono lets you check the fold-down, with a lamp that shows how much you lose.', '4 pan laws · width · mono check'),
+      ('Five skins', 'Studio, Paper, Rack, Console and Citra, all from the lotus menu, each with its own meter that actually moves. Resize it however you like.', '5 skins · resizable')],
+     skins([], [n for _, n in TULA_SKINS], 'tula'),
+     extra=viewer3d('tula', 'Tulā', TULA_SKINS),
+     cta_html=('<section><div class="wrap cta"><h2>Want Tulā?</h2><p class="soon">It\'s free.. the download goes up with the launch</p>'
+               '<p class="lede req">VST3 · Windows 64-bit · signed updates right inside the plugin</p></div></section>'))
+
 cards = [
     ('spanda.html', 'spanda', 'Channel strip', 'Spanda', 'Seven modules in one strip. Lots of it fitted to analysis, and parts you can mix and match.', 'img/con-cin-hero.jpg'),
     ('galana.html', 'galana', 'Effects box', 'Gālana', 'Twelve filters, a Movement section, chorus and delay, in any of six orders. Presets, A/B and undo.', 'img/galana-hero.jpg'),
@@ -225,6 +262,7 @@ cards = [
     ('akasa.html', 'akasa', 'Coloured reverb', 'Ākāśa', 'Six reverbs fitted to the decay and colour of classic digital units.. vintage converters optional.', 'img/akasa-b-detail.jpg'),
     ('shunya.html', 'shunya', 'Transparent reverb', 'Shunya', 'Six clean reverbs. No saturation, no drive, no grain. Just space.', 'img/shunya-hero.jpg'),
     ('lahari.html', 'lahari', 'Modulation', 'Lahari', 'Chorus, ensemble, celeste, flanger and phaser, six units, fitted to classic digital chorus sections.', 'img/lahari-hero-analog.jpg'),
+    ('tula.html', 'tula', 'Free utility', 'Tulā', 'Gain staging, level matching and pan for every track. Listen All stages the whole session. Free.', 'img/skins/tula-studio.jpg'),
 ]
 
 
@@ -235,7 +273,7 @@ def card(h, c, t, n, p, src):
     return f'<a class="bay" href="{h}" style="--c:var(--{c})">{th}<span class="tag">{t}</span>{badge}<h3>{n}</h3><p>{p}</p></a>'
 
 
-home = HEAD.format(title='Audio Citra', desc=e('Audio Citra makes six VST3 plugins for Windows: Spanda, Gālana, Agni, Ākāśa, Shunya and Lahari.'),
+home = HEAD.format(title='Audio Citra', desc=e('Audio Citra makes VST3 plugins for Windows: Spanda, Gālana, Agni, Ākāśa, Shunya, Lahari and the free Tulā.'),
                    ogimg='img/lim-cin-hero.jpg', icon=ICON, acc='spanda', cls='') + f'''<div class="wrap">
   <header class="hero hero-tight"><span class="eyebrow">Hey, welcome in</span>
   <h1>I build plugins, <em>and this is where I keep them.</em></h1>

@@ -1,7 +1,7 @@
 /* Audio Citra site: dark lacquer base; each product page sets --accent (Shunya flips to a pale room) */
 :root{
   --bg:#0c0b10; --panel:#16141d; --line:#2a2733; --fg:#ece9f2; --mute:#8d8899;
-  --spanda:#c58bff; --galana:#ffb35c; --akasa:#e895a0; --shunya:#1f6a82; --shunya-lt:#5fb0cc; --agni:#ff6a3d; --lahari:#5fd4b4;
+  --spanda:#c58bff; --galana:#ffb35c; --akasa:#e895a0; --shunya:#1f6a82; --shunya-lt:#5fb0cc; --agni:#ff6a3d; --lahari:#5fd4b4; --tula:#e8b04a;
   --on-accent:#111; --nav-h:56px;
   --pale:#eef0ee; --pale-fg:#1d2124; --pale-mute:#5f676c;
   --display:"Syne",system-ui,sans-serif; --body:"Instrument Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
