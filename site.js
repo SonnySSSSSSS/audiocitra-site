@@ -15,7 +15,13 @@
 
   // Cartoon me, narrating a line or two per page. [page, selector, pose, line]; "*" = every product page.
   const SAY = [
-    ["index.html", ".hero", "welcome", "Hey, welcome in! I built every one of these myself. Have a look around, and poke at whatever looks fun."],
+    ["index.html", ".hero", "welcome", "Hi, I'm Citra! I made all of these. Have a look around, and poke at whatever looks fun."],
+    ["akasa.html", ".hero", "fun-akasa", "Echo.. echo.. echo.. Six reverbs fitted to classic digital units."],
+    ["galana.html", ".hero", "fun-galana", "Twelve filters, and I'm their number one fan."],
+    ["agni.html", ".hero", "fun-agni", "Careful, this one runs hot. Two engines, ten shapes."],
+    ["shunya.html", ".hero", "fun-shunya", "Shunya means zero. No saturation, no drive.. just space."],
+    ["lahari.html", ".hero", "fun-lahari", "Lahari means wave. Chorus, flanger, phaser.. surf's up."],
+    ["tula.html", ".hero", "fun-tula", "Tulā means scale, the kind that balances. Every track, nice and level."],
     ["spanda.html", ".hero", "welcome", "Welcome to Spanda! Seven modules in one strip.. pick any of those tabs to dig in."],
     ["buy.html", ".hero", "thumbs", "One licence covers all your own computers. No account, no dongle, no activation server."],
     ["buy.html", ".faq", "think", "Stuck on something? E-mail support@audiocitra.com, it comes straight to me."],
