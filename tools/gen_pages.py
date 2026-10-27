@@ -251,7 +251,9 @@ page_lite('tula.html', 'Tulā Gain Utility',
       ('Pan and width', 'Pan with four laws: Balance (the default, so inserting it changes nothing), -3, -4.5 and -6 dB. Width goes 0 to 200 % without touching the mono sum, and Mono lets you check the fold-down, with a lamp that shows how much you lose.', '4 pan laws · width · mono check'),
       ('Five skins', 'Studio, Paper, Rack, Console and Citra, all from the lotus menu, each with its own meter that actually moves. Resize it however you like.', '5 skins · resizable')],
      skins([], [n for _, n in TULA_SKINS], 'tula'),
-     extra=viewer3d('tula', 'Tulā', TULA_SKINS),
+     extra=viewer3d('tula', 'Tulā', TULA_SKINS) + ('</div></section><section id="measurements"><div class="wrap"><div class="head"><span class="eyebrow">Analysis</span>'
+           '<h2>I&#39;d rather show you than tell you.</h2><p class="lede">I rendered every one of these offline through the plugin itself at 48 kHz. '
+           'The settings are under each plot, so you can check my work.</p></div><div class="meas-grid" data-meas="tula"></div>'),
      cta_html=('<section><div class="wrap cta"><h2>Want Tulā?</h2><p class="soon">It\'s free.. the download goes up with the launch</p>'
                '<p class="lede req">VST3 · Windows 64-bit · signed updates right inside the plugin</p></div></section>'))
 

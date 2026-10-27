@@ -42,5 +42,7 @@ for plug, items in SEL.items():
     for name, title, cap, settings in items:
         shutil.copy2(os.path.join(M, plug, name + '.png'), os.path.join(d, name + '.png'))
         out[plug].append({'src': 'img/meas/%s.png' % name, 'title': title, 'caption': cap, 'settings': settings})
+# Tulā's plots come from AudioCitraFree/tools/meas/tula_meas.py and are already in img/meas: keep them
+out['tula'] = json.load(open(os.path.join(W, 'meas.json'), encoding='utf-8')).get('tula', [])
 json.dump(out, open(os.path.join(W, 'meas.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('ok', sum(len(v) for v in out.values()))

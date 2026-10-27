@@ -176,5 +176,25 @@
    "w": 1200,
    "h": 675
   }
+ ],
+ "tula": [
+  {
+   "src": "img/meas/tula_transparent.png",
+   "title": "Transparent on insert",
+   "caption": "Drop it on a track at default settings and nothing changes. The output nulls against the input to −158 dB, which is just float rounding.",
+   "settings": "Defaults: Trim 0, Out 0, Pan centre, Balance law, Width 100 % · log sweep 20 Hz–20 kHz at −12 dBFS"
+  },
+  {
+   "src": "img/meas/tula_pan_laws.png",
+   "title": "Four pan laws",
+   "caption": "Each law lands exactly on its centre value: 0, −3.01, −4.52 and −6.02 dB.",
+   "settings": "Dual-mono 997 Hz at −12 dBFS · nine pan positions per law · level per side re input"
+  },
+  {
+   "src": "img/meas/tula_width.png",
+   "title": "Width keeps the mono sum",
+   "caption": "Side follows the knob, −6 dB at 50 % and +6 dB at 200 %, while the mono sum doesn’t move at all.",
+   "settings": "Independent L/R pink noise at −18 dBFS RMS · mid (L+R) and side (L−R) re input"
+  }
  ]
 }
