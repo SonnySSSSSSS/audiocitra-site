@@ -13,6 +13,8 @@
 .pick[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
 .pick b{display:block;font-size:20px;margin-bottom:4px}.pick span{color:var(--mute);font-size:14px}.pick .pr{display:block;margin-top:10px;font:500 15px var(--mono);color:var(--fg)}
 .pick.all{grid-column:1/-1}
+.pick .pr s{color:var(--mute);margin-right:8px;font-weight:400}
+.sale{color:var(--accent);margin:0 0 16px}
 #status{color:var(--mute);margin-top:14px;min-height:1.5em}
 .faq{max-width:720px;margin-top:56px}.faq h2{font-size:1.25rem;margin:28px 0 8px}.faq p{color:var(--mute);line-height:1.6;margin:0}
 </style>
@@ -22,13 +24,16 @@
   <header class="hero hero-tight"><span class="eyebrow">Buy</span><h1>Pick what you <em>want to keep.</em></h1>
     <p>Every plug-in runs fully for 14 days first, so only buy what you're already using. One licence covers all your own computers.</p></header>
   <div class="picks" id="picks">
-    <button class="pick all" data-id="bundle" type="button"><b>Everything</b><span>Spanda, Agni, Ākāśa, Shunya and Gālana in one licence.</span><span class="pr" data-price="bundle"></span></button>
+    <button class="pick all" data-id="bundle" type="button"><b>Everything</b><span>All seven: Spanda, Agni, Ākāśa, Shunya, Gālana, Lahari and Tulā in one licence.</span><span class="pr" data-price="bundle"></span></button>
     <button class="pick" data-id="spanda" type="button"><b>Spanda</b><span>Channel strip</span><span class="pr" data-price="spanda"></span></button>
     <button class="pick" data-id="agni" type="button"><b>Agni</b><span>Distortion</span><span class="pr" data-price="agni"></span></button>
     <button class="pick" data-id="akasa" type="button"><b>Ākāśa</b><span>Reverb</span><span class="pr" data-price="akasa"></span></button>
     <button class="pick" data-id="shunya" type="button"><b>Shunya</b><span>Reverb</span><span class="pr" data-price="shunya"></span></button>
     <button class="pick" data-id="galana" type="button"><b>Gālana</b><span>Effects box</span><span class="pr" data-price="galana"></span></button>
+    <button class="pick" data-id="lahari" type="button"><b>Lahari</b><span>Modulation</span><span class="pr" data-price="lahari"></span></button>
+    <button class="pick" data-id="tula" type="button"><b>Tulā</b><span>Mix utility: level, match, pan, align</span><span class="pr" data-price="tula"></span></button>
   </div>
+  <p id="sale" class="sale" hidden></p>
   <a class="btn solid" id="go" href="#" role="button">Checkout</a>
   <p id="status" role="status"></p>
 
@@ -55,8 +60,10 @@
 const PADDLE = {
   env: "sandbox",          // "production" at launch
   token: "",               // client-side token (test_... for the sandbox, live_... at launch)
-  prices: { bundle: "", spanda: "", agni: "", akasa: "", shunya: "", galana: "" },   // pri_... ids
-  show: { bundle: "", spanda: "", agni: "", akasa: "", shunya: "", galana: "" },     // display text, e.g. "$49"
+  prices: { bundle: "", spanda: "", agni: "", akasa: "", shunya: "", galana: "", lahari: "", tula: "" },   // pri_... ids
+  full: { bundle: 299, spanda: 129, agni: 59, akasa: 99, shunya: 89, galana: 79, lahari: 49, tula: 29 },   // USD list prices
+  // Launch sale: shown until `ends` (YYYY-MM-DD, last day). The discount itself is a Paddle discount; keep these in step with it.
+  launch: { ends: "", code: "", price: { bundle: 239, spanda: 97, agni: 44, akasa: 74, shunya: 67, galana: 59, lahari: 37, tula: 22 } },
 };
 (() => {
   const q = new URLSearchParams(location.search);
@@ -65,7 +72,18 @@ const PADDLE = {
   let pick = PADDLE.prices[q.get("product")] !== undefined ? q.get("product") : "bundle";
   const status = document.getElementById("status"), go = document.getElementById("go");
   const ready = !!PADDLE.token && typeof Paddle !== "undefined";
-  document.querySelectorAll("[data-price]").forEach(el => el.textContent = PADDLE.show[el.dataset.price] || "");
+  const L = PADDLE.launch, onSale = !!L.ends && new Date() <= new Date(L.ends + "T23:59:59");
+  document.querySelectorAll("[data-price]").forEach(el => {
+    const id = el.dataset.price, full = PADDLE.full[id];
+    if (onSale) { const s = document.createElement("s"); s.textContent = "$" + full; el.append(s, "$" + L.price[id]); }
+    else el.textContent = "$" + full;
+  });
+  if (onSale) {
+    const sale = document.getElementById("sale");
+    sale.textContent = "Launch sale: 25% off every plug-in, 20% off Everything, until " +
+      new Date(L.ends + "T12:00:00").toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) + ".";
+    sale.hidden = false;
+  }
   const sel = () => document.querySelectorAll(".pick").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === pick));
   document.querySelectorAll(".pick").forEach(b => b.addEventListener("click", () => { pick = b.dataset.id; sel(); }));
   sel();
@@ -79,7 +97,8 @@ const PADDLE = {
   go.addEventListener("click", ev => {
     ev.preventDefault();
     if (!ready || !PADDLE.prices[pick]) { status.textContent = "Checkout isn't open yet."; return; }
-    Paddle.Checkout.open({ items: [{ priceId: PADDLE.prices[pick], quantity: 1 }], customData: ref ? { ref } : {} });
+    Paddle.Checkout.open({ items: [{ priceId: PADDLE.prices[pick], quantity: 1 }], customData: ref ? { ref } : {},
+      ...(onSale && L.code ? { discountCode: L.code } : {}) });
   });
 })();
 </script>
