@@ -13,6 +13,23 @@
   foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="buy.html">Buy</a> · <a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
   document.body.append(foot);
 
+  // Cartoon me, narrating a line or two per page. [page, selector, pose, line]; "*" = every product page.
+  const SAY = [
+    ["index.html", ".hero", "wave", "Hey! I built every one of these myself. Have a look around, and poke at whatever looks fun."],
+    ["buy.html", ".hero", "thumbs", "One licence covers all your own computers. No account, no dongle, no activation server."],
+    ["buy.html", ".faq", "think", "Stuck on something? E-mail support@audiocitra.com, it comes straight to me."],
+    ["*", ".cta", "point", "When the trial's out, put it on a real track. If it doesn't click, no hard feelings."],
+  ];
+  const product = pages.some(([h]) => h === here);
+  SAY.filter(([pg]) => pg === here || (pg === "*" && product)).forEach(([, sel, pose, line]) => {
+    const at = document.querySelector(sel);
+    if (!at) return;
+    const say = document.createElement("aside");
+    say.className = "say";
+    say.innerHTML = `<img src="img/avatar/${pose}.webp" alt="" width="120" loading="lazy"><p class="bubble">${line}</p>`;
+    at.append(say);
+  });
+
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const pad2 = i => String(i + 1).padStart(2, "0");
   const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));

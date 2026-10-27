@@ -241,9 +241,9 @@ def viewer3d(key, label, skins_):
 
 
 page_lite('tula.html', 'Tulā Gain Utility',
-     'Tulā is a free VST3 utility for Windows: gain staging by Peak, RMS or LUFS, level matching with A/B, and a pan section, on every track.',
-     'tula', 'Tulā · free utility', 'Every track, <em>in balance.</em>',
-     'Tulā means scale, as in the kind that balances. It\'s the little thing I put on every track first: it listens, sets your gain to a target, matches levels so your A/B is honest, and handles pan and width. And it\'s free.. no catch, I just want it on your tracks.',
+     'Tulā is a VST3 utility for Windows: gain staging by Peak, RMS or LUFS, level matching with A/B, and a pan section, on every track.',
+     'tula', 'Tulā · mix utility', 'Every track, <em>in balance.</em>',
+     'Tulā means scale, as in the kind that balances. It\'s the little thing I put on every track first: it listens, sets your gain to a target, matches levels so your A/B is honest, and handles pan and width.',
      'img/skins/tula-studio.jpg', 'Tulā editor in the Studio skin', 'Studio skin &middot; straight from the plugin',
      'Small box, <em>does the boring stuff right.</em>',
      [('Listen', 'Pick Peak, RMS or LUFS and a Target, hit Listen and play the loudest part. It waits for audio, listens for six seconds and sets Trim for you. LUFS is proper BS.1770, gated and K-weighted, and Peak ignores that one stray click.', 'Peak · RMS · LUFS · 6 s'),
@@ -255,7 +255,7 @@ page_lite('tula.html', 'Tulā Gain Utility',
      extra=viewer3d('tula', 'Tulā', TULA_SKINS) + ('</div></section><section id="measurements"><div class="wrap"><div class="head"><span class="eyebrow">Analysis</span>'
            '<h2>I&#39;d rather show you than tell you.</h2><p class="lede">I rendered every one of these offline through the plugin itself at 48 kHz. '
            'The settings are under each plot, so you can check my work.</p></div><div class="meas-grid" data-meas="tula"></div>'),
-     cta_html=('<section><div class="wrap cta"><h2>Want Tulā?</h2><p class="soon">It\'s free.. the download goes up with the launch</p>'
+     cta_html=('<section><div class="wrap cta"><h2>Want to try Tulā?</h2><p class="soon">Trial&#39;s coming soon.. I&#39;m almost there</p>'
                '<p class="lede req">VST3 · Windows 64-bit · signed updates right inside the plugin</p></div></section>'))
 
 cards = [
@@ -265,7 +265,7 @@ cards = [
     ('akasa.html', 'akasa', 'Coloured reverb', 'Ākāśa', 'Six reverbs fitted to the decay and colour of classic digital units.. vintage converters optional.', 'img/akasa-b-detail.jpg'),
     ('shunya.html', 'shunya', 'Transparent reverb', 'Shunya', 'Six clean reverbs. No saturation, no drive, no grain. Just space.', 'img/shunya-hero.jpg'),
     ('lahari.html', 'lahari', 'Modulation', 'Lahari', 'Chorus, ensemble, celeste, flanger and phaser, six units, fitted to classic digital chorus sections.', 'img/lahari-hero-analog.jpg'),
-    ('tula.html', 'tula', 'Free utility', 'Tulā', 'Gain staging, level matching and pan for every track. Listen All stages the whole session. Free.', 'img/skins/tula-studio.jpg'),
+    ('tula.html', 'tula', 'Mix utility', 'Tulā', 'Gain staging, level matching and pan for every track. Listen All stages the whole session.', 'img/skins/tula-studio.jpg'),
 ]
 
 
@@ -276,7 +276,7 @@ def card(h, c, t, n, p, src):
     return f'<a class="bay" href="{h}" style="--c:var(--{c})">{th}<span class="tag">{t}</span>{badge}<h3>{n}</h3><p>{p}</p></a>'
 
 
-home = HEAD.format(title='Audio Citra', desc=e('Audio Citra makes VST3 plugins for Windows: Spanda, Gālana, Agni, Ākāśa, Shunya, Lahari and the free Tulā.'),
+home = HEAD.format(title='Audio Citra', desc=e('Audio Citra makes VST3 plugins for Windows: Spanda, Gālana, Agni, Ākāśa, Shunya, Lahari and Tulā.'),
                    ogimg='img/lim-cin-hero.jpg', icon=ICON, acc='spanda', cls='') + f'''<div class="wrap">
   <header class="hero hero-tight"><span class="eyebrow">Hey, welcome in</span>
   <h1>I build plugins, <em>and this is where I keep them.</em></h1>
