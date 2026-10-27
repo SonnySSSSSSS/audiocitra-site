@@ -19,6 +19,10 @@
     ["spanda.html", ".hero", "welcome", "Welcome to Spanda! Seven modules in one strip.. pick any of those tabs to dig in."],
     ["buy.html", ".hero", "thumbs", "One licence covers all your own computers. No account, no dongle, no activation server."],
     ["buy.html", ".faq", "think", "Stuck on something? E-mail support@audiocitra.com, it comes straight to me."],
+    ["*", "#measurements .head", "measure", "This is me most nights.. squinting at curves until they look right."],
+    ["*", "#listen .head", "listen", "Grab some headphones. This is the part I actually care about."],
+    ["*", "#parts .head", "tinker", "Not sure where to start? Load a recipe, then swap one part at a time and listen."],
+    ["*", "#skins .head", "paint", "Same sound, different paint job. Pick whichever one makes you want to mix."],
     ["*", ".cta", "point", "When the trial's out, put it on a real track. If it doesn't click, no hard feelings."],
   ];
   const product = pages.some(([h]) => h === here);
