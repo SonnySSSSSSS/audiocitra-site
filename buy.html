@@ -68,8 +68,8 @@ const PADDLE = {
   token: "live_5dc1e2400900ce0a3dee631fd3d",               // client-side token (test_... for the sandbox, live_... at launch)
   prices: { bundle: "pri_01m5yq92gn6ssy7wtkggy5eybf", spanda: "pri_01m5yqewm8fs88zzsr7w9d4kqb", agni: "pri_01m5yqfs6d7qsn4jj11w6jsnd6", akasa: "pri_01m5yqgk3xcwwymrvv17vq2qg6", shunya: "pri_01m5yqhfpwhy1dpent5ya54b9j", galana: "pri_01m5yqj85ey6h070819pk5r4zc", lahari: "pri_01m5yqcvxvwjthyjhsvs41czxa", tula: "pri_01m5yqb6chmz4fcf0stn0cfxtz" },   // Paddle live price ids
   full: { bundle: 299, spanda: 129, agni: 59, akasa: 99, shunya: 89, galana: 79, lahari: 49, tula: 29 },   // USD list prices
-  // Launch sale: Paddle discounts LAUNCH25 (singles) and LAUNCH20 (bundle) expire on `ends`. Shown only once checkout is live.
-  launch: { ends: "2026-12-11", code: "LAUNCH25", bundleCode: "LAUNCH20" },
+  // Early-access sale: Paddle discounts EARLY40 (singles) and EARLY30 (bundle) expire on `ends`. Shown only once checkout is live.
+  launch: { ends: "2026-12-11", code: "EARLY40", bundleCode: "EARLY30" },
 };
 (() => {
   const q = new URLSearchParams(location.search);
@@ -79,7 +79,7 @@ const PADDLE = {
   const status = document.getElementById("status"), go = document.getElementById("go");
   const ready = !!PADDLE.token && typeof Paddle !== "undefined";
   const L = PADDLE.launch, onSale = ready && !!L.ends && new Date() <= new Date(L.ends + "T23:59:59");
-  const off = id => id === "bundle" ? 0.8 : 0.75, usd = n => "$" + (Number.isInteger(n) ? n : n.toFixed(2));
+  const off = id => id === "bundle" ? 0.7 : 0.6, usd = n => "$" + (Number.isInteger(n) ? n : n.toFixed(2));
   document.querySelectorAll("[data-price]").forEach(el => {
     const id = el.dataset.price, full = PADDLE.full[id];
     if (onSale) { const s = document.createElement("s"); s.textContent = "$" + full; el.append(s, usd(Math.round(full * off(id) * 100) / 100)); }
@@ -87,7 +87,7 @@ const PADDLE = {
   });
   if (onSale) {
     const sale = document.getElementById("sale");
-    sale.textContent = "Launch sale: 25% off every plug-in, 20% off Everything, until " +
+    sale.textContent = "Early access: 40% off every plug-in, 30% off Everything, until " +
       new Date(L.ends + "T12:00:00").toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) + ".";
     sale.hidden = false;
   }
