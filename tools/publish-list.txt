@@ -27,33 +27,40 @@ audio/spanda-2-dry.mp3
 audio/spanda-2-wet.mp3
 audio/spanda-3-dry.mp3
 audio/spanda-3-wet.mp3
+buy.html
 credits.html
 galana.html
 img/agni-engine.jpg
 img/agni-hero.jpg
 img/agni-master.jpg
 img/akasa-b-detail.jpg
-img/con-cin-hero.jpg
-img/con-cin-meter.jpg
-img/con-clr-hero.jpg
-img/dyn-cin-hero.jpg
-img/dyn-cin-knobs.jpg
-img/dyn-cin-tube.jpg
-img/dyn-clr-gr.jpg
+img/avatar/welcome.webp
+img/con-cin.jpg
+img/con-clr.jpg
+img/con-noir-fan.jpg
+img/con-noir-hero.jpg
+img/con-noir.jpg
+img/dyn-cin.jpg
+img/dyn-clr.jpg
+img/dyn-noir-hero.jpg
+img/dyn-noir-scope.jpg
+img/dyn-noir.jpg
 img/eq-cin.jpg
 img/eq-clr.jpg
+img/eq-noir.jpg
 img/fin-cin.jpg
 img/fin-clr.jpg
-img/flat-cin-dyn.jpg
-img/flat-clr-dyn.jpg
+img/fin-noir.jpg
 img/galana-crt.jpg
 img/galana-hero.jpg
 img/galana-knobs.jpg
 img/lahari-hero-analog.jpg
 img/lahari-hero-pedal.jpg
-img/lim-cin-hero.jpg
-img/lim-cin-knobs.jpg
-img/lim-clr-hero.jpg
+img/lim-cin.jpg
+img/lim-clr.jpg
+img/lim-noir-hero.jpg
+img/lim-noir-vfd.jpg
+img/lim-noir.jpg
 img/meas/agni_aliasing_1x_vs_8x.png
 img/meas/agni_harmonic_spectra.png
 img/meas/agni_transfer_curves.png
@@ -75,9 +82,13 @@ img/meas/spanda_eq_curves.png
 img/meas/spanda_eq_q_family.png
 img/meas/spanda_finisher_logos_harmonics.png
 img/meas/spanda_limiter_true_peak.png
-img/neu-cin-hero.jpg
-img/neu-cin-mix.jpg
-img/neu-clr-hero.jpg
+img/meas/tula_pan_laws.png
+img/meas/tula_transparent.png
+img/meas/tula_width.png
+img/neu-cin.jpg
+img/neu-clr.jpg
+img/neu-noir-lens.jpg
+img/neu-noir.jpg
 img/parts/comp_colour_0.jpg
 img/parts/comp_colour_1.jpg
 img/parts/comp_colour_2.jpg
@@ -141,6 +152,7 @@ img/parts/eq_lowmid_5.jpg
 img/parts/eq_lowmid_6.jpg
 img/rail-cin.jpg
 img/rail-clr.jpg
+img/rail-noir.jpg
 img/shunya-crt.jpg
 img/shunya-hero.jpg
 img/shunya-knobs.jpg
@@ -149,9 +161,9 @@ img/skins/agni-forge.jpg
 img/skins/agni-pyre.jpg
 img/skins/agni-slate.jpg
 img/skins/agni-valve.jpg
+img/skins/akasa-noir.jpg
 img/skins/akasa-orb.jpg
 img/skins/akasa-oxblood.jpg
-img/skins/akasa-walnut.jpg
 img/skins/akasa-watercolor.jpg
 img/skins/galana-aether.jpg
 img/skins/galana-brutalist.jpg
@@ -168,6 +180,11 @@ img/skins/shunya-blueprint.jpg
 img/skins/shunya-eclipse.jpg
 img/skins/shunya-graticule.jpg
 img/skins/shunya-washi.jpg
+img/skins/tula-citra.jpg
+img/skins/tula-console.jpg
+img/skins/tula-paper.jpg
+img/skins/tula-rack.jpg
+img/skins/tula-studio.jpg
 img/smart-console.jpg
 img/smart-dynamics.jpg
 img/smart-eq.jpg
@@ -175,14 +192,41 @@ img/smart-finisher.jpg
 img/smart-limiter.jpg
 img/smart-neural.jpg
 img/smart-rail.jpg
+img/tula-citra.jpg
+img/walk/agni.jpg
+img/walk/akasa.jpg
+img/walk/galana.jpg
+img/walk/mixer.jpg
+img/walk/parts.jpg
+img/walk/shunya.jpg
+img/walk/spanda.jpg
+img/walk/support.jpg
 index.html
 lahari.html
 meas.json
 parts.json
+privacy.html
+refund.html
 shunya.html
 site.css
 site.js
 spanda.html
 teardown.json
+terms.html
+tula.html
 
 # EXCLUDED (not published): *.py scripts, .claude/, and unreferenced images:
+# img/avatar/fun-agni.webp
+# img/avatar/fun-akasa.webp
+# img/avatar/fun-galana.webp
+# img/avatar/fun-lahari.webp
+# img/avatar/fun-shunya.webp
+# img/avatar/fun-tula.webp
+# img/avatar/listen.webp
+# img/avatar/measure.webp
+# img/avatar/paint.webp
+# img/avatar/point.webp
+# img/avatar/think.webp
+# img/avatar/thumbs.webp
+# img/avatar/tinker.webp
+# img/avatar/wave.webp

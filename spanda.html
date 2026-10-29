@@ -6,7 +6,7 @@
 <meta property="og:type" content="website"><meta property="og:site_name" content="Audio Citra">
 <meta property="og:title" content="Spanda Channel Strip">
 <meta property="og:description" content="Spanda is a VST3 channel strip for Windows: console, rail, neural, dynamics, EQ, finisher and a true-peak limiter, with compressor and EQ parts you can combine.">
-<meta property="og:image" content="img/dyn-cin-hero.jpg">
+<meta property="og:image" content="img/dyn-noir-hero.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0b10'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c58bff' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -21,8 +21,8 @@
     <p>This is the big one.. the one I've been building the longest. Console, rail, neural, dynamics, EQ, finisher and a true-peak limiter. A lot of it I fitted to analysis, then broke back down into parts you can combine yourself. Oh, and strips on different tracks talk to each other. Plus the everyday stuff: a preset browser that auditions presets live on your sound, Auto Gain (match loudness or peaks), two bypass modes, and licence and updates built right in.</p>
     <div class="row"><a class="btn solid" href="#inside">Take it apart</a><a class="btn" href="#listen">Listen</a><a class="btn" href="#walkthrough">Watch</a><a class="btn" href="#parts">Parts</a><a class="btn" href="#measurements">Analysis</a></div>
   </header>
-  <figure class="plate" style="margin:0"><img src="img/dyn-cin-hero.jpg" alt="Spanda Dynamics module in the Cinematic skin, rendered in 3D at a three-quarter angle" width="1280" height="720"></figure>
-  <p class="cap">Dynamics · Cinematic skin · rendered from the plugin's own 3D source</p>
+  <figure class="plate" style="margin:0"><img src="img/dyn-noir-hero.jpg" alt="Spanda Dynamics module in the Noir skin, rendered in 3D at a three-quarter angle" width="1280" height="720"></figure>
+  <p class="cap">Dynamics · Noir skin · rendered in 3D from the plugin's own screen</p>
 </div>
 
 <div class="td" id="inside" data-teardown="spanda" style="--n:7"></div>
@@ -121,8 +121,8 @@
 </div></section>
 
 <section id="skins"><div class="wrap">
-  <div class="head"><span class="eyebrow">Skins</span><h2>Every module, <em>three skins.</em></h2>
-    <p class="lede">Pick a module, then a skin. Cinematic and Clear are 3D renders, Smart is the flat modern one. Yes I made all three for every module.. no, I don't regret it.</p></div>
+  <div class="head"><span class="eyebrow">Skins</span><h2>Every module, <em>four skins.</em></h2>
+    <p class="lede">Pick a module, then a skin. Noir, Cinematic, Clear and Smart.. every module has all four, so pick the one you like looking at.</p></div>
 
   <div id="modules" data-tabs>
     <div class="tabs" role="tablist">
@@ -136,79 +136,79 @@
     </div>
 
     <div class="mod on split" id="m-console">
-      <div><figure class="plate" style="margin:0"><img id="i-console" src="img/con-cin-hero.jpg" alt="Console module, Cinematic skin" width="1280" height="720" loading="lazy"></figure>
+      <div><figure class="plate" style="margin:0"><img id="i-console" src="img/con-noir.jpg" alt="Console module, Noir skin" width="1537" height="803" loading="lazy"></figure>
         <div class="seg" data-swap="i-console" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/con-cin-hero.jpg">Cinematic</button><button aria-pressed="false" data-src="img/con-clr-hero.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-console.jpg">Smart</button></div></div>
+          <button aria-pressed="true" data-src="img/con-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/con-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/con-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-console.jpg">Smart</button></div></div>
       <div class="feat"><span class="eyebrow">Console</span><h3>Linked strips</h3>
         <p>Set a strip to Stem, Bus or Master and it finds the strips on your other tracks and links up. Pick a console flavour too: Signature, Vintage British, Discrete American, Modern Ultra-Linear or Custom.</p></div>
     </div>
 
     <div class="mod split" id="m-rail">
-      <div><figure class="plate" style="margin:0"><img id="i-rail" src="img/rail-cin.jpg" alt="Rail module, Cinematic skin" width="1537" height="807" loading="lazy"></figure>
+      <div><figure class="plate" style="margin:0"><img id="i-rail" src="img/rail-noir.jpg" alt="Rail module, Noir skin" width="1537" height="803" loading="lazy"></figure>
         <div class="seg" data-swap="i-rail" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/rail-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/rail-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-rail.jpg">Smart</button></div></div>
+          <button aria-pressed="true" data-src="img/rail-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/rail-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/rail-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-rail.jpg">Smart</button></div></div>
       <div class="feat"><span class="eyebrow">Rail</span><h3>Shared flow</h3>
         <p>Passes level and energy between linked strips, so the mix moves together. The display has 11 analyzer styles.. SPIRALS is my new favourite, a spectrum fountain that finds resonances for you.</p></div>
     </div>
 
     <div class="mod split" id="m-neural">
-      <div><figure class="plate" style="margin:0"><img id="i-neural" src="img/neu-cin-hero.jpg" alt="Neural module, Cinematic skin" width="1280" height="720" loading="lazy"></figure>
+      <div><figure class="plate" style="margin:0"><img id="i-neural" src="img/neu-noir.jpg" alt="Neural module, Noir skin" width="1537" height="803" loading="lazy"></figure>
         <div class="seg" data-swap="i-neural" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/neu-cin-hero.jpg">Cinematic</button><button aria-pressed="false" data-src="img/neu-clr-hero.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-neural.jpg">Smart</button></div></div>
+          <button aria-pressed="true" data-src="img/neu-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/neu-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/neu-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-neural.jpg">Smart</button></div></div>
       <div class="feat"><span class="eyebrow">Neural</span><h3>Your captures</h3>
         <p>Load your own neural capture files, then dial in Drive and Mix.</p></div>
     </div>
 
     <div class="mod split" id="m-dyn">
-      <div><figure class="plate" style="margin:0"><img id="i-dyn" src="img/dyn-cin-tube.jpg" alt="Dynamics gain-reduction tube, Cinematic skin" width="1280" height="720" loading="lazy"></figure>
+      <div><figure class="plate" style="margin:0"><img id="i-dyn" src="img/dyn-noir.jpg" alt="Dynamics module, Noir skin" width="1537" height="803" loading="lazy"></figure>
         <div class="seg" data-swap="i-dyn" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/dyn-cin-tube.jpg">Cinematic</button><button aria-pressed="false" data-src="img/dyn-clr-gr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-dynamics.jpg">Smart</button></div></div>
+          <button aria-pressed="true" data-src="img/dyn-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/dyn-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/dyn-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-dynamics.jpg">Smart</button></div></div>
       <div class="feat"><span class="eyebrow">Dynamics</span><h3>Voicings or parts</h3>
         <p>Pick a compressor voicing.. or build your own from parts. There's a gate and de-esser in here too, and it all runs stereo or mid-side.</p></div>
     </div>
 
     <div class="mod split" id="m-eq">
-      <div><figure class="plate" style="margin:0"><img id="i-eq" src="img/eq-cin.jpg" alt="EQ module, Cinematic skin" width="1537" height="807" loading="lazy"></figure>
+      <div><figure class="plate" style="margin:0"><img id="i-eq" src="img/eq-noir.jpg" alt="EQ module, Noir skin" width="1537" height="803" loading="lazy"></figure>
         <div class="seg" data-swap="i-eq" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/eq-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/eq-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-eq.jpg">Smart</button></div></div>
+          <button aria-pressed="true" data-src="img/eq-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/eq-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/eq-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-eq.jpg">Smart</button></div></div>
       <div class="feat"><span class="eyebrow">EQ</span><h3>Four bands</h3>
         <p>Bells and shelves, six EQ voicings, series or parallel, stereo or mid-side.. and a new Macro curve that tilts and smiles the whole thing before the bands.</p></div>
     </div>
 
     <div class="mod split" id="m-fin">
-      <div><figure class="plate" style="margin:0"><img id="i-fin" src="img/fin-cin.jpg" alt="Finisher module, Cinematic skin" width="1537" height="807" loading="lazy"></figure>
+      <div><figure class="plate" style="margin:0"><img id="i-fin" src="img/fin-noir.jpg" alt="Finisher module, Noir skin" width="1537" height="803" loading="lazy"></figure>
         <div class="seg" data-swap="i-fin" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/fin-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/fin-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-finisher.jpg">Smart</button></div></div>
+          <button aria-pressed="true" data-src="img/fin-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/fin-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/fin-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-finisher.jpg">Smart</button></div></div>
       <div class="feat"><span class="eyebrow">Finisher</span><h3>Colour and clipping</h3>
         <p>Lysium, Logos, A-Roll, Tarus and Kill: preamp colour, tube, tape (15 or 30 IPS, with heat) and a couple of clippers.</p></div>
     </div>
 
     <div class="mod split" id="m-lim">
-      <div><figure class="plate" style="margin:0"><img id="i-lim" src="img/lim-cin-hero.jpg" alt="Limiter module, Cinematic skin" width="1280" height="720" loading="lazy"></figure>
+      <div><figure class="plate" style="margin:0"><img id="i-lim" src="img/lim-noir.jpg" alt="Limiter module, Noir skin" width="1537" height="803" loading="lazy"></figure>
         <div class="seg" data-swap="i-lim" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/lim-cin-hero.jpg">Cinematic</button><button aria-pressed="false" data-src="img/lim-clr-hero.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-limiter.jpg">Smart</button></div></div>
+          <button aria-pressed="true" data-src="img/lim-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/lim-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/lim-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-limiter.jpg">Smart</button></div></div>
       <div class="feat"><span class="eyebrow">Limiter</span><h3>True peak</h3>
         <p>Three modes, and the ceiling holds in true peak. No sneaky overs.</p></div>
     </div>
   </div>
 
-  <div class="head" style="margin-top:72px"><h3>Cinematic vs Clear</h3>
+  <div class="head" style="margin-top:72px"><h3>Noir vs Clear</h3>
     <p class="lede">Drag the slider across the Dynamics module.. same plugin, two very different moods.</p></div>
   <div class="compare">
-    <img src="img/flat-clr-dyn.jpg" alt="Dynamics in the Clear skin" width="1537" height="807" loading="lazy">
-    <img class="top" src="img/flat-cin-dyn.jpg" alt="Dynamics in the Cinematic skin" width="1537" height="807" loading="lazy">
-    <span class="lbl" style="left:14px">Clear</span><span class="lbl" style="right:14px">Cinematic</span>
+    <img src="img/dyn-clr.jpg" alt="Dynamics in the Clear skin" width="1537" height="803" loading="lazy">
+    <img class="top" src="img/dyn-noir.jpg" alt="Dynamics in the Noir skin" width="1537" height="803" loading="lazy">
+    <span class="lbl" style="left:14px">Clear</span><span class="lbl" style="right:14px">Noir</span>
     <div class="bar"></div>
-    <input type="range" min="0" max="100" value="50" aria-label="Compare Clear and Cinematic skins">
+    <input type="range" min="0" max="100" value="50" aria-label="Compare Clear and Noir skins">
   </div>
-  <div class="skins"><span class="d3">Cinematic · 3D</span><span class="d3">Clear · 3D</span><span>Smart · flat</span></div>
+  <div class="skins"><span class="d3">Noir</span><span class="d3">Cinematic</span><span class="d3">Clear</span><span>Smart · flat</span></div>
 
   <div class="head" style="margin-top:72px"><h3>Up close</h3></div>
   <div class="grid2">
-    <figure class="plate" style="margin:0"><img src="img/con-cin-meter.jpg" alt="Console Rail Link meter close-up" width="1280" height="720" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/dyn-cin-knobs.jpg" alt="Dynamics knob row close-up" width="1280" height="720" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/neu-cin-mix.jpg" alt="Neural Mix and Drive knobs close-up" width="1280" height="720" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/lim-cin-knobs.jpg" alt="Limiter knobs close-up" width="1280" height="720" loading="lazy"></figure>
+    <figure class="plate" style="margin:0"><img src="img/con-noir-fan.jpg" alt="Console sunburst fan close-up, Noir skin" width="1280" height="720" loading="lazy"></figure>
+    <figure class="plate" style="margin:0"><img src="img/dyn-noir-scope.jpg" alt="Dynamics phosphor scope close-up, Noir skin" width="1280" height="720" loading="lazy"></figure>
+    <figure class="plate" style="margin:0"><img src="img/neu-noir-lens.jpg" alt="Neural lens scope close-up, Noir skin" width="1280" height="720" loading="lazy"></figure>
+    <figure class="plate" style="margin:0"><img src="img/lim-noir-vfd.jpg" alt="Limiter VFD close-up, Noir skin" width="1280" height="720" loading="lazy"></figure>
   </div>
 </div></section>
 
