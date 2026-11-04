@@ -98,7 +98,7 @@ const PADDLE = {
     if (PADDLE.env !== "production") Paddle.Environment.set("sandbox");
     Paddle.Initialize({ token: PADDLE.token, eventCallback: ev => {
       if (ev.name === "checkout.error")
-        status.textContent = "Checkout couldn't open. Try again in a minute, or e-mail support@audiocitra.com if it keeps happening.";
+        status.textContent = "Checkout couldn't open. Try again in a minute, or use the Contact page if it keeps happening.";
       if (ev.name === "checkout.completed")
         status.textContent = ref ? "Paid, thank you. Go back to the plug-in and click Fetch licence." : "Paid, thank you. Your licence is on its way by e-mail.";
     } });

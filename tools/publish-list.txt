@@ -28,6 +28,7 @@ audio/spanda-2-wet.mp3
 audio/spanda-3-dry.mp3
 audio/spanda-3-wet.mp3
 buy.html
+contact.html
 credits.html
 galana.html
 img/agni-engine.jpg

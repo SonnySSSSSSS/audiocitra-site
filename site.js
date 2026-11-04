@@ -7,10 +7,10 @@
   const nav = document.createElement("nav");
   nav.setAttribute("aria-label", "Main");
   nav.innerHTML = `${document.getElementById("main") ? '<a class="skip" href="#main">Skip to content</a>' : ""}<div class="wrap"><a class="logo" href="index.html">AUDIO CITRA</a><ul>${
-    pages.map(([h,t]) => `<li><a href="${h}"${h===here?' aria-current="page"':""}>${t}</a></li>`).join("")}</ul></div>`;
+    pages.map(([h,t]) => `<li><a href="${h}"${h===here?' aria-current="page"':""}>${t}</a></li>`).join("")}<li><a href="contact.html"${here==="contact.html"?' aria-current="page"':""}>Contact</a></li></ul></div>`;
   document.body.prepend(nav);
   const foot = document.createElement("footer");
-  foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="buy.html">Buy</a> · <a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
+  foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="buy.html">Buy</a> · <a href="contact.html">Contact</a> · <a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
   document.body.append(foot);
 
   // Cartoon me, narrating a line or two per page. [page, selector, pose, line]; "*" = every product page.
@@ -24,7 +24,7 @@
     ["tula.html", ".hero", "fun-tula", "Tulā means scale, the kind that balances. Every track, nice and level."],
     ["spanda.html", ".hero", "welcome", "Welcome to Spanda! Seven modules in one strip.. pick any of those tabs to dig in."],
     ["buy.html", ".hero", "thumbs", "One licence covers all your own computers. No account, no dongle, no activation server."],
-    ["buy.html", ".faq", "think", "Stuck on something? E-mail support@audiocitra.com, it comes straight to me."],
+    ["buy.html", ".faq", "think", "Stuck on something? Use the Contact page, it comes straight to me."],
     ["*", "#measurements .head", "measure", "This is me most nights.. squinting at curves until they look right."],
     ["*", "#listen .head", "listen", "Grab some headphones. This is the part I actually care about."],
     ["*", "#parts .head", "tinker", "Not sure where to start? Load a recipe, then swap one part at a time and listen."],

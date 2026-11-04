@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact · Audio Citra</title>
+<meta name="description" content="Send Audio Citra a message: questions, bugs, requests.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0b10'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c58bff' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+body{--accent:var(--spanda)}
+.contact{max-width:560px;display:grid;gap:18px;margin-bottom:72px}
+.contact label{display:grid;gap:6px;font-weight:500}
+.contact input,.contact textarea{width:100%;box-sizing:border-box;padding:12px 14px;font:inherit;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:8px}
+.contact textarea{min-height:180px;resize:vertical}
+.contact input:focus-visible,.contact textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.contact button{justify-self:start;padding:12px 26px;font:inherit;font-weight:600;color:#0c0b10;background:var(--accent);border:0;border-radius:8px;cursor:pointer}
+.contact button:disabled{opacity:.6;cursor:default}
+.contact .trap{position:absolute;left:-9999px}
+#status{margin:0;color:var(--mute);min-height:1.5em}
+</style>
+</head><body>
+<main id="main">
+<div class="wrap">
+  <header class="hero hero-tight"><span class="eyebrow">Contact</span><h1>Say <em>hello.</em></h1>
+    <p>Questions, bugs, requests. Your message comes straight to me, and I'll answer by e-mail.</p></header>
+  <form class="contact" id="contact">
+    <label>Name <input name="name" autocomplete="name" maxlength="100"></label>
+    <label>E-mail <input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+    <label>Message <textarea name="message" maxlength="8000" required></textarea></label>
+    <label class="trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+    <button type="submit">Send message</button>
+    <p id="status" role="status"></p>
+  </form>
+</div>
+</main>
+<script>
+(() => {
+  const form = document.getElementById("contact"), status = document.getElementById("status"), button = form.querySelector("button");
+  const api = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:8787" : "https://support.audiocitra.com";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    button.disabled = true;
+    status.textContent = "Sending..";
+    let res = null;
+    try {
+      res = await fetch(api + "/v1/contact", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+    } catch { /* reported below */ }
+    button.disabled = false;
+    if (res && res.ok) { form.reset(); status.textContent = "Thanks, that's sent. I'll reply by e-mail."; }
+    else if (res && res.status === 429) status.textContent = "That's a lot of messages for one hour. Please try again later.";
+    else if (res && res.status === 400) status.textContent = "Please check your e-mail address and message.";
+    else status.textContent = "That didn't send. Please try again in a minute.";
+  });
+})();
+</script>
+<script src="site.js"></script>
+</body></html>
