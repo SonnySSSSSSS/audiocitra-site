@@ -1,3 +1,4 @@
+404.html
 agni.html
 akasa.html
 audio/agni-1-dry.mp3
@@ -28,6 +29,7 @@ audio/spanda-2-wet.mp3
 audio/spanda-3-dry.mp3
 audio/spanda-3-wet.mp3
 buy.html
+changes.html
 contact.html
 credits.html
 galana.html
@@ -226,14 +228,18 @@ img/walk/shunya.jpg
 img/walk/spanda.jpg
 img/walk/support.jpg
 index.html
+install.html
 lahari.html
 meas.json
 parts.json
 privacy.html
 refund.html
+releases.json
+robots.txt
 shunya.html
 site.css
 site.js
+sitemap.xml
 spanda.html
 teardown.json
 terms.html

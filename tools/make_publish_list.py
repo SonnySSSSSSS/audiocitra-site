@@ -1,11 +1,11 @@
-"""Write website-publish-list.txt: the files under website/ that should be published.
+"""Write tools/publish-list.txt: the files in the site root that should be published.
 
 Included: *.html, site.css, site.js, root *.json, audio/*.mp3, audio/clips.json,
 and every image under img/ whose file name appears in any html/json/js/css file
-(website root and audio/clips.json) or in website-tools/*.py.
+(website root and audio/clips.json) or in tools/*.py.
 Excluded: scripts (*.py), .claude, unreferenced images (listed as comments at the end).
 
-Re-run any time:  python website-tools/make_publish_list.py
+Re-run any time:  python tools/make_publish_list.py
 """
 import os
 import re
@@ -34,7 +34,7 @@ def main():
     clips = os.path.join(SITE, "audio", "clips.json")
     if os.path.exists(clips):
         corpus_files.append(clips)
-    tools = os.path.join(ROOT, "website-tools")
+    tools = os.path.join(ROOT, "tools")
     tool_files = [os.path.join(tools, n) for n in sorted(os.listdir(tools)) if n.endswith(".py")] \
         if os.path.isdir(tools) else []
     # Only site files count as "referenced by the published site". Tool scripts are
@@ -45,7 +45,7 @@ def main():
     included, unref, tool_only = [], [], []
     for n in sorted(os.listdir(SITE)):
         p = os.path.join(SITE, n)
-        if os.path.isfile(p) and n.lower().endswith((".html", ".css", ".js", ".json")):
+        if os.path.isfile(p) and n.lower().endswith((".html", ".css", ".js", ".json", ".txt", ".xml")):
             included.append(n)
     audio = os.path.join(SITE, "audio")
     if os.path.isdir(audio):
