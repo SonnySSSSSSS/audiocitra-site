@@ -7,10 +7,10 @@
   const nav = document.createElement("nav");
   nav.setAttribute("aria-label", "Main");
   nav.innerHTML = `${document.getElementById("main") ? '<a class="skip" href="#main">Skip to content</a>' : ""}<div class="wrap"><a class="logo" href="index.html">AUDIO CITRA</a><ul>${
-    pages.map(([h,t]) => `<li><a href="${h}"${h===here?' aria-current="page"':""}>${t}</a></li>`).join("")}<li><a href="contact.html"${here==="contact.html"?' aria-current="page"':""}>Contact</a></li></ul></div>`;
+    pages.map(([h,t]) => `<li><a href="${h}"${h===here?' aria-current="page"':""}>${t}</a></li>`).join("")}<li><a href="buy.html"${here==="buy.html"?' aria-current="page"':""}>Buy</a></li><li><a href="contact.html"${here==="contact.html"?' aria-current="page"':""}>Contact</a></li></ul></div>`;
   document.body.prepend(nav);
   const foot = document.createElement("footer");
-  foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="buy.html">Buy</a> · <a href="contact.html">Contact</a> · <a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
+  foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="buy.html">Buy</a> · <a href="install.html">Install</a> · <a href="changes.html">Changes</a> · <a href="contact.html">Contact</a> · <a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
   document.body.append(foot);
 
   // Cartoon me, narrating a line or two per page. [page, selector, pose, line]; "*" = every product page.
@@ -378,6 +378,23 @@
     const queuePin = () => { if (onScreen && !q) { q = true; requestAnimationFrame(pin); } };
     new IntersectionObserver(([en]) => { onScreen = en.isIntersecting; queuePin(); }, { rootMargin: "100px 0px" }).observe(el);
     addEventListener("scroll", queuePin, { passive: true }); addEventListener("resize", queuePin);
+  });
+
+  // Release facts from releases.json (tools/make_releases.py). If it fails, the page just goes without them.
+  const relDate = d => new Date(d + "T12:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  const relSize = n => `${Math.round(n / 1e6)} MB`;
+  const relFacts = r => `Build ${r.build} · ${relSize(r.size)} · ${relDate(r.date)}`;
+  if (document.querySelector("[data-release],[data-changes]")) getJson("releases.json").then(rel => {
+    document.querySelectorAll("[data-release]").forEach(el => {
+      const r = rel[el.dataset.release]?.releases?.[0];
+      if (r) el.textContent = ` · ${relFacts(r)}`;
+    });
+    document.querySelectorAll("[data-changes]").forEach(el => {
+      el.innerHTML = Object.entries(rel).map(([id, p]) => `<h2><a href="${esc(id)}.html">${esc(p.name)}</a></h2><ul class="credits">${
+        p.releases.map(r => `<li><small>${esc(relFacts(r))}</small>${esc(r.notes)}</li>`).join("")}</ul>`).join("");
+    });
+  }).catch(() => {
+    document.querySelectorAll("[data-changes]").forEach(el => { el.textContent = "The release list didn't load. Please try again in a minute."; });
   });
 
   // Skin switchers: swap the image and rebuild its alt text from the original alt.

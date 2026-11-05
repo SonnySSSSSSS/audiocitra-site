@@ -48,9 +48,9 @@ body{--accent:var(--spanda)}
     } catch { /* reported below */ }
     button.disabled = false;
     if (res && res.ok) { form.reset(); status.textContent = "Thanks, that's sent. I'll reply by e-mail."; }
-    else if (res && res.status === 429) status.textContent = "That's a lot of messages for one hour. Please try again later.";
+    else if (res && res.status === 429) status.textContent = "That's a lot of messages for one hour. Please try again later, or e-mail support@audiocitra.com.";
     else if (res && res.status === 400) status.textContent = "Please check your e-mail address and message.";
-    else status.textContent = "That didn't send. Please try again in a minute.";
+    else status.textContent = "That didn't send. Please try again in a minute, or e-mail support@audiocitra.com.";
   });
 })();
 </script>

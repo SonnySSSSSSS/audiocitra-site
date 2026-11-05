@@ -1,0 +1,35 @@
+{
+ "spanda": {
+  "name": "Spanda",
+  "releases": [
+   {
+    "date": "2026-10-25",
+    "build": 1605,
+    "size": 233419330,
+    "notes": "Updates now come from the Audio Citra release repository."
+   }
+  ]
+ },
+ "akasa": {
+  "name": "Ākāśa",
+  "releases": [
+   {
+    "date": "2026-11-05",
+    "build": 319,
+    "size": 31300305,
+    "notes": "Skin polish on all four skins, and a smaller, cleaner build that holds only Akasa's own units."
+   }
+  ]
+ },
+ "tula": {
+  "name": "Tulā",
+  "releases": [
+   {
+    "date": "2026-10-29",
+    "build": 14,
+    "size": 10446012,
+    "notes": "First public release."
+   }
+  ]
+ }
+}
