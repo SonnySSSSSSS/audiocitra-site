@@ -27,15 +27,12 @@
 <main id="main">
 <div class="wrap">
   <header class="hero hero-tight"><span class="eyebrow">Buy</span><h1>Pick what you <em>want to keep.</em></h1>
-    <p>Every plug-in runs fully for 14 days first, so only buy what you're already using. One licence covers all your own computers.</p>
-    <p>Everything here is in early access (beta): working and supported, still being finished. Every update until 1.0 is free.</p></header>
+    <p>Every released plug-in runs fully for 14 days first, so only buy what you're already using. One licence covers all your own computers.</p>
+    <p>Everything on sale here is in early access (beta): working and supported, still being finished. Every update until 1.0 is free.</p></header>
   <div class="picks" id="picks">
-    <button class="pick all" data-id="bundle" type="button" style="--bg:url(img/lim-noir-hero.jpg)"><b>Everything</b><span>All seven: Spanda, Agni, Ākāśa, Shunya, Gālana, Lahari and Tulā in one licence.</span><span class="pr" data-price="bundle"></span></button>
+    <button class="pick all" data-id="bundle" type="button" style="--bg:url(img/lim-noir-hero.jpg)"><b>Everything</b><span>All seven in one licence. Spanda, Ākāśa and Tulā are out now. Agni, Gālana, Lahari and Shunya aren't out yet, and your licence covers them when they're released.</span><span class="pr" data-price="bundle"></span></button>
     <button class="pick" data-id="spanda" type="button" style="--bg:url(img/con-noir-hero.jpg)"><b>Spanda</b><span>Channel strip</span><span class="pr" data-price="spanda"></span></button>
-    <button class="pick" data-id="agni" type="button" style="--bg:url(img/agni-hero.jpg)"><b>Agni</b><span>Distortion</span><span class="pr" data-price="agni"></span></button>
     <button class="pick" data-id="akasa" type="button" style="--bg:url(img/akasa-b-detail.jpg)"><b>Ākāśa</b><span>Reverb</span><span class="pr" data-price="akasa"></span></button>
-    <button class="pick" data-id="galana" type="button" style="--bg:url(img/galana-hero.jpg)"><b>Gālana</b><span>Effects box</span><span class="pr" data-price="galana"></span></button>
-    <button class="pick" data-id="lahari" type="button" style="--bg:url(img/lahari-hero-analog.jpg)"><b>Lahari</b><span>Modulation</span><span class="pr" data-price="lahari"></span></button>
     <button class="pick" data-id="tula" type="button" style="--bg:url(img/tula-citra.jpg)"><b>Tulā</b><span>Mix utility: level, match, pan, align</span><span class="pr" data-price="tula"></span></button>
   </div>
   <p id="sale" class="sale" hidden></p>
@@ -74,9 +71,13 @@ const PADDLE = {
   const q = new URLSearchParams(location.search);
   // ref comes from the plug-in's Buy button; the webhook uses it so Fetch licence works.
   const ref = /^[0-9a-f]{32}$/.test(q.get("ref") || "") ? q.get("ref") : "";
-  let pick = PADDLE.prices[q.get("product")] !== undefined && q.get("product") !== "shunya" ? q.get("product") : "bundle";   // Shunya: not on sale singly until it is released
+  // Not on sale singly until released: their pages say coming soon and they have no pick above.
+  const held = { agni: "Agni", galana: "Gālana", lahari: "Lahari", shunya: "Shunya" };
+  const asked = q.get("product");
+  let pick = PADDLE.prices[asked] !== undefined && !Object.hasOwn(held, asked) ? asked : "bundle";
   const status = document.getElementById("status"), go = document.getElementById("go");
   const ready = !!PADDLE.token && typeof Paddle !== "undefined";
+  const checkoutBlocked = "Checkout couldn't load. If you use an ad or script blocker, allow cdn.paddle.com and reload, or use the Contact page.";
   const L = PADDLE.launch, onSale = ready && !!L.ends && new Date() <= new Date(L.ends + "T23:59:59");
   const off = id => id === "bundle" ? 0.7 : 0.6, usd = n => "$" + (Number.isInteger(n) ? n : n.toFixed(2));
   document.querySelectorAll("[data-price]").forEach(el => {
@@ -86,7 +87,7 @@ const PADDLE = {
   });
   if (onSale) {
     const sale = document.getElementById("sale");
-    sale.textContent = "Early access: 40% off every plug-in, 30% off Everything, until " +
+    sale.textContent = "Early access: 40% off single plug-ins, 30% off Everything, until " +
       new Date(L.ends + "T12:00:00").toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) + ".";
     sale.hidden = false;
   }
@@ -101,10 +102,11 @@ const PADDLE = {
       if (ev.name === "checkout.completed")
         status.textContent = ref ? "Paid, thank you. Go back to the plug-in and click Fetch licence." : "Paid, thank you. Your licence is on its way by e-mail.";
     } });
-  } else status.textContent = "Checkout opens at launch. Until then every plug-in runs as a full 14-day trial.";
+  } else status.textContent = checkoutBlocked;
+  if (ready && Object.hasOwn(held, asked)) status.textContent = held[asked] + " isn't out yet, so it isn't sold on its own. Everything includes it once it's released.";
   go.addEventListener("click", ev => {
     ev.preventDefault();
-    if (!ready || !PADDLE.prices[pick]) { status.textContent = "Checkout isn't open yet."; return; }
+    if (!ready || !PADDLE.prices[pick]) { status.textContent = checkoutBlocked; return; }
     Paddle.Checkout.open({ items: [{ priceId: PADDLE.prices[pick], quantity: 1 }], customData: ref ? { ref } : {},
       ...(onSale && L.code ? { discountCode: pick === "bundle" ? L.bundleCode : L.code } : {}) });
   });

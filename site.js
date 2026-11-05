@@ -29,7 +29,7 @@
     ["*", "#listen .head", "listen", "Grab some headphones. This is the part I actually care about."],
     ["*", "#parts .head", "tinker", "Not sure where to start? Load a recipe, then swap one part at a time and listen."],
     ["*", "#skins .head", "paint", "Same sound, different paint job. Pick whichever one makes you want to mix."],
-    ["*", ".cta", "point", "When the trial's out, put it on a real track. If it doesn't click, no hard feelings."],
+    ["*", ".cta", "point", document.querySelector(".soon-banner") ? "Not out yet.. I'm still finishing it. It'll be right here when it's ready." : "Put the trial on a real track. If it doesn't click, no hard feelings."],
   ];
   const product = pages.some(([h]) => h === here);
   SAY.filter(([pg]) => pg === here || (pg === "*" && product)).forEach(([, sel, pose, line]) => {
