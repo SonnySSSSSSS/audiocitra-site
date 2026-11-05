@@ -35,19 +35,27 @@ img/agni-engine.jpg
 img/agni-hero.jpg
 img/agni-master.jpg
 img/akasa-b-detail.jpg
+img/aroll-noir-detail.jpg
+img/aroll-noir-hero.jpg
+img/aroll-noir-right.jpg
 img/avatar/welcome.webp
 img/con-cin.jpg
 img/con-clr.jpg
 img/con-noir-fan.jpg
 img/con-noir-hero.jpg
+img/con-noir-right.jpg
 img/con-noir.jpg
 img/dyn-cin.jpg
 img/dyn-clr.jpg
 img/dyn-noir-hero.jpg
+img/dyn-noir-right.jpg
 img/dyn-noir-scope.jpg
 img/dyn-noir.jpg
 img/eq-cin.jpg
 img/eq-clr.jpg
+img/eq-noir-detail.jpg
+img/eq-noir-hero.jpg
+img/eq-noir-right.jpg
 img/eq-noir.jpg
 img/fin-cin.jpg
 img/fin-clr.jpg
@@ -60,8 +68,15 @@ img/lahari-hero-pedal.jpg
 img/lim-cin.jpg
 img/lim-clr.jpg
 img/lim-noir-hero.jpg
+img/lim-noir-right.jpg
 img/lim-noir-vfd.jpg
 img/lim-noir.jpg
+img/logos-noir-detail.jpg
+img/logos-noir-hero.jpg
+img/logos-noir-right.jpg
+img/lys-noir-detail.jpg
+img/lys-noir-hero.jpg
+img/lys-noir-right.jpg
 img/meas/agni_aliasing_1x_vs_8x.png
 img/meas/agni_harmonic_spectra.png
 img/meas/agni_transfer_curves.png
@@ -88,7 +103,9 @@ img/meas/tula_transparent.png
 img/meas/tula_width.png
 img/neu-cin.jpg
 img/neu-clr.jpg
-img/neu-noir-lens.jpg
+img/neu-noir-detail.jpg
+img/neu-noir-hero.jpg
+img/neu-noir-right.jpg
 img/neu-noir.jpg
 img/parts/comp_colour_0.jpg
 img/parts/comp_colour_1.jpg
@@ -153,6 +170,9 @@ img/parts/eq_lowmid_5.jpg
 img/parts/eq_lowmid_6.jpg
 img/rail-cin.jpg
 img/rail-clr.jpg
+img/rail-noir-detail.jpg
+img/rail-noir-hero.jpg
+img/rail-noir-right.jpg
 img/rail-noir.jpg
 img/shunya-crt.jpg
 img/shunya-hero.jpg
@@ -193,6 +213,9 @@ img/smart-finisher.jpg
 img/smart-limiter.jpg
 img/smart-neural.jpg
 img/smart-rail.jpg
+img/tarus-noir-detail.jpg
+img/tarus-noir-hero.jpg
+img/tarus-noir-right.jpg
 img/tula-citra.jpg
 img/walk/agni.jpg
 img/walk/akasa.jpg
@@ -231,3 +254,4 @@ tula.html
 # img/avatar/thumbs.webp
 # img/avatar/tinker.webp
 # img/avatar/wave.webp
+# img/neu-noir-lens.jpg
