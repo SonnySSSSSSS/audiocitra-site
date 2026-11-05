@@ -34,7 +34,6 @@
     <button class="pick" data-id="spanda" type="button" style="--bg:url(img/con-noir-hero.jpg)"><b>Spanda</b><span>Channel strip</span><span class="pr" data-price="spanda"></span></button>
     <button class="pick" data-id="agni" type="button" style="--bg:url(img/agni-hero.jpg)"><b>Agni</b><span>Distortion</span><span class="pr" data-price="agni"></span></button>
     <button class="pick" data-id="akasa" type="button" style="--bg:url(img/akasa-b-detail.jpg)"><b>Ākāśa</b><span>Reverb</span><span class="pr" data-price="akasa"></span></button>
-    <button class="pick" data-id="shunya" type="button" style="--bg:url(img/shunya-hero.jpg)"><b>Shunya</b><span>Reverb</span><span class="pr" data-price="shunya"></span></button>
     <button class="pick" data-id="galana" type="button" style="--bg:url(img/galana-hero.jpg)"><b>Gālana</b><span>Effects box</span><span class="pr" data-price="galana"></span></button>
     <button class="pick" data-id="lahari" type="button" style="--bg:url(img/lahari-hero-analog.jpg)"><b>Lahari</b><span>Modulation</span><span class="pr" data-price="lahari"></span></button>
     <button class="pick" data-id="tula" type="button" style="--bg:url(img/tula-citra.jpg)"><b>Tulā</b><span>Mix utility: level, match, pan, align</span><span class="pr" data-price="tula"></span></button>
@@ -75,7 +74,7 @@ const PADDLE = {
   const q = new URLSearchParams(location.search);
   // ref comes from the plug-in's Buy button; the webhook uses it so Fetch licence works.
   const ref = /^[0-9a-f]{32}$/.test(q.get("ref") || "") ? q.get("ref") : "";
-  let pick = PADDLE.prices[q.get("product")] !== undefined ? q.get("product") : "bundle";
+  let pick = PADDLE.prices[q.get("product")] !== undefined && q.get("product") !== "shunya" ? q.get("product") : "bundle";   // Shunya: not on sale singly until it is released
   const status = document.getElementById("status"), go = document.getElementById("go");
   const ready = !!PADDLE.token && typeof Paddle !== "undefined";
   const L = PADDLE.launch, onSale = ready && !!L.ends && new Date() <= new Date(L.ends + "T23:59:59");
