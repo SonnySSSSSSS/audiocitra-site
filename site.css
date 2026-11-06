@@ -286,3 +286,15 @@ footer a:hover{color:var(--fg)}
 .say .bubble::before{content:"";position:absolute;left:-8px;bottom:12px;width:14px;height:14px;background:var(--panel);border-left:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
 .say img[src$="welcome.webp"],.say img[src*="/fun-"]{width:170px}
 @media (max-width:520px){.say img{width:88px}.say img[src$="welcome.webp"],.say img[src*="/fun-"]{width:120px}.say .bubble{font-size:14px;margin-bottom:18px}}
+
+/* Museum placard: an exhibit label under each product hero. Paper, serif, small caps. */
+.placard{max-width:380px;margin:20px 0 0 auto;padding:18px 20px 16px;background:#f2eee4;color:#1d1b19;border-radius:2px;box-shadow:0 1px 0 rgba(0,0,0,.25),0 10px 24px -12px rgba(0,0,0,.6);font:400 14px/1.5 Georgia,"Times New Roman",serif}
+.placard .no{display:block;font:600 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#6b655c}
+.placard h2{margin:6px 0 2px;font:700 22px/1.2 Georgia,"Times New Roman",serif;letter-spacing:0;color:#1d1b19}
+.placard .kind{margin:0 0 12px;font-style:italic;color:#4a4540}
+.placard dl{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:0;padding:10px 0;border-block:1px solid #cfc8ba}
+.placard dt{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#6b655c;padding-top:2px}
+.placard dd{margin:0}
+.placard .note{margin:10px 0 0;font-style:italic}
+.placard .note::before{content:"Curator’s note. ";font-style:normal;font-weight:700}
+@media (max-width:640px){.placard{margin:20px 0 0;max-width:none}}

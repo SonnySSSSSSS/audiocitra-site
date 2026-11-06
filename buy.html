@@ -2,11 +2,11 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Buy · Audio Citra</title>
-<meta name="description" content="Buy Audio Citra plug-ins: singles or the full bundle, 14-day trial, 14-day refunds.">
+<meta name="description" content="Buy Audio Citra plug-ins: Spanda, Ākāśa and Tulā, with a 14-day trial and 14-day refunds.">
 <link rel="canonical" href="https://audiocitra.com/buy.html">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Audio Citra">
 <meta property="og:title" content="Buy · Audio Citra">
-<meta property="og:description" content="Buy Audio Citra plug-ins: singles or the full bundle, 14-day trial, 14-day refunds.">
+<meta property="og:description" content="Buy Audio Citra plug-ins: Spanda, Ākāśa and Tulā, with a 14-day trial and 14-day refunds.">
 <meta property="og:image" content="https://audiocitra.com/img/lim-noir-hero.jpg">
 <meta property="og:url" content="https://audiocitra.com/buy.html">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,7 +37,6 @@
     <p>Every released plug-in runs fully for 14 days first, so only buy what you're already using. One licence covers all your own computers.</p>
     <p>Everything on sale here is in early access (beta): working and supported, still being finished. Every update is free, including 1.0 and all the 1.x updates after it.</p></header>
   <div class="picks" id="picks">
-    <button class="pick all" data-id="bundle" type="button" style="--bg:url(img/lim-noir-hero.jpg)"><b>Everything</b><span>All seven in one licence. Spanda, Ākāśa and Tulā are out now. Agni, Gālana, Lahari and Shunya aren't out yet, and your licence covers them when they're released.</span><span class="pr" data-price="bundle"></span></button>
     <button class="pick" data-id="spanda" type="button" style="--bg:url(img/con-noir-hero.jpg)"><b>Spanda</b><span>Channel strip</span><span class="pr" data-price="spanda"></span></button>
     <button class="pick" data-id="akasa" type="button" style="--bg:url(img/akasa-b-detail.jpg)"><b>Ākāśa</b><span>Reverb</span><span class="pr" data-price="akasa"></span></button>
     <button class="pick" data-id="tula" type="button" style="--bg:url(img/tula-citra.jpg)"><b>Tulā</b><span>Mix utility: level, match, pan, align</span><span class="pr" data-price="tula"></span></button>
@@ -58,7 +57,7 @@
     <h2>How many computers?</h2>
     <p>All the computers you personally use. The licence is a file checked offline: no activation server, no dongle, no account.</p>
     <h2>Can I get a refund?</h2>
-    <p>Yes, within 14 days, for any reason. Each plug-in in Everything gets its own 14 days, which start when it's released if it isn't out yet. See the <a href="refund.html">refund policy</a>.</p>
+    <p>Yes, within 14 days, for any reason. See the <a href="refund.html">refund policy</a>.</p>
     <h2>Are updates free?</h2>
     <p>Yes. Buy during early access and every update is free, including 1.0 and all the 1.x updates after it. I expect a new major version of each plug-in about every year and a half, though that's a plan, not a promise. The plug-ins tell you when an update is out. See the <a href="terms.html">terms</a> for the rest.</p>
   </div>
@@ -83,7 +82,9 @@ const PADDLE = {
   // Not on sale singly until released: their pages say coming soon and they have no pick above.
   const held = { agni: "Agni", galana: "Gālana", lahari: "Lahari", shunya: "Shunya" };
   const asked = q.get("product");
-  let pick = PADDLE.prices[asked] !== undefined && !Object.hasOwn(held, asked) ? asked : "bundle";
+  // The bundle is off sale until it is repriced for what is out. Its Paddle price stays in PADDLE.prices.
+  const onSaleNow = ["spanda", "akasa", "tula"];
+  let pick = onSaleNow.includes(asked) ? asked : "spanda";
   const status = document.getElementById("status"), go = document.getElementById("go");
   const ready = !!PADDLE.token && typeof Paddle !== "undefined";
   const checkoutBlocked = "Checkout couldn't load. If you use an ad or script blocker, allow cdn.paddle.com and reload, or use the Contact page.";
@@ -96,7 +97,7 @@ const PADDLE = {
   });
   if (onSale) {
     const sale = document.getElementById("sale");
-    sale.textContent = "Early access: 40% off single plug-ins, 30% off Everything, until " +
+    sale.textContent = "Early access: 40% off every plug-in, until " +
       new Date(L.ends + "T12:00:00").toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) + ".";
     sale.hidden = false;
   }
@@ -112,7 +113,7 @@ const PADDLE = {
         status.textContent = ref ? "Paid, thank you. Go back to the plug-in and click Fetch licence." : "Paid, thank you. Your licence is on its way by e-mail.";
     } });
   } else status.textContent = checkoutBlocked;
-  if (ready && Object.hasOwn(held, asked)) status.textContent = held[asked] + " isn't out yet, so it isn't sold on its own. Everything includes it once it's released.";
+  if (ready && Object.hasOwn(held, asked)) status.textContent = held[asked] + " isn't out yet, so it isn't on sale.";
   go.addEventListener("click", ev => {
     ev.preventDefault();
     if (!ready || !PADDLE.prices[pick]) { status.textContent = checkoutBlocked; return; }
