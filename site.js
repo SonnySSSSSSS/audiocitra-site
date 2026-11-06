@@ -9,6 +9,11 @@
   nav.innerHTML = `${document.getElementById("main") ? '<a class="skip" href="#main">Skip to content</a>' : ""}<div class="wrap"><a class="logo" href="index.html">AUDIO CITRA</a><ul>${
     pages.map(([h,t]) => `<li><a href="${h}"${h===here?' aria-current="page"':""}>${t}</a></li>`).join("")}<li><a href="buy.html"${here==="buy.html"?' aria-current="page"':""}>Buy</a></li><li><a href="contact.html"${here==="contact.html"?' aria-current="page"':""}>Contact</a></li></ul></div>`;
   document.body.prepend(nav);
+  // Phone layout: the links scroll sideways, so bring the current page's link into view and drop the fade at the end.
+  const row = nav.querySelector("ul"), cur = row.querySelector("[aria-current]");
+  const atEnd = () => row.classList.toggle("end", row.scrollLeft + row.clientWidth >= row.scrollWidth - 2);
+  if (cur && row.scrollWidth > row.clientWidth) row.scrollLeft = cur.parentElement.offsetLeft - row.offsetLeft - 8;
+  row.addEventListener("scroll", atEnd, { passive: true }); addEventListener("resize", atEnd); atEnd();
   const foot = document.createElement("footer");
   foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="buy.html">Buy</a> · <a href="install.html">Install</a> · <a href="changes.html">Changes</a> · <a href="contact.html">Contact</a> · <a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
   document.body.append(foot);

@@ -298,3 +298,9 @@ footer a:hover{color:var(--fg)}
 .placard .note{margin:10px 0 0;font-style:italic}
 .placard .note::before{content:"Curator’s note. ";font-style:normal;font-weight:700}
 @media (max-width:640px){.placard{margin:20px 0 0;max-width:none}}
+
+/* Phone nav: the link row scrolls sideways. A fade on the right says there is more, until the end is reached. */
+@media (max-width:600px){
+  nav ul{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)}
+  nav ul.end{-webkit-mask-image:none;mask-image:none}
+}
