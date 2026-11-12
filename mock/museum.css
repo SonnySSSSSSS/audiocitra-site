@@ -1,5 +1,5 @@
 /* Museum mock (2026-11-12). See tools/DESIGN_MANUAL.md. Quiet building, loud exhibits.
-   Fonts: Archivo (signage, condensed caps) + Source Serif 4 (wall text). Compare in type.html. */
+   Fonts: Schibsted Grotesk (signage) + Literata (wall text), picked for warmth 2026-11-12. Compare in type.html. */
 :root{
   --wall:#191816;      /* deep gallery wall, warm, not gray-purple */
   --wall-2:#211f1c;    /* alcove */
@@ -7,8 +7,8 @@
   --ink-2:#a39d91;     /* secondary label */
   --rule:#3a3631;      /* printed rule */
   --room:#ece6da;      /* each room sets its own colour */
-  --sign:"Archivo",system-ui,sans-serif;
-  --text:"Source Serif 4",Georgia,serif;
+  --sign:"Schibsted Grotesk",system-ui,sans-serif;
+  --text:"Literata",Georgia,serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -18,10 +18,10 @@ a{color:inherit}
 .in{max-width:1180px;margin:0 auto;padding-inline:max(16px,4vw)}
 
 /* Signage: condensed caps, numbers, thin rules. Replaces eyebrows and two-tone headings. */
-.sign{font:600 13px/1.2 var(--sign);font-stretch:75%;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.sign{font:600 13px/1.2 var(--sign);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
 .sign b{color:var(--ink);font-weight:700}
-.room-no{font:800 clamp(64px,11vw,148px)/.85 var(--sign);font-stretch:62%;color:var(--room);letter-spacing:-.01em}
-h1,h2,h3{font-family:var(--sign);font-stretch:75%;font-weight:700;margin:0;line-height:1.02;text-wrap:balance}
+.room-no{font:800 clamp(64px,11vw,148px)/.85 var(--sign);color:var(--room);letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--sign);font-weight:700;margin:0;line-height:1.02;text-wrap:balance}
 h1{font-size:clamp(44px,7vw,96px);text-transform:uppercase;letter-spacing:.01em}
 h2{font-size:clamp(28px,3.6vw,44px);text-transform:uppercase;letter-spacing:.02em}
 h3{font-size:20px;text-transform:uppercase;letter-spacing:.04em}
@@ -33,7 +33,7 @@ h3{font-size:20px;text-transform:uppercase;letter-spacing:.04em}
 .top .mark img{height:46px;width:auto}
 .top ol{display:flex;gap:16px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
 .top a{text-decoration:none}
-.top ol a{font:600 13px var(--sign);font-stretch:75%;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.top ol a{font:600 13px var(--sign);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
 .top ol a span{color:var(--ink-2);opacity:.6;margin-right:6px}
 .top ol a:hover,.top ol a[aria-current]{color:var(--ink)}
 .top .shop{margin-left:auto}
@@ -53,7 +53,7 @@ h3{font-size:20px;text-transform:uppercase;letter-spacing:.04em}
 .placard h2{font-size:34px}
 .placard .kind{font-style:italic;color:var(--ink-2);margin:2px 0 14px}
 .placard dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:0 0 14px;border-top:1px solid var(--rule);padding-top:12px}
-.placard dt{font:600 12px var(--sign);font-stretch:75%;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding-top:3px}
+.placard dt{font:600 12px var(--sign);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding-top:3px}
 .placard dd{margin:0}
 .placard .note{margin:0;color:var(--ink-2)}
 
@@ -72,7 +72,7 @@ h3{font-size:20px;text-transform:uppercase;letter-spacing:.04em}
 .plan{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
 .plan li{border-bottom:1px solid var(--rule)}
 .plan a{display:grid;grid-template-columns:92px minmax(0,1fr) minmax(0,1.3fr) 180px;gap:24px;align-items:center;padding:18px 0;text-decoration:none}
-.plan .n{font:800 46px/1 var(--sign);font-stretch:62%;color:var(--c,var(--ink))}
+.plan .n{font:800 46px/1 var(--sign);color:var(--c,var(--ink))}
 .plan h3{font-size:28px}
 .plan p{margin:0;font-size:16px;color:var(--ink-2)}
 .plan img{width:180px;aspect-ratio:16/9;object-fit:cover;opacity:.9}
@@ -80,7 +80,7 @@ h3{font-size:20px;text-transform:uppercase;letter-spacing:.04em}
 .plan a:hover h3{color:var(--c)}
 
 .links{display:flex;gap:28px;flex-wrap:wrap;margin-top:24px}
-.links a{font:600 14px var(--sign);font-stretch:75%;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--room);padding-bottom:3px}
+.links a{font:600 14px var(--sign);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--room);padding-bottom:3px}
 
 footer{border-top:1px solid var(--rule);padding-block:28px;margin-top:40px}
 footer .in{display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between}
