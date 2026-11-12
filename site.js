@@ -15,7 +15,7 @@
   if (cur && row.scrollWidth > row.clientWidth) row.scrollLeft = cur.parentElement.offsetLeft - row.offsetLeft - 8;
   row.addEventListener("scroll", atEnd, { passive: true }); addEventListener("resize", atEnd); atEnd();
   const foot = document.createElement("footer");
-  foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="buy.html">Buy</a> · <a href="install.html">Install</a> · <a href="changes.html">Changes</a> · <a href="contact.html">Contact</a> · <a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
+  foot.innerHTML = `<div class="wrap"><span>Audio Citra · VST3 · Windows</span><span><a href="about.html">About</a> · <a href="buy.html">Buy</a> · <a href="install.html">Install</a> · <a href="changes.html">Changes</a> · <a href="contact.html">Contact</a> · <a href="refund.html">Refunds</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="credits.html">Credits</a></span></div>`;
   document.body.append(foot);
 
   // Cartoon me, narrating a line or two per page. [page, selector, pose, line]; "*" = every product page.
