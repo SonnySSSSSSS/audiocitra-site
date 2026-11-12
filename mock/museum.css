@@ -45,10 +45,7 @@ h3{font-size:20px;text-transform:uppercase;letter-spacing:.04em}
 
 /* Exhibit: object lit on the wall, no card */
 .exhibit{position:relative;margin:0;background:radial-gradient(ellipse 60% 70% at 50% 38%,#2b2925 0%,var(--wall) 72%)}
-.exhibit img,.vitrine img,.plan img{margin:0 auto;
-  /* Feather the renders' black backdrop into the wall, so it reads as shadow, not a box */
-  -webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent 100%);
-          mask-image:radial-gradient(closest-side,#000 62%,transparent 100%)}
+.exhibit img{margin:0 auto}
 
 /* Placard: the sign system */
 .placard{border-top:3px solid var(--room);padding-top:14px;max-width:340px;font:400 15px/1.5 var(--text)}
