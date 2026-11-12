@@ -1,0 +1,95 @@
+/* Museum mock (2026-11-12). See tools/DESIGN_MANUAL.md. Quiet building, loud exhibits.
+   Fonts: Archivo (signage, condensed caps) + Source Serif 4 (wall text). Compare in type.html. */
+:root{
+  --wall:#191816;      /* deep gallery wall, warm, not gray-purple */
+  --wall-2:#211f1c;    /* alcove */
+  --ink:#ece6da;       /* warm paper white */
+  --ink-2:#a39d91;     /* secondary label */
+  --rule:#3a3631;      /* printed rule */
+  --room:#ece6da;      /* each room sets its own colour */
+  --sign:"Archivo",system-ui,sans-serif;
+  --text:"Source Serif 4",Georgia,serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--wall);color:var(--ink);font:400 18px/1.65 var(--text)}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+.in{max-width:1180px;margin:0 auto;padding-inline:max(16px,4vw)}
+
+/* Signage: condensed caps, numbers, thin rules. Replaces eyebrows and two-tone headings. */
+.sign{font:600 13px/1.2 var(--sign);font-stretch:75%;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.sign b{color:var(--ink);font-weight:700}
+.room-no{font:800 clamp(64px,11vw,148px)/.85 var(--sign);font-stretch:62%;color:var(--room);letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--sign);font-stretch:75%;font-weight:700;margin:0;line-height:1.02;text-wrap:balance}
+h1{font-size:clamp(44px,7vw,96px);text-transform:uppercase;letter-spacing:.01em}
+h2{font-size:clamp(28px,3.6vw,44px);text-transform:uppercase;letter-spacing:.02em}
+h3{font-size:20px;text-transform:uppercase;letter-spacing:.04em}
+
+/* Top: lotus + floor-plan links, no glass */
+.top{border-bottom:1px solid var(--rule)}
+.top .in{display:flex;align-items:center;gap:20px 24px;min-height:64px;flex-wrap:wrap;padding-block:8px}
+.top .mark{display:block;background:#0d0d0c;padding:6px 10px;border-radius:2px}
+.top .mark img{height:46px;width:auto}
+.top ol{display:flex;gap:16px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.top a{text-decoration:none}
+.top ol a{font:600 13px var(--sign);font-stretch:75%;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.top ol a span{color:var(--ink-2);opacity:.6;margin-right:6px}
+.top ol a:hover,.top ol a[aria-current]{color:var(--ink)}
+.top .shop{margin-left:auto}
+
+/* Wall text: one narrow column, like a printed panel */
+.wall{max-width:62ch}
+.wall p{margin:0 0 1em}
+.wall p:first-of-type::first-line{font-variant:small-caps;letter-spacing:.04em}
+
+/* Exhibit: object lit on the wall, no card */
+.exhibit{position:relative;margin:0;background:radial-gradient(ellipse 60% 70% at 50% 38%,#2b2925 0%,var(--wall) 72%)}
+.exhibit img{margin:0 auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.55))}
+
+/* Placard: the sign system */
+.placard{border-top:3px solid var(--room);padding-top:14px;max-width:340px;font:400 15px/1.5 var(--text)}
+.placard .sign{display:block;margin-bottom:8px}
+.placard h2{font-size:34px}
+.placard .kind{font-style:italic;color:var(--ink-2);margin:2px 0 14px}
+.placard dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:0 0 14px;border-top:1px solid var(--rule);padding-top:12px}
+.placard dt{font:600 12px var(--sign);font-stretch:75%;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding-top:3px}
+.placard dd{margin:0}
+.placard .note{margin:0;color:var(--ink-2)}
+
+/* Rhythm pieces */
+.bay{padding-block:clamp(56px,9vw,120px)}
+.bench{padding-block:clamp(64px,10vw,140px);text-align:center}
+.bench q{font:italic 400 clamp(24px,3vw,36px)/1.35 var(--text);quotes:"\201C" "\201D";display:block;max-width:28ch;margin:0 auto 14px}
+.split{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);gap:clamp(28px,5vw,72px);align-items:end}
+.vitrine{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:40px 28px;border-top:1px solid var(--rule);padding-top:28px;margin-top:28px}
+.vitrine figure{margin:0}
+.vitrine figcaption{margin-top:10px;border-top:1px solid var(--rule);padding-top:8px}
+.vitrine figcaption .sign{display:block}
+.vitrine figcaption span+span{display:block;font-size:15px;color:var(--ink-2);margin-top:2px;font-family:var(--text);text-transform:none;letter-spacing:0}
+
+/* Floor plan (home) */
+.plan{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.plan li{border-bottom:1px solid var(--rule)}
+.plan a{display:grid;grid-template-columns:92px minmax(0,1fr) minmax(0,1.3fr) 180px;gap:24px;align-items:center;padding:18px 0;text-decoration:none}
+.plan .n{font:800 46px/1 var(--sign);font-stretch:62%;color:var(--c,var(--ink))}
+.plan h3{font-size:28px}
+.plan p{margin:0;font-size:16px;color:var(--ink-2)}
+.plan img{width:180px;aspect-ratio:16/9;object-fit:cover;opacity:.9}
+.plan a:hover img{opacity:1}
+.plan a:hover h3{color:var(--c)}
+
+.links{display:flex;gap:28px;flex-wrap:wrap;margin-top:24px}
+.links a{font:600 14px var(--sign);font-stretch:75%;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--room);padding-bottom:3px}
+
+footer{border-top:1px solid var(--rule);padding-block:28px;margin-top:40px}
+footer .in{display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between}
+footer a{text-decoration:none}
+
+@media (max-width:760px){
+  .split{grid-template-columns:1fr}
+  .plan a{grid-template-columns:56px 1fr;gap:6px 14px}
+  .plan .n{font-size:34px;grid-row:span 2}
+  .plan img{display:none}
+  .top .shop{margin-left:0}
+}
