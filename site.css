@@ -304,3 +304,59 @@ footer a:hover{color:var(--fg)}
   nav ul{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)}
   nav ul.end{-webkit-mask-image:none;mask-image:none}
 }
+
+/* Homepage rooms: one plug-in per screen, stepped sideways (rooms.js). Without JS they stack. */
+.rooms{position:relative;--c:var(--fg)}
+.room{position:relative;min-height:min(80svh,760px);display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line)}
+.room>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.room::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.35) 50%,transparent 75%)}
+.room-copy{position:relative;z-index:1;max-width:560px;padding:48px clamp(16px,4vw,48px) 120px;display:grid;gap:18px}
+.room-kick{font-family:var(--mono);font-size:13px;color:var(--c);text-transform:uppercase;letter-spacing:.04em}
+.room h2{font-size:clamp(56px,9vw,120px);font-weight:800;line-height:.9;color:var(--c)}
+.room p{margin:0;font-size:19px;color:#ddd9e4}
+.room .btn.solid{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.room-spec{display:flex;gap:40px;margin:0;padding-top:14px;border-top:1px solid rgba(255,255,255,.2)}
+.room-spec dt{font-family:var(--mono);font-size:11px;color:var(--mute);text-transform:uppercase}
+.room-spec dd{margin:0;font-family:var(--display);font-size:30px}
+.rooms.js{height:calc(100svh - var(--nav-h));min-height:520px;overflow:hidden}
+.rooms.js .room{position:absolute;inset:0 140px 0 0;min-height:0;border:0;opacity:0;visibility:hidden}
+.rooms.ready .room{transition:opacity .45s,visibility 0s .45s}
+.rooms.js .room.on{opacity:1;visibility:visible}
+.rooms.ready .room.on{transition:opacity .45s}
+.room-peek{position:absolute;top:0;right:0;bottom:0;width:140px;border:0;padding:0;background:#000;overflow:hidden;cursor:pointer}
+.room-peek img{width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .2s}
+.room-peek:hover img{opacity:.6}
+.room-peek span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(90deg);white-space:nowrap;font-family:var(--display);font-weight:800;font-size:40px;color:var(--pc)}
+.room-bar{position:absolute;left:clamp(16px,4vw,48px);right:180px;bottom:28px;z-index:2;display:flex;align-items:center;gap:16px}
+.room-arrow{width:56px;height:56px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.4);color:#fff;font-size:22px;cursor:pointer}
+.room-arrow.next{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.room-pos{font-family:var(--mono);font-size:14px;flex:none}
+.room-strip{flex:1;display:flex;gap:6px;list-style:none;margin:0;padding:0;min-width:0}
+.room-strip li{flex:1;min-width:0}
+.room-strip button{width:100%;min-height:44px;border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;font-family:var(--mono);font-size:11px;color:var(--mute);text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.room-strip button::after{content:"";display:block;height:3px;background:rgba(255,255,255,.25)}
+.room-strip button[aria-current=true]{color:var(--fg)}
+.room-strip button[aria-current=true]::after{background:var(--c)}
+.room-arrow:focus-visible,.room-strip button:focus-visible,.room-peek:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.rooms.ready .room,.rooms.ready .room.on{transition:none}}
+/* Phone: picture on top, words below, a thin peek of the next room, dots instead of names. */
+@media (max-width:700px){
+  .rooms.js .room{inset:0;flex-direction:column;align-items:stretch;justify-content:flex-end}
+  .room>img{bottom:auto;height:56%;width:calc(100% - 28px)}
+  .room::after{background:linear-gradient(180deg,transparent 30%,#000 56%)}
+  .room-copy{padding:0 16px 104px;gap:12px}
+  .room h2{font-size:clamp(40px,13vw,56px)}
+  .room p{font-size:16px}
+  .room-spec{gap:28px}.room-spec dd{font-size:22px}
+  .room-peek{width:28px;bottom:44%}
+  .room-peek span{display:none}
+  .room-bar{left:16px;right:16px;bottom:20px;gap:8px}
+  .room-arrow{width:44px;height:44px;font-size:18px}
+  .room-pos{order:4;display:none}
+  .room-strip{order:1;justify-content:center;gap:0}
+  .room-strip li{flex:none}
+  .room-strip button{width:26px;font-size:0;align-items:center;justify-content:center}
+  .room-strip button::after{width:6px;height:6px;border-radius:3px}
+  .room-strip button[aria-current=true]::after{width:20px}
+  .room-arrow.next{order:2}
+}

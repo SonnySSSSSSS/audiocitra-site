@@ -15,20 +15,81 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="site.css">
-<style>body{--accent:var(--spanda)}</style>
-</head><body>
+</head><body class="home">
 <main id="main">
-<div class="wrap">
-  <header class="hero hero-tight"><span class="eyebrow">Hey, welcome in</span>
-  <h1>I build plugins, <em>and this is where I keep them.</em></h1>
-  <p>Pull up a chair. This is my little museum.. a channel strip, an effects box, a distortion, two reverbs, a modulation box and a mix utility. A lot of what they do is fitted to stuff I analyzed myself, and I built every one of them to feel good under your hands. All VST3, all Windows.</p>
-  <div class="row"><a class="btn solid" href="spanda.html">start with Spanda</a><a class="btn" href="#plugins">see them all</a><a class="btn" href="buy.html">buy</a></div></header>
-  <figure class="plate" style="margin:0"><img src="img/lim-noir-hero.jpg" alt="Spanda Limiter in the Noir skin as 5U rack gear, rendered in 3D" width="1280" height="720"></figure>
-  <p class="cap">Spanda Limiter · Noir skin · 3D render</p>
-  <h2 class="sr">The plugins</h2>
-  <div class="bays" id="plugins" style="padding-top:64px"><a class="bay" href="spanda.html" style="--c:var(--spanda)"><div class="thumb"><img src="img/con-noir-hero.jpg" alt="" width="1280" height="720" loading="lazy"></div><span class="tag">Channel strip</span><h3>Spanda</h3><p>Seven modules in one strip. Lots of it fitted to analysis, and parts you can mix and match.</p></a><a class="bay" href="galana.html" style="--c:var(--galana)"><div class="thumb"><img src="img/galana-hero.jpg" alt="" width="1280" height="720" loading="lazy"></div><span class="tag">Effects box</span><span class="soon-tag">Coming soon</span><h3>Gālana</h3><p>Twelve filters, a Movement section, chorus and delay, in any of six orders. Presets, A/B and undo.</p></a><a class="bay" href="agni.html" style="--c:var(--agni)"><div class="thumb"><img src="img/agni-hero.jpg" alt="" width="1280" height="720" loading="lazy"></div><span class="tag">Distortion</span><span class="soon-tag">Coming soon</span><h3>Agni</h3><p>Two engines, ten shapes, eight pedal models, five routings, a capture slot and cab IRs.</p></a><a class="bay" href="akasa.html" style="--c:var(--akasa)"><div class="thumb"><img src="img/akasa-b-detail.jpg" alt="" width="1600" height="900" loading="lazy"></div><span class="tag">Coloured reverb</span><h3>Ākāśa</h3><p>Six reverbs fitted to the decay and colour of classic digital units.. vintage converters optional.</p></a><a class="bay" href="shunya.html" style="--c:var(--shunya)"><div class="thumb"><img src="img/shunya-hero.jpg" alt="" width="1280" height="720" loading="lazy"></div><span class="tag">Transparent reverb</span><span class="soon-tag">Coming soon</span><h3>Shunya</h3><p>Six clean reverbs. No saturation, no drive, no grain. Just space.</p></a><a class="bay" href="lahari.html" style="--c:var(--lahari)"><div class="thumb"><img src="img/lahari-hero-analog.jpg" alt="" width="1600" height="900" loading="lazy"></div><span class="tag">Modulation</span><span class="soon-tag">Coming soon</span><h3>Lahari</h3><p>Chorus, ensemble, celeste, flanger and phaser, six units, fitted to classic digital chorus sections.</p></a><a class="bay" href="tula.html" style="--c:var(--tula)"><div class="thumb"><img src="img/skins/tula-studio.jpg" alt="" width="1260" height="900" loading="lazy"></div><span class="tag">Mix utility</span><h3>Tulā</h3><p>Gain staging, level matching and pan for every track. Listen All stages the whole session.</p></a></div>
-  <p class="proof">One thing I care about: every plot here I analyzed offline from the actual plugin, with the settings printed right next to it. And every audio clip is level-matched, dry vs processed. No tricks.. you hear what it does.</p>
+<h1 class="sr">Audio Citra: VST3 plug-ins for Windows</h1>
+<section class="rooms" aria-roledescription="carousel" aria-label="The plug-ins">
+<div class="rooms-track">
+<article class="room" id="home" style="--c:var(--fg)" aria-roledescription="slide" aria-label="Home">
+  <img src="img/lim-noir-hero.jpg" alt="Spanda Limiter in the Noir skin rendered as rack gear" width="1280" height="720">
+  <div class="room-copy"><span class="room-kick">VST3 · Windows · 7 plug-ins</span>
+  <h2>Audio Citra</h2>
+  <p>Hey, welcome in. I build plug-ins, and this is where I keep them. Step through the rack with the arrows.</p>
+  <div class="row"><a class="btn solid" href="#spanda">Start with Spanda</a><a class="btn" href="about.html">About me</a></div></div>
+</article>
+<article class="room" id="spanda" style="--c:var(--spanda)" aria-roledescription="slide" aria-label="Spanda">
+  <img src="img/con-noir-hero.jpg" alt="Spanda console module in the Noir skin" width="1280" height="720" loading="lazy">
+  <div class="room-copy"><span class="room-kick">01 · Channel strip · Available</span>
+  <h2>Spanda</h2>
+  <p>Seven modules in one strip. Lots of it fitted to analysis, and parts you can mix and match.</p>
+  <dl class="room-spec"><div><dt>Modules</dt><dd>7</dd></div><div><dt>Skins</dt><dd>3</dd></div></dl>
+  <div class="row"><a class="btn solid" href="buy.html">Buy</a><a class="btn" href="spanda.html">Details</a></div></div>
+</article>
+<article class="room" id="akasa" style="--c:var(--akasa)" aria-roledescription="slide" aria-label="Ākāśa">
+  <img src="img/akasa-b-detail.jpg" alt="Ākāśa reverb" width="1280" height="720" loading="lazy">
+  <div class="room-copy"><span class="room-kick">02 · Coloured reverb · Available</span>
+  <h2>Ākāśa</h2>
+  <p>Six reverbs fitted to the decay and colour of classic digital units. Vintage converters optional.</p>
+  <dl class="room-spec"><div><dt>Reverbs</dt><dd>6</dd></div></dl>
+  <div class="row"><a class="btn solid" href="buy.html">Buy</a><a class="btn" href="akasa.html">Details</a></div></div>
+</article>
+<article class="room" id="tula" style="--c:var(--tula)" aria-roledescription="slide" aria-label="Tulā">
+  <img src="img/tula-citra.jpg" alt="Tulā mix utility" width="1280" height="720" loading="lazy">
+  <div class="room-copy"><span class="room-kick">03 · Mix utility · Available</span>
+  <h2>Tulā</h2>
+  <p>Gain staging, level matching and pan for every track. Listen All stages the whole session.</p>
+  <div class="row"><a class="btn solid" href="buy.html">Buy</a><a class="btn" href="tula.html">Details</a></div></div>
+</article>
+<article class="room" id="galana" style="--c:var(--galana)" aria-roledescription="slide" aria-label="Gālana">
+  <img src="img/galana-hero.jpg" alt="Gālana effects box" width="1280" height="720" loading="lazy">
+  <div class="room-copy"><span class="room-kick">04 · Effects box · Coming soon</span>
+  <h2>Gālana</h2>
+  <p>Twelve filters, a Movement section, chorus and delay, in any of six orders. Presets, A/B and undo.</p>
+  <dl class="room-spec"><div><dt>Filters</dt><dd>12</dd></div><div><dt>Orders</dt><dd>6</dd></div></dl>
+  <div class="row"><a class="btn solid" href="galana.html">See what's coming</a></div></div>
+</article>
+<article class="room" id="agni" style="--c:var(--agni)" aria-roledescription="slide" aria-label="Agni">
+  <img src="img/agni-hero.jpg" alt="Agni distortion" width="1280" height="720" loading="lazy">
+  <div class="room-copy"><span class="room-kick">05 · Distortion · Coming soon</span>
+  <h2>Agni</h2>
+  <p>Two engines, ten shapes, eight pedal models, five routings, a capture slot and cab IRs.</p>
+  <dl class="room-spec"><div><dt>Engines</dt><dd>2</dd></div><div><dt>Pedals</dt><dd>8</dd></div></dl>
+  <div class="row"><a class="btn solid" href="agni.html">See what's coming</a></div></div>
+</article>
+<article class="room" id="shunya" style="--c:var(--shunya-lt)" aria-roledescription="slide" aria-label="Shunya">
+  <img src="img/shunya-hero.jpg" alt="Shunya reverb" width="1280" height="720" loading="lazy">
+  <div class="room-copy"><span class="room-kick">06 · Transparent reverb · Coming soon</span>
+  <h2>Shunya</h2>
+  <p>Six clean reverbs. No saturation, no drive, no grain. Just space.</p>
+  <div class="row"><a class="btn solid" href="shunya.html">See what's coming</a></div></div>
+</article>
+<article class="room" id="lahari" style="--c:var(--lahari)" aria-roledescription="slide" aria-label="Lahari">
+  <img src="img/lahari-hero-pedal.jpg" alt="Lahari modulation" width="1280" height="720" loading="lazy">
+  <div class="room-copy"><span class="room-kick">07 · Modulation · Coming soon</span>
+  <h2>Lahari</h2>
+  <p>Chorus, ensemble, celeste, flanger and phaser, six units, fitted to classic digital chorus sections.</p>
+  <div class="row"><a class="btn solid" href="lahari.html">See what's coming</a></div></div>
+</article>
 </div>
+<button class="room-peek" type="button" hidden><img alt="" src=""><span></span></button>
+<div class="room-bar" hidden>
+  <button class="room-arrow prev" type="button" aria-label="Previous plug-in">←</button>
+  <button class="room-arrow next" type="button" aria-label="Next plug-in">→</button>
+  <span class="room-pos" aria-live="polite"></span>
+  <ol class="room-strip"></ol>
+</div>
+</section>
 </main>
 <script src="site.js"></script>
+<script src="rooms.js"></script>
 </body></html>
