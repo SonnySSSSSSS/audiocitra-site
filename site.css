@@ -306,11 +306,11 @@ footer a:hover{color:var(--fg)}
 }
 
 /* Homepage rooms: one plug-in per screen, stepped sideways (rooms.js). Without JS they stack. */
-.rooms{position:relative;--c:var(--fg)}
+.rooms{position:relative;--c:var(--fg);container-type:inline-size}
 .room{position:relative;min-height:min(80svh,760px);display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line)}
 .room>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .room::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.35) 50%,transparent 75%)}
-.room-copy{position:relative;z-index:1;max-width:560px;padding:48px clamp(16px,4vw,48px) 120px;display:grid;gap:18px}
+.room-copy{position:relative;z-index:1;box-sizing:content-box;max-width:560px;padding:48px 16px 120px max(16px,calc((100cqw - 1200px) / 2 + 16px));display:grid;gap:18px}
 .room-kick{font-family:var(--mono);font-size:13px;color:var(--c);text-transform:uppercase;letter-spacing:.04em}
 .room h2{font-size:clamp(56px,9vw,120px);font-weight:800;line-height:.9;color:var(--c)}
 .room p{margin:0;font-size:19px;color:#ddd9e4}
@@ -327,7 +327,7 @@ footer a:hover{color:var(--fg)}
 .room-peek img{width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .2s}
 .room-peek:hover img{opacity:.6}
 .room-peek span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(90deg);white-space:nowrap;font-family:var(--display);font-weight:800;font-size:40px;color:var(--pc)}
-.room-bar{position:absolute;left:clamp(16px,4vw,48px);right:180px;bottom:28px;z-index:2;display:flex;align-items:center;gap:16px}
+.room-bar{position:absolute;left:max(16px,calc((100cqw - 1200px) / 2 + 16px));right:180px;bottom:28px;z-index:2;display:flex;align-items:center;gap:16px}
 .room-arrow{width:56px;height:56px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.4);color:#fff;font-size:22px;cursor:pointer}
 .room-arrow.next{background:var(--c);border-color:var(--c);color:var(--on-accent)}
 .room-pos{font-family:var(--mono);font-size:14px;flex:none}
@@ -360,3 +360,16 @@ footer a:hover{color:var(--fg)}
   .room-strip button[aria-current=true]::after{width:20px}
   .room-arrow.next{order:2}
 }
+
+/* Proof cards (data-proof on a [data-listen]): a clip, the plot behind it and its loudness, side by side. */
+.proof-list{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.proof-list>.proof-card:not(.no-plot),.proof-list>.proof-more,.proof-list>.meas-grid,.proof-list>.cap{grid-column:1/-1}
+.proof-card.no-plot{padding:14px}
+.proof-card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.proof-card.no-plot{grid-template-columns:minmax(0,1fr)}
+.proof-hear{display:grid;gap:12px;align-content:start}
+.proof-card .ab-card{grid-template-columns:auto 1fr;background:#0c0b10}
+.proof-card .ab-card .seg{grid-column:1/-1}
+.proof-lvl{margin:0;font:400 12px var(--mono);color:var(--mute)}
+.proof-more{margin:28px 0 4px;font-size:22px}
+@media (max-width:760px){.proof-card{grid-template-columns:minmax(0,1fr);padding:14px}}
