@@ -388,3 +388,23 @@ footer a:hover{color:var(--fg)}
 .try-samples{gap:8px}
 .try-samples .btn{padding:9px 16px;font-size:14px;cursor:pointer;background:transparent;color:var(--fg)}
 .try-samples .btn[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+/* Film look on the homepage rooms (film.js): a print grade on each room's image, its highlights glowing (halation), and one overlay
+   for the whole stage: warm lifted blacks, grain, projector flicker, vignette, drifting dust and occasional god rays. Strong setting. */
+.rooms .room>img{filter:sepia(.12) saturate(1.1) contrast(1.05) brightness(.99)}
+.room .film-halo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:sepia(.12) brightness(.8) contrast(2.6) blur(14px);mix-blend-mode:screen;opacity:.12;pointer-events:none}
+.room .film-tint{position:absolute;inset:0;background:var(--c);opacity:.045;mix-blend-mode:soft-light;pointer-events:none}
+.film{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.film>*{position:absolute;pointer-events:none}
+.film-lift{inset:0;background:rgb(70,48,24);opacity:.02;mix-blend-mode:lighten}
+.film-grain{inset:-10%;mix-blend-mode:overlay;opacity:.25;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:film-grain .5s steps(5) infinite}
+@keyframes film-grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.film-flicker{inset:0;background:#fff3dc;mix-blend-mode:soft-light;opacity:0;animation:film-flick 3.6s linear infinite}
+@keyframes film-flick{0%,100%{opacity:0}12%{opacity:.05}14%{opacity:.01}52%{opacity:.03}55%{opacity:0}80%{opacity:.04}}
+.film-vig{inset:0;background:radial-gradient(ellipse 85% 75% at 50% 45%,transparent 55%,rgba(8,4,0,.46) 100%)}
+.film-rays{top:-25%;left:-15%;width:95%;height:160%;opacity:0;mix-blend-mode:screen;filter:blur(16px);background:repeating-linear-gradient(112deg,rgba(255,236,200,0) 0,rgba(255,236,200,.22) 30px,rgba(255,236,200,0) 80px,rgba(255,236,200,0) 130px,rgba(255,236,200,.13) 165px,rgba(255,236,200,0) 230px);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 22% 12%,#000,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 22% 12%,#000,transparent 75%);animation:film-rays 14s ease-in-out infinite}
+@keyframes film-rays{0%,58%{opacity:0;transform:translateX(-6%)}70%{opacity:.5}84%{opacity:.42}100%{opacity:0;transform:translateX(5%) rotate(1.5deg)}}
+.film-dust{inset:0;width:100%;height:100%}
+@media (max-width:700px){.film{inset:0}.room .film-halo{display:none}}
+/* reduced motion: the grade, grain and vignette stay, still; no dust, flicker or rays */
+@media (prefers-reduced-motion:reduce){.film-grain{animation:none}.film-flicker,.film-rays,.film-dust{display:none}}
+.room-peek img{filter:sepia(.12) saturate(1.1) contrast(1.05) brightness(.99)}
