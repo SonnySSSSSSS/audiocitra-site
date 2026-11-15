@@ -444,3 +444,8 @@ footer a:hover{color:var(--fg)}
 .logo{display:flex;align-items:center}.logo img{height:40px;width:auto;display:block}
 .room h2.room-logo{line-height:0;margin-bottom:8px}.room-logo img{width:min(520px,70vw);height:auto;filter:none!important}
 @media (max-width:700px){.logo img{height:30px}.room-logo img{width:min(300px,78vw)}}
+/* home room: what the plug-ins are for, in three lines */
+.home-why{list-style:none;margin:0;padding:0;display:grid;gap:10px;max-width:520px}
+.home-why li{display:grid;grid-template-columns:28px 1fr;gap:4px 12px;align-items:baseline}
+.home-why b{font:500 12px var(--mono);color:var(--mute)}
+.home-why span{color:#ece9f2;font-size:17px;line-height:1.45}.home-why em{font-style:normal;color:var(--mute)}
