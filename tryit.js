@@ -3,13 +3,18 @@
 // does not set it), no export or download. The file is decoded and played in this browser; it is never uploaded.
 (() => {
   const box = document.querySelector("[data-tryit]"); if (!box) return;
-  const MAX_S = 15, MAX_MB = 25, V = "?v=try3";
+  const MAX_S = 15, MAX_MB = 25, V = "?v=try4";
   // per engine: the glue's factory, the C API prefix, and twelve presets [index in the engine's table, category, name].
   const ENGINES = {
     akasa: { mod: "AkasaModule", mix: true, name: "Ākāśa", presets: [
       [0, "Halls", "Grand Hall"], [5, "Halls", "Hall (Vayu)"], [6, "Rooms", "Studio Room"], [10, "Chambers", "Stone Chamber"],
       [13, "Plates", "Steel Sheet"], [17, "Plates", "Deep Sheet"], [21, "Ambience", "Short Ambience"], [23, "Creative", "Ensemble Echo"],
       [26, "Creative", "Backward Room"], [29, "Creative", "Shimmer Hall"], [33, "Creative", "Slap Echo (Vayu)"], [38, "Layered", "Room, Sheet, Hall"]] },
+    // Shunya: the Akasa engine built as Shunya (synthlab #34), Mandapa left out; presets keep Mix as Akasa's do
+    shunya: { mod: "AkasaModule", prefix: "akasa", mix: true, name: "Shunya", presets: [
+      [0, "Halls", "Hall (Chatur)"], [1, "Halls", "Hall A (Kosha)"], [3, "Halls", "Concert Hall (Vistara)"], [6, "Halls", "Cathedral (Vistara)"],
+      [20, "Rooms", "Compact Room (Chatur)"], [22, "Rooms", "Chamber A (Kosha)"], [29, "Plates", "Sheet (Kosha)"], [30, "Plates", "Classic Plate (Vistara)"],
+      [38, "Plates", "Vocal Plate (Vistara)"], [48, "Ambience", "Vast Air (Vistara)"], [52, "Creative", "Echo (Kosha)"], [57, "Creative", "Car Park (Vistara)"]] },
     // a Lahari preset sets its own Mix (part of the sound), so its player has no Mix slider
     lahari: { mod: "LahariModule", mix: false, name: "Lahari", presets: [
       [0, "Guitar", "Soft Stream"], [1, "Guitar", "Thick Ensemble"], [2, "Guitar", "Jet Sweep"], [3, "Guitar", "Spiral Funk"],
@@ -42,7 +47,7 @@
     const url = URL.createObjectURL(new Blob([glue, `\nconst ENGINE_MODULE = ${E.mod};\n`, worklet], { type: "text/javascript" }));
     await ctx.audioWorklet.addModule(url); URL.revokeObjectURL(url);
     node = new AudioWorkletNode(ctx, "engine", { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2],
-      channelCount: 2, channelCountMode: "explicit", channelInterpretation: "speakers", processorOptions: { wasm, prefix: key } });
+      channelCount: 2, channelCountMode: "explicit", channelInterpretation: "speakers", processorOptions: { wasm, prefix: E.prefix || key } });
     await new Promise((ok, bad) => { node.port.onmessage = e => e.data.ready ? ok() : bad(new Error(e.data.error)); });
     node.connect(ctx.destination);
     send();
