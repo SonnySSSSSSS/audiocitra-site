@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0b10'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c58bff' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=try3">
 <style>body{--accent:var(--shunya)}</style>
 </head><body class="pale">
 <main id="main">
@@ -23,6 +23,19 @@
   <figure class="plate" style="margin:0"><img src="img/shunya-hero.jpg" alt="Shunya Eclipse skin rendered in 3D, Vistara in the eclipse lens" width="1280" height="720"></figure><p class="cap">Eclipse skin &middot; Vistara in the lens &middot; 3D render</p><aside class="placard" aria-label="Exhibit label"><span class="no">Exhibit 05 · Audio Citra</span><h2>Shunya</h2><p class="kind">Transparent reverb</p><dl><dt>Status</dt><dd>In the workshop</dd><dt>Contents</dt><dd>6 units · 3 chainable slots · wet EQ</dd><dt>Medium</dt><dd>C++ on JUCE</dd><dt>Build</dt><dd>310</dd></dl><p class="note">Ākāśa&#39;s quiet sibling. Shunya means zero, which is how much grain it adds.</p></aside>
 </div>
 <div class="td" id="inside" data-teardown="shunya" style="--n:5"></div>
+<section id="try"><div class="wrap"><div class="head"><span class="eyebrow">Try it</span><h2>Your audio, <em>through the presets.</em></h2>
+  <p class="lede">Pick a file and hear it through twelve of the factory presets. This runs Shunya's own engine in your browser, the same code the plug-in uses. Shunya isn't out yet, so this is an early listen. Your file stays on your device: nothing is uploaded.</p></div>
+  <div class="try" data-tryit="shunya">
+    <label class="btn solid try-file">Choose an audio file<input type="file" accept="audio/*,.wav,.mp3,.flac,.ogg,.m4a,.aif,.aiff"></label>
+    <p class="try-status" aria-live="polite">The first 15 seconds of one file, up to 25 MB. WAV, MP3, FLAC, OGG or M4A.</p>
+    <div class="try-ctl" hidden>
+      <label class="try-f"><span class="eyebrow">Preset</span><select></select></label>
+      <label class="try-f"><span class="eyebrow">Mix <span class="try-mixv">30 %</span></span><input type="range" min="0" max="100" value="30"></label>
+      <div class="row"><button class="btn solid try-play" type="button" aria-pressed="false">Play</button><button class="btn try-ab" type="button" aria-pressed="false">Ākāśa (tap for dry)</button></div>
+    </div>
+    <p class="cap">Limits: twelve presets and Mix only, the first 15 s of one file, levels set to a safe peak, no export or download. Changing preset restarts the tail, as it does in the plug-in. For every control, get the plug-in.</p>
+  </div>
+</div></section>
 <section id="features"><div class="wrap"><div class="head"><span class="eyebrow">What's in here</span><h2>Six spaces, <em>one clean path.</em></h2></div>
   <div class="grid2"><figure class="plate" style="margin:0"><img src="img/shunya-crt.jpg" alt="Graticule skin: the phosphor tube showing Vistara and its decay trace" width="1280" height="720" loading="lazy"></figure><figure class="plate" style="margin:0"><img src="img/shunya-knobs.jpg" alt="Eclipse skin: input and late-slot knobs close-up" width="1280" height="720" loading="lazy"></figure></div>
   <div class="feats"><div class="feat"><h3>Mandapa</h3><p>The modern, natural one. Dense, smooth, and it stays out of the way, so it's what I reach for on acoustic music, orchestral stuff, or a mix bus send where you want depth you don't really hear. True stereo, with Motion for the tail.</p><span class="spec">True stereo · Motion</span></div><div class="feat"><h3>Vistara</h3><p>The big studio hall from the mid 80s that ended up on half the records you know. Wide, glossy and tall. Vocals and snare love it. Hall, Random Hall, Plate, Ambience, Rich Plate and Concert Hall, with size, pre-delay and diffusion.</p><span class="spec">6 algorithms</span></div><div class="feat"><h3>Taranga</h3><p>The tidy, polite sound of a 90s sound module. Short rooms and plates that glue a busy arrangement together without washing it out, plus a tube and.. yep, a cellar. 11 reverbs and 8 choruses.</p><span class="spec">11 reverbs · 8 choruses</span></div><div class="feat"><h3>Dhvani</h3><p>From a 90s synth's effects section: clean, airy and a bit glassy. Perfect for pads, keys and electric pianos, especially with the chorus feeding the reverb. Eight types, with delay feedback and three chorus types.</p><span class="spec">Chorus → reverb</span></div><div class="feat"><h3>Kosha</h3><p>That early-90s sound module effect block. Simple, friendly rooms and halls that sound like the games and MIDI tracks a lot of us grew up on. Great for that nostalgic, slightly boxy space. Chorus can feed the reverb.</p><span class="spec">Chorus → reverb</span></div><div class="feat"><h3>Chatur</h3><p>From a 90s studio multi-effects rack. Solid rooms and plates for drums and vocals, plus Backward Swell and Gate Burst for that gated 80s drum thing and reverse swells into a chorus. 10 programs.</p><span class="spec">10 programs</span></div><div class="feat"><h3>Three slots</h3><p>Early, Mid and Late each hold any unit and feed the next, so you can chain a room into a hall.. which I do constantly. After them: a four-band wet EQ, presets and A/B.</p><span class="spec">Early · Mid · Late · A/B</span></div><div class="feat"><h3>FIT: Classic or Analyzed</h3><p>Same nerd switch as Ākāśa. I refitted the late reverb against my analysis with gradient descent, and the FIT switch in the lotus panel flips between Classic and Analyzed with a crossfade. Mandapa also got new edge depths and a refit of its top-end damping.</p><span class="spec">FIT: Classic · Analyzed</span></div><div class="feat"><h3>Auto Gain</h3><p>On by default, so the output sits at the input's loudness.</p><span class="spec">Auto Gain</span></div></div>
@@ -82,4 +95,5 @@
 <section><div class="wrap cta"><h2>Shunya isn&#39;t out yet</h2><p class="lede">I&#39;m still finishing it, so there&#39;s no download or single licence for it just yet. It&#39;ll be right here when it&#39;s ready.</p><p class="lede req">VST3 · Windows 64-bit · licence, trial and signed updates right inside the plugin</p></div></section>
 </main>
 <script src="site.js"></script>
+<script src="tryit.js?v=try4"></script>
 </body></html>
