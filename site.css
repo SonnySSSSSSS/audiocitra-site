@@ -360,3 +360,16 @@ footer a:hover{color:var(--fg)}
   .room-strip button[aria-current=true]::after{width:20px}
   .room-arrow.next{order:2}
 }
+
+/* Proof cards (data-proof on a [data-listen]): a clip, the plot behind it and its loudness, side by side. */
+.proof-list{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.proof-list>.proof-card:not(.no-plot),.proof-list>.proof-more,.proof-list>.meas-grid,.proof-list>.cap{grid-column:1/-1}
+.proof-card.no-plot{padding:14px}
+.proof-card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.proof-card.no-plot{grid-template-columns:minmax(0,1fr)}
+.proof-hear{display:grid;gap:12px;align-content:start}
+.proof-card .ab-card{grid-template-columns:auto 1fr;background:#0c0b10}
+.proof-card .ab-card .seg{grid-column:1/-1}
+.proof-lvl{margin:0;font:400 12px var(--mono);color:var(--mute)}
+.proof-more{margin:28px 0 4px;font-size:22px}
+@media (max-width:760px){.proof-card{grid-template-columns:minmax(0,1fr);padding:14px}}

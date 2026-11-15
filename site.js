@@ -96,31 +96,45 @@
   });
 
   // Measurements: a grid of analyser plots from meas.json
+  const measFig = m =>
+    `<figure class="meas"><a href="${esc(m.src)}" target="_blank" rel="noopener"><img src="${esc(m.src)}" alt="${esc(m.title)}"${m.w ? ` width="${m.w}" height="${m.h}"` : ""} loading="lazy"></a>
+     <figcaption><b>${esc(m.title)}</b><span>${esc(m.caption)}</span><small>${esc(m.settings)} · 48 kHz</small></figcaption></figure>`;
   document.querySelectorAll("[data-meas]").forEach(async el => {
     try {
       const items = (await getJson("meas.json"))[el.dataset.meas] || [];
       if (!items.length) throw 0;
-      el.innerHTML = items.map(m =>
-        `<figure class="meas"><a href="${esc(m.src)}" target="_blank" rel="noopener"><img src="${esc(m.src)}" alt="${esc(m.title)}"${m.w ? ` width="${m.w}" height="${m.h}"` : ""} loading="lazy"></a>
-         <figcaption><b>${esc(m.title)}</b><span>${esc(m.caption)}</span><small>${esc(m.settings)} · 48 kHz</small></figcaption></figure>`).join("");
+      el.innerHTML = items.map(measFig).join("");
     } catch { drop(el); }
   });
 
-  // Listen: dry / processed A/B players from audio/clips.json; switching keeps the playhead
+  // Listen: dry / processed A/B players from audio/clips.json; switching keeps the playhead.
+  // With data-proof, each clip becomes a proof card: player + the plot named by its "plot" field
+  // + loudness, and the plugin's remaining plots follow in a grid.
   document.querySelectorAll("[data-listen]").forEach(async el => {
-    let clips = [];
+    let clips = [], meas = [];
     try { clips = (await getJson("audio/clips.json")).filter(c => c.plugin.toLowerCase() === el.dataset.listen); } catch {}
-    if (!clips.length) { drop(el); return; }
+    if (el.dataset.proof != null) try { meas = (await getJson("meas.json"))[el.dataset.listen] || []; } catch {}
+    if (!clips.length && !meas.length) { drop(el); return; }
     const name = el.dataset.name || el.dataset.listen;
-    el.innerHTML = clips.map((c, i) => `
+    const lufs = v => (v < 0 ? "−" : "") + Math.abs(v).toFixed(1);
+    const card = (c, i) => `
       <div class="ab-card" data-i="${i}">
         <button class="play" aria-label="Play ${esc(c.title)}" data-title="${esc(c.title)}">▶</button>
         <div class="ab-meta"><b>${esc(c.title)}</b><small>${esc(c.settings_summary)}</small></div>
         <div class="seg" role="group" aria-label="Dry or processed, ${esc(c.title)}"><button aria-pressed="true" data-k="dry">Dry</button><button aria-pressed="false" data-k="wet">${esc(name)}</button></div>
         <audio preload="none" src="audio/${esc(c.dry)}"></audio><audio preload="none" src="audio/${esc(c.wet)}"></audio>
-      </div>`).join("");
+      </div>`;
+    if (el.dataset.proof == null) el.innerHTML = clips.map(card).join("");
+    else {
+      const used = new Set();
+      el.innerHTML = clips.map((c, i) => {
+        const m = meas.find(x => x.src === c.plot); if (m) used.add(m);
+        const lvl = c.lufs_dry != null ? `<p class="proof-lvl">Level-matched · dry ${lufs(c.lufs_dry)} LUFS · ${esc(name)} ${lufs(c.lufs_wet)} LUFS</p>` : "";
+        return `<article class="proof-card${m ? "" : " no-plot"}"><div class="proof-hear">${card(c, i)}${lvl}</div>${m ? measFig(m) : ""}</article>`;
+      }).join("") + (meas.length > used.size ? `<h3 class="proof-more">More plots</h3><div class="meas-grid">${meas.filter(m => !used.has(m)).map(measFig).join("")}</div>` : "");
+    }
     const credits = [...new Set(clips.map(c => c.credit).filter(Boolean))];
-    if (credits.length) el.insertAdjacentHTML("beforeend", `<p class="cap">${credits.map(esc).join(" · ")}</p>`);
+    if (credits.length) { const more = el.querySelector(".proof-more"); (more || el).insertAdjacentHTML(more ? "beforebegin" : "beforeend", `<p class="cap">${credits.map(esc).join(" · ")}</p>`); }
     const stopAll = except => document.querySelectorAll(".ab-card").forEach(k => {
       if (k !== except) { k.querySelectorAll("audio").forEach(a => a.pause()); k._show?.(false); }
     });

@@ -73,12 +73,48 @@ CLIPS = {
    "Stage A Rectify shape, 10 dB drive, 10 kHz post low-pass, 60 % mix; capture and cab off", None),
  ],
  "Akasa": [
-  ("akasa-1", "Vocal · Megha hall", "Vocal - Song (a cappella).wav", 11, 2.5,
-   dict(unit="Megha", megha_program="Clear Hall", pre_delay_ms=30.0, low_cut_hz=150.0, mix=25.0, input_db=0.0),
-   "Megha unit, Clear Hall program, 30 ms pre-delay, 150 Hz low cut, 25 % mix", None),
-  ("akasa-2", "Drums · Guha room", "Drums - Acoustic (Groove).wav", 11, 2,
+  # Factory presets (SynthLab akasa-vst/src/Presets.h): a preset resets everything but Input, Mix and Wet out, then sets its values,
+  # which is what render_plugin does (defaults, then these). Titles name the preset as the menu shows it, "Category / Name".
+  ("akasa-1", "Vocal · Halls / Grand Hall", "Vocal - Song (a cappella).wav", 11, 2.5,
+   dict(unit="Megha", megha_program="Grand Hall", mix=25.0, input_db=0.0),
+   "Factory preset Halls / Grand Hall (Megha, Vintage converters on, as the preset leaves them), mix 25 %", None),
+  ("akasa-2", "Drums · Rooms / Studio Room", "Drums - Acoustic (Groove).wav", 11, 2,
+   dict(unit="Megha", megha_program="Studio Room", mix=22.0, input_db=0.0),
+   "Factory preset Rooms / Studio Room (Megha), mix 22 %", CC_BY_DRUMS),
+  ("akasa-3", "Male vocal · Chambers / Velvet Chamber", "Vocal - Male (lead).wav", 11, 2.5,
+   dict(unit="Megha", megha_program="Velvet Chamber", mix=25.0, input_db=0.0),
+   "Factory preset Chambers / Velvet Chamber (Megha), mix 25 %", '"Growing" by mykleanthony (ccmixter.org/files/mykleanthony/29576), CC BY 3.0'),
+  ("akasa-4", "Electric piano · Plates / Deep Sheet", "Keys - Electric Piano.wav", 11, 2.5,
+   dict(unit="Megha", megha_program="Deep Sheet", mix=28.0, input_db=0.0),
+   "Factory preset Plates / Deep Sheet (Megha), mix 28 %", None),
+  ("akasa-5", "Drums · Plates / Steel Sheet", "Drums - Acoustic (Groove).wav", 11, 2,
+   dict(unit="Megha", megha_program="Steel Sheet", mix=20.0, input_db=0.0),
+   "Factory preset Plates / Steel Sheet (Megha), mix 20 %", CC_BY_DRUMS),
+  ("akasa-6", "Synth lead · Creative / Ensemble Echo", "Lead - Synth.wav", 11, 2.5,
+   dict(unit="Megha", megha_program="Ensemble Echo", mix=30.0, input_db=0.0),
+   "Factory preset Creative / Ensemble Echo (Megha), mix 30 %", None),
+  ("akasa-7", "Pad · Halls / Hall (Vayu)", "Pad - Warm.wav", 11, 3,
+   dict(unit="Vayu", vayu_size="Hall", vayu_decay=70.0, vayu_damping=0.0, vayu_color=64.0, vayu_mode="Reverb", vayu_feedback=0.0, vayu_predelay_ms=0.0, mix=35.0, input_db=0.0),
+   "Factory preset Halls / Hall (Vayu): Hall size, decay 70, damping 0, colour 64; mix 35 %", None),
+  ("akasa-8", "Plucked arp · Creative / Slap Echo (Vayu)", "Pluck - Arp.wav", 11, 2.5,
+   dict(unit="Vayu", vayu_size="Large", vayu_decay=30.0, vayu_damping=40.0, vayu_color=64.0, vayu_mode="Reverb + Feedback 1", vayu_feedback=55.0, vayu_predelay_ms=140.0, mix=30.0, input_db=0.0),
+   "Factory preset Creative / Slap Echo (Vayu): Large, decay 30, damping 40, feedback mode 1 at 55, 140 ms pre-delay; mix 30 %", None),
+  ("akasa-9", "Vocal · Creative / Shimmer Hall", "Vocal - Song (a cappella).wav", 11, 3,
+   dict(unit="Megha", megha_program="Grand Hall", shimmer=30.0, shimmer_pitch_st=12.0, megha_rt=130.0, mix=25.0, input_db=0.0),
+   "Factory preset Creative / Shimmer Hall: Megha Grand Hall, decay 130 %, shimmer 30 % at +12 st; mix 25 %", None),
+  # The other units' own program menus (Dvaya's are named presets too); picked by name in the unit.
+  ("akasa-10", "Electronic drums · Guha program Room One", "Drums - Electronic.wav", 11, 2,
    dict(unit="Guha", guha_program="Room One", mix=25.0, input_db=0.0),
-   "Guha unit, Room One program, default decay, 25 % mix", CC_BY_DRUMS),
+   "Guha unit, program Room One, mix 25 %", None),
+  ("akasa-11", "Electric piano · Dvaya preset Ensemble + Sheet", "Keys - Electric Piano.wav", 11, 2.5,
+   dict(unit="Dvaya", dvaya_preset="Effects + Reverb: Ensemble + Sheet", mix=35.0, input_db=0.0),
+   "Dvaya unit, preset Effects + Reverb: Ensemble + Sheet, mix 35 %", None),
+  ("akasa-12", "Electronic drums · Valuka program Gate Snap 150 ms", "Drums - Electronic.wav", 11, 1.5,
+   dict(unit="Valuka", valuka_program="Gate Snap 150 ms", mix=30.0, input_db=0.0),
+   "Valuka unit, program Gate Snap 150 ms, mix 30 %", None),
+  ("akasa-13", "Vocal · Adi program Mid Mellow 1.4 s", "Vocal - Female (dry).wav", 11, 2.5,
+   dict(unit="Adi", adi_program="Mid Mellow 1.4 s", mix=25.0, input_db=0.0),
+   "Adi unit, program Mid Mellow 1.4 s, mix 25 %", None),
  ],
  "Shunya": [
   ("shunya-1", "Vocal · Mandapa", "Vocal - Female (dry).wav", 11, 2.5,
@@ -88,6 +124,13 @@ CLIPS = {
    dict(unit="Vistara", vistara_algorithm="Plate", mix=25.0, input_db=0.0),
    "Vistara unit, Plate algorithm, default time, 25 % mix", None),
  ],
+}
+
+
+# Clip id -> the measurement plot it sits next to on the page (proof cards).
+PLOTS = {
+ # only where the plot was measured on exactly the clip's program
+ "akasa-1": "img/meas/akasa_megha_decay_per_octave.png",
 }
 
 
@@ -158,11 +201,18 @@ def decode_mp3(path):
     return np.frombuffer(dec, np.float32).reshape(-1, 2).T.astype(np.float64)
 
 
-def finish():
+def finish(only=None):
+    """Loudness-match and encode. With `only`, just that plugin; other plugins' entries are kept as they are.
+    Extra fields an entry already has (such as "plot", which links a clip to its measurement) are kept."""
     import pyloudnorm as pyln
     meter = pyln.Meter(SR)
-    out = []
+    try:
+        with open(os.path.join(AUDIO, "clips.json"), encoding="utf-8") as f: old = json.load(f)
+    except Exception: old = []
+    prev = {c["id"]: c for c in old}
+    out = [c for c in old if only and c["plugin"] != only]
     for name, clips in CLIPS.items():
+        if only and name != only: continue
         for cid, title, stem, secs, tail, settings, summary, credit in clips:
             d, _ = sf.read(os.path.join(TMP, f"{cid}-dry.wav"), always_2d=True); d = fade(d.T)
             w, _ = sf.read(os.path.join(TMP, f"{cid}-wet.wav"), always_2d=True); w = fade(w.T)
@@ -187,6 +237,9 @@ def finish():
             out.append(dict(plugin=name, id=cid, title=title, source_stem=stem, settings_summary=summary,
                             dry=f"{cid}-dry.mp3", wet=f"{cid}-wet.mp3",
                             lufs_dry=stats["dry"]["lufs"], lufs_wet=stats["wet"]["lufs"], credit=credit))
+            extra = {k: v for k, v in prev.get(cid, {}).items() if k not in out[-1] and k != "plot"}
+            if cid in PLOTS: extra["plot"] = PLOTS[cid]  # plot links come only from PLOTS, so a changed clip never keeps a stale one
+            out[-1].update(extra)
             print(cid, "target", round(target, 2), stats, flush=True)
     with open(os.path.join(AUDIO, "clips.json"), "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2, ensure_ascii=False)
@@ -196,7 +249,10 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--plugin"); ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--finish-only", action="store_true")
+    ap.add_argument("--only", help="finish just this plugin (render it first with --plugin)")
     a = ap.parse_args()
+    if a.only:
+        finish(a.only); sys.exit(0)
     if a.plugin:
         render_plugin(a.plugin, a.smoke); sys.exit(0)
     if not a.finish_only:

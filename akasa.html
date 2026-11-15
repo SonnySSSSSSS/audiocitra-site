@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0b10'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c58bff' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=proof3">
 <style>body{--accent:var(--akasa)}</style>
 </head><body>
 <main id="main">
@@ -23,14 +23,13 @@
   <div class="row"><a class="btn solid" href="#inside">Take it apart</a><a class="btn" href="#listen">Have a listen</a><a class="btn" href="#measurements">The plots</a></div></header>
   <figure class="plate" style="margin:0"><img src="img/akasa-b-detail.jpg" alt="Noir skin close-up: input knob and the hero glass with the decay graph" width="1600" height="900"></figure><p class="cap">Noir skin · close-up · 3D render</p><aside class="placard" aria-label="Exhibit label"><span class="no">Exhibit 04 · Audio Citra</span><h2>Ākāśa</h2><p class="kind">Coloured reverb</p><dl><dt>Status</dt><dd>On display since October 2026</dd><dt>Contents</dt><dd>6 units · 3 chainable slots · wet EQ</dd><dt>Medium</dt><dd>C++ on JUCE, fitted to analysis of classic digital reverbs</dd><dt>Build</dt><dd>319</dd></dl><p class="note">If you grew up on those old racks, you&#39;ll hear it. The FIT switch flips between the classic sound and my analysis, for people like me.</p></aside>
 </div>
-<div class="td" id="inside" data-teardown="akasa" style="--n:4"></div>
+<section id="listen"><div class="wrap"><div class="head"><span class="eyebrow">Listen</span><h2>Hear the presets <em>in action.</em></h2>
+  <p class="lede">Every clip is a factory preset or a unit's own program, named the way the menu shows it, so you can load the exact sound yourself. Only the mix is set. Dry and processed are matched in loudness, and where I have a plot of that exact program it sits right next to the clip.</p></div>
+  <div class="proof-list" id="measurements" data-listen="akasa" data-name="Ākāśa" data-proof></div>
+</div></section>
 <section id="features"><div class="wrap"><div class="head"><span class="eyebrow">What's in here</span><h2>Fitted to <em>what I analyzed.</em></h2></div>
   
   <div class="feats"><div class="feat"><h3>Megha</h3><p>The lush, dark one from the golden age of studio reverb. It sits behind a vocal or a piano without fighting it, and long halls bloom instead of hiss. My go-to for ballads, strings and anything that needs to feel expensive. 22 programs, true stereo, and Motion gives the tail that slow drift.</p><span class="spec">22 programs · true stereo · Motion</span></div><div class="feat"><h3>Guha</h3><p>Brighter and more forward, that 80s rack sound. Great on snares, toms and synth stabs where you want the verb to be part of the hit. The backward, echo and hold programs are pure fun for transitions and drops. 14 programs.</p><span class="spec">14 programs</span></div><div class="feat"><h3>Vayu</h3><p>The reverb straight out of a classic virtual-analog synth, so of course it lives on synths: pads, leads, plucks. The colour filter and feedback let you push it from a soft wash into something that sings back at you.</p><span class="spec">Colour filter · feedback</span></div><div class="feat"><h3>Dvaya</h3><p>For when a plain reverb is too polite. 77 two-effect presets pair the reverb with delay, modulation, phaser or pitch, so one slot gets you a whole sound-design chain. Guitars, synths and anything that needs to move.</p><span class="spec">77 presets</span></div><div class="feat"><h3>Valuka and Adi</h3><p>Small, grainy, early-digital boxes, and I love them for it. Valuka has 100 programs (flanges and choruses too), Adi has 64. Put them on drums, demos and lo-fi stuff where a pristine reverb would sound wrong.</p><span class="spec">100 + 64 programs</span></div><div class="feat"><h3>Optional converters</h3><p>Set Converters to Vintage and you get the word length, word noise, idle floor and DC of old converters.. the grit nobody asked for but everybody misses. It's on Megha (on by default), Valuka and Adi (off by default).</p><span class="spec">Converters: Off · Vintage</span></div><div class="feat"><h3>Three slots</h3><p>Early, Mid and Late each hold any unit, and each feeds the next. Every slot gets pre-delay, width, cuts, shimmer and freeze. After those: a four-band wet EQ, ducking, chorus and a fidelity control, plus presets and A/B.</p><span class="spec">Early · Mid · Late · A/B</span></div><div class="feat"><h3>FIT: Classic or Analyzed</h3><p>This one is pure nerd stuff. I went back and refitted the late reverb of the clean units against my analysis with gradient descent. The FIT switch in the lotus panel lets you flip between Classic (the original fit) and Analyzed (the new one), with a crossfade, so you can judge for yourself.</p><span class="spec">FIT: Classic · Analyzed</span></div><div class="feat"><h3>Auto Gain</h3><p>On by default: the output sits at the same loudness as the input, so you're never fooled by a louder reverb.</p><span class="spec">Auto Gain</span></div></div>
-</div></section>
-<section id="listen"><div class="wrap"><div class="head"><span class="eyebrow">Listen</span><h2>Ok, have a listen.</h2>
-  <p class="lede">Hit play and flip between Dry and Ākāśa. I matched the loudness on both, so you're hearing what it actually does.. not just "louder sounds better".</p></div>
-  <div class="listen" data-listen="akasa" data-name="Ākāśa"></div>
 </div></section>
 <section id="walkthrough"><div class="wrap">
   <div class="head"><span class="eyebrow">Walkthrough <span class="draft-tag">Draft</span></span><h2>Watch <em>the walkthrough.</em></h2>
@@ -65,15 +64,12 @@
     </div>
 </div></section>
 
-<section id="measurements"><div class="wrap"><div class="head"><span class="eyebrow">Analysis</span><h2>I'd rather show you than tell you.</h2>
-  <p class="lede">I ran every one of these offline through the plugin itself at 48 kHz. The settings I used are under each plot, so you can check my work.</p></div>
-  <div class="meas-grid" data-meas="akasa"></div>
-</div></section>
+<div class="td" id="inside" data-teardown="akasa" style="--n:4"></div>
 <section id="skins"><div class="wrap"><div class="head"><span class="eyebrow">Skins</span><h2>Pick a finish.</h2>
   <p class="lede">These are straight from the plugin, no mockups. Click around.. I spent way too long on some of these.</p></div>
   <figure class="plate" style="margin:0"><img id="i-skin" src="img/skins/akasa-noir.jpg" alt="Ākāśa editor, Noir skin" width="1400" height="902" loading="lazy"></figure><div class="seg" data-swap="i-skin" aria-label="Skin" style="margin-top:12px"><button aria-pressed="true" data-src="img/skins/akasa-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/skins/akasa-orb.jpg">Orb</button><button aria-pressed="false" data-src="img/skins/akasa-oxblood.jpg">Oxblood</button><button aria-pressed="false" data-src="img/skins/akasa-watercolor.jpg">Watercolor</button></div>
 </div></section>
 <section><div class="wrap cta"><h2>Want to try Ākāśa?</h2><p class="lede">Early access (beta): it works and I support it, but I&#39;m still finishing it. Every update is free, including 1.0 and all the 1.x updates after it.</p><div class="row"><a class="btn solid" href="https://support.audiocitra.com/download/akasa">Download for Windows</a><a class="btn" href="buy.html?product=akasa">Buy</a></div><p class="lede req">VST3 · Windows 64-bit · licence, trial and signed updates right inside the plugin · <a href="install.html">How to install</a> · <a href="changes.html">What&#39;s changed</a><span data-release="akasa"></span></p></div></section>
 </main>
-<script src="site.js"></script>
+<script src="site.js?v=proof3"></script>
 </body></html>
