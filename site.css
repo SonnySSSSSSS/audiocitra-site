@@ -377,11 +377,11 @@ footer a:hover{color:var(--fg)}
 .try{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:16px;max-width:720px}
 .try-file{position:relative;justify-self:start;cursor:pointer}
 .try-file input{position:absolute;inset:0;opacity:0;cursor:pointer}
-.try-file:focus-within{outline:2px solid var(--akasa);outline-offset:2px}
+.try-file:focus-within{outline:2px solid var(--accent);outline-offset:2px}
 .try-status{margin:0;color:var(--mute);font:400 13px var(--mono);overflow-wrap:anywhere}
 .try-ctl{display:grid;gap:16px}.try-ctl[hidden]{display:none}
 .try-f{display:grid;gap:8px}
 .try select{font:500 15px var(--body);padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);max-width:100%}
-.try input[type=range]{accent-color:var(--akasa);width:100%;max-width:420px}
-.try-ab[aria-pressed=true]{border-color:var(--akasa);color:var(--akasa)}
+.try input[type=range]{accent-color:var(--accent);width:100%;max-width:420px}
+.try-ab[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
 .try .cap{margin:0}
