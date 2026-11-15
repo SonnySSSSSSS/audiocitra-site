@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0b10'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c58bff' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=try3">
 <style>body{--accent:var(--lahari)}</style>
 </head><body>
 <main id="main">
@@ -22,6 +22,19 @@
   <div class="row"><a class="btn solid" href="#features">What's in here</a><a class="btn" href="#skins">Skins</a></div></header>
   <figure class="plate" style="margin:0"><img src="img/lahari-hero-analog.jpg" alt="Lahari in the Fantasy skin, rendered in 3D" width="1600" height="900"></figure><p class="cap">Fantasy skin &middot; 3D render</p><aside class="placard" aria-label="Exhibit label"><span class="no">Exhibit 06 · Audio Citra</span><h2>Lahari</h2><p class="kind">Modulation</p><dl><dt>Status</dt><dd>In the workshop</dd><dt>Contents</dt><dd>6 units · 22 programs · 16 presets</dd><dt>Medium</dt><dd>C++ on JUCE</dd><dt>Build</dt><dd>7</dd></dl><p class="note">Most of it is fitted to classic chorus sections. The phaser is my own, so blame me for that one.</p></aside>
 </div>
+<section id="try"><div class="wrap"><div class="head"><span class="eyebrow">Try it</span><h2>Your audio, <em>through the presets.</em></h2>
+  <p class="lede">Pick a file and hear it through twelve of the factory presets. This runs Lahari's own engine in your browser, the same code the plug-in uses. Lahari isn't out yet, so this is the first place you can hear it. Your file stays on your device: nothing is uploaded.</p></div>
+  <div class="try" data-tryit="lahari">
+    <label class="btn solid try-file">Choose an audio file<input type="file" accept="audio/*,.wav,.mp3,.flac,.ogg,.m4a,.aif,.aiff"></label>
+    <p class="try-status" aria-live="polite">The first 15 seconds of one file, up to 25 MB. WAV, MP3, FLAC, OGG or M4A.</p>
+    <div class="try-ctl" hidden>
+      <label class="try-f"><span class="eyebrow">Preset</span><select></select></label>
+      <label class="try-f"><span class="eyebrow">Mix <span class="try-mixv">30 %</span></span><input type="range" min="0" max="100" value="30"></label>
+      <div class="row"><button class="btn solid try-play" type="button" aria-pressed="false">Play</button><button class="btn try-ab" type="button" aria-pressed="false">Ākāśa (tap for dry)</button></div>
+    </div>
+    <p class="cap">Limits: twelve presets, each with its own mix, the first 15 s of one file, levels set to a safe peak, no export or download. The plug-in has every control.</p>
+  </div>
+</div></section>
 <section id="features"><div class="wrap"><div class="head"><span class="eyebrow">What's in here</span><h2>Six units, <em>one set of hands.</em></h2></div>
   <div class="feats"><div class="feat"><h3>Nadi</h3><p>A chorus with three programs: Stream, Ripple and Shiver.</p><span class="spec">Chorus · 3 programs</span></div><div class="feat"><h3>Sarita</h3><p>A big wide ensemble chorus, three programs, Ensemble I to III.</p><span class="spec">Chorus · 3 programs</span></div><div class="feat"><h3>Yugala</h3><p>A celeste.. that slow, detuned shimmer. Three programs, Shimmer I to III.</p><span class="spec">Celeste · 3 programs</span></div><div class="feat"><h3>Bhramara</h3><p>A flanger with two programs, Sweep I and II. Crank Feedback and it starts to ring all metallic.</p><span class="spec">Flanger · 2 programs</span></div><div class="feat"><h3>Vrinda</h3><p>The newest one: a big ensemble with seven programs, Octet, Drift, Echo, Throng, Weave, Spread and Choir. Lots of modulated taps, an optional amplitude swing and a crossed feedback echo. It gets thick fast.</p><span class="spec">Ensemble · 7 programs</span></div><div class="feat"><h3>Chakra</h3><p>My own phaser. Chains of 4 to 12 allpass stages, swept on a log scale, in four programs from Wheel to Whirl.</p><span class="spec">Phaser · 4 programs</span></div><div class="feat"><h3>Shared controls</h3><p>Rate and Depth scale the program's own values, Delay shifts its base delay or sweep range, and Feedback adds to its loop. Then Tone, Width, Mix and Output. Oversampling goes Off, 2x or 4x.</p><span class="spec">Rate ×0.25–×4 · Depth 0–200%</span></div><div class="feat"><h3>Presets and size</h3><p>16 factory presets to start from: 6 chorus, 3 celeste, 3 flanger and 4 phaser. Click the logo for presets, skin, size (75–200%, or Ctrl +/−) and oversampling.</p><span class="spec">16 presets · 75–200%</span></div></div>
   <figure class="plate" style="margin:0"><img src="img/lahari-hero-pedal.jpg" alt="Lahari in the Analog skin, rendered in 3D" width="1600" height="900" loading="lazy"></figure><p class="cap">Analog skin &middot; 3D render</p>
@@ -33,4 +46,5 @@
 <section><div class="wrap cta"><h2>Lahari isn&#39;t out yet</h2><p class="lede">I&#39;m still finishing it, so there&#39;s no download or single licence for it just yet. It&#39;ll be right here when it&#39;s ready.</p><p class="lede req">VST3 · Windows 64-bit · licence, trial and signed updates right inside the plugin</p></div></section>
 </main>
 <script src="site.js"></script>
+<script src="tryit.js?v=try3"></script>
 </body></html>
