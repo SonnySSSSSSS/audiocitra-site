@@ -4,7 +4,7 @@
   --spanda:#c58bff; --galana:#ffb35c; --akasa:#e895a0; --shunya:#1f6a82; --shunya-lt:#5fb0cc; --agni:#ff6a3d; --lahari:#5fd4b4; --tula:#e8b04a;
   --on-accent:#111; --nav-h:56px;
   --pale:#eef0ee; --pale-fg:#1d2124; --pale-mute:#5f676c;
-  --display:"Syne",system-ui,sans-serif; --body:"Instrument Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  --display:"Bodoni Moda",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
   --accent:var(--fg);
   color-scheme:dark;
 }
@@ -440,3 +440,7 @@ footer a:hover{color:var(--fg)}
 @media (max-width:700px){.lightbox img{inset:64px 8px 56px;width:calc(100% - 16px)}.lb-p,.lb-n{top:auto;bottom:8px;transform:none}.vw-cmp{margin-left:0}}
 .mod.gal.on{display:block}
 @media (max-width:700px){.gal-grid{grid-template-columns:1fr 1fr;gap:8px}}
+/* the owner's lotus logo, never recoloured; the dark nav and rooms are its backing */
+.logo{display:flex;align-items:center}.logo img{height:40px;width:auto;display:block}
+.room h2.room-logo{line-height:0;margin-bottom:8px}.room-logo img{width:min(520px,70vw);height:auto;filter:none!important}
+@media (max-width:700px){.logo img{height:30px}.room-logo img{width:min(300px,78vw)}}
