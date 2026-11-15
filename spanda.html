@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0b10'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c58bff' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=vw1">
 <style>body{--accent:var(--spanda)}</style>
 </head><body>
 <main id="main">
@@ -128,133 +128,17 @@
   <div class="head"><span class="eyebrow">Skins</span><h2>Every module, <em>four skins.</em></h2>
     <p class="lede">Pick a module, then a skin. Noir, Cinematic, Clear and Smart.. every module has all four, so pick the one you like looking at.</p></div>
 
-  <div id="modules" data-tabs>
-    <div class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-for="m-console">Console</button>
-      <button role="tab" aria-selected="false" data-for="m-rail">Rail</button>
-      <button role="tab" aria-selected="false" data-for="m-neural">Neural</button>
-      <button role="tab" aria-selected="false" data-for="m-dyn">Dynamics</button>
-      <button role="tab" aria-selected="false" data-for="m-eq">EQ</button>
-      <button role="tab" aria-selected="false" data-for="m-fin">Finisher</button>
-      <button role="tab" aria-selected="false" data-for="m-lim">Limiter</button>
-    </div>
+  <div data-viewer><script type="application/json">{"name": "Spanda", "mods": [{"name": "Console", "title": "Linked strips", "text": "Set a strip to Stem, Bus or Master and it finds the strips on your other tracks and links up. Pick a console flavour too: Signature, Vintage British, Discrete American, Modern Ultra-Linear or Custom.", "skins": {"Noir": "img/con-noir.jpg", "Cinematic": "img/con-cin.jpg", "Clear": "img/con-clr.jpg", "Smart": "img/smart-console.jpg"}}, {"name": "Rail", "title": "Shared flow", "text": "Passes level and energy between linked strips, so the mix moves together. The display has 11 analyzer styles.. SPIRALS is my new favourite, a spectrum fountain that finds resonances for you.", "skins": {"Noir": "img/rail-noir.jpg", "Cinematic": "img/rail-cin.jpg", "Clear": "img/rail-clr.jpg", "Smart": "img/smart-rail.jpg"}}, {"name": "Neural", "title": "Your captures", "text": "Load your own neural capture files, then dial in Drive and Mix.", "skins": {"Noir": "img/neu-noir.jpg", "Cinematic": "img/neu-cin.jpg", "Clear": "img/neu-clr.jpg", "Smart": "img/smart-neural.jpg"}}, {"name": "Dynamics", "title": "Voicings or parts", "text": "Pick a compressor voicing.. or build your own from parts. There's a gate and de-esser in here too, and it all runs stereo or mid-side.", "skins": {"Noir": "img/dyn-noir.jpg", "Cinematic": "img/dyn-cin.jpg", "Clear": "img/dyn-clr.jpg", "Smart": "img/smart-dynamics.jpg"}}, {"name": "EQ", "title": "Four bands", "text": "Bells and shelves, six EQ voicings, series or parallel, stereo or mid-side.. and a new Macro curve that tilts and smiles the whole thing before the bands.", "skins": {"Noir": "img/eq-noir.jpg", "Cinematic": "img/eq-cin.jpg", "Clear": "img/eq-clr.jpg", "Smart": "img/smart-eq.jpg"}}, {"name": "Finisher", "title": "Colour and clipping", "text": "Lysium, Logos, A-Roll, Tarus and Kill: preamp colour, tube, tape (15 or 30 IPS, with heat) and a couple of clippers.", "skins": {"Noir": "img/fin-noir.jpg", "Cinematic": "img/fin-cin.jpg", "Clear": "img/fin-clr.jpg", "Smart": "img/smart-finisher.jpg"}}, {"name": "Limiter", "title": "True peak", "text": "Three modes, and the ceiling holds in true peak. No sneaky overs.", "skins": {"Noir": "img/lim-noir.jpg", "Cinematic": "img/lim-cin.jpg", "Clear": "img/lim-clr.jpg", "Smart": "img/smart-limiter.jpg"}}]}</script></div>
 
-    <div class="mod on split" id="m-console">
-      <div><figure class="plate" style="margin:0"><img id="i-console" src="img/con-noir.jpg" alt="Console module, Noir skin" width="1537" height="803" loading="lazy"></figure>
-        <div class="seg" data-swap="i-console" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/con-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/con-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/con-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-console.jpg">Smart</button></div></div>
-      <div class="feat"><span class="eyebrow">Console</span><h3>Linked strips</h3>
-        <p>Set a strip to Stem, Bus or Master and it finds the strips on your other tracks and links up. Pick a console flavour too: Signature, Vintage British, Discrete American, Modern Ultra-Linear or Custom.</p></div>
-    </div>
+</div></section>
 
-    <div class="mod split" id="m-rail">
-      <div><figure class="plate" style="margin:0"><img id="i-rail" src="img/rail-noir.jpg" alt="Rail module, Noir skin" width="1537" height="803" loading="lazy"></figure>
-        <div class="seg" data-swap="i-rail" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/rail-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/rail-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/rail-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-rail.jpg">Smart</button></div></div>
-      <div class="feat"><span class="eyebrow">Rail</span><h3>Shared flow</h3>
-        <p>Passes level and energy between linked strips, so the mix moves together. The display has 11 analyzer styles.. SPIRALS is my new favourite, a spectrum fountain that finds resonances for you.</p></div>
-    </div>
-
-    <div class="mod split" id="m-neural">
-      <div><figure class="plate" style="margin:0"><img id="i-neural" src="img/neu-noir.jpg" alt="Neural module, Noir skin" width="1537" height="803" loading="lazy"></figure>
-        <div class="seg" data-swap="i-neural" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/neu-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/neu-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/neu-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-neural.jpg">Smart</button></div></div>
-      <div class="feat"><span class="eyebrow">Neural</span><h3>Your captures</h3>
-        <p>Load your own neural capture files, then dial in Drive and Mix.</p></div>
-    </div>
-
-    <div class="mod split" id="m-dyn">
-      <div><figure class="plate" style="margin:0"><img id="i-dyn" src="img/dyn-noir.jpg" alt="Dynamics module, Noir skin" width="1537" height="803" loading="lazy"></figure>
-        <div class="seg" data-swap="i-dyn" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/dyn-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/dyn-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/dyn-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-dynamics.jpg">Smart</button></div></div>
-      <div class="feat"><span class="eyebrow">Dynamics</span><h3>Voicings or parts</h3>
-        <p>Pick a compressor voicing.. or build your own from parts. There's a gate and de-esser in here too, and it all runs stereo or mid-side.</p></div>
-    </div>
-
-    <div class="mod split" id="m-eq">
-      <div><figure class="plate" style="margin:0"><img id="i-eq" src="img/eq-noir.jpg" alt="EQ module, Noir skin" width="1537" height="803" loading="lazy"></figure>
-        <div class="seg" data-swap="i-eq" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/eq-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/eq-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/eq-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-eq.jpg">Smart</button></div></div>
-      <div class="feat"><span class="eyebrow">EQ</span><h3>Four bands</h3>
-        <p>Bells and shelves, six EQ voicings, series or parallel, stereo or mid-side.. and a new Macro curve that tilts and smiles the whole thing before the bands.</p></div>
-    </div>
-
-    <div class="mod split" id="m-fin">
-      <div><figure class="plate" style="margin:0"><img id="i-fin" src="img/fin-noir.jpg" alt="Finisher module, Noir skin" width="1537" height="803" loading="lazy"></figure>
-        <div class="seg" data-swap="i-fin" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/fin-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/fin-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/fin-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-finisher.jpg">Smart</button></div></div>
-      <div class="feat"><span class="eyebrow">Finisher</span><h3>Colour and clipping</h3>
-        <p>Lysium, Logos, A-Roll, Tarus and Kill: preamp colour, tube, tape (15 or 30 IPS, with heat) and a couple of clippers.</p></div>
-    </div>
-
-    <div class="mod split" id="m-lim">
-      <div><figure class="plate" style="margin:0"><img id="i-lim" src="img/lim-noir.jpg" alt="Limiter module, Noir skin" width="1537" height="803" loading="lazy"></figure>
-        <div class="seg" data-swap="i-lim" style="margin-top:12px">
-          <button aria-pressed="true" data-src="img/lim-noir.jpg">Noir</button><button aria-pressed="false" data-src="img/lim-cin.jpg">Cinematic</button><button aria-pressed="false" data-src="img/lim-clr.jpg">Clear</button><button aria-pressed="false" data-src="img/smart-limiter.jpg">Smart</button></div></div>
-      <div class="feat"><span class="eyebrow">Limiter</span><h3>True peak</h3>
-        <p>Three modes, and the ceiling holds in true peak. No sneaky overs.</p></div>
-    </div>
-  </div>
-
-  <div class="head" style="margin-top:72px"><h3>Noir vs Clear</h3>
-    <p class="lede">Drag the slider across the Dynamics module.. same plugin, two very different moods.</p></div>
-  <div class="compare">
-    <img src="img/dyn-clr.jpg" alt="Dynamics in the Clear skin" width="1537" height="803" loading="lazy">
-    <img class="top" src="img/dyn-noir.jpg" alt="Dynamics in the Noir skin" width="1537" height="803" loading="lazy">
-    <span class="lbl" style="left:14px">Clear</span><span class="lbl" style="right:14px">Noir</span>
-    <div class="bar"></div>
-    <input type="range" min="0" max="100" value="50" aria-label="Compare Clear and Noir skins">
-  </div>
-  <div class="skins"><span class="d3">Noir</span><span class="d3">Cinematic</span><span class="d3">Clear</span><span>Smart · flat</span></div>
-
-  <div class="head" style="margin-top:72px"><h3>In the room</h3>
-    <p class="lede">Every module rendered as real gear, sitting on desks and shelves.</p></div>
-  <div class="grid2">
-    <figure class="plate" style="margin:0"><img src="img/room-dyn-clr-three.jpg" alt="Dynamics, Clear skin, on a desk" width="1200" height="800" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-dyn-clr-crop.jpg" alt="Dynamics, Clear skin, on a desk" width="1200" height="800" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-dyn.jpg" alt="Dynamics, Noir skin, rendered in a room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-con.jpg" alt="Console, Noir skin, rendered in a room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-rail.jpg" alt="Rail, Noir skin, rendered in a room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-neu.jpg" alt="Neural, Noir skin, rendered in a room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-eq.jpg" alt="EQ, Noir skin, rendered in a room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-aroll.jpg" alt="A-Roll, Noir skin, rendered in a room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-lys.jpg" alt="Lysium, Noir skin, rendered in a room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-tarus.jpg" alt="Tarus, Noir skin, rendered in a room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-con.jpg" alt="Console, Clear skin, in a bar" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-rail.jpg" alt="Rail, Clear skin, in an office" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-neu.jpg" alt="Neural, Clear skin, in a dark studio" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-dyn.jpg" alt="Dynamics, Clear skin, in a lounge" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-eq.jpg" alt="EQ, Clear skin, in a kitchen table" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-lim.jpg" alt="Limiter, Clear skin, in a lab" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-lys.jpg" alt="Lysium, Clear skin, in a hotel room" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-logos.jpg" alt="Logos, Clear skin, in a study" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-aroll.jpg" alt="A-Roll, Clear skin, in a workshop" width="1500" height="1000" loading="lazy"></figure>
-    <figure class="plate" style="margin:0"><img src="img/room-clr-tarus.jpg" alt="Tarus, Clear skin, in a billiard room" width="1500" height="1000" loading="lazy"></figure>
-  </div>
-
-  <div class="head" style="margin-top:72px"><h3>Up close</h3>
-    <p class="lede">Every Noir page, rendered in 3D as if it were a piece of rack gear.</p></div>
-  <div class="grid2">
-    <div><div class="seg" data-swap="r-con" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/con-noir-hero.jpg">Console</button><button aria-pressed="false" data-src="img/con-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/con-noir-fan.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-con" src="img/con-noir-hero.jpg" alt="Console, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-rail" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/rail-noir-hero.jpg">Rail</button><button aria-pressed="false" data-src="img/rail-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/rail-noir-detail.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-rail" src="img/rail-noir-hero.jpg" alt="Rail, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-neu" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/neu-noir-hero.jpg">Neural</button><button aria-pressed="false" data-src="img/neu-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/neu-noir-detail.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-neu" src="img/neu-noir-hero.jpg" alt="Neural, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-dyn" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/dyn-noir-right.jpg">Dynamics</button><button aria-pressed="false" data-src="img/dyn-noir-hero.jpg">Other side</button><button aria-pressed="false" data-src="img/dyn-noir-scope.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-dyn" src="img/dyn-noir-right.jpg" alt="Dynamics, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-eq" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/eq-noir-hero.jpg">EQ</button><button aria-pressed="false" data-src="img/eq-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/eq-noir-detail.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-eq" src="img/eq-noir-hero.jpg" alt="EQ, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-lys" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/lys-noir-hero.jpg">Lysium</button><button aria-pressed="false" data-src="img/lys-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/lys-noir-detail.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-lys" src="img/lys-noir-hero.jpg" alt="Finisher Lysium, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-logos" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/logos-noir-hero.jpg">Logos</button><button aria-pressed="false" data-src="img/logos-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/logos-noir-detail.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-logos" src="img/logos-noir-hero.jpg" alt="Finisher Logos, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-aroll" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/aroll-noir-hero.jpg">A-Roll</button><button aria-pressed="false" data-src="img/aroll-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/aroll-noir-detail.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-aroll" src="img/aroll-noir-hero.jpg" alt="Finisher A-Roll, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-tarus" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/tarus-noir-hero.jpg">Tarus</button><button aria-pressed="false" data-src="img/tarus-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/tarus-noir-detail.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-tarus" src="img/tarus-noir-hero.jpg" alt="Finisher Tarus, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
-    <div><div class="seg" data-swap="r-lim" style="margin-bottom:12px"><button aria-pressed="true" data-src="img/lim-noir-hero.jpg">Limiter</button><button aria-pressed="false" data-src="img/lim-noir-right.jpg">Side</button><button aria-pressed="false" data-src="img/lim-noir-vfd.jpg">Close</button></div>
-      <figure class="plate" style="margin:0"><img id="r-lim" src="img/lim-noir-hero.jpg" alt="Limiter, Noir skin, rendered in 3D" width="1280" height="720" loading="lazy"></figure></div>
+<section id="gallery"><div class="wrap">
+  <div class="head"><span class="eyebrow">Gallery</span><h2>As <em>real gear.</em></h2>
+    <p class="lede">Every module rendered in 3D: out in rooms, and up close on the rack. Click any one to see it big.</p></div>
+  <div data-gallery data-tabs>
+    <div class="tabs gal-tabs" role="tablist"><button role="tab" aria-selected="true" data-for="g-room">In the room</button><button role="tab" aria-selected="false" data-for="g-close">Up close</button></div>
+    <div class="mod on gal" id="g-room"><div class="gal-grid"><a href="img/room-dyn-clr-three.jpg"><img src="img/room-dyn-clr-three.jpg" alt="Dynamics, Clear skin, on a desk" loading="lazy"></a><a href="img/room-dyn-clr-crop.jpg"><img src="img/room-dyn-clr-crop.jpg" alt="Dynamics, Clear skin, on a desk" loading="lazy"></a><a href="img/room-dyn.jpg"><img src="img/room-dyn.jpg" alt="Dynamics, Noir skin, rendered in a room" loading="lazy"></a><a href="img/room-con.jpg"><img src="img/room-con.jpg" alt="Console, Noir skin, rendered in a room" loading="lazy"></a><a href="img/room-rail.jpg"><img src="img/room-rail.jpg" alt="Rail, Noir skin, rendered in a room" loading="lazy"></a><a href="img/room-neu.jpg"><img src="img/room-neu.jpg" alt="Neural, Noir skin, rendered in a room" loading="lazy"></a><a href="img/room-eq.jpg"><img src="img/room-eq.jpg" alt="EQ, Noir skin, rendered in a room" loading="lazy"></a><a href="img/room-aroll.jpg"><img src="img/room-aroll.jpg" alt="A-Roll, Noir skin, rendered in a room" loading="lazy"></a><a href="img/room-lys.jpg"><img src="img/room-lys.jpg" alt="Lysium, Noir skin, rendered in a room" loading="lazy"></a><a href="img/room-tarus.jpg"><img src="img/room-tarus.jpg" alt="Tarus, Noir skin, rendered in a room" loading="lazy"></a><a href="img/room-clr-con.jpg"><img src="img/room-clr-con.jpg" alt="Console, Clear skin, in a bar" loading="lazy"></a><a href="img/room-clr-rail.jpg"><img src="img/room-clr-rail.jpg" alt="Rail, Clear skin, in an office" loading="lazy"></a><a href="img/room-clr-neu.jpg"><img src="img/room-clr-neu.jpg" alt="Neural, Clear skin, in a dark studio" loading="lazy"></a><a href="img/room-clr-dyn.jpg"><img src="img/room-clr-dyn.jpg" alt="Dynamics, Clear skin, in a lounge" loading="lazy"></a><a href="img/room-clr-eq.jpg"><img src="img/room-clr-eq.jpg" alt="EQ, Clear skin, in a kitchen table" loading="lazy"></a><a href="img/room-clr-lim.jpg"><img src="img/room-clr-lim.jpg" alt="Limiter, Clear skin, in a lab" loading="lazy"></a><a href="img/room-clr-lys.jpg"><img src="img/room-clr-lys.jpg" alt="Lysium, Clear skin, in a hotel room" loading="lazy"></a><a href="img/room-clr-logos.jpg"><img src="img/room-clr-logos.jpg" alt="Logos, Clear skin, in a study" loading="lazy"></a><a href="img/room-clr-aroll.jpg"><img src="img/room-clr-aroll.jpg" alt="A-Roll, Clear skin, in a workshop" loading="lazy"></a><a href="img/room-clr-tarus.jpg"><img src="img/room-clr-tarus.jpg" alt="Tarus, Clear skin, in a billiard room" loading="lazy"></a></div></div>
+    <div class="mod gal" id="g-close"><div class="gal-grid"><a href="img/con-noir-hero.jpg"><img src="img/con-noir-hero.jpg" alt="Console, front" loading="lazy"></a><a href="img/con-noir-right.jpg"><img src="img/con-noir-right.jpg" alt="Console, side" loading="lazy"></a><a href="img/con-noir-fan.jpg"><img src="img/con-noir-fan.jpg" alt="Console, close-up" loading="lazy"></a><a href="img/rail-noir-hero.jpg"><img src="img/rail-noir-hero.jpg" alt="Rail, front" loading="lazy"></a><a href="img/rail-noir-right.jpg"><img src="img/rail-noir-right.jpg" alt="Rail, side" loading="lazy"></a><a href="img/rail-noir-detail.jpg"><img src="img/rail-noir-detail.jpg" alt="Rail, close-up" loading="lazy"></a><a href="img/neu-noir-hero.jpg"><img src="img/neu-noir-hero.jpg" alt="Neural, front" loading="lazy"></a><a href="img/neu-noir-right.jpg"><img src="img/neu-noir-right.jpg" alt="Neural, side" loading="lazy"></a><a href="img/neu-noir-detail.jpg"><img src="img/neu-noir-detail.jpg" alt="Neural, close-up" loading="lazy"></a><a href="img/dyn-noir-right.jpg"><img src="img/dyn-noir-right.jpg" alt="Dynamics, front" loading="lazy"></a><a href="img/dyn-noir-hero.jpg"><img src="img/dyn-noir-hero.jpg" alt="Dynamics, other side" loading="lazy"></a><a href="img/dyn-noir-scope.jpg"><img src="img/dyn-noir-scope.jpg" alt="Dynamics, close-up" loading="lazy"></a><a href="img/eq-noir-hero.jpg"><img src="img/eq-noir-hero.jpg" alt="EQ, front" loading="lazy"></a><a href="img/eq-noir-right.jpg"><img src="img/eq-noir-right.jpg" alt="EQ, side" loading="lazy"></a><a href="img/eq-noir-detail.jpg"><img src="img/eq-noir-detail.jpg" alt="EQ, close-up" loading="lazy"></a><a href="img/lys-noir-hero.jpg"><img src="img/lys-noir-hero.jpg" alt="Finisher Lysium, front" loading="lazy"></a><a href="img/lys-noir-right.jpg"><img src="img/lys-noir-right.jpg" alt="Finisher Lysium, side" loading="lazy"></a><a href="img/lys-noir-detail.jpg"><img src="img/lys-noir-detail.jpg" alt="Finisher Lysium, close-up" loading="lazy"></a><a href="img/logos-noir-hero.jpg"><img src="img/logos-noir-hero.jpg" alt="Finisher Logos, front" loading="lazy"></a><a href="img/logos-noir-right.jpg"><img src="img/logos-noir-right.jpg" alt="Finisher Logos, side" loading="lazy"></a><a href="img/logos-noir-detail.jpg"><img src="img/logos-noir-detail.jpg" alt="Finisher Logos, close-up" loading="lazy"></a><a href="img/aroll-noir-hero.jpg"><img src="img/aroll-noir-hero.jpg" alt="Finisher A-Roll, front" loading="lazy"></a><a href="img/aroll-noir-right.jpg"><img src="img/aroll-noir-right.jpg" alt="Finisher A-Roll, side" loading="lazy"></a><a href="img/aroll-noir-detail.jpg"><img src="img/aroll-noir-detail.jpg" alt="Finisher A-Roll, close-up" loading="lazy"></a><a href="img/tarus-noir-hero.jpg"><img src="img/tarus-noir-hero.jpg" alt="Finisher Tarus, front" loading="lazy"></a><a href="img/tarus-noir-right.jpg"><img src="img/tarus-noir-right.jpg" alt="Finisher Tarus, side" loading="lazy"></a><a href="img/tarus-noir-detail.jpg"><img src="img/tarus-noir-detail.jpg" alt="Finisher Tarus, close-up" loading="lazy"></a><a href="img/lim-noir-hero.jpg"><img src="img/lim-noir-hero.jpg" alt="Limiter, front" loading="lazy"></a><a href="img/lim-noir-right.jpg"><img src="img/lim-noir-right.jpg" alt="Limiter, side" loading="lazy"></a><a href="img/lim-noir-vfd.jpg"><img src="img/lim-noir-vfd.jpg" alt="Limiter, close-up" loading="lazy"></a></div></div>
   </div>
 </div></section>
 
@@ -265,4 +149,5 @@
 </div></section>
 </main>
 <script src="site.js"></script>
+<script src="viewer.js?v=vw1"></script>
 </body></html>
