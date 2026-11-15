@@ -66,7 +66,11 @@
     list = items; show(i); lb.showModal();
   };
   const show = i => { at = (i + list.length) % list.length; const a = list[at], im = lb.querySelector("img");
-    im.src = a.href; im.alt = a.querySelector("img").alt; lb.querySelector("p").textContent = `${a.querySelector("img").alt} · ${at + 1} / ${list.length}`; };
+    im.src = a.href; im.alt = a.querySelector("img").alt; const p = lb.querySelector("p"), pol = !!a.dataset.cap;
+    lb.classList.toggle("pol", pol); p.style.top = ""; im.onload = null;
+    if (pol) { p.innerHTML = ""; p.append(a.dataset.cap, Object.assign(document.createElement("span"), { textContent: ` · ${at + 1} / ${list.length}` }));
+      const place = () => { const r = im.getBoundingClientRect(); p.style.top = (r.bottom - 52) + "px"; }; im.complete ? place() : im.onload = place; }
+    else p.textContent = `${im.alt} · ${at + 1} / ${list.length}`; };
   document.querySelectorAll("[data-gallery]").forEach(g => {
     g.querySelectorAll(".gal-grid").forEach(grid => {
       const items = [...grid.querySelectorAll("a")];
