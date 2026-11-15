@@ -13,7 +13,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0b10'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c58bff' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=try3">
 <style>body{--accent:var(--agni)}</style>
 </head><body>
 <main id="main">
@@ -23,6 +23,19 @@
   <figure class="plate" style="margin:0"><img src="img/agni-hero.jpg" alt="Agni Pyre skin rendered in 3D" width="1280" height="720"></figure><p class="cap">Pyre skin · 3D render</p><aside class="placard" aria-label="Exhibit label"><span class="no">Exhibit 03 · Audio Citra</span><h2>Agni</h2><p class="kind">Distortion</p><dl><dt>Status</dt><dd>In the workshop</dd><dt>Contents</dt><dd>2 engines · 10 shapes · 8 pedals · 5 routings</dd><dt>Medium</dt><dd>C++ on JUCE</dd><dt>Build</dt><dd>38</dd></dl><p class="note">Basically my whole dirt rack in one box. The scope draws the transfer curve live, and I could watch it all day.</p></aside>
 </div>
 <div class="td" id="inside" data-teardown="agni" style="--n:6"></div>
+<section id="try"><div class="wrap"><div class="head"><span class="eyebrow">Try it</span><h2>Your audio, <em>through the presets.</em></h2>
+  <p class="lede">Pick a file and hear it through twelve of the factory presets. This runs Agni's own engine in your browser, the same code the plug-in uses. Agni isn't out yet, so this is an early listen. Your file stays on your device: nothing is uploaded.</p></div>
+  <div class="try" data-tryit="agni">
+    <label class="btn solid try-file">Choose an audio file<input type="file" accept="audio/*,.wav,.mp3,.flac,.ogg,.m4a,.aif,.aiff"></label>
+    <p class="try-status" aria-live="polite">The first 15 seconds of one file, up to 25 MB. WAV, MP3, FLAC, OGG or M4A.</p>
+    <div class="try-ctl" hidden>
+      <label class="try-f"><span class="eyebrow">Preset</span><select></select></label>
+      <label class="try-f"><span class="eyebrow">Mix <span class="try-mixv">30 %</span></span><input type="range" min="0" max="100" value="30"></label>
+      <div class="row"><button class="btn solid try-play" type="button" aria-pressed="false">Play</button><button class="btn try-ab" type="button" aria-pressed="false">Ākāśa (tap for dry)</button></div>
+    </div>
+    <p class="cap">Limits: twelve presets, each with its own mix, the first 15 s of one file, levels set to a safe peak, no export or download. No capture slot or cab IRs here. The plug-in has every control.</p>
+  </div>
+</div></section>
 <section id="features"><div class="wrap"><div class="head"><span class="eyebrow">What's in here</span><h2>Everything between <em>clean and totally gone.</em></h2></div>
   <div class="grid2"><figure class="plate" style="margin:0"><img src="img/agni-engine.jpg" alt="Engine A in the Pyre skin: shape selector and Drive knob" width="1280" height="720" loading="lazy"></figure><figure class="plate" style="margin:0"><img src="img/agni-master.jpg" alt="Cab and Master section in the Pyre skin" width="1280" height="720" loading="lazy"></figure></div>
   <div class="feats"><div class="feat"><h3>Pedal models</h3><p>Flip Engine A from Custom to a pedal: Clean Boost, Tight Boost, Overdrive, Fuzz, Filter Distortion, Distortion, Metal or Octave Fuzz. Each one gets the three knobs you expect, Drive, Tone and Level, from 0 to 10. I fitted them to analysis and community captures of real pedals, clean blend and tone circuits included. Octave Fuzz even has its own octave-up stage. Switch back to Custom and your own engine settings come right back.</p><span class="spec">8 pedals · Drive · Tone · Level</span></div><div class="feat"><h3>Two engines, ten shapes</h3><p>Each engine grabs its own shape from the same ten: Soft, Hard, Diode, Fold, Rectify, Tube, Transistor, Germanium, Tape and Crush. Turn Drive and Bias and the scope draws the transfer curve live.. honestly I could watch that thing all day.</p><span class="spec">2 engines · 10 shapes</span></div><div class="feat"><h3>Routings, feedback and modulation</h3><p>Five ways to wire the two engines together, and a feedback loop wrapped around both. Two modulators (LFO or envelope) can push drive, tone, bias or balance around while you play.</p><span class="spec">5 routings · feedback · 2 mods</span></div><div class="feat"><h3>Capture and cab</h3><p>Drop a neural capture (.nam) in after the engines, with a gate and a tight, mid or bright voicing in front of it. Then blend two cab IRs to taste. Oh, and Render Quality lets offline bounces run at a higher oversampling than you play at.</p><span class="spec">Capture slot · cab A/B</span></div></div>
@@ -83,4 +96,5 @@
 <section><div class="wrap cta"><h2>Agni isn&#39;t out yet</h2><p class="lede">I&#39;m still finishing it, so there&#39;s no download or single licence for it just yet. It&#39;ll be right here when it&#39;s ready.</p><p class="lede req">VST3 · Windows 64-bit · licence, trial and signed updates right inside the plugin</p></div></section>
 </main>
 <script src="site.js"></script>
+<script src="tryit.js?v=try6"></script>
 </body></html>

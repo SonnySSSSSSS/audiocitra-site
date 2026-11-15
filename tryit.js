@@ -3,7 +3,7 @@
 // does not set it), no export or download. The file is decoded and played in this browser; it is never uploaded.
 (() => {
   const box = document.querySelector("[data-tryit]"); if (!box) return;
-  const MAX_S = 15, MAX_MB = 25, V = "?v=try4";
+  const MAX_S = 15, MAX_MB = 25, V = "?v=try6";
   // per engine: the glue's factory, the C API prefix, and twelve presets [index in the engine's table, category, name].
   const ENGINES = {
     akasa: { mod: "AkasaModule", mix: true, name: "Ākāśa", presets: [
@@ -15,6 +15,17 @@
       [0, "Halls", "Hall (Chatur)"], [1, "Halls", "Hall A (Kosha)"], [3, "Halls", "Concert Hall (Vistara)"], [6, "Halls", "Cathedral (Vistara)"],
       [20, "Rooms", "Compact Room (Chatur)"], [22, "Rooms", "Chamber A (Kosha)"], [29, "Plates", "Sheet (Kosha)"], [30, "Plates", "Classic Plate (Vistara)"],
       [38, "Plates", "Vocal Plate (Vistara)"], [48, "Ambience", "Vast Air (Vistara)"], [52, "Creative", "Echo (Kosha)"], [57, "Creative", "Car Park (Vistara)"]] },
+    // Galana: no global Mix (each preset sets its stages' mixes); its web Mix is a blend after the engine that a preset resets
+    // to 100 %, so no slider. Square Pluck Bass (11) is left out: it parts from the plug-in in wasm (galana #5).
+    galana: { mod: "GalanaModule", mix: false, name: "Gālana", presets: [
+      [0, "Bass Guitar", "Dub Bass"], [6, "Bass Synth", "Acid Squelch"], [12, "Bass Synth", "Sub Wobble"], [14, "Drums", "Drum Chords"],
+      [18, "Drums", "Lo-Fi Break"], [27, "Guitar", "Auto-Wah Funk"], [31, "Guitar", "Shoegaze Wash"], [34, "Guitar", "Talk Box"],
+      [40, "Keys & Synth", "Rhodes Wah"], [42, "Sound Design", "Barber Pole"], [50, "Sound Design", "Water Drops"], [56, "Vocals", "Vowel Morph"]] },
+    // Agni: the preset's Mix is part of the sound (as Lahari). No capture slot or cab IR in the web build; no factory preset uses them.
+    agni: { mod: "AgniModule", mix: false, name: "Agni", presets: [
+      [0, "Bass Guitar", "Bass Drive Blend"], [1, "Bass Guitar", "Growl Grit"], [3, "Bass Synth", "Acid Bite"], [6, "Drums", "Drum Bus Crunch"],
+      [9, "Guitar", "Classic Fuzz"], [11, "Guitar", "Metal Rhythm"], [13, "Guitar", "Push Overdrive"], [14, "Keys & Synth", "Rhodes Bark"],
+      [16, "Keys & Synth", "Wurli Tape"], [18, "Sound Design", "Feedback Drone"], [21, "Vocals", "Megaphone"], [23, "Vocals", "Vocal Warmth"]] },
     // a Lahari preset sets its own Mix (part of the sound), so its player has no Mix slider
     lahari: { mod: "LahariModule", mix: false, name: "Lahari", presets: [
       [0, "Guitar", "Soft Stream"], [1, "Guitar", "Thick Ensemble"], [2, "Guitar", "Jet Sweep"], [3, "Guitar", "Spiral Funk"],

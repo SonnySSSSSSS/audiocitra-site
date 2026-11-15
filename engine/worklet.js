@@ -5,7 +5,8 @@ class EngineProcessor extends AudioWorkletProcessor {
     super();
     this.ready = false;
     const bytes = opts.processorOptions.wasm, P = opts.processorOptions.prefix;                    // this glue has no wasmBinary path, so instantiate it here
-    ENGINE_MODULE({ instantiateWasm(info, done) { WebAssembly.instantiate(bytes, info).then(r => done(r.instance)); return {}; } }).then(M => {
+    const self = this;
+    ENGINE_MODULE({ instantiateWasm(info, done) { WebAssembly.instantiate(bytes, info).then(r => { self.mem = Object.values(r.instance.exports).find(x => x instanceof WebAssembly.Memory); done(r.instance); }); return {}; } }).then(M => {
       this.M = M;
       this.h = M[`_${P}_create`](sampleRate);
       if (!M[`_${P}_check_table`](this.h)) { this.port.postMessage({ error: "table" }); return; }
@@ -24,12 +25,14 @@ class EngineProcessor extends AudioWorkletProcessor {
     const out = outputs[0]; if (!out || !out.length) return true;
     const n = out[0].length;
     if (!this.ready || n > 128) { for (const c of out) c.fill(0); return true; }
-    const inp = inputs[0], M = this.M;
-    let heap = M.HEAPF32, l = this.pL >> 2, r = this.pR >> 2;
+    const inp = inputs[0];
+    // a view on the wasm memory itself, renewed when a preset load grows it (the glue's HEAPF32 can go stale here)
+    const heapNow = () => (this.heap && this.heap.buffer === this.mem.buffer) ? this.heap : (this.heap = new Float32Array(this.mem.buffer));
+    let heap = heapNow(), l = this.pL >> 2, r = this.pR >> 2;
     if (inp && inp.length) { heap.set(inp[0], l); heap.set(inp[1] || inp[0], r); }
     else { heap.fill(0, l, l + n); heap.fill(0, r, r + n); }
     this.proc(this.h, this.pL, this.pR, n);
-    heap = M.HEAPF32;                                            // memory may have grown
+    heap = heapNow();                                             // memory may have grown
     const oL = out[0], oR = out[1] || out[0];
     for (let k = 0; k < n; k++) {                                // hard ceiling at -1 dBFS: nothing louder ever leaves the page
       const a = heap[l + k], b = heap[r + k];
