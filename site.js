@@ -298,6 +298,17 @@
       show(p < EXPLODE ? -1 : Math.min(n - 1, Math.floor((p - EXPLODE) / (1 - EXPLODE) * n)));
     };
     const tick = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; frame(); }); } };
+    // On a projector page the teardown sits on the screen, not in the scroll: it opens exploded and the list steps it.
+    if (el.closest(".proj-pane")) {
+      stack.style.setProperty("--e", "1"); lastE = "1";
+      new ResizeObserver(measure).observe(stage); measure(); show(0);
+      btns.forEach((b, i) => b.addEventListener("click", () => show(i)));
+      ol.addEventListener("keydown", e => {
+        const d = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : e.key === "ArrowUp" || e.key === "ArrowLeft" ? -1 : 0;
+        if (!d) return; e.preventDefault(); e.stopPropagation(); const k = Math.max(0, Math.min(n - 1, active + d)); show(k); btns[k].focus();
+      });
+      return;
+    }
     addEventListener("scroll", () => { if (near) tick(); }, { passive: true });
     new IntersectionObserver(([en]) => { near = en.isIntersecting; el.classList.toggle("near", near); tick(); }, { rootMargin: "200px 0px" }).observe(el);
     new ResizeObserver(() => { measure(); tick(); }).observe(stage);
