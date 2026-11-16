@@ -13,14 +13,14 @@
 <link rel="icon" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Reenie+Beanie&display=swap">
-<link rel="stylesheet" href="site.css?v=postit2">
+<link rel="stylesheet" href="site.css?v=film7">
 <style>body{--accent:var(--agni)}</style>
 </head><body>
 <main id="main">
 <div class="wrap"><div class="soon-banner" role="note"><b>Coming soon</b><p>Spanda, Ākāśa and Tulā are out first so I can test them properly. Agni is next.. have a look around, it&#39;s all real, it just isn&#39;t out yet.</p></div></div><div class="wrap">
   <header class="hero hero-tight"><span class="eyebrow">Agni · distortion</span><h1>Two engines. <em>Ten shapes.</em></h1><p>Two distortion engines, and each one picks from the same ten shapes. Then five ways to wire them, a feedback loop, a capture slot and cab IRs. Engine A can also turn into one of eight pedals.. I basically wanted my whole dirt rack in one box.</p>
-  <div class="row"><a class="btn solid" href="#inside">Take it apart</a><a class="btn" href="#listen">Have a listen</a><a class="btn" href="#measurements">The plots</a></div></header>
-  <figure class="plate photo" style="margin:0"><img src="img/agni-hero.jpg" alt="Agni Pyre skin rendered in 3D" width="1280" height="720"></figure><p class="cap">Pyre skin · 3D render</p><aside class="placard" aria-label="Exhibit label"><span class="no">Exhibit 03 · Audio Citra</span><h2>Agni</h2><p class="kind">Distortion</p><dl><dt>Status</dt><dd>In the workshop</dd><dt>Contents</dt><dd>2 engines · 10 shapes · 8 pedals · 5 routings</dd><dt>Medium</dt><dd>C++ on JUCE</dd><dt>Build</dt><dd>38</dd></dl><p class="note">Basically my whole dirt rack in one box. The scope draws the transfer curve live, and I could watch it all day.</p></aside>
+  <div class="row"><a class="btn solid" href="#inside">Take it apart</a><a class="btn" href="#listen">Listen</a><a class="btn" href="#measurements">Analysis</a></div></header>
+  <figure class="plate photo" style="margin:0"><img src="img/agni-hero.jpg" alt="Agni Pyre skin rendered in 3D" width="1280" height="720"></figure><p class="cap">Pyre skin · 3D render</p><aside class="placard" aria-label="Exhibit label"><span class="no">Exhibit 05 · Audio Citra</span><h2>Agni</h2><p class="kind">Distortion</p><dl><dt>Status</dt><dd>In the workshop</dd><dt>Contents</dt><dd>2 engines · 10 shapes · 8 pedals · 5 routings</dd></dl><p class="note">Basically my whole dirt rack in one box. The scope draws the transfer curve live, and I could watch it all day.</p></aside>
 </div>
 <div class="td" id="inside" data-teardown="agni" style="--n:6"></div>
 <section id="try"><div class="wrap"><div class="head"><span class="eyebrow">Try it</span><h2>Your audio, <em>through the presets.</em></h2>
@@ -33,16 +33,16 @@
     <div class="try-ctl" hidden>
       <label class="try-f"><span class="eyebrow">Preset</span><select></select></label>
       <label class="try-f"><span class="eyebrow">Mix <span class="try-mixv">30 %</span></span><input type="range" min="0" max="100" value="30"></label>
-      <div class="row"><button class="btn solid try-play" type="button" aria-pressed="false">Play</button><button class="btn try-ab" type="button" aria-pressed="false">Ākāśa (tap for dry)</button></div>
+      <div class="row"><button class="btn solid try-play" type="button" aria-pressed="false">Play</button><button class="btn try-ab" type="button" aria-pressed="false"></button></div>
     </div>
     <p class="cap">Limits: twelve presets, each with its own mix, the first 15 s of one file, levels set to a safe peak, no export or download. No capture slot or cab IRs here. The plug-in has every control.</p>
   </div>
 </div></section>
 <section id="features"><div class="wrap"><div class="head"><span class="eyebrow">What's in here</span><h2>Everything between <em>clean and totally gone.</em></h2></div>
-  <div class="grid2"><figure class="plate" style="margin:0"><img src="img/agni-engine.jpg" alt="Engine A in the Pyre skin: shape selector and Drive knob" width="1280" height="720" loading="lazy"></figure><figure class="plate" style="margin:0"><img src="img/agni-master.jpg" alt="Cab and Master section in the Pyre skin" width="1280" height="720" loading="lazy"></figure></div>
+  <div class="grid2"><figure class="plate photo" style="margin:0"><img src="img/agni-engine.jpg" alt="Engine A in the Pyre skin: shape selector and Drive knob" width="1280" height="720" loading="lazy"></figure><figure class="plate photo" style="margin:0"><img src="img/agni-master.jpg" alt="Cab and Master section in the Pyre skin" width="1280" height="720" loading="lazy"></figure></div>
   <div class="feats"><div class="feat"><h3>Pedal models</h3><p>Flip Engine A from Custom to a pedal: Clean Boost, Tight Boost, Overdrive, Fuzz, Filter Distortion, Distortion, Metal or Octave Fuzz. Each one gets the three knobs you expect, Drive, Tone and Level, from 0 to 10. I fitted them to analysis and community captures of real pedals, clean blend and tone circuits included. Octave Fuzz even has its own octave-up stage. Switch back to Custom and your own engine settings come right back.</p><span class="spec">8 pedals · Drive · Tone · Level</span></div><div class="feat"><h3>Two engines, ten shapes</h3><p>Each engine grabs its own shape from the same ten: Soft, Hard, Diode, Fold, Rectify, Tube, Transistor, Germanium, Tape and Crush. Turn Drive and Bias and the scope draws the transfer curve live.. honestly I could watch that thing all day.</p><span class="spec">2 engines · 10 shapes</span></div><div class="feat"><h3>Routings, feedback and modulation</h3><p>Five ways to wire the two engines together, and a feedback loop wrapped around both. Two modulators (LFO or envelope) can push drive, tone, bias or balance around while you play.</p><span class="spec">5 routings · feedback · 2 mods</span></div><div class="feat"><h3>Capture and cab</h3><p>Drop a neural capture (.nam) in after the engines, with a gate and a tight, mid or bright voicing in front of it. Then blend two cab IRs to taste. Oh, and Render Quality lets offline bounces run at a higher oversampling than you play at.</p><span class="spec">Capture slot · cab A/B</span></div></div>
 </div></section>
-<section id="listen"><div class="wrap"><div class="head"><span class="eyebrow">Listen</span><h2>Ok, have a listen.</h2>
+<section id="listen"><div class="wrap"><div class="head"><span class="eyebrow">Listen</span><h2>Ok, <em>have a listen.</em></h2>
   <p class="lede">Hit play and flip between Dry and Agni. I matched the loudness on both, so you're hearing what it actually does.. not just "louder sounds better".</p></div>
   <div class="listen" data-listen="agni" data-name="Agni"></div>
 </div></section>
@@ -87,17 +87,18 @@
     </div>
 </div></section>
 
-<section id="measurements"><div class="wrap"><div class="head"><span class="eyebrow">Analysis</span><h2>I'd rather show you than tell you.</h2>
-  <p class="lede">I ran every one of these offline through the plugin itself at 48 kHz. The settings I used are under each plot, so you can check my work.</p></div>
+<section id="measurements"><div class="wrap"><div class="head"><span class="eyebrow">Analysis</span><h2>I'd rather show you <em>than tell you.</em></h2>
+  <p class="lede">I ran every one of these offline through the plug-in itself at 48 kHz. The settings I used are under each plot, so you can check my work.</p></div>
   <div class="meas-grid" data-meas="agni"></div>
 </div></section>
-<section id="skins"><div class="wrap"><div class="head"><span class="eyebrow">Skins</span><h2>Pick a finish.</h2>
-  <p class="lede">These are straight from the plugin, no mockups. Click around.. I spent way too long on some of these.</p></div>
+<section id="skins"><div class="wrap"><div class="head"><span class="eyebrow">Skins</span><h2>Pick <em>a finish.</em></h2>
+  <p class="lede">These are straight from the plug-in, no mockups. Click around.. I spent way too long on some of these.</p></div>
   <div data-viewer><script type="application/json">{"name": "Agni", "mods": [{"name": "Agni", "skins": {"Valve": "img/skins/agni-valve.jpg", "Forge": "img/skins/agni-forge.jpg", "Slate": "img/skins/agni-slate.jpg", "Citra": "img/skins/agni-citra.jpg", "Pyre": "img/skins/agni-pyre.jpg"}}]}</script></div>
 </div></section>
-<section><div class="wrap cta"><h2>Agni isn&#39;t out yet</h2><p class="lede">I&#39;m still finishing it, so there&#39;s no download or single licence for it just yet. It&#39;ll be right here when it&#39;s ready.</p><p class="lede req">VST3 · Windows 64-bit · licence, trial and signed updates right inside the plugin</p></div></section>
+<section><div class="wrap cta"><h2>Agni isn&#39;t out yet</h2><p class="lede">I&#39;m still finishing it, so there&#39;s no download or single licence for it just yet. It&#39;ll be right here when it&#39;s ready.</p><p class="lede req">VST3 · Windows 64-bit · licence, trial and signed updates right inside the plug-in</p></div></section>
 </main>
-<script src="site.js?v=logo1"></script>
-<script src="viewer.js?v=pol2"></script>
+<script src="site.js?v=film8"></script>
+<script src="viewer.js?v=polish1"></script>
 <script src="tryit.js?v=try8"></script>
+<script src="film.js?v=film7"></script>
 </body></html>

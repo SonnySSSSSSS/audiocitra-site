@@ -1,6 +1,6 @@
-// Shared nav/footer, Spanda module tabs, skin compare sliders, listen players, teardown, parts builder.
+// Shared nav/footer, Spanda module tabs, listen players, teardown, parts builder.
 (() => {
-  const pages = [["spanda.html","Spanda"],["galana.html","Gālana"],["agni.html","Agni"],["akasa.html","Ākāśa"],["shunya.html","Shunya"],["lahari.html","Lahari"],["tula.html","Tulā"]];
+  const pages = [["spanda.html","Spanda"],["akasa.html","Ākāśa"],["tula.html","Tulā"],["galana.html","Gālana"],["agni.html","Agni"],["shunya.html","Shunya"],["lahari.html","Lahari"]];
   // "" and "/" are the index, "spanda" or "spanda/" are spanda.html
   let here = location.pathname.replace(/\/+$/, "").split("/").pop() || "index.html";
   if (!/\./.test(here)) here += ".html";
@@ -20,14 +20,13 @@
 
   // Cartoon me, narrating a line or two per page. [page, selector, pose, line]; "*" = every product page.
   const SAY = [
-    ["index.html", ".hero", "welcome", "Hi, I'm Citra! I made all of these. Have a look around, and poke at whatever looks fun."],
     ["akasa.html", ".hero", "fun-akasa", "Echo.. echo.. echo.. Six reverbs fitted to classic digital units."],
     ["galana.html", ".hero", "fun-galana", "Twelve filters, and I'm their number one fan."],
     ["agni.html", ".hero", "fun-agni", "Careful, this one runs hot. Two engines, ten shapes."],
     ["shunya.html", ".hero", "fun-shunya", "Shunya means zero. No saturation, no drive.. just space."],
     ["lahari.html", ".hero", "fun-lahari", "Lahari means wave. Chorus, flanger, phaser.. surf's up."],
     ["tula.html", ".hero", "fun-tula", "Tulā means scale, the kind that balances. Every track, nice and level."],
-    ["spanda.html", ".hero", "welcome", "Welcome to Spanda! Seven modules in one strip.. pick any of those tabs to dig in."],
+    ["spanda.html", ".hero", "welcome", "Welcome to Spanda! Seven modules in one strip.. scroll down and take it apart."],
     ["buy.html", ".hero", "thumbs", "One licence covers all your own computers. No account, no dongle, no activation server."],
     ["buy.html", ".faq", "think", "Stuck on something? Use the Contact page, it comes straight to me."],
     ["*", "#measurements .head", "measure", "This is me most nights.. squinting at curves until they look right."],
@@ -59,7 +58,9 @@
     box.remove();
     if (id) document.querySelectorAll(`a[href="#${id}"]`).forEach(a => { a.hidden = true; });
   };
-  const getJson = async url => { const r = await fetch(url); if (!r.ok) throw new Error(r.status); return r.json(); };
+  // data files carry a version so a deploy never meets a cached copy: bump DATA_V when any JSON changes
+  const DATA_V = "lahari1";
+  const getJson = async url => { const r = await fetch(url + (url.includes("?") ? "&" : "?") + "v=" + DATA_V); if (!r.ok) throw new Error(r.status); return r.json(); };
 
   // Module tabs: tablist semantics, roving tabindex, arrow/Home/End keys.
   document.querySelectorAll("[data-tabs]").forEach(group => {
@@ -89,11 +90,6 @@
     });
   });
 
-  document.querySelectorAll(".compare").forEach(c => {
-    const r = c.querySelector("input");
-    const set = () => c.style.setProperty("--x", r.value + "%");
-    r.addEventListener("input", set); set();
-  });
 
   // Measurements: a grid of analyser plots from meas.json
   const measFig = m =>
@@ -234,6 +230,10 @@
                   return faint(`M${xy(0, z)}L${xy(1, z)}`) + path(plot(t => { const l = Math.log10(logHz(t)); return db(4 * (1 - sig((l - 2.1) * 9)) - 3.5 * bump(l, 2.6, 0.16) + 3 * sig((l - 3.9) * 9), -12, 12); })) + label(X1, 34, "WET EQ", "end"); },
       null: () => path(plot(t => 0.72 + 0.2 * Math.sin(6 * Math.PI * t) * Math.exp(-1.5 * t), 200)) + path(plot(t => 0.72 + 0.2 * Math.sin(6 * Math.PI * t) * Math.exp(-1.5 * t), 200), 'opacity=".5" stroke-dasharray="4 4" transform="translate(0 0)"') +
                   path(`M${xy(0, 0.16)}L${xy(1, 0.16)}`) + label(X0, 34, "ORIGINAL + REBUILD") + label(X0, 126, "RESIDUAL"),
+      lfo: () => faint(`M${xy(0, 0.5)}L${xy(1, 0.5)}`) + path(plot(t => 0.5 + 0.32 * Math.sin(2 * Math.PI * 3 * t), 200)) + label(X1, 34, "DELAY ~ LFO", "end"),
+      voices: () => [0, 1, 2, 3, 4, 5, 6, 7].map(k => path(plot(t => 0.5 + 0.06 * (k - 3.5) + 0.07 * Math.sin(2 * Math.PI * (1.3 + k * 0.37) * t + k), 160), `opacity="${0.3 + (k % 4) * 0.18}"`)).join("") + label(X1, 34, "8 TAPS", "end"),
+      voices2: () => path(plot(t => 0.5 + 0.25 * Math.sin(2 * Math.PI * 2 * t), 200)) + path(plot(t => 0.5 + 0.25 * Math.sin(2 * Math.PI * 2.15 * t + 0.4), 200), 'stroke-dasharray="5 3"') + label(X1, 34, "DETUNED PAIR", "end"),
+      notch: () => [0.25, 0.5, 0.75].map((c, i) => path(plot(t => 0.82 - 0.7 * Math.exp(-(((t - c - 0.06 * i) / 0.035) ** 2)), 240), `opacity="${1 - i * 0.28}"`)).join("") + label(X1, 34, "ALLPASS NOTCHES", "end"),
       flat: () => path(plot(t => t)) + label(X1, 150, "IN →", "end") + label(X0, 34, "OUT"),
     };
     const grid = Array.from({ length: 15 }, (_, i) => `M${X0 + i * 19.7},${Y0}V${Y1}`).join("") + Array.from({ length: 8 }, (_, i) => `M${X0},${Y0 + i * 19.4}H${X1}`).join("");

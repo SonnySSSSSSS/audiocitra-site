@@ -124,6 +124,21 @@ CLIPS = {
    dict(unit="Vistara", vistara_algorithm="Plate", mix=25.0, input_db=0.0),
    "Vistara unit, Plate algorithm, default time, 25 % mix", None),
  ],
+ # Lahari: unit and program as the menus name them; Mix set, every other control at default
+ "Lahari": [
+  ("lahari-1", "Plucked arp · Nadi / Stream", "Pluck - Arp.wav", 12, 0, dict(unit="Nadi  Chorus", program=0, mix=50),
+   "Nadi chorus, program Stream, mix 50 %, other controls at default", None),
+  ("lahari-2", "Electric piano · Sarita / Ensemble I", "Keys - Electric Piano.wav", 12, 0, dict(unit="Sarita  Chorus", program=0, mix=50),
+   "Sarita chorus, program Ensemble I, mix 50 %, other controls at default", None),
+  ("lahari-3", "Pad · Vrinda / Octet", "Pad - Warm.wav", 12, 0, dict(unit="Vrinda  Ensemble", program=0, mix=50),
+   "Vrinda ensemble, program Octet, mix 50 %, other controls at default", None),
+  ("lahari-4", "Vocal · Yugala / Shimmer I", "Vocal - Female (dry).wav", 12, 0, dict(unit="Yugala  Celeste", program=0, mix=35),
+   "Yugala celeste, program Shimmer I, mix 35 %, other controls at default", None),
+  ("lahari-5", "Synth lead · Bhramara / Sweep I", "Lead - Synth.wav", 12, 0, dict(unit="Bhramara  Flanger", program=0, feedback=40, mix=50),
+   "Bhramara flanger, program Sweep I, feedback +40, mix 50 %, other controls at default", None),
+  ("lahari-6", "Drums · Chakra / Wheel", "Drums - Electronic.wav", 12, 0, dict(unit="Chakra  Phaser", program=0, mix=50),
+   "Chakra phaser, program Wheel, mix 50 %, other controls at default", None),
+ ],
 }
 
 

@@ -14,7 +14,7 @@
   document.querySelectorAll("[data-viewer]").forEach(box => {
     const cfg = JSON.parse(box.querySelector("script").textContent), mods = cfg.mods;
     let m = mods[0], skin = Object.keys(m.skins)[0], vs = null;
-    const a = el("img", { width: 1600, height: 900 }), b = el("img", { className: "top", width: 1600, height: 900 });
+    const a = el("img", { width: 1600, height: 900 }), b = el("img", { className: "top", alt: "", width: 1600, height: 900 });
     const la = el("span", { className: "lbl l" }), lb = el("span", { className: "lbl r" });
     const range = el("input", { type: "range", min: 0, max: 100, value: 50 }); range.setAttribute("aria-label", "Compare skins");
     const frame = el("figure", { className: "plate vw-frame" }, [a, b, la, lb, el("div", { className: "bar" }), range]);
