@@ -41,7 +41,7 @@
     if (!at) return;
     const say = document.createElement("aside");
     say.className = "say";
-    say.innerHTML = `<img src="img/avatar/${pose}.webp" alt="" width="${pose === "welcome" ? 170 : 120}" loading="lazy"><p class="bubble">${line}</p>`;
+    say.innerHTML = `<p class="bubble">${line}</p>`;
     at.append(say);
   });
 
