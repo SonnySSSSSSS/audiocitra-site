@@ -287,5 +287,77 @@
     "lufs_dry": -16.26,
     "lufs_wet": -16.26,
     "credit": null
+  },
+  {
+    "plugin": "Lahari",
+    "id": "lahari-1",
+    "title": "Plucked arp · Nadi / Stream",
+    "source_stem": "Pluck - Arp.wav",
+    "settings_summary": "Nadi chorus, program Stream, mix 50 %, other controls at default",
+    "dry": "lahari-1-dry.mp3",
+    "wet": "lahari-1-wet.mp3",
+    "lufs_dry": -16.26,
+    "lufs_wet": -16.26,
+    "credit": null
+  },
+  {
+    "plugin": "Lahari",
+    "id": "lahari-2",
+    "title": "Electric piano · Sarita / Ensemble I",
+    "source_stem": "Keys - Electric Piano.wav",
+    "settings_summary": "Sarita chorus, program Ensemble I, mix 50 %, other controls at default",
+    "dry": "lahari-2-dry.mp3",
+    "wet": "lahari-2-wet.mp3",
+    "lufs_dry": -16.26,
+    "lufs_wet": -16.26,
+    "credit": null
+  },
+  {
+    "plugin": "Lahari",
+    "id": "lahari-3",
+    "title": "Pad · Vrinda / Octet",
+    "source_stem": "Pad - Warm.wav",
+    "settings_summary": "Vrinda ensemble, program Octet, mix 50 %, other controls at default",
+    "dry": "lahari-3-dry.mp3",
+    "wet": "lahari-3-wet.mp3",
+    "lufs_dry": -16.26,
+    "lufs_wet": -16.26,
+    "credit": null
+  },
+  {
+    "plugin": "Lahari",
+    "id": "lahari-4",
+    "title": "Vocal · Yugala / Shimmer I",
+    "source_stem": "Vocal - Female (dry).wav",
+    "settings_summary": "Yugala celeste, program Shimmer I, mix 35 %, other controls at default",
+    "dry": "lahari-4-dry.mp3",
+    "wet": "lahari-4-wet.mp3",
+    "lufs_dry": -16.26,
+    "lufs_wet": -16.26,
+    "credit": null
+  },
+  {
+    "plugin": "Lahari",
+    "id": "lahari-5",
+    "title": "Synth lead · Bhramara / Sweep I",
+    "source_stem": "Lead - Synth.wav",
+    "settings_summary": "Bhramara flanger, program Sweep I, feedback +40, mix 50 %, other controls at default",
+    "dry": "lahari-5-dry.mp3",
+    "wet": "lahari-5-wet.mp3",
+    "lufs_dry": -16.26,
+    "lufs_wet": -16.26,
+    "credit": null
+  },
+  {
+    "plugin": "Lahari",
+    "id": "lahari-6",
+    "title": "Drums · Chakra / Wheel",
+    "source_stem": "Drums - Electronic.wav",
+    "settings_summary": "Chakra phaser, program Wheel, mix 50 %, other controls at default",
+    "dry": "lahari-6-dry.mp3",
+    "wet": "lahari-6-wet.mp3",
+    "lufs_dry": -18.26,
+    "lufs_wet": -18.31,
+    "credit": null
   }
 ]

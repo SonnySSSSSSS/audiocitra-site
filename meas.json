@@ -196,5 +196,23 @@
    "caption": "Side follows the knob, −6 dB at 50 % and +6 dB at 200 %, while the mono sum doesn’t move at all.",
    "settings": "Independent L/R pink noise at −18 dBFS RMS · mid (L+R) and side (L−R) re input"
   }
+ ],
+ "lahari": [
+  {
+   "src": "img/meas/lahari_units_pitch.png",
+   "title": "Six units, six movements",
+   "caption": "A steady tone through each unit. Nadi swings its pitch in a clear wave, Vrinda smears it into a cloud of voices, the rest move gently.",
+   "settings": "Program 0 of each unit, mix 100 % · 1 kHz sine at −12 dBFS",
+   "w": 1200,
+   "h": 675
+  },
+  {
+   "src": "img/meas/lahari_sweeps.png",
+   "title": "Flanger and phaser, sweeping",
+   "caption": "The flanger's comb of notches rides up and down; the phaser's fewer, wider notches roll through the spectrum.",
+   "settings": "Bhramara Sweep I, feedback +40 · Chakra Wheel · mix 50 % · white noise",
+   "w": 1200,
+   "h": 675
+  }
  ]
 }

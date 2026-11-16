@@ -267,5 +267,58 @@
     "spec": "Wet EQ · presets · A/B"
    }
   ]
+ },
+ "lahari": {
+  "eyebrow": "Taken apart",
+  "title": "Six ways <em>to move.</em>",
+  "schematic": true,
+  "layers": [
+   {
+    "name": "Chorus",
+    "draw": "lfo",
+    "head": "Nadi and Sarita",
+    "body": "Two choruses. Nadi is the classic one, a delay line swung by a slow wave, in three programs from Stream to Shiver. Sarita is wider and thicker, three programs, Ensemble I to III. I fitted both to the chorus sections of classic digital units.",
+    "spec": "2 units · 6 programs"
+   },
+   {
+    "name": "Ensemble",
+    "draw": "voices",
+    "head": "Vrinda, a crowd of voices",
+    "body": "Lots of modulated taps at once, with an optional amplitude swing and a crossed feedback echo. Seven programs, Octet to Choir. It gets thick fast.",
+    "spec": "7 programs · many taps"
+   },
+   {
+    "name": "Celeste",
+    "draw": "voices2",
+    "head": "Yugala, the slow shimmer",
+    "body": "Two copies slightly detuned against each other, so the sound breathes. Three programs, Shimmer I to III.",
+    "spec": "3 programs"
+   },
+   {
+    "name": "Flanger",
+    "draw": "comb",
+    "head": "Bhramara, the jet",
+    "body": "A short delay swept up and down, so a comb of notches rides through the sound. Two programs, Sweep I and II. Push Feedback and it rings all metallic.",
+    "spec": "2 programs · feedback ±100",
+    "link": [
+     "#measurements",
+     "See it sweep"
+    ]
+   },
+   {
+    "name": "Phaser",
+    "draw": "notch",
+    "head": "Chakra, my own",
+    "body": "Chains of 4 to 12 allpass stages, swept on a log scale. Four programs, Wheel to Whirl. This is the one I didn't fit to anything.",
+    "spec": "4 programs · 4–12 stages"
+   },
+   {
+    "name": "Controls",
+    "draw": "io",
+    "head": "One set of hands",
+    "body": "Rate and Depth scale each program's own values, Delay shifts its base delay or sweep, Feedback adds to its loop. Then Tone, Width, Mix and Output, and oversampling Off, 2x or 4x.",
+    "spec": "Rate ×0.25–×4 · Depth 0–200 %"
+   }
+  ]
  }
 }
