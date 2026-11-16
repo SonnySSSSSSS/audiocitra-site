@@ -35,7 +35,7 @@
     "name": "Dynamics",
     "img": "img/smart-dynamics.jpg",
     "head": "Voicings, or build your own",
-    "body": "Pick a compressor voicing, or switch to CUSTOM and put one together from 35 parts in seven slots. A lot of those parts I fitted to analysis of real units. The voicings are VCA, FET, Opto, Tube and Diode, and most have sub-modes of their own. There's also a Gate/Expand and De-Ess section with five voicings (wideband or split-band de-essing), an external sidechain, and everything runs stereo or mid-side.",
+    "body": "Pick a compressor voicing, or switch to CUSTOM and put one together from 45 parts in seven slots. A lot of those parts I fitted to analysis of real units. The voicings are VCA, FET, Opto, Tube and Diode, and most have sub-modes of their own. There's also a Gate/Expand and De-Ess section with five voicings (wideband or split-band de-essing), an external sidechain, and everything runs stereo or mid-side.",
     "spec": "5 voicings · CUSTOM parts · gate · de-ess · M/S",
     "link": [
      "#parts",

@@ -59,7 +59,7 @@
     if (id) document.querySelectorAll(`a[href="#${id}"]`).forEach(a => { a.hidden = true; });
   };
   // data files carry a version so a deploy never meets a cached copy: bump DATA_V when any JSON changes
-  const DATA_V = "lahari1";
+  const DATA_V = "parts2";
   const getJson = async url => { const r = await fetch(url + (url.includes("?") ? "&" : "?") + "v=" + DATA_V); if (!r.ok) throw new Error(r.status); return r.json(); };
 
   // Module tabs: tablist semantics, roving tabindex, arrow/Home/End keys.
