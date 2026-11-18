@@ -1,6 +1,10 @@
 /* Audio Citra site: dark lacquer base; each product page sets --accent (Shunya flips to a pale room) */
 :root{
-  --bg:#0c0b10; --panel:#16141d; --line:#2a2733; --fg:#ece9f2; --mute:#8d8899;
+  /* fixed: stay dark on light (body.pale) pages too */
+  --night:#0c0b10; --night-fg:#ece9f2; --night-mute:#8d8899;
+  /* polaroid paper and handwriting ink; warm projector light for the film effects */
+  --paper:#f4f1ea; --ink:#2b2830; --film-warm:#fff3dc;
+  --bg:var(--night); --panel:#16141d; --line:#2a2733; --fg:var(--night-fg); --mute:var(--night-mute);
   --spanda:#c58bff; --galana:#ffb35c; --akasa:#e895a0; --shunya:#1f6a82; --shunya-lt:#5fb0cc; --agni:#ff6a3d; --lahari:#5fd4b4; --tula:#e8b04a;
   --on-accent:#111; --nav-h:56px;
   --pale:#eef0ee; --pale-fg:#1d2124; --pale-mute:#5f676c;
@@ -68,11 +72,11 @@ section{padding-block:88px;border-top:1px solid var(--line)}
 
 /* measurements */
 .meas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:20px}
-.meas{margin:0;background:#0c0b10;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.meas{margin:0;background:var(--night);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .meas img{width:100%}
-.meas figcaption{display:grid;gap:4px;padding:12px 16px 16px;color:#ece9f2}
+.meas figcaption{display:grid;gap:4px;padding:12px 16px 16px;color:var(--night-fg)}
 .meas figcaption span{color:#b3aebd;font-size:14px}
-.meas figcaption small{font:400 12px var(--mono);color:#8d8899}
+.meas figcaption small{font:400 12px var(--mono);color:var(--night-mute)}
 
 /* listen */
 .listen{display:grid;gap:12px}
@@ -168,7 +172,7 @@ body.pale .td-layer.img{background:#000}
 .slot-info .bg{color:var(--mute);font-size:13px}
 .slot-info .why{font:500 12px var(--mono);color:var(--accent)}
 .slot-strip{grid-column:1/-1;display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
-.slot-strip button{flex:0 0 auto;width:128px;padding:0;border:1px solid var(--line);border-radius:8px;background:#000;color:#ece9f2;cursor:pointer;overflow:hidden;text-align:left;transition:border-color .2s}
+.slot-strip button{flex:0 0 auto;width:128px;padding:0;border:1px solid var(--line);border-radius:8px;background:#000;color:var(--night-fg);cursor:pointer;overflow:hidden;text-align:left;transition:border-color .2s}
 .slot-strip button:hover{border-color:color-mix(in srgb,var(--accent) 60%,var(--line))}
 .slot-strip button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .slot-strip img{width:100%;aspect-ratio:1600/538;object-fit:cover}
@@ -246,7 +250,7 @@ footer a:hover{color:var(--fg)}
 .say{display:block;max-width:420px;margin-top:14px;text-align:left}
 .cta .say{justify-self:center}
 .faq .say{margin-top:40px}
-.say .bubble{position:relative;display:inline-block;margin:6px 0 0;padding:12px 18px 12px;background:#f4f1ea;color:#2b2830;border-radius:1px;transform:rotate(-1.2deg);
+.say .bubble{position:relative;display:inline-block;margin:6px 0 0;padding:12px 18px 12px;background:var(--paper);color:var(--ink);border-radius:1px;transform:rotate(-1.2deg);
   box-shadow:0 10px 18px -10px #000c,0 1px 2px #0006;font:400 24px/1.12 "Reenie Beanie",cursive}
 .say .bubble::before{content:"";position:absolute;top:-9px;left:50%;width:70px;height:18px;margin-left:-35px;background:rgba(236,226,196,.82);box-shadow:0 1px 2px #0004;transform:rotate(-3deg)}
 .cta .say .bubble{transform:rotate(1deg)}
@@ -338,7 +342,7 @@ footer a:hover{color:var(--fg)}
 .proof-card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:20px;align-items:start;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
 .proof-card.no-plot{grid-template-columns:minmax(0,1fr)}
 .proof-hear{display:grid;gap:12px;align-content:start}
-.proof-card .ab-card{grid-template-columns:auto 1fr;background:#0c0b10}
+.proof-card .ab-card{grid-template-columns:auto 1fr;background:var(--night)}
 .proof-card .ab-card .seg{grid-column:1/-1}
 .proof-lvl{margin:0;font:400 12px var(--mono);color:var(--mute)}
 .proof-more{margin:28px 0 4px;font-size:22px}
@@ -368,7 +372,7 @@ footer a:hover{color:var(--fg)}
 .film-lift{inset:0;background:rgb(70,48,24);opacity:.02;mix-blend-mode:lighten}
 .film-grain{inset:-10%;mix-blend-mode:overlay;opacity:.25;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:film-grain .5s steps(5) infinite}
 @keyframes film-grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
-.film-flicker{inset:0;background:#fff3dc;mix-blend-mode:soft-light;opacity:0;animation:film-flick 3.6s linear infinite}
+.film-flicker{inset:0;background:var(--film-warm);mix-blend-mode:soft-light;opacity:0;animation:film-flick 3.6s linear infinite}
 @keyframes film-flick{0%,100%{opacity:0}12%{opacity:.05}14%{opacity:.01}52%{opacity:.03}55%{opacity:0}80%{opacity:.04}}
 .film-vig{inset:0;background:radial-gradient(ellipse 85% 75% at 50% 45%,transparent 55%,rgba(8,4,0,.46) 100%)}
 .film-rays{top:-25%;left:-15%;width:95%;height:160%;opacity:0;mix-blend-mode:screen;filter:blur(16px);background:repeating-linear-gradient(112deg,rgba(255,236,200,0) 0,rgba(255,236,200,.22) 30px,rgba(255,236,200,0) 80px,rgba(255,236,200,0) 130px,rgba(255,236,200,.13) 165px,rgba(255,236,200,0) 230px);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 22% 12%,#000,transparent 75%);mask-image:radial-gradient(ellipse 70% 60% at 22% 12%,#000,transparent 75%);animation:film-rays 14s ease-in-out infinite}
@@ -419,27 +423,27 @@ footer a:hover{color:var(--fg)}
 .home-why{list-style:none;margin:0;padding:0;display:grid;gap:10px;max-width:520px}
 .home-why li{display:grid;grid-template-columns:28px 1fr;gap:4px 12px;align-items:baseline}
 .home-why b{font:500 12px var(--mono);color:var(--mute)}
-.home-why span{color:#ece9f2;font-size:17px;line-height:1.45}.home-why em{font-style:normal;color:var(--mute)}
+.home-why span{color:var(--night-fg);font-size:17px;line-height:1.45}.home-why em{font-style:normal;color:var(--mute)}
 /* "In the room" renders as polaroids: white card, deep bottom lip, handwritten caption, each one slightly askew */
 #gallery .gal-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:34px 26px;padding:12px 6px}
-#gallery .gal-grid a{min-width:0;aspect-ratio:auto;border:0;border-radius:2px;background:#f4f1ea;padding:12px 12px 0;box-shadow:0 14px 28px -10px #000c,0 2px 4px #0006;transform:rotate(var(--r,0deg));transition:transform .25s,box-shadow .25s;overflow:visible}
+#gallery .gal-grid a{min-width:0;aspect-ratio:auto;border:0;border-radius:2px;background:var(--paper);padding:12px 12px 0;box-shadow:0 14px 28px -10px #000c,0 2px 4px #0006;transform:rotate(var(--r,0deg));transition:transform .25s,box-shadow .25s;overflow:visible}
 #gallery .gal-grid a img{aspect-ratio:4/3;height:auto;border-radius:0;filter:sepia(.18) saturate(1.05) contrast(1.04)}
-#gallery .gal-grid a::after{content:attr(data-cap);display:block;font:400 24px/1 "Reenie Beanie",cursive;color:#2b2830;padding:12px 4px 14px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#gallery .gal-grid a::after{content:attr(data-cap);display:block;font:400 24px/1 "Reenie Beanie",cursive;color:var(--ink);padding:12px 4px 14px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #gallery .gal-grid a:hover,#gallery .gal-grid a:focus-visible{transform:rotate(0) scale(1.04);z-index:1;box-shadow:0 24px 40px -12px #000e}
 #gallery .gal-grid a:hover img{transform:none}
 #gallery .gal-grid a:nth-child(5n+1){--r:-2.2deg}#gallery .gal-grid a:nth-child(5n+2){--r:1.6deg}#gallery .gal-grid a:nth-child(5n+3){--r:-.8deg}#gallery .gal-grid a:nth-child(5n+4){--r:2.4deg}#gallery .gal-grid a:nth-child(5n){--r:-1.4deg}
 @media (max-width:700px){#gallery .gal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px}#gallery .gal-grid a{padding:7px 7px 0}#gallery .gal-grid a::after{font-size:17px;padding:8px 2px 9px}}
 /* hero renders as a big taped print: off-white border, deep lip, two strips of masking tape; the caption under it is handwritten */
-.plate.photo{background:#f4f1ea;padding:14px 14px 56px;border-radius:2px;border:0;overflow:visible;transform:rotate(-.6deg);box-shadow:0 30px 50px -24px #000e,0 2px 6px #0007}
+.plate.photo{background:var(--paper);padding:14px 14px 56px;border-radius:2px;border:0;overflow:visible;transform:rotate(-.6deg);box-shadow:0 30px 50px -24px #000e,0 2px 6px #0007}
 .plate.photo img{display:block;width:100%;height:auto;border-radius:0;filter:sepia(.14) saturate(1.05) contrast(1.04)}
 .plate.photo::before,.plate.photo::after{content:"";position:absolute;top:-14px;width:120px;height:30px;background:rgba(236,226,196,.82);box-shadow:0 1px 2px #0004;z-index:2}
 .plate.photo::before{left:8%;transform:rotate(-5deg)}.plate.photo::after{right:8%;transform:rotate(4deg)}
 .plate.photo{position:relative}
-.plate.photo+.cap{position:relative;margin-top:-50px;z-index:3;padding-left:28px;font:400 26px/1.2 "Reenie Beanie",cursive;color:#2b2830;letter-spacing:0;text-transform:none}
+.plate.photo+.cap{position:relative;margin-top:-50px;z-index:3;padding-left:28px;font:400 26px/1.2 "Reenie Beanie",cursive;color:var(--ink);letter-spacing:0;text-transform:none}
 @media (max-width:700px){.plate.photo{padding:8px 8px 40px}.plate.photo::before,.plate.photo::after{width:70px;height:20px;top:-9px}.plate.photo+.cap{margin-top:-37px;font-size:19px;padding-left:16px}}
 /* lightbox opened from a polaroid shows it as one (viewer.js places the caption on its lip) */
-.lightbox.pol img{inset:0;margin:auto;width:auto;height:auto;max-width:calc(100% - 160px);max-height:calc(100% - 120px);background:#f4f1ea;padding:16px 16px 70px;box-sizing:content-box;filter:sepia(.14);box-shadow:0 30px 60px -20px #000}
-.lightbox.pol p{font:400 32px/1 "Reenie Beanie",cursive;color:#2b2830;bottom:auto}
+.lightbox.pol img{inset:0;margin:auto;width:auto;height:auto;max-width:calc(100% - 160px);max-height:calc(100% - 120px);background:var(--paper);padding:16px 16px 70px;box-sizing:content-box;filter:sepia(.14);box-shadow:0 30px 60px -20px #000}
+.lightbox.pol p{font:400 32px/1 "Reenie Beanie",cursive;color:var(--ink);bottom:auto}
 .lightbox.pol p span{display:none}
 /* wide screens: the note sits on the print's bottom-right corner, lifting at its lower edge */
 @media (min-width:1280px){
@@ -469,7 +473,7 @@ footer a:hover{color:var(--fg)}
 .page-film{position:fixed;inset:0;z-index:30;pointer-events:none;overflow:hidden}
 .page-film>*,.print-film>*{position:absolute;pointer-events:none}
 .page-film .film-grain{mix-blend-mode:normal;opacity:.085}
-.page-film .film-flicker{mix-blend-mode:normal;background:#fff3dc;animation-name:film-flick-page}
+.page-film .film-flicker{mix-blend-mode:normal;background:var(--film-warm);animation-name:film-flick-page}
 @keyframes film-flick-page{0%,100%{opacity:0}12%{opacity:.012}14%{opacity:0}52%{opacity:.008}55%{opacity:0}80%{opacity:.01}}
 .page-film .film-vig{background:radial-gradient(ellipse 90% 80% at 50% 45%,transparent 50%,rgba(0,0,0,.5) 100%)}
 body.pale .page-film .film-grain{mix-blend-mode:multiply;opacity:.12}
@@ -533,7 +537,7 @@ html.proj-open{overflow:hidden}
 .proj-body{overflow:auto;overflow-x:hidden;overscroll-behavior:contain;position:relative;z-index:1}
 .proj-grain,.proj-flick{position:absolute;inset:0;pointer-events:none;z-index:2}
 .proj-grain{inset:-10%;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:film-grain .5s steps(5) infinite}
-.proj-flick{background:#fff3dc;opacity:0}
+.proj-flick{background:var(--film-warm);opacity:0}
 .proj.flash .proj-screen{animation:proj-on .5s ease-out}
 .proj.flash .proj-flick{animation:proj-flick .5s linear}
 @keyframes proj-on{0%{opacity:0;transform:scale(.97);filter:brightness(1.8)}40%{opacity:1}100%{transform:none;filter:none}}
