@@ -1,7 +1,7 @@
 {
  "spanda": [
   {
-   "src": "img/meas/spanda_eq_curves.png",
+   "src": "img/meas/spanda_eq_curves.webp",
    "title": "EQ: four bands, analyzed",
    "caption": "The shelves and bells land where the knobs say.",
    "settings": "Low shelf 100 Hz, bells 500 Hz and 3 kHz, high shelf 8 kHz · each band alone at ±6 and ±12 dB · −18 dBFS sweep",
@@ -9,7 +9,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/spanda_eq_q_family.png",
+   "src": "img/meas/spanda_eq_q_family.webp",
    "title": "EQ: bell width",
    "caption": "From a broad tilt to a narrow peak, all from one bell band.",
    "settings": "1 kHz bell, +9 dB, Q 0.3 to 6",
@@ -17,7 +17,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/spanda_dynamics_static_curve.png",
+   "src": "img/meas/spanda_dynamics_static_curve.webp",
    "title": "Dynamics: static curve",
    "caption": "Analyzed input against output for four ratios.",
    "settings": "Threshold −24 dB, knee 6 dB, ratios 2, 4, 10 and 20 · stepped 1 kHz sine",
@@ -25,7 +25,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/spanda_dynamics_step_response.png",
+   "src": "img/meas/spanda_dynamics_step_response.webp",
    "title": "Dynamics: attack and release",
    "caption": "Gain reduction over time for a level step.",
    "settings": "−40 → −6 → −40 dBFS step · threshold −24 dB, 4:1 · three attack/release pairs",
@@ -33,7 +33,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/spanda_finisher_logos_harmonics.png",
+   "src": "img/meas/spanda_finisher_logos_harmonics.webp",
    "title": "Finisher: Logos harmonics",
    "caption": "A 1 kHz tone picks up harmonics as you push the drive.",
    "settings": "Logos, bias 6, drive 3 vs 12 · 1 kHz at −12 dBFS",
@@ -41,7 +41,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/spanda_limiter_true_peak.png",
+   "src": "img/meas/spanda_limiter_true_peak.webp",
    "title": "Limiter: true-peak ceiling",
    "caption": "Push it 18 dB past full scale and the output still stops at −1 dBTP.",
    "settings": "Transparent mode, ceiling −1.0 dBTP · noise bursts and a 997 Hz sine, −12 to +18 dBFS · 4x-oversampled meter",
@@ -51,7 +51,7 @@
  ],
  "galana": [
   {
-   "src": "img/meas/galana_filter_lp24_cutoff.png",
+   "src": "img/meas/galana_filter_lp24_cutoff.webp",
    "title": "LP 24 across the range",
    "caption": "A 24 dB/oct low-pass from 100 Hz to 10 kHz.",
    "settings": "Drive type, resonance 0, Clean, drive 0 · −30 dBFS sweep",
@@ -59,7 +59,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/galana_filter_lp24_resonance.png",
+   "src": "img/meas/galana_filter_lp24_resonance.webp",
    "title": "Resonance",
    "caption": "The peak rises past +15 dB and the bass thins as it does.",
    "settings": "LP 24 at 1 kHz, resonance 0 to 115",
@@ -67,7 +67,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/galana_filter_hp24_cutoff.png",
+   "src": "img/meas/galana_filter_hp24_cutoff.webp",
    "title": "HP 24 across the range",
    "caption": "A 24 dB/oct high-pass at full level.",
    "settings": "Drive type, resonance 0 · −30 dBFS sweep",
@@ -75,7 +75,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/galana_filter_bp24_cutoff.png",
+   "src": "img/meas/galana_filter_bp24_cutoff.webp",
    "title": "BP 24 across the range",
    "caption": "Band-pass from 100 Hz to 10 kHz.",
    "settings": "Drive type, resonance 0 · −30 dBFS sweep",
@@ -83,7 +83,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/galana_filter_types_compared.png",
+   "src": "img/meas/galana_filter_types_compared.webp",
    "title": "Three of twelve filters",
    "caption": "Same knob settings, three different shapes.",
    "settings": "Drive, Ladder and Cascade · LP 24, 1 kHz, resonance 96",
@@ -91,7 +91,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/galana_comb_plus.png",
+   "src": "img/meas/galana_comb_plus.webp",
    "title": "Comb +",
    "caption": "Tuned resonant teeth across the whole spectrum.",
    "settings": "500 Hz, resonance 32 / 80 / 115",
@@ -101,7 +101,7 @@
  ],
  "agni": [
   {
-   "src": "img/meas/agni_transfer_curves.png",
+   "src": "img/meas/agni_transfer_curves.webp",
    "title": "Ten shapes, ten curves",
    "caption": "Each shape bends the signal its own way. The loops come from the slot’s filters adding phase shift.",
    "settings": "Slot A, drive +12 dB, bias 0 · one cycle of a 0 dBFS 100 Hz sine · quality 4x",
@@ -109,7 +109,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/agni_harmonic_spectra.png",
+   "src": "img/meas/agni_harmonic_spectra.webp",
    "title": "Harmonics",
    "caption": "Four of the ten shapes. Soft and Hard add odd harmonics only; Tube and Germanium add even harmonics too.",
    "settings": "Slot A, drive +12 dB, bias 0 · 1 kHz at −6 dBFS · quality 4x",
@@ -117,7 +117,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/agni_aliasing_1x_vs_8x.png",
+   "src": "img/meas/agni_aliasing_1x_vs_8x.webp",
    "title": "Oversampling",
    "caption": "The worst alias falls from −24 dBFS at 1x to −82 dBFS at 8x.",
    "settings": "Hard shape, drive +24 dB · 7 kHz tone at −6 dBFS",
@@ -127,7 +127,7 @@
  ],
  "akasa": [
   {
-   "src": "img/meas/akasa_rt60_per_octave.png",
+   "src": "img/meas/akasa_rt60_per_octave.webp",
    "title": "Six units, six decays",
    "caption": "Reverb time per octave band for the six units. Megha, Guha and Vayu get much shorter toward the highs; Valuka is nearly flat and Adi falls only slightly.",
    "settings": "Default programs · T20 per octave",
@@ -135,7 +135,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/akasa_wet_response_per_unit.png",
+   "src": "img/meas/akasa_wet_response_per_unit.webp",
    "title": "Each unit’s colour",
    "caption": "The wet spectrum of each unit, offset so the lines do not overlap. Each unit runs at its own internal sample rate, so most end between about 10 and 18 kHz.",
    "settings": "Default programs · 1/3-octave smoothed",
@@ -143,7 +143,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/akasa_megha_decay_per_octave.png",
+   "src": "img/meas/akasa_megha_decay_per_octave.webp",
    "title": "Megha: decay per octave",
    "caption": "Reverb time falls from 2.9 s at 125 Hz to 1.4 s at 8 kHz, so the highs die away sooner than the lows. Below about −45 dB the bands bunch together and 8 kHz briefly outlasts the rest.",
    "settings": "Grand Hall, defaults (Vintage converters on) · −6 dBFS impulse",
@@ -153,7 +153,7 @@
  ],
  "shunya": [
   {
-   "src": "img/meas/shunya_rt60_per_octave.png",
+   "src": "img/meas/shunya_rt60_per_octave.webp",
    "title": "Reverb time per octave",
    "caption": "Reverb time per octave band for the six units. Most get shorter toward the highs, as in a real room; Chatur’s compact room is short and nearly flat.",
    "settings": "Default programs · T20 per octave",
@@ -161,7 +161,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/shunya_wet_response_per_unit.png",
+   "src": "img/meas/shunya_wet_response_per_unit.webp",
    "title": "Wet response per unit",
    "caption": "The wet spectrum of each unit, offset so the lines do not overlap. Kosha and Dhvani run at 32 kHz internally, so they end between about 14 and 17 kHz. The other units slope more gently toward the top.",
    "settings": "Default programs · 1/3-octave smoothed",
@@ -169,7 +169,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/shunya_kosha_decay_per_octave.png",
+   "src": "img/meas/shunya_kosha_decay_per_octave.webp",
    "title": "Kosha: decay per octave",
    "caption": "Every band falls in a straight line, and the highs fall faster: 1.4 s at 8 kHz against 2.1 s at 125 Hz.",
    "settings": "Hall B, defaults",
@@ -179,19 +179,19 @@
  ],
  "tula": [
   {
-   "src": "img/meas/tula_transparent.png",
+   "src": "img/meas/tula_transparent.webp",
    "title": "Transparent on insert",
    "caption": "Drop it on a track at default settings and nothing changes. The output nulls against the input to −158 dB, which is just float rounding.",
    "settings": "Defaults: Trim 0, Out 0, Pan centre, Balance law, Width 100 % · log sweep 20 Hz–20 kHz at −12 dBFS"
   },
   {
-   "src": "img/meas/tula_pan_laws.png",
+   "src": "img/meas/tula_pan_laws.webp",
    "title": "Four pan laws",
    "caption": "Each law lands exactly on its centre value: 0, −3.01, −4.52 and −6.02 dB.",
    "settings": "Dual-mono 997 Hz at −12 dBFS · nine pan positions per law · level per side re input"
   },
   {
-   "src": "img/meas/tula_width.png",
+   "src": "img/meas/tula_width.webp",
    "title": "Width keeps the mono sum",
    "caption": "Side follows the knob, −6 dB at 50 % and +6 dB at 200 %, while the mono sum doesn’t move at all.",
    "settings": "Independent L/R pink noise at −18 dBFS RMS · mid (L+R) and side (L−R) re input"
@@ -199,7 +199,7 @@
  ],
  "lahari": [
   {
-   "src": "img/meas/lahari_units_pitch.png",
+   "src": "img/meas/lahari_units_pitch.webp",
    "title": "Six units, six movements",
    "caption": "A steady tone through each unit. Nadi swings its pitch in a clear wave, Vrinda smears it into a cloud of voices, the rest move gently.",
    "settings": "Program 0 of each unit, mix 100 % · 1 kHz sine at −12 dBFS",
@@ -207,7 +207,7 @@
    "h": 675
   },
   {
-   "src": "img/meas/lahari_sweeps.png",
+   "src": "img/meas/lahari_sweeps.webp",
    "title": "Flanger and phaser, sweeping",
    "caption": "The flanger's comb of notches rides up and down; the phaser's fewer, wider notches roll through the spectrum.",
    "settings": "Bhramara Sweep I, feedback +40 · Chakra Wheel · mix 50 % · white noise",

@@ -90,3 +90,8 @@ ax.set_xlabel("Frequency (Hz)"); ax.set_ylabel("Level re dry (dB)")
 ax.legend(loc="lower left", fontsize=9, ncol=2, frameon=False); ax.text(15000, 3, "solid: L+R  ·  dashed: L-R (the width)", ha="right", color=MUTE, fontsize=10)
 f.savefig(os.path.join(OUT, "lahari_width_mono.png")); plt.close(f)
 print("plots written")
+
+# The site serves WebP copies of the plots.
+from PIL import Image
+for n in ("lahari_units_pitch", "lahari_sweeps", "lahari_width_mono"):
+    Image.open(os.path.join(OUT, n + ".png")).save(os.path.join(OUT, n + ".webp"), "WEBP", lossless=True)

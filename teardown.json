@@ -6,7 +6,7 @@
   "layers": [
    {
     "name": "Console",
-    "img": "img/smart-console.jpg",
+    "img": "img/smart-console.webp",
     "head": "Tracks that know about each other",
     "body": "Set each strip to Stem, Bus or Master and it links up with the strips on your other tracks. The Rail Link meter lights up when the link is live.. I still get a kick out of watching that. Pick a console flavour (Signature, Vintage British, Discrete American, Modern Ultra-Linear or Custom), and every Stem gets its own Mixer, so you can tweak one track from another.",
     "spec": "STEM · BUS · MASTER",
@@ -15,7 +15,7 @@
    },
    {
     "name": "Rail",
-    "img": "img/smart-rail.jpg",
+    "img": "img/smart-rail.webp",
     "head": "Shared flow between instances",
     "body": "Rail coupling passes level and energy between linked strips, so the whole mix moves together like it's running through one console. The display has 11 analyzer styles, from Ribbon and Waterfall to SPIRALS: a spectrum fountain with a resonance finder that points at the trouble spots.",
     "spec": "Rail coupling · 11 analyzer styles",
@@ -24,7 +24,7 @@
    },
    {
     "name": "Neural",
-    "img": "img/smart-neural.jpg",
+    "img": "img/smart-neural.webp",
     "head": "Bring your own captures",
     "body": "Swap the Console's built-in saturation for a neural capture. Load .nam or .json files through the tone browser, or import files and packs. Drive sets how hard you hit the capture, Mix blends it against the Console's own saturation. Heads up: I don't include any captures, so bring your favourites.",
     "spec": "Drive · Mix · .nam / .json",
@@ -33,7 +33,7 @@
    },
    {
     "name": "Dynamics",
-    "img": "img/smart-dynamics.jpg",
+    "img": "img/smart-dynamics.webp",
     "head": "Voicings, or build your own",
     "body": "Pick a compressor voicing, or switch to CUSTOM and put one together from 45 parts in seven slots. A lot of those parts I fitted to analysis of real units. The voicings are VCA, FET, Opto, Tube and Diode, and most have sub-modes of their own. There's also a Gate/Expand and De-Ess section with five voicings (wideband or split-band de-essing), an external sidechain, and everything runs stereo or mid-side.",
     "spec": "5 voicings · CUSTOM parts · gate · de-ess · M/S",
@@ -46,7 +46,7 @@
    },
    {
     "name": "EQ",
-    "img": "img/smart-eq.jpg",
+    "img": "img/smart-eq.webp",
     "head": "Classic curves, band by band",
     "body": "The bells and shelves follow curves fitted to analysis of classic EQs. In CUSTOM, each of the four bands takes its own part, so you can mix and match per band. On top of that: six EQ voicings, series or parallel, stereo or mid-side. And the new Macro curve sits before the bands.. one pivot, Tilt and Smile, with its own slope and spread, four parts (Clean, Iron, Shelf Pair and Passive Lift), an optional dynamic mode, and a handle right on the graph.",
     "spec": "4 bands · 26 band parts · Macro curve",
@@ -59,7 +59,7 @@
    },
    {
     "name": "Finisher",
-    "img": "img/smart-finisher.jpg",
+    "img": "img/smart-finisher.webp",
     "head": "Colour, tape and clipping",
     "body": "Lysium is preamp-style colour: even or odd harmonics, low-end weight, and treble that softens as you push it. Logos is a tube-style saturator, A-Roll is tape (15 or 30 IPS, with a heat control), Tarus is a clipper, and Kill is a clipper at the very end. Nerd note: Lysium, Logos, Tarus and Kill oversample up to 16x.. tape doesn't.",
     "spec": "Lysium · Logos · A-Roll · Tarus · Kill",
@@ -68,7 +68,7 @@
    },
    {
     "name": "Limiter",
-    "img": "img/smart-limiter.jpg",
+    "img": "img/smart-limiter.webp",
     "head": "True-peak limiting",
     "body": "Three modes for three jobs. I drove it 18 dB past full scale and the output still stopped at the −1 dBTP ceiling.",
     "spec": "TRANSPARENT · TRANSIENT · SMOOTH",

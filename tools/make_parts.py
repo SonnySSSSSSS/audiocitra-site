@@ -133,8 +133,8 @@ def slot(sid, pid, stem, name, options, g):
     for i, o in enumerate(options):
         im = Image.open(io.BytesIO(show('src/Spanda/Resources/parts_collectibles/%s_%d.jpg' % (stem, i), True))).convert('RGB')
         im = im.resize((800, round(800 * im.height / im.width)), Image.LANCZOS)
-        img = 'img/parts/%s_%d.jpg' % (stem, i)
-        im.save(os.path.join(W, img), quality=80, optimize=True)
+        img = 'img/parts/%s_%d.webp' % (stem, i)  # WebP: about half the weight of the old JPEGs
+        im.save(os.path.join(W, img), 'WEBP', quality=80)
         use, bg = lesson(gd['lessons'][i]) if gd.get('lessons') else ('', '')
         opts.append({'name': o, 'img': img + '?v=' + HASH,  # the art changes under the same names, so bust the cache
                       'note': gd['notes'][i], 'use': use, 'bg': bg, 'w': im.width, 'h': im.height})
