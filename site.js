@@ -62,6 +62,29 @@
   const DATA_V = "webp1";
   const getJson = async url => { const r = await fetch(url + (url.includes("?") ? "&" : "?") + "v=" + DATA_V); if (!r.ok) throw new Error(r.status); return r.json(); };
 
+  // Pressed-button groups (parts, skins, dry/processed, part families): one Tab stop per group, the pressed button,
+  // and arrow/Home/End keys move between its buttons; Enter or Space picks. Groups built later are picked up too.
+  const groupBtns = g => [...g.querySelectorAll("button[aria-pressed]")].filter(b => b.closest('[role="group"]') === g);
+  const rove = g => {
+    const bs = groupBtns(g); if (bs.length < 2) return;
+    const on = bs.find(b => b.getAttribute("aria-pressed") === "true") || bs[0];
+    bs.forEach(b => { b.tabIndex = b === on ? 0 : -1; });
+  };
+  let roveQueued = false;
+  const roveAll = () => { roveQueued = false; document.querySelectorAll('[role="group"]').forEach(rove); };
+  roveAll();
+  new MutationObserver(() => { if (!roveQueued) { roveQueued = true; requestAnimationFrame(roveAll); } })
+    .observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ["aria-pressed"] });
+  document.addEventListener("keydown", e => {
+    const b = e.target.closest?.("button[aria-pressed]"), g = b?.closest('[role="group"]'); if (!g) return;
+    const bs = groupBtns(g); if (bs.length < 2) return;
+    const i = bs.indexOf(b), k = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: bs.length - 1 }[e.key];
+    if (k === undefined) return;
+    e.preventDefault(); e.stopImmediatePropagation();  // the projector's arrow keys must not also change slide
+    const t = bs[(k + bs.length) % bs.length];
+    bs.forEach(x => { x.tabIndex = x === t ? 0 : -1; }); t.focus(); t.scrollIntoView({ block: "nearest", inline: "nearest" });
+  });
+
   // Module tabs: tablist semantics, roving tabindex, arrow/Home/End keys.
   document.querySelectorAll("[data-tabs]").forEach(group => {
     const list = group.querySelector(".tabs"); if (!list) return;
