@@ -6,7 +6,7 @@
   if (!/\./.test(here)) here += ".html";
   const nav = document.createElement("nav");
   nav.setAttribute("aria-label", "Main");
-  nav.innerHTML = `${document.getElementById("main") ? '<a class="skip" href="#main">Skip to content</a>' : ""}<div class="wrap"><a class="logo" href="index.html"><img src="img/logo-full.png" alt="Audio Citra" width="1137" height="624"></a><ul>${
+  nav.innerHTML = `${document.getElementById("main") ? '<a class="skip" href="#main">Skip to content</a>' : ""}<div class="wrap"><a class="logo" href="index.html"><img src="img/logo-nav.webp" alt="Audio Citra" width="219" height="120"></a><ul>${
     pages.map(([h,t]) => `<li><a href="${h}"${h===here?' aria-current="page"':""}>${t}</a></li>`).join("")}<li><a href="buy.html"${here==="buy.html"?' aria-current="page"':""}>Buy</a></li><li><a href="contact.html"${here==="contact.html"?' aria-current="page"':""}>Contact</a></li></ul></div>`;
   document.body.prepend(nav);
   // Phone layout: the links scroll sideways, so bring the current page's link into view and drop the fade at the end.
