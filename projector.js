@@ -61,6 +61,7 @@
   dlg.addEventListener("close", () => {
     document.documentElement.classList.remove("proj-open");
     const was = cur; cur = -1;
+    if (was >= 0) items[was].el.hidden = true;  // else the next slide opens with this pane still showing above it
     reel.querySelectorAll(".slide").forEach(a => a.removeAttribute("aria-current"));
     if (pushed) { pushed = false; history.back(); }
     if (was >= 0) reel.querySelectorAll(".slide")[was]?.focus({ preventScroll: true });

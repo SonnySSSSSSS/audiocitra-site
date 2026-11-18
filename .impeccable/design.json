@@ -4,42 +4,135 @@
   "title": "Design System: Audio Citra",
   "extensions": {
     "colorMeta": {
-      "night": { "role": "neutral", "displayName": "Night" },
-      "panel": { "role": "neutral", "displayName": "Panel" },
-      "line": { "role": "neutral", "displayName": "Line" },
-      "night-fg": { "role": "neutral", "displayName": "Night Text" },
-      "night-mute": { "role": "neutral", "displayName": "Night Mute" },
-      "spanda": { "role": "primary", "displayName": "Spanda Violet" },
-      "galana": { "role": "primary", "displayName": "Gālana Amber" },
-      "akasa": { "role": "primary", "displayName": "Ākāśa Rose" },
-      "shunya": { "role": "primary", "displayName": "Shunya Deep Teal" },
-      "shunya-lt": { "role": "primary", "displayName": "Shunya Light Teal" },
-      "agni": { "role": "primary", "displayName": "Agni Ember" },
-      "lahari": { "role": "primary", "displayName": "Lahari Mint" },
-      "tula": { "role": "primary", "displayName": "Tulā Brass" },
-      "paper": { "role": "tertiary", "displayName": "Polaroid Paper" },
-      "ink": { "role": "tertiary", "displayName": "Handwriting Ink" },
-      "film-warm": { "role": "tertiary", "displayName": "Projector Warm" }
+      "night": {
+        "role": "neutral",
+        "displayName": "Night"
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line"
+      },
+      "night-fg": {
+        "role": "neutral",
+        "displayName": "Night Text"
+      },
+      "night-mute": {
+        "role": "neutral",
+        "displayName": "Night Mute"
+      },
+      "spanda": {
+        "role": "primary",
+        "displayName": "Spanda Violet"
+      },
+      "galana": {
+        "role": "primary",
+        "displayName": "Gālana Amber"
+      },
+      "akasa": {
+        "role": "primary",
+        "displayName": "Ākāśa Rose"
+      },
+      "shunya": {
+        "role": "primary",
+        "displayName": "Shunya Deep Teal"
+      },
+      "shunya-lt": {
+        "role": "primary",
+        "displayName": "Shunya Light Teal"
+      },
+      "agni": {
+        "role": "primary",
+        "displayName": "Agni Ember"
+      },
+      "lahari": {
+        "role": "primary",
+        "displayName": "Lahari Mint"
+      },
+      "tula": {
+        "role": "primary",
+        "displayName": "Tulā Brass"
+      },
+      "paper": {
+        "role": "tertiary",
+        "displayName": "Polaroid Paper"
+      },
+      "ink": {
+        "role": "tertiary",
+        "displayName": "Handwriting Ink"
+      },
+      "film-warm": {
+        "role": "tertiary",
+        "displayName": "Projector Warm"
+      },
+      "note-ink": {
+        "role": "tertiary",
+        "displayName": "Ballpoint Blue"
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Page heroes; home rooms up to 120px." },
-      "headline": { "displayName": "Headline", "purpose": "Section heads." },
-      "label": { "displayName": "Label", "purpose": "Kicker labels, captions, specs and tabs." },
-      "handwriting": { "displayName": "Handwriting", "purpose": "Captions on paper only." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page heroes; home rooms up to 120px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section heads."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Kicker labels, captions, specs and tabs."
+      },
+      "handwriting": {
+        "displayName": "Handwriting",
+        "purpose": "Captions on paper only."
+      }
     },
     "shadows": [
-      { "name": "plate-drop", "value": "0 40px 80px -30px #000c", "purpose": "Screenshot plates." },
-      { "name": "paper-drop", "value": "0 14px 28px -10px #000c, 0 2px 4px #0006", "purpose": "Polaroids and paper." },
-      { "name": "accent-glow", "value": "0 8px 32px -6px var(--accent)", "purpose": "Walkthrough play button." }
+      {
+        "name": "plate-drop",
+        "value": "0 40px 80px -30px #000c",
+        "purpose": "Screenshot plates."
+      },
+      {
+        "name": "paper-drop",
+        "value": "0 14px 28px -10px #000c, 0 2px 4px #0006",
+        "purpose": "Polaroids and paper."
+      },
+      {
+        "name": "accent-glow",
+        "value": "0 8px 32px -6px var(--accent)",
+        "purpose": "Walkthrough play button."
+      }
     ],
     "motion": [
-      { "name": "room-fade", "value": "opacity .45s", "purpose": "Home rooms cross-fade." },
-      { "name": "state", "value": ".2s", "purpose": "Hover colour, border and brightness changes." }
+      {
+        "name": "room-fade",
+        "value": "opacity .45s",
+        "purpose": "Home rooms cross-fade."
+      },
+      {
+        "name": "state",
+        "value": ".2s",
+        "purpose": "Hover colour, border and brightness changes."
+      }
     ],
     "breakpoints": [
-      { "name": "phone", "value": "700px" },
-      { "name": "tablet", "value": "820px" },
-      { "name": "split", "value": "1100px" }
+      {
+        "name": "phone",
+        "value": "700px"
+      },
+      {
+        "name": "tablet",
+        "value": "820px"
+      },
+      {
+        "name": "split",
+        "value": "1100px"
+      }
     ]
   },
   "components": [
@@ -95,10 +188,26 @@
       "Pills for actions, soft cards for data, square-ish paper for keepsakes."
     ],
     "rules": [
-      { "name": "The One Accent Rule", "body": "A page wears one plug-in's colour. Don't mix two plug-in accents on one page except in navigation strips that list all of them.", "section": "colors" },
-      { "name": "The Night Stays Night Rule", "body": "Elements that must stay dark on the pale page use the `--night*` tokens, never `--bg`/`--fg`, which flip there.", "section": "colors" },
-      { "name": "The Measured Mono Rule", "body": "Numbers, specs, timings and units are set in IBM Plex Mono with tabular figures.", "section": "typography" },
-      { "name": "The Film Grade Rule", "body": "The film grade (grain, flicker, halation, vignette, dust) is part of the identity. Keep it, and keep its reduced-motion fallback: grade and grain stay, still; dust, flicker and rays go.", "section": "elevation" }
+      {
+        "name": "The One Accent Rule",
+        "body": "A page wears one plug-in's colour. Don't mix two plug-in accents on one page except in navigation strips that list all of them.",
+        "section": "colors"
+      },
+      {
+        "name": "The Night Stays Night Rule",
+        "body": "Elements that must stay dark on the pale page use the `--night*` tokens, never `--bg`/`--fg`, which flip there.",
+        "section": "colors"
+      },
+      {
+        "name": "The Measured Mono Rule",
+        "body": "Numbers, specs, timings and units are set in IBM Plex Mono with tabular figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Film Grade Rule",
+        "body": "The film grade (grain, flicker, halation, vignette, dust) is part of the identity. Keep it, and keep its reduced-motion fallback: grade and grain stay, still; dust, flicker and rays go.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do keep pages dark on `--night`. Shunya's pale room is the only light page.",
