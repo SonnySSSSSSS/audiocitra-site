@@ -295,10 +295,10 @@ footer a:hover{color:var(--fg)}
 .room-spec{display:flex;gap:40px;margin:0;padding-top:14px;border-top:1px solid rgba(255,255,255,.2)}
 .room-spec dt{font-family:var(--mono);font-size:11px;color:var(--mute);text-transform:uppercase}
 .room-spec dd{margin:0;font-family:var(--display);font-size:30px}
-.rooms.js{height:calc(100svh - var(--nav-h));min-height:520px;overflow:hidden}
-.rooms.js .room{position:absolute;inset:0 140px 0 0;min-height:0;border:0;opacity:0;visibility:hidden}
+:is(.rooms.js,html.js .rooms){height:calc(100svh - var(--nav-h));min-height:520px;overflow:hidden}
+:is(.rooms.js,html.js .rooms) .room{position:absolute;inset:0 140px 0 0;min-height:0;border:0;opacity:0;visibility:hidden}
 .rooms.ready .room{transition:opacity .45s,visibility 0s .45s}
-.rooms.js .room.on{opacity:1;visibility:visible}
+:is(.rooms.js,html.js .rooms) .room.on{opacity:1;visibility:visible}
 .rooms.ready .room.on{transition:opacity .45s}
 .room-peek{position:absolute;top:0;right:0;bottom:0;width:140px;border:0;padding:0;background:#000;overflow:hidden;cursor:pointer}
 .room-peek img{width:100%;height:100%;object-fit:cover;opacity:.4;transition:opacity .2s}
@@ -318,7 +318,7 @@ footer a:hover{color:var(--fg)}
 @media (prefers-reduced-motion:reduce){.rooms.ready .room,.rooms.ready .room.on{transition:none}}
 /* Phone: picture on top, words below, a thin peek of the next room, dots instead of names. */
 @media (max-width:700px){
-  .rooms.js .room{inset:0;flex-direction:column;align-items:stretch;justify-content:flex-end}
+  :is(.rooms.js,html.js .rooms) .room{inset:0;flex-direction:column;align-items:stretch;justify-content:flex-end}
   .room>img{bottom:auto;height:56%;width:calc(100% - 28px)}
   .room::after{background:linear-gradient(180deg,transparent 30%,#000 56%)}
   .room-copy{padding:0 16px 104px;gap:12px}
@@ -510,6 +510,10 @@ body.projector .stage .hero{padding-block:0}
 }
 @media (min-width:1280px){body.projector .stage>.placard{grid-column:auto;grid-row:auto}body.projector .stage>.cap{padding-right:230px}}
 body.projector main>section:not(.proj-pane){padding-block:40px}
+/* site.js builds the nav; hold its height until it lands so the page doesn't drop when it does */
+html.js body:not(:has(>nav))::before{content:"";display:block;height:calc(var(--nav-h) + 1px)}
+/* before projector.js moves the sections into its screen, keep them out of the layout so nothing jumps */
+html.js body.projector main>[id]:not(.proj-pane){display:none}
 .reel{padding-block:18px 26px}
 .reel ol{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(132px,1fr);gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
 .reel ol::-webkit-scrollbar{display:none}
@@ -595,9 +599,9 @@ body.pale .slide::before,body.pale .slide::after{background-image:radial-gradien
 /* Phone rooms: the picture keeps its 16:9 shape on top and the words follow it in normal flow, so they can never run up
    over the picture whatever the screen height. The active room sets the stage height; the others stay stacked, hidden. */
 @media (max-width:700px){
-  .rooms.js{height:auto;min-height:0}
-  .rooms.js .room{justify-content:flex-start}
-  .rooms.js .room.on{position:relative}
+  :is(.rooms.js,html.js .rooms){height:auto;min-height:0}
+  :is(.rooms.js,html.js .rooms) .room{justify-content:flex-start}
+  :is(.rooms.js,html.js .rooms) .room.on{position:relative}
   .room>img{position:relative;inset:auto;flex:none;width:calc(100% - 28px);height:auto;aspect-ratio:16/9;
     -webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)}
   .room::after{display:none}
