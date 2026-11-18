@@ -1,5 +1,6 @@
 """Copy the measurement plots into the site and write website/meas.json (captions + settings per plugin)."""
 import json, os, shutil
+from PIL import Image
 M = r'D:\AI\TAM\.claude\worktrees\website-showcase\marketing\shots\measurements'
 W = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # site root
 SEL = {
@@ -41,7 +42,8 @@ for plug, items in SEL.items():
     out[plug] = []
     for name, title, cap, settings in items:
         shutil.copy2(os.path.join(M, plug, name + '.png'), os.path.join(d, name + '.png'))
-        out[plug].append({'src': 'img/meas/%s.png' % name, 'title': title, 'caption': cap, 'settings': settings})
+        Image.open(os.path.join(d, name + '.png')).save(os.path.join(d, name + '.webp'), 'WEBP', lossless=True)  # the site serves the WebP
+        out[plug].append({'src': 'img/meas/%s.webp' % name, 'title': title, 'caption': cap, 'settings': settings})
 # Tulā's plots come from AudioCitraFree/tools/meas/tula_meas.py and are already in img/meas: keep them
 out['tula'] = json.load(open(os.path.join(W, 'meas.json'), encoding='utf-8')).get('tula', [])
 json.dump(out, open(os.path.join(W, 'meas.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

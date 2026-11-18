@@ -142,7 +142,7 @@
     "lufs_dry": -16.24,
     "lufs_wet": -16.24,
     "credit": null,
-    "plot": "img/meas/akasa_megha_decay_per_octave.png"
+    "plot": "img/meas/akasa_megha_decay_per_octave.webp"
   },
   {
     "plugin": "Akasa",
