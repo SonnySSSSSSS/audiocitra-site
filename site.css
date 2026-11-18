@@ -164,7 +164,6 @@ body.pale .td-layer.img{background:#000}
 .slot{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:start}
 .slot-n{width:40px;height:40px;border-radius:50%;border:1px solid var(--accent);background:var(--bg);display:grid;place-items:center;font:500 12px var(--mono);position:relative;margin-top:14px}
 .slot-body{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px 22px;transition:opacity .25s}
-.slot-body.off .slot-art,.slot-body.off .slot-strip{opacity:.4}
 .slot-art{margin:0;border-radius:10px;overflow:hidden;background:#000;aspect-ratio:1600/538}
 .slot-art img{width:100%;height:100%;object-fit:cover}
 .slot-info{display:grid;gap:6px;align-content:start;min-width:0}
@@ -184,7 +183,6 @@ body.pale .td-layer.img{background:#000}
   border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 90%,transparent);backdrop-filter:blur(12px);box-shadow:0 20px 40px -20px #000c}
 .build .chips{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 360px;min-width:0}
 .build .chips span{font:500 12px var(--mono);padding:4px 9px;border-radius:999px;border:1px solid color-mix(in srgb,var(--accent) 55%,var(--line))}
-.build .chips span.off{opacity:.4;text-decoration:line-through}
 .build .recipes{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .build .recipes small{font:500 12px var(--mono);color:var(--mute);letter-spacing:.1em;text-transform:uppercase}
 .build .recipes button{font:500 12px var(--mono);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
@@ -421,6 +419,7 @@ footer a:hover{color:var(--fg)}
 @media (max-width:700px){.lightbox img{inset:64px 8px 56px;width:calc(100% - 16px)}.lb-p,.lb-n{top:auto;bottom:8px;transform:none}.vw-cmp{margin-left:0}}
 .mod.gal.on{display:block}
 @media (max-width:700px){.gal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+/* Parts showcase: a part that the current picks leave unused keeps full brightness (it's on show here); its note says why */
 /* the owner's lotus logo, never recoloured; the dark nav and rooms are its backing */
 .logo{display:flex;align-items:center}.logo img{height:40px;width:auto;display:block}
 @media (max-width:700px){.logo img{height:30px}}
