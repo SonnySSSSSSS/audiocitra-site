@@ -21,7 +21,8 @@
     box.style.setProperty("--c", r.style.getPropertyValue("--c"));
     pos.textContent = String(i).padStart(2, "0") + " / " + String(n - 1).padStart(2, "0");
     const pimg = nx.querySelector("img");
-    peek.querySelector("img").src = pimg.currentSrc || pimg.src;
+    const peekImg = peek.querySelector("img");
+    peekImg.sizes = "140px"; peekImg.srcset = pimg.srcset; peekImg.src = pimg.src;
     peek.querySelector("span").textContent = name(nx);
     peek.style.setProperty("--pc", nx.style.getPropertyValue("--c"));
     peek.setAttribute("aria-label", "Next: " + name(nx));
