@@ -13,7 +13,9 @@ Home and project-studio producers and mixers on Windows. They're tired of plug-i
 audiocitra.com presents and sells Audio Citra's VST3 plug-ins for Windows. Spanda (channel strip), Ākāśa (coloured reverb) and Tulā (mix utility) are on sale in early access. Gālana, Agni, Shunya and Lahari are "coming soon". Success means a visitor understands what a plug-in does and how it sounds, tries it, and keeps it.
 
 ## Positioning
-A long-time home mixer with a lot of gripes, building the plug-ins they wanted and couldn't find. Not a pro studio, and the site never claims to be one. Over two decades of mixing at home, and wanting plug-ins that sound like the gear, not just act like it. Built with AI, said openly. Parts are fitted to analysis of real units, then checked by ear.
+**Draft, not settled.** The owner isn't sure what the real difference is, so don't build design or copy decisions on this section until they confirm it.
+
+The owner's own words: a long-time mixer with a lot of gripes, building the plug-ins they wanted and couldn't find. Not a pro studio, and the site never claims to be one. The About page states over two decades of audio production, mixing and mastering, and brief work with two Grammy award winners. The aim is plug-ins that sound like the gear, not just act like it. They're built with AI, said openly, with parts fitted to analysis of real units and then checked by ear.
 
 ## Operating Context
 - Visitors judge sound: before/after audio clips (`audio/`), a "try it" player with sample stems, measurement figures and 3D renders of each plug-in's skins.
