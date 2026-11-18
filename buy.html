@@ -63,7 +63,6 @@
   </div>
 </div>
 </main>
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script src="site.js?v=rove1"></script>
 <script>
 // Fill these from the Paddle dashboard. Until `token` is set the page says checkout opens at launch.
@@ -86,39 +85,57 @@ const PADDLE = {
   const onSaleNow = ["spanda", "akasa", "tula"];
   let pick = onSaleNow.includes(asked) ? asked : "spanda";
   const status = document.getElementById("status"), go = document.getElementById("go");
-  const ready = !!PADDLE.token && typeof Paddle !== "undefined";
+  // Paddle loads in the background so it never holds up the page. Prices show at once as if checkout will work;
+  // if Paddle can't load (an ad or script blocker), they fall back to list prices and the blocked message.
+  let ready = false, failed = !PADDLE.token, wanted = false;
   const checkoutBlocked = "Checkout couldn't load. If you use an ad or script blocker, allow cdn.paddle.com and reload, or use the Contact page.";
-  const L = PADDLE.launch, onSale = ready && !!L.ends && new Date() <= new Date(L.ends + "T23:59:59");
+  const L = PADDLE.launch, saleDate = !!L.ends && new Date() <= new Date(L.ends + "T23:59:59");
+  const onSale = () => !failed && saleDate;
   const off = id => id === "bundle" ? 0.7 : 0.6, usd = n => "$" + (Number.isInteger(n) ? n : n.toFixed(2));
-  document.querySelectorAll("[data-price]").forEach(el => {
-    const id = el.dataset.price, full = PADDLE.full[id];
-    if (onSale) { const s = document.createElement("s"), sr = t => Object.assign(document.createElement("span"), { className: "sr", textContent: t }); s.append(sr("Was "), "$" + full); el.append(s, sr(", now "), usd(Math.round(full * off(id) * 100) / 100)); }
-    else el.textContent = "$" + full;
-  });
-  if (onSale) {
-    const sale = document.getElementById("sale");
-    sale.textContent = "Early access: 40% off every plug-in, until " +
-      new Date(L.ends + "T12:00:00").toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) + ".";
-    sale.hidden = false;
-  }
+  const sale = document.getElementById("sale");
+  const prices = () => {
+    document.querySelectorAll("[data-price]").forEach(el => {
+      const id = el.dataset.price, full = PADDLE.full[id]; el.textContent = "";
+      if (onSale()) { const s = document.createElement("s"), sr = t => Object.assign(document.createElement("span"), { className: "sr", textContent: t }); s.append(sr("Was "), "$" + full); el.append(s, sr(", now "), usd(Math.round(full * off(id) * 100) / 100)); }
+      else el.textContent = "$" + full;
+    });
+    if (onSale()) {
+      sale.textContent = "Early access: 40% off every plug-in, until " +
+        new Date(L.ends + "T12:00:00").toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) + ".";
+      sale.hidden = false;
+    } else sale.hidden = true;
+  };
+  prices();
   const sel = () => document.querySelectorAll(".pick").forEach(b => b.setAttribute("aria-pressed", b.dataset.id === pick));
   document.querySelectorAll(".pick").forEach(b => b.addEventListener("click", () => { pick = b.dataset.id; sel(); }));
   sel();
-  if (ready) {
-    if (PADDLE.env !== "production") Paddle.Environment.set("sandbox");
-    Paddle.Initialize({ token: PADDLE.token, eventCallback: ev => {
-      if (ev.name === "checkout.error")
-        status.textContent = "Checkout couldn't open. Try again in a minute, or use the Contact page if it keeps happening.";
-      if (ev.name === "checkout.completed")
-        status.textContent = ref ? "Paid, thank you. Go back to the plug-in and click Fetch licence." : "Paid, thank you. Your licence is on its way by e-mail.";
-    } });
-  } else status.textContent = checkoutBlocked;
-  if (ready && Object.hasOwn(held, asked)) status.textContent = held[asked] + " isn't out yet, so it isn't on sale.";
+  const open = () => Paddle.Checkout.open({ items: [{ priceId: PADDLE.prices[pick], quantity: 1 }], customData: ref ? { ref } : {},
+    ...(onSale() && L.code ? { discountCode: pick === "bundle" ? L.bundleCode : L.code } : {}) });
+  const fail = () => { failed = true; ready = false; wanted = false; prices(); status.textContent = checkoutBlocked; };
+  if (failed) status.textContent = checkoutBlocked;
+  else {
+    if (Object.hasOwn(held, asked)) status.textContent = held[asked] + " isn't out yet, so it isn't on sale.";
+    const js = document.createElement("script"); js.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
+    js.onload = () => {
+      if (typeof Paddle === "undefined") return fail();
+      if (PADDLE.env !== "production") Paddle.Environment.set("sandbox");
+      Paddle.Initialize({ token: PADDLE.token, eventCallback: ev => {
+        if (ev.name === "checkout.error")
+          status.textContent = "Checkout couldn't open. Try again in a minute, or use the Contact page if it keeps happening.";
+        if (ev.name === "checkout.completed")
+          status.textContent = ref ? "Paid, thank you. Go back to the plug-in and click Fetch licence." : "Paid, thank you. Your licence is on its way by e-mail.";
+      } });
+      ready = true;
+      if (wanted) { wanted = false; status.textContent = ""; open(); }  // a click that came before Paddle arrived
+    };
+    js.onerror = fail;
+    document.head.append(js);
+  }
   go.addEventListener("click", ev => {
     ev.preventDefault();
-    if (!ready || !PADDLE.prices[pick]) { status.textContent = checkoutBlocked; return; }
-    Paddle.Checkout.open({ items: [{ priceId: PADDLE.prices[pick], quantity: 1 }], customData: ref ? { ref } : {},
-      ...(onSale && L.code ? { discountCode: pick === "bundle" ? L.bundleCode : L.code } : {}) });
+    if (failed || !PADDLE.prices[pick]) { status.textContent = checkoutBlocked; return; }
+    if (!ready) { wanted = true; status.textContent = "Opening checkout…"; return; }
+    open();
   });
 })();
 </script>
