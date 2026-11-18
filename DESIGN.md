@@ -22,6 +22,7 @@ colors:
   paper: "#f4f1ea"
   ink: "#2b2830"
   film-warm: "#fff3dc"
+  note-ink: "#2c3a6b"
 typography:
   display:
     fontFamily: "Bodoni Moda, Georgia, serif"
@@ -147,6 +148,7 @@ Each product page sets `--accent` to its plug-in's colour, and the home rooms se
 - **Polaroid Paper** (paper): polaroid cards, photo plates, speech bubbles, lightbox frames.
 - **Handwriting Ink** (ink): handwritten captions on paper.
 - **Projector Warm** (film-warm): the film flicker light.
+- **Ballpoint Blue** (note-ink): handwriting on the yellow sticky notes.
 
 ### Named Rules
 **The One Accent Rule.** A page wears one plug-in's colour. Don't mix two plug-in accents on one page except in navigation strips that list all of them.
