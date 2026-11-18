@@ -28,12 +28,12 @@ The maker is in the buyer's own situation: a long-time mixer, not a pro studio, 
 ## Capabilities and Constraints
 - Every released plug-in runs fully for 14 days. One licence covers all of the buyer's own computers.
 - Early access (beta): every update is free, including 1.0 and all 1.x.
-- Refunds: `refund.html` offers a full refund within 14 days of purchase, for any reason. Open: the owner decided on 2026-11-05 that each plug-in in the Everything bundle gets 14 days from its own release, but the site doesn't say so yet. Settle this before changing refund copy.
+- Refunds: a full refund within 14 days of purchase, for any reason (`refund.html`). Everything bundle (owner decision, 2026-11-05): each plug-in in the bundle gets its own 14 days, counted from that plug-in's release, so unreleased plug-ins aren't refundable until they're out. `refund.html` doesn't state the bundle rule yet.
 - Coming-soon plug-ins have no Download or single-licence Buy until they're released.
 - As of 2026-11-18, plug-ins aren't code-signed.
 - Walkthrough videos are on the product pages. Spanda's 15:20 walkthrough is marked "Draft".
 - Tech: static files with no build step. Each page links `site.css`, `site.js` and other scripts with its own `?v=` string, so a changed file needs that string bumped on every page that loads it.
-- Open: may the site name the hardware units the plug-ins are fitted to? Undecided. Until it is, don't add hardware names that aren't already on the site.
+- Hardware names (owner decision, 2026-11-18): the site may name brands, never specific models. For example, "fitted to an LA-2A" is out; "fitted to a Teletronix opto" is fine.
 
 ## Brand Commitments
 - Name: Audio Citra. Plug-in names keep their diacritics (Ākāśa, Gālana, Tulā).
