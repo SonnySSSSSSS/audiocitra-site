@@ -28,7 +28,7 @@ The maker is in the buyer's own situation: a long-time mixer, not a pro studio, 
 ## Capabilities and Constraints
 - Every released plug-in runs fully for 14 days. One licence covers all of the buyer's own computers.
 - Early access (beta): every update is free, including 1.0 and all 1.x.
-- Refunds: a full refund within 14 days of purchase, for any reason (`refund.html`). Everything bundle (owner decision, 2026-11-05): each plug-in in the bundle gets its own 14 days, counted from that plug-in's release, so unreleased plug-ins aren't refundable until they're out. `refund.html` doesn't state the bundle rule yet.
+- Refunds: a full refund within 14 days of purchase, for any reason (`refund.html`). Everything bundle (owner decision, 2026-11-05): each plug-in in the bundle gets its own 14 days, counted from that plug-in's release, so unreleased plug-ins aren't refundable until they're out. As of 2026-11-18 the bundle is off sale until it's repriced (`buy.html`), so `refund.html` leaves this rule out on purpose. Add it to `refund.html` on the day the bundle goes back on sale.
 - Coming-soon plug-ins have no Download or single-licence Buy until they're released.
 - As of 2026-11-18, plug-ins aren't code-signed.
 - Walkthrough videos are on the product pages. Spanda's 15:20 walkthrough is marked "Draft".
