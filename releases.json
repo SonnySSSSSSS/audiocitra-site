@@ -4,6 +4,12 @@
   "releases": [
    {
     "date": "2026-11-19",
+    "build": 1790,
+    "size": 305057007,
+    "notes": "Internal unit-reference switches no longer appear in the DAW's parameter list."
+   },
+   {
+    "date": "2026-11-19",
     "build": 1789,
     "size": 305056699,
     "notes": "The Neural tone browser is powered by TONE3000, plus everything built since ALPHA n5."
