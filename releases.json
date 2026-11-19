@@ -3,6 +3,12 @@
   "name": "Spanda",
   "releases": [
    {
+    "date": "2026-11-19",
+    "build": 1789,
+    "size": 305056699,
+    "notes": "The Neural tone browser is powered by TONE3000, plus everything built since ALPHA n5."
+   },
+   {
     "date": "2026-10-25",
     "build": 1605,
     "size": 233419330,
