@@ -6,7 +6,8 @@ lights). Replaces the old hero, a render of the site's GLB unit (tula_glb.py) in
     CAP=<capture> [CYCLES_DEVICE=GPU] blender -b -noaudio -t 4 -P tula_desk.py -- <out.png> <samples> <res_x> <res_y>
 
 The capture: tula_face_render <dir> (AudioCitraFree, headless), face_citra.png at 2x (1072 x 920 for the 536 x 460 editor), with
-updateAutoCheck answered in the test data folder so no update strip shows, and the resize grip in the corner painted out.
+updateAutoCheck answered in the test data folder so no update strip shows (--manual: the same face with a drum loop playing
+through four linked Tulās, so the lotus is lit; skins-citra.png, 958 x 822), and the resize grip in the corner painted out.
 Positions come from skins/citra/layout.json (380 x 326 layout px, scaled to the editor). Env: LAYOUT = that layout.json;
 KIT = a folder holding noir_plate_kit.py (default Agni's tools/skins); ROOM = the studio image the glossy parts mirror."""
 import bpy, bmesh, json, math, os, sys
@@ -125,6 +126,8 @@ for _n in list(_g.nodes): _g.nodes.remove(_n)
 _tr = _g.nodes.new("ShaderNodeBsdfTransparent"); _gl = _g.nodes.new("ShaderNodeBsdfGlossy"); _gl.inputs["Roughness"].default_value = 0.12
 _fr = _g.nodes.new("ShaderNodeFresnel"); _fr.inputs["IOR"].default_value = 1.5; _mx = _g.nodes.new("ShaderNodeMixShader"); _go = _g.nodes.new("ShaderNodeOutputMaterial")
 _g.links.new(_fr.outputs[0], _mx.inputs[0]); _g.links.new(_tr.outputs[0], _mx.inputs[1]); _g.links.new(_gl.outputs[0], _mx.inputs[2]); _g.links.new(_mx.outputs[0], _go.inputs["Surface"])
+bpy.ops.mesh.primitive_circle_add(vertices=256, radius=117.5 / 100, fill_type="NGON", location=(*P(*hc), 0.0005))   # the display glows behind the glass
+disp = bpy.context.object; disp.data.materials.append(print_mat("display", (0, 0, 0), rough=0.6, coat=0.0, emit=float(os.environ.get("LOTUS_GLOW", "0.9")))); upd(disp)
 bpy.ops.mesh.primitive_uv_sphere_add(segments=128, ring_count=64, radius=117.5 / 100, location=(*P(*hc), 0))
 gd = bpy.context.object; gd.scale.z = 3.0 * MMU / 1.175; smooth(gd, 80); gd.data.materials.append(M_GLASS); gd.visible_shadow = False
 
