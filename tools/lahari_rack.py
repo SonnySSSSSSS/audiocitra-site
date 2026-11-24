@@ -223,7 +223,14 @@ for o in list(bpy.data.objects):
 rig.rotation_euler = (math.pi / 2, 0, 0)
 FLOOR = -CH / 2 - 0.22 * U
 rig.location = (0, 0, -FLOOR)
-M_GROUND = mat("ground", (0.006, 0.005, 0.006), rough=0.6); M_GROUND.node_tree.nodes["Principled BSDF"].inputs["Specular IOR Level"].default_value = 0.0
+# the desk (owner 2026-11-25: a black void under the rack read as unreal): dark oiled oak, long fibres along X, a soft sheen
+M_GROUND = bpy.data.materials.new("ground"); M_GROUND.use_nodes = True; _dt = M_GROUND.node_tree; _db = _dt.nodes["Principled BSDF"]
+_nz = _dt.nodes.new("ShaderNodeTexNoise"); _nz.inputs["Scale"].default_value = 1.0; _nz.inputs["Detail"].default_value = 12.0; _nz.inputs["Roughness"].default_value = 0.62
+_tc = _dt.nodes.new("ShaderNodeTexCoord"); _mp = _dt.nodes.new("ShaderNodeMapping"); _mp.inputs["Scale"].default_value = (0.16, 4.5, 1.0)
+_dt.links.new(_tc.outputs["Object"], _mp.inputs["Vector"]); _dt.links.new(_mp.outputs["Vector"], _nz.inputs["Vector"])
+_cr = _dt.nodes.new("ShaderNodeValToRGB"); _cr.color_ramp.elements[0].color = (0.005, 0.003, 0.002, 1); _cr.color_ramp.elements[1].color = (0.020, 0.012, 0.008, 1)
+_dt.links.new(_nz.outputs["Fac"], _cr.inputs["Fac"]); _dt.links.new(_cr.outputs["Color"], _db.inputs["Base Color"])
+_db.inputs["Roughness"].default_value = 0.6; _db.inputs["Specular IOR Level"].default_value = 0.25   # matte enough that no softbox mirrors in it
 bpy.ops.mesh.primitive_plane_add(size=300, location=(0, 0, 0)); bpy.context.object.data.materials.append(M_GROUND)
 def warea(name, loc, size, power, color, target=(0, 6, 3)):
     loc = tuple(v * U for v in loc); target = tuple(v * U for v in target)
@@ -233,6 +240,14 @@ def warea(name, loc, size, power, color, target=(0, 6, 3)):
 warea("top", (0, 6, 16), (16, 10), 2000, (1.0, 0.93, 0.85))
 warea("rimR", (16, 18, 7), (2, 9), 900, (1.0, 0.75, 0.65))
 warea("rimL", (-16, 14, 5), (2, 7), 350, (0.6, 0.75, 1.0))
+# the rims and the lid softbox light the rack only: on the desk the softbox threw the rack's shadow forward with a hard far edge
+_desk = bpy.data.collections.new("desk_only")
+for _o in bpy.data.objects:
+    if _o.type == "MESH" and _o.active_material is not None and _o.active_material.name == "ground": _desk.objects.link(_o)
+for _o in bpy.data.objects:
+    if _o.type == "LIGHT" and _o.name in ("rimR", "rimL", "top"):
+        _o.light_linking.receiver_collection = _desk
+        for _c in _desk.collection_objects: _c.light_linking.link_state = "EXCLUDE"
 sc.view_settings.exposure = float(os.environ.get("EXPOSURE", "0.35"))
 def card(loc, size, strength, warm=(1.0, 0.9, 0.78)):
     loc = tuple(v * U for v in loc)
@@ -246,7 +261,7 @@ def card(loc, size, strength, warm=(1.0, 0.9, 0.78)):
     nt.links.new(mx_.outputs[0], o.inputs[0]); c.data.materials.append(m)
     c.visible_camera = False; c.visible_diffuse = False; c.visible_shadow = False; return c
 card((-9, -15, 9), (11, 7), 8.0); card((12, -12, 5), (4, 10), 5.0, (0.8, 0.88, 1.0))
-card((0.5, -7.5, 0.02), (22, 7), 0.6).rotation_euler = (0, 0, 0)
+# (the reflector card that lay on the table is gone: on the oak desk it showed as a hard-edged lighter patch)
 wn = sc.world.node_tree; N = wn.nodes; Lk = wn.links
 bg = N["Background"]; lp = N.new("ShaderNodeLightPath"); env = N.new("ShaderNodeBackground"); env.inputs[0].default_value = (0.55, 0.45, 0.36, 1)
 mxw = N.new("ShaderNodeMixShader"); Lk.new(lp.outputs["Is Glossy Ray"], mxw.inputs[0]); Lk.new(bg.outputs[0], mxw.inputs[1]); Lk.new(env.outputs[0], mxw.inputs[2])
