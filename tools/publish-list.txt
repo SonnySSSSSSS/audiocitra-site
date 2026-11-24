@@ -36,7 +36,6 @@ galana.html
 img/agni-engine.jpg
 img/agni-hero.jpg
 img/agni-master.jpg
-img/akasa-b-detail.jpg
 img/akasa-oxblood-hero.jpg
 img/aroll-noir-detail.jpg
 img/aroll-noir-hero.jpg
