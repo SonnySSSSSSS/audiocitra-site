@@ -89,6 +89,85 @@ for (x, y, rs, rc, deg) in KN:
     bpy.ops.mesh.primitive_cylinder_add(vertices=160, radius=R_c, depth=top - hs, location=(cx, cy, hs + (top - hs) / 2)); k = bpy.context.object
     k.data.materials.append(m); bevel(k, R_c * 0.16, 8); smooth(k); planar_uv(k)
 
+# ---------- every other control as hardware (owner 2026-11-25: the round display, header, VU meters and keys read flat) ----------
+# Editor px from the 3x captures (the spec files predate the current header). Heights in mm: keys 3-6, bezels 3-6, the glass dome 8.
+MMU = 1.0 / MM_PER_PX / 100.0                   # scene units per mm
+def upd(o): bpy.context.view_layer.update(); planar_uv(o); return o
+def key(x0, y0, x1, y1, h_mm, rad=4, side=None, rough=0.35, coat=0.5, metal=0.0, emit=0.0):
+    """a raised part: its printed face on top, its sides in the colour of its printed edge"""
+    side = side or ring_col_rect(x0, y0, x1, y1)
+    o = K.rrect(x0, y0, x1, y1, rad, 0.0, h_mm * MMU, "key"); o.data.materials.append(print_mat("keym", side, rough, coat, metal, emit))
+    bevel(o, min(1.2 * MMU, (min(x1 - x0, y1 - y0) / 100.0) * 0.18), 3, 40); smooth(o, 40); return upd(o)
+def ring_col_rect(x0, y0, x1, y1):
+    k = cw / W; a, b = int(x0 * k) + 2, int(x1 * k) - 2; c, d = int(y0 * k) + 2, int(y1 * k) - 2
+    rows = pxs[chh - 1 - d:chh - 1 - c, a:b, :3]; edge = np.concatenate([rows[:3].reshape(-1, 3), rows[-3:].reshape(-1, 3)])
+    return tuple(float(v) * 0.8 for v in np.median(edge, axis=0))
+def frame(x0, y0, x1, y1, t, h_mm, rad=4, metal=0.0, glass=True):
+    """a bezel round a window: the printed frame raised, the window's print left on the floor under a glass sheet"""
+    side = ring_col_rect(x0, y0, x1, y1)
+    for (a, b, c, d) in ((x0, y0, x1, y0 + t), (x0, y1 - t, x1, y1), (x0, y0 + t, x0 + t, y1 - t), (x1 - t, y0 + t, x1, y1 - t)):
+        o = K.box((a + c) / 2 / 100 - W / 200, H / 200 - (b + d) / 2 / 100, (c - a) / 100, (d - b) / 100, 0.0, h_mm * MMU)
+        o.data.materials.append(print_mat("bezel", side, 0.3, 0.5, metal)); bevel(o, min(0.8 * MMU, t / 100 * 0.3), 2, 40); upd(o)
+    if glass: sheet(x0 + t, y0 + t, x1 - t, y1 - t, h_mm * MMU * 0.7)
+M_GLASS = bpy.data.materials.new("glass"); M_GLASS.use_nodes = True; _g = M_GLASS.node_tree
+for _n in list(_g.nodes): _g.nodes.remove(_n)
+_tr = _g.nodes.new("ShaderNodeBsdfTransparent"); _gl = _g.nodes.new("ShaderNodeBsdfGlossy"); _gl.inputs["Roughness"].default_value = 0.03
+_fr = _g.nodes.new("ShaderNodeFresnel"); _fr.inputs["IOR"].default_value = 1.5; _mx = _g.nodes.new("ShaderNodeMixShader"); _go = _g.nodes.new("ShaderNodeOutputMaterial")
+_g.links.new(_fr.outputs[0], _mx.inputs[0]); _g.links.new(_tr.outputs[0], _mx.inputs[1]); _g.links.new(_gl.outputs[0], _mx.inputs[2]); _g.links.new(_mx.outputs[0], _go.inputs["Surface"])
+def sheet(x0, y0, x1, y1, z):
+    o = K.box((x0 + x1) / 200 - W / 200, H / 200 - (y0 + y1) / 200, (x1 - x0) / 100, (y1 - y0) / 100, z, z + 0.002)
+    o.data.materials.append(M_GLASS); o.visible_shadow = False
+def ring(cx_, cy_, r0, r1, h_mm, metal=0.0, rough=0.3):
+    """a raised annulus (a bezel ring), its print on top"""
+    side = ring_col(cx_, cy_, r0, r1)
+    o = K.lathe([(r0 / 100, 0.0), (r1 / 100, 0.0), (r1 / 100, h_mm * MMU), (r0 / 100, h_mm * MMU)], 192, "ring")
+    o.location = (*P(cx_, cy_), 0); o.data.materials.append(print_mat("ringm", side, rough, 0.5, metal)); bevel(o, 0.6 * MMU, 3, 40); smooth(o, 40)
+    return upd(o)
+def dome(cx_, cy_, r, h_mm, m=None, emit=0.0):
+    """a lens, lamp or screw head: a flattened sphere standing on the panel, the capture printed on it"""
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=64, ring_count=32, radius=r / 100, location=(*P(cx_, cy_), 0)); o = bpy.context.object
+    o.scale.z = h_mm * MMU / (r / 100); smooth(o, 80)
+    o.data.materials.append(m or print_mat("domem", ring_col(cx_, cy_, r * 0.8, r), 0.15, 1.0, 0.0, emit)); return upd(o)
+def toggle(cx_, cy_):
+    """a bat-handle toggle: a hex nut, a chrome bat, a ball tip"""
+    x_, y_ = P(cx_, cy_); ch = mat("chrome2", (0.86, 0.86, 0.88), metal=1.0, rough=0.12)
+    bpy.ops.mesh.primitive_cylinder_add(vertices=6, radius=12 / 100, depth=3 * MMU, location=(x_, y_, 1.5 * MMU)); bpy.context.object.data.materials.append(ch)
+    bpy.ops.mesh.primitive_cylinder_add(vertices=32, radius=3.2 / 100, depth=16 * MMU, location=(x_, y_ + 4 / 100, 9 * MMU))
+    b_ = bpy.context.object; b_.rotation_euler.x = math.radians(-22); b_.data.materials.append(ch); smooth(b_)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=4.5 / 100, location=(x_, y_ + 7.5 / 100, 17 * MMU)); bpy.context.object.data.materials.append(ch); smooth(bpy.context.object)
+    for o in bpy.data.objects:           # the printed toggle under it stays on the panel: hide nothing, it reads as the nut's shadow
+        pass
+
+if SKIN == "fantasy":
+    key(330, 27, 569, 54, 3.0, rad=8)                                  # the preset bar
+    for a, b in ((578, 605), (609, 636), (640, 682)): key(a, 31, b, 53, 4.0, rad=4)      # A, B, COPY
+    dome(711, 41, 9, 4.0, emit=0.6); dome(795, 41, 7, 3.0)             # ACTIVE / BYPASS lamps
+    ring(450, 264, 118, 143, 3.0)                                      # the astrolabe's outer ring (unit names engraved)
+    ring(450, 264, 110, 120, 6.0, metal=0.9, rough=0.22)               # its gold bezel
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=96, ring_count=48, radius=110 / 100, location=(*P(450, 264), 0))   # the glass dome
+    gd = bpy.context.object; gd.scale.z = 8.0 * MMU / 1.10; smooth(gd, 80); gd.data.materials.append(M_GLASS); gd.visible_shadow = False
+    dome(450, 106, 8, 4.0, emit=0.8)                                   # the lamp above it
+    for (sx_, sy_) in ((315, 183), (585, 183), (315, 338), (585, 338), (450, 417)): dome(sx_, sy_, 6, 2.0)   # screws round it
+    key(260, 473, 640, 513, 3.0, rad=8)                                # the program bar
+    key(36, 480, 131, 501, 3.0, rad=4); key(138, 480, 241, 501, 3.0, rad=4)   # Vibrato, Preamp
+    key(14, 418, 73, 445, 2.5, rad=4); key(826, 418, 885, 445, 2.5, rad=4)    # the meter readouts
+    for (a, b) in ((30, 58), (842, 870)): frame(a, 98, b, 412, 3, 3.0, rad=2)  # the LED meter columns
+    for xx in (125, 235, 665, 775):                                    # the value boxes under the knobs
+        for yy in (224, 402): key(xx - 36, yy - 13, xx + 36, yy + 13, 2.5, rad=4)
+else:
+    key(59, 21, 279, 95, 3.0, rad=4)                                   # the logo plate
+    frame(348, 29, 552, 77, 6, 3.0, rad=4)                             # the preset display's bezel
+    key(304, 34, 342, 72, 6.0, rad=3); key(558, 34, 596, 72, 6.0, rad=3)      # preset < >
+    for a, b in ((602, 620), (624, 642), (646, 680)): key(a, 44, b, 62, 3.5, rad=3)      # A, B, COPY
+    ring(710, 56, 19, 24, 3.0); dome(710, 56, 19, 8.0, emit=0.5)       # EFFECT: a red lens in its collar
+    toggle(795, 55)                                                    # BYPASS
+    for (sx_, sy_) in ((46, 56), (854, 56), (46, 136), (854, 136)): dome(sx_, sy_, 6, 2.0)
+    for (a, b) in ((58, 228), (672, 842)): frame(a, 160, b, 290, 8, 5.0, rad=6)   # the VU meters
+    for (c, d) in ((162, 208), (216, 262), (270, 316)): key(525, c, 647, d, 6.0, rad=3)  # the program keys
+    key(254, 288, 345, 304, 2.5, rad=6); key(254, 309, 345, 325, 2.5, rad=6)  # Vibrato, Preamp
+    for xx in (107, 205, 303, 401, 499, 597, 695, 793): key(xx - 29, 504, xx + 29, 521, 2.0, rad=2)   # the value boxes
+    for (sx_, sy_) in ((46, 543), (854, 543)): dome(sx_, sy_, 6, 2.0)
+
 # ---------- the rack: ears, handles, crinkle chassis (the Noir rack shots, scaled to this face) ----------
 U = W / 1280.0                                 # the Noir rack's parts were sized for a 1280 px face
 EAR, CD = 0.78 * U, 13.0 * U
