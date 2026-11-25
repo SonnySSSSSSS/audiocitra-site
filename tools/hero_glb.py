@@ -55,27 +55,62 @@ vfov = 2 * math.atan(math.tan(cam.data.angle_x / 2) / asp) if cam.data.sensor_fi
 
 RIG = ("softbox", "card", "reflector", "lightcard", "cyc", "sweep")
 
+# the unit: every rendered mesh near the camera's target that is not the room (desk, floor, walls) or the light rig. The target
+# is where the camera's centre ray lands, often the desk in front of the unit, so the unit is found by kind, not by distance
+ROOMN = tuple(os.environ.get("ENV_KEEP", "ground,desk,oak,floor,wall,room,backdrop").split(","))
+def unit_objects(reach=float(os.environ.get("UNIT_REACH", "40"))):
+    out = []
+    for o in sc.objects:
+        if o.type not in ("MESH", "CURVE", "FONT") or o.hide_render: continue
+        mn = [m.name.lower() for m in getattr(o.data, "materials", []) if m]
+        if any(n.startswith(k) for n in mn for k in ROOMN + RIG): continue
+        c = sum((o.matrix_world @ Vector(b) for b in o.bound_box), Vector()) / 8
+        if (c - target).length < reach: out.append(o)
+    return out
+
+# the pivot: the page turns the unit about the camera's target, so the target is moved along the centre ray (the framing does not
+# change) to the point nearest the unit's centre; turning about the desk in front swung the unit half out of the frame
+_u = unit_objects()
+if _u and os.environ.get("PIVOT", "unit") == "unit":
+    _lo = Vector([min((o.matrix_world @ Vector(b))[i] for o in _u for b in o.bound_box) for i in range(3)])
+    _hi = Vector([max((o.matrix_world @ Vector(b))[i] for o in _u for b in o.bound_box) for i in range(3)])
+    _t = max(1.0, (((_lo + _hi) / 2) - cam.matrix_world.translation).dot(fwd))
+    print("HERO_PIVOT", round(dist, 2), "->", round(_t, 2))
+    dist, target = _t, cam.matrix_world.translation + fwd * _t
+
 # 2b. ENV=1: the environment the viewer lights metals with: an equirect HDR of this scene's lights and room, seen from the
 # unit's centre with the unit hidden and the reflector cards made visible (they light the still only by reflection)
 if os.environ.get("ENV") == "1":
     ex, ey = (int(v) for v in os.environ.get("ENV_RES", "2048x1024").split("x"))
-    unit_r = float(os.environ.get("ENV_UNIT_R", "12"))                  # objects whose centre is this close to the target = the unit
-    keepn = tuple(os.environ.get("ENV_KEEP", "ground,desk,oak,floor,wall,room,backdrop").split(","))
-    for o in sc.objects:
-        if o.type not in ("MESH", "CURVE", "FONT"): continue
-        mn = [m.name.lower() for m in getattr(o.data, "materials", []) if m]
-        if any(n.startswith(r) for n in mn for r in RIG): o.visible_camera = True; o.hide_render = False; continue
-        c = sum((o.matrix_world @ Vector(b) for b in o.bound_box), Vector()) / 8
-        if (c - target).length < unit_r and not any(n.startswith(k) for n in mn for k in keepn): o.hide_render = True
+    unit = unit_objects()
+    lo = Vector([min((o.matrix_world @ Vector(b))[i] for o in unit for b in o.bound_box) for i in range(3)])
+    hi = Vector([max((o.matrix_world @ Vector(b))[i] for o in unit for b in o.bound_box) for i in range(3)])
+    centre = (lo + hi) / 2
+    for o in unit: o.hide_render = True
+    for o in sc.objects:                                                # the reflector cards light the still only by reflection
+        mn = [m.name.lower() for m in getattr(o.data, "materials", []) if m] if o.type == "MESH" else []
+        if any(n.startswith(r) for n in mn for r in RIG): o.visible_camera = True; o.hide_render = False
     pc = bpy.data.cameras.new("env"); pc.type = "PANO"; pc.panorama_type = "EQUIRECTANGULAR"
     po = bpy.data.objects.new("env", pc); sc.collection.objects.link(po)
-    po.location = target; po.rotation_euler = (math.radians(90), 0, math.radians(-90))     # glTF +z (the unit's front) at the map's centre
+    po.location = centre; po.rotation_euler = (math.radians(90), 0, math.radians(-90))     # glTF +z (the unit's front) at the map's centre
     sc.camera = po; sc.render.resolution_x, sc.render.resolution_y = ex, ey; sc.render.resolution_percentage = 100
     sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("ENV_SAMPLES", "128"))
     sc.render.image_settings.file_format = "HDR"; sc.render.filepath = os.path.splitext(OUT)[0] + "_env.hdr"
     sc.view_settings.view_transform = "Standard"; sc.view_settings.look = "None"; sc.view_settings.exposure = 0
     _real_render(write_still=True)
     print("HERO_ENV", sc.render.filepath); sys.exit(0)
+
+# 2c. PLATE=1: the still's own frame with the unit hidden (<out>_plate.png at the scene's resolution and colour settings). The
+# page shows it under the model while the model is live, so a turned unit never uncovers the still's unit behind it
+if os.environ.get("PLATE") == "1":
+    unit = unit_objects()
+    for o in unit: o.hide_render = True
+    print("HERO_PLATE hidden", len(unit), "of", len(sc.objects), "shown:", sorted({m.name for o in sc.objects if o.type == "MESH" and not o.hide_render for m in o.data.materials if m}))
+    if os.environ.get("PLATE_DRY"): sys.exit(0)
+    sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("PLATE_SAMPLES", "128"))
+    sc.render.image_settings.file_format = "PNG"; sc.render.filepath = os.path.splitext(OUT)[0] + "_plate.png"
+    _real_render(write_still=True)
+    print("HERO_PLATE", sc.render.filepath); sys.exit(0)
 
 # 3. what to keep: meshes that render, near the unit; never the light rig (area-light cards, softboxes, reflectors)
 KEEP_DIST = float(os.environ.get("KEEP_DIST", "60"))
@@ -90,6 +125,12 @@ for o in list(sc.objects):
         drop.append(o); continue
     c = sum((o.matrix_world @ Vector(b) for b in o.bound_box), Vector()) / 8
     if (c - target).length > KEEP_DIST: drop.append(o)
+# the kept meshes' modifiers are applied first: their boolean cutters are hidden objects about to be dropped, and a boolean
+# without its cutter cuts nothing (the Limiter's VFD window and brass frame came out solid)
+dg = bpy.context.evaluated_depsgraph_get()
+for o in [o for o in sc.objects if o.type == "MESH" and o.modifiers and o not in drop]:
+    me = bpy.data.meshes.new_from_object(o.evaluated_get(dg), preserve_all_data_layers=True, depsgraph=dg)
+    o.modifiers.clear(); o.data = me
 for o in drop: bpy.data.objects.remove(o, do_unlink=True)
 
 # live parts (object or material name equal to a LIVE entry, ignoring Blender's .001 suffixes): renamed LIVE_<name> for the page's
@@ -133,7 +174,16 @@ if crop:
     for o in sc.objects:
         if o.type != "MESH" or o.data in done or not o.active_material or not o.active_material.name.startswith("LIVE_"): continue
         done.add(o.data)
-        for d in o.data.uv_layers.active.data: d.uv = ((d.uv.x - u0) / (u1 - u0), (d.uv.y - v0) / (v1 - v0))
+        if len(o.data.vertices) == 4:
+            # a layer plane: cut it down to the crop, so no part of it shows the video outside the crop (tiled, the turned model
+            # showed a second display beside the first)
+            uvl = o.data.uv_layers.active.data
+            for li, lp in enumerate(o.data.loops):
+                v = o.data.vertices[lp.vertex_index]; u = uvl[li].uv
+                v.co.x = (u0 if u.x < 0.5 else u1) - 0.5; v.co.y = (v0 if u.y < 0.5 else v1) - 0.5
+            for d in uvl: d.uv = (0.0 if d.uv.x < 0.5 else 1.0, 0.0 if d.uv.y < 0.5 else 1.0)
+        else:
+            for d in o.data.uv_layers.active.data: d.uv = ((d.uv.x - u0) / (u1 - u0), (d.uv.y - v0) / (v1 - v0))
         poster = os.path.splitext(crop)[0].removesuffix(".crop") + ".png"
         for n in o.active_material.node_tree.nodes:
             if n.bl_idname == "ShaderNodeTexImage" and os.path.exists(poster): n.image = bpy.data.images.load(poster); n.extension = "CLIP"
@@ -150,6 +200,10 @@ if BAKE:
     sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("BAKE_SAMPLES", "64"))
     sc.render.bake.margin = 8
     outdir = os.path.splitext(OUT)[0] + "_bake"; os.makedirs(outdir, exist_ok=True)
+    # the live parts are out of the bake: lit surfaces right behind them (the Limiter's VFD floor) would keep a sharp copy of
+    # the poster frame that the video then plays beside, a ghost display as the unit turns
+    live_hidden = [o for o in sc.objects if o.active_material and o.active_material.name.startswith("LIVE_") and not o.hide_render]
+    for o in live_hidden: o.hide_render = True
     for o in [o for o in sc.objects if o.type in ("CURVE", "FONT", "SURFACE", "META")]:    # text and curves to meshes (UVs)
         bpy.ops.object.select_all(action="DESELECT"); o.select_set(True); bpy.context.view_layer.objects.active = o
         bpy.ops.object.convert(target="MESH")
@@ -212,6 +266,7 @@ if BAKE:
                       and len({s.material for s in o.material_slots if s.material}) > 1})
     print("BAKED", len(groups), "materials:", report_bake, "| multi-material objects left unbaked:", skipped)
     report_baked, report_unbaked = report_bake, skipped
+    for o in live_hidden: o.hide_render = False
 
 # 5. what survives glTF: a Principled BSDF fed by image textures (or plain values); anything procedural is lost
 def survives(m):

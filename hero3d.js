@@ -1,5 +1,5 @@
 // Front-page heroes as real-time 3D: a room whose <article> carries data-hero3d="3d/hero/<name>" gets that unit as a model
-// (<name>.glb, framed by <name>.json from tools/hero_glb.py) over its still. The unit turns a few degrees toward the pointer
+// (<name>.glb, framed by <name>.json from tools/hero_glb.py) over its still, on <name>_plate.webp (the still's frame without the unit). The unit turns a few degrees toward the pointer
 // and eases back when it leaves; on touch screens it sways gently. Live parts (a VFD, meters, a lotus) play the videos named in
 // data-live ('{"LIVE_vfd":"3d/hero/lim-vfd"}': .webm and .mp4 beside it) on their emissive texture.
 // The still stays the page's image: the model fades in over it only once it has drawn, only in the room that is on, and never
@@ -27,8 +27,9 @@
       maskImage: cs.maskImage, webkitMaskImage: cs.webkitMaskImage, filter: cs.filter });
     const a = s.cam.aspect, k = Math.max(ir.width / a, ir.height);                  // cover: the canvas height
     const w = k * a, h = k, [px, py] = cs.objectPosition.split(" ").map(v => parseFloat(v) / 100);
-    Object.assign(s.el.style, { width: w + "px", height: h + "px", left: (ir.width - w) * (isNaN(px) ? .5 : px) + "px",
-      top: (ir.height - h) * (isNaN(py) ? .5 : py) + "px" });
+    const box = { width: w + "px", height: h + "px", left: (ir.width - w) * (isNaN(px) ? .5 : px) + "px",
+      top: (ir.height - h) * (isNaN(py) ? .5 : py) + "px" };
+    Object.assign(s.el.style, box); if (s.plate) Object.assign(s.plate.style, box);
   }
 
   const orbit = (c, dt = 0, dp = 0) => `${c.theta_deg + dt}deg ${c.phi_deg + dp}deg ${c.radius}m`;
@@ -53,6 +54,11 @@
     el.setAttribute("shadow-intensity", "0"); el.setAttribute("interaction-prompt", "none");
     el.setAttribute("disable-zoom", ""); el.setAttribute("disable-pan", ""); el.setAttribute("disable-tap", "");
     el.setAttribute("loading", "eager"); el.setAttribute("reveal", "auto");
+    // under the model, the still's own frame without the unit (<name>_plate.webp), so a turned unit never uncovers the still's
+    if (room.dataset.hero3dPlate !== "none") {
+      s.plate = document.createElement("img"); s.plate.alt = ""; s.plate.decoding = "async";
+      s.plate.src = room.dataset.hero3dPlate || base + "_plate.webp"; s.wrap.append(s.plate);
+    }
     s.wrap.append(el);
     room.querySelector(":scope > img").after(s.wrap);
     fit(room, s);
@@ -63,7 +69,9 @@
         const ext = document.createElement("video").canPlayType('video/webm; codecs="vp9"') ? ".webm" : ".mp4";
         const tex = el.createVideoTexture(src + ext);
         m.emissiveTexture.setTexture(tex);
-        s.videos.push(tex);
+        const smp = m.emissiveTexture.texture && m.emissiveTexture.texture.sampler;          // never tile the video
+        if (smp) { smp.setWrapS(33071); smp.setWrapT(33071); }
+        unflip(tex); s.videos.push(tex);
       }
       // the model shows only once it has drawn a frame, so the still is never swapped for a blank canvas
       requestAnimationFrame(() => requestAnimationFrame(() => { s.ready = true; if (room.classList.contains("on")) on(room); }));
@@ -77,6 +85,11 @@
     const sym = Object.getOwnPropertySymbols(src).find(k => k.description === "correlatedObjects");
     for (const o of (sym && src[sym]) || []) { const v = o && o.source && o.source.data; if (v instanceof HTMLVideoElement) return v; }
     return null;
+  }
+  // glTF textures are stored top row first (flipY off); a video texture comes with three.js's default flipY on, so it plays upside down
+  function unflip(tex) {
+    const src = tex && tex.source, sym = src && Object.getOwnPropertySymbols(src).find(k => k.description === "correlatedObjects");
+    for (const o of (sym && src[sym]) || []) if (o && "flipY" in o) { o.flipY = false; o.needsUpdate = true; }
   }
   const play = tex => { const v = videoOf(tex); if (v) v.play().catch(() => {}); };
   const pause = tex => { const v = videoOf(tex); if (v) v.pause(); };
