@@ -499,5 +499,6 @@ document.querySelectorAll(".walk").forEach(el => {
     video.readyState >= 1 ? go() : video.addEventListener("loadedmetadata", go, { once: true });
   };
   poster.addEventListener("click", () => start(0));
+  el.addEventListener("walk-stop", () => { el.querySelector("iframe")?.replaceWith(poster); video?.pause(); });
   el.querySelectorAll(".walk-ch button").forEach(b => b.addEventListener("click", () => start(+b.dataset.t)));
 });

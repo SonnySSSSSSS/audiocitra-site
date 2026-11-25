@@ -36,6 +36,7 @@
   let cur = -1, pushed = false;
   const quiet = pane => {
     pane.querySelectorAll("audio,video").forEach(a => a.pause());
+    pane.querySelectorAll(".walk").forEach(w => w.dispatchEvent(new Event("walk-stop")));  // YouTube players: put the poster back
     pane.querySelectorAll('.try-play[aria-pressed="true"]').forEach(b => b.click());
   };
   function show(i, { push = true } = {}) {
@@ -61,7 +62,7 @@
   dlg.addEventListener("close", () => {
     document.documentElement.classList.remove("proj-open");
     const was = cur; cur = -1;
-    if (was >= 0) items[was].el.hidden = true;  // else the next slide opens with this pane still showing above it
+    if (was >= 0) { quiet(items[was].el); items[was].el.hidden = true; }  // Esc and Back close without close(); else the next slide opens with this pane still showing above it
     reel.querySelectorAll(".slide").forEach(a => a.removeAttribute("aria-current"));
     if (pushed) { pushed = false; history.back(); }
     if (was >= 0) reel.querySelectorAll(".slide")[was]?.focus({ preventScroll: true });
