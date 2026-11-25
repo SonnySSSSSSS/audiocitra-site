@@ -69,13 +69,34 @@ for o in list(sc.objects):
     if (c - target).length > KEEP_DIST: drop.append(o)
 for o in drop: bpy.data.objects.remove(o, do_unlink=True)
 
-# live parts (matched by object or material name): their material keeps its image (the poster frame) and is renamed LIVE_<name>
-# for the page's video swap
+# live parts (object or material name equal to a LIVE entry, ignoring Blender's .001 suffixes): renamed LIVE_<name> for the page's
+# video swap; unlit, their image (the poster frame) as emission over a black base, so nothing lit shows under the video
+base = lambda n: n.split(".")[0]
 live_mats = {}
 for o in sc.objects:
     m = o.active_material if o.type == "MESH" else None
-    if m and not m.name.startswith("LIVE_") and any(o.name.startswith(p) or m.name.startswith(p) for p in LIVE):
-        live_mats[m.name] = m.name = "LIVE_" + m.name.split(".")[0]
+    if m and not m.name.startswith("LIVE_") and (base(o.name) in LIVE or base(m.name) in LIVE):
+        live_mats[m.name] = m.name = "LIVE_" + base(m.name)
+for m in bpy.data.materials:
+    if not m.name.startswith("LIVE_") or not m.use_nodes: continue
+    nt = m.node_tree; im = next((n.image for n in nt.nodes if n.bl_idname == "ShaderNodeTexImage" and n.image), None)
+    nt.nodes.clear()                                   # node references go stale as nodes go: rebuild from the image alone
+    out = nt.nodes.new("ShaderNodeOutputMaterial"); b = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    tex = None
+    if im: tex = nt.nodes.new("ShaderNodeTexImage"); tex.image = im; tex.extension = "CLIP"
+    nt.links.new(b.outputs[0], out.inputs["Surface"]); b.inputs["Base Color"].default_value = (0, 0, 0, 1)
+    b.inputs["Roughness"].default_value = 1.0; b.inputs["Specular IOR Level"].default_value = 0.0
+    if tex: nt.links.new(tex.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 1.0
+
+# glass and see-through sheets (a transparent BSDF in a mix): glTF has no such mix, so a dark low-alpha blend that keeps a highlight
+for m in bpy.data.materials:
+    if not m.use_nodes or not any(n.bl_idname == "ShaderNodeBsdfTransparent" for n in m.node_tree.nodes): continue
+    nt = m.node_tree; nt.nodes.clear()
+    b = nt.nodes.new("ShaderNodeBsdfPrincipled"); out = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(b.outputs[0], out.inputs["Surface"])
+    b.inputs["Base Color"].default_value = (0.01, 0.01, 0.012, 1); b.inputs["Roughness"].default_value = 0.06
+    b.inputs["Alpha"].default_value = float(os.environ.get("GLASS_ALPHA", "0.22"))
+    if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
+    m["hero_glass"] = True
 
 # LIVE_CROP=<hero_frames.py's .crop.json>: the live parts' video holds only the crop of the full layer, so their UVs move onto it
 crop = os.environ.get("LIVE_CROP")
@@ -91,52 +112,74 @@ if crop:
         for n in o.active_material.node_tree.nodes:
             if n.bl_idname == "ShaderNodeTexImage" and os.path.exists(poster): n.image = bpy.data.images.load(poster); n.extension = "CLIP"
 
-report = {"scene": os.path.basename(SCENE), "kept": [], "dropped": [o for o in []], "materials": {}}
+report = {"scene": os.path.basename(SCENE), "kept": [], "materials": {}}
 
-# 4. bake (heavy; BAKE=1 only)
+# 4. bake (heavy; BAKE=1 only). One texture per material, not per object: every object of a bakeable material is joined into one
+# mesh and unwrapped together. Bakeable: not live, not glass, not metal (a diffuse bake of metal is black; metals stay PBR and take
+# their highlights from the viewer's environment map, rendered from this scene). The bake goes in as emission over a black base:
+#   diffuse: the diffuse light (direct + indirect, colour) baked; roughness kept, so a dielectric highlight still moves as it turns
+#   full:    everything baked (COMBINED), no highlight of its own
 if BAKE:
-    px, fpx = int(os.environ.get("BAKE_PX", "1024")), int(os.environ.get("FACE_PX", "2048"))
+    px = int(os.environ.get("BAKE_PX", "2048"))
     sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("BAKE_SAMPLES", "64"))
     sc.render.bake.margin = 8
     outdir = os.path.splitext(OUT)[0] + "_bake"; os.makedirs(outdir, exist_ok=True)
-    meshes = [o for o in sc.objects if o.type in ("CURVE", "FONT", "SURFACE", "META")]
-    for o in meshes:                                   # text and curves to meshes so they can carry UVs
+    for o in [o for o in sc.objects if o.type in ("CURVE", "FONT", "SURFACE", "META")]:    # text and curves to meshes (UVs)
         bpy.ops.object.select_all(action="DESELECT"); o.select_set(True); bpy.context.view_layer.objects.active = o
         bpy.ops.object.convert(target="MESH")
+    def principled(m):
+        return m.node_tree.nodes.get("Principled BSDF") if m and m.use_nodes else None
+    def bakeable(m):
+        if not m or m.name.startswith("LIVE_") or m.get("hero_glass"): return False
+        b = principled(m)
+        if b and not b.inputs["Metallic"].is_linked and b.inputs["Metallic"].default_value >= 0.5: return False
+        return True
+    groups = {}
     for o in [o for o in sc.objects if o.type == "MESH"]:
-        if o.active_material and o.active_material.name.startswith("LIVE_"): continue
-        me = o.data
-        if not me.uv_layers:
-            bpy.ops.object.select_all(action="DESELECT"); o.select_set(True); bpy.context.view_layer.objects.active = o
-            bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.select_all(action="SELECT")
-            bpy.ops.uv.smart_project(angle_limit=math.radians(66), island_margin=0.004)
-            bpy.ops.object.mode_set(mode="OBJECT")
-        size = fpx if any(k in o.name.lower() for k in ("face", "panel", "plate")) else px
-        img = bpy.data.images.new("bake_" + o.name, size, size, float_buffer=False)
-        for m in [s.material for s in o.material_slots if s.material]:
-            n = m.node_tree.nodes.new("ShaderNodeTexImage"); n.image = img; m.node_tree.nodes.active = n
-        bpy.ops.object.select_all(action="DESELECT"); o.select_set(True); bpy.context.view_layer.objects.active = o
+        ms = {s.material for s in o.material_slots if s.material}
+        if len(ms) == 1 and bakeable(next(iter(ms))): groups.setdefault(next(iter(ms)).name, []).append(o)
+    report_bake = {}
+    for mname, objs in groups.items():
+        m = bpy.data.materials[mname]
+        bpy.ops.object.select_all(action="DESELECT")
+        for o in objs:
+            if o.data.users > 1: o.data = o.data.copy()
+            o.select_set(True)
+        bpy.context.view_layer.objects.active = objs[0]
+        bpy.ops.object.parent_clear(type="CLEAR_KEEP_TRANSFORM")
+        if len(objs) > 1: bpy.ops.object.join()
+        o = bpy.context.view_layer.objects.active; o.name = "baked_" + mname
+        while o.data.uv_layers: o.data.uv_layers.remove(o.data.uv_layers[0])          # a fresh unwrap for the bake only
+        o.data.uv_layers.new(name="bake")
+        bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.select_all(action="SELECT")
+        bpy.ops.uv.smart_project(angle_limit=math.radians(66), island_margin=0.003)
+        bpy.ops.object.mode_set(mode="OBJECT")
+        img = bpy.data.images.new("bake_" + mname, px, px, float_buffer=True)
+        n = m.node_tree.nodes.new("ShaderNodeTexImage"); n.image = img; m.node_tree.nodes.active = n
         if MODE == "full":
             bpy.ops.object.bake(type="COMBINED")
         else:
             sc.render.bake.use_pass_direct = sc.render.bake.use_pass_indirect = sc.render.bake.use_pass_color = True
             bpy.ops.object.bake(type="DIFFUSE")
-        img.filepath_raw = os.path.join(outdir, img.name + ".png"); img.file_format = "PNG"; img.save()
-        # the object's new material: the bake as its colour (or as emission, unlit, for full)
-        mats = [s.material for s in o.material_slots if s.material]
-        rough = metal = 0.5
-        for m in mats:
-            b = m.node_tree.nodes.get("Principled BSDF")
-            if b: rough = b.inputs["Roughness"].default_value; metal = b.inputs["Metallic"].default_value; break
-        nm = bpy.data.materials.new("baked_" + o.name); nm.use_nodes = True; nt = nm.node_tree; b = nt.nodes["Principled BSDF"]
+        img.filepath_raw = os.path.join(outdir, img.name + ".exr"); img.file_format = "OPEN_EXR"; img.save()
+        # into 0..1 for an 8-bit texture: divide by the bright end, carried back as the emission strength
+        # (glTF KHR_materials_emissive_strength), so baked light above 1 is not clipped
+        import numpy as np
+        pix = np.empty(px * px * 4, np.float32); img.pixels.foreach_get(pix); pix = pix.reshape(-1, 4)
+        peak = max(1.0, float(np.percentile(pix[:, :3].max(1), 99.9)))
+        pix[:, :3] = np.clip(pix[:, :3] / peak, 0, 1); pix[:, 3] = 1
+        ldr = bpy.data.images.new("bake_" + mname + "_ldr", px, px); ldr.pixels.foreach_set(pix.ravel())
+        ldr.filepath_raw = os.path.join(outdir, ldr.name + ".png"); ldr.file_format = "PNG"; ldr.save(); img = ldr
+        b = principled(m); rough = b.inputs["Roughness"].default_value if b else 0.5
+        nm = bpy.data.materials.new("baked_" + mname); nm.use_nodes = True; nt = nm.node_tree; bb = nt.nodes["Principled BSDF"]
         t = nt.nodes.new("ShaderNodeTexImage"); t.image = img
-        if MODE == "full":
-            nt.links.new(t.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 1.0
-            b.inputs["Base Color"].default_value = (0, 0, 0, 1); b.inputs["Roughness"].default_value = 1.0
-        else:
-            nt.links.new(t.outputs["Color"], b.inputs["Base Color"])
-            b.inputs["Roughness"].default_value = rough; b.inputs["Metallic"].default_value = metal
+        nt.links.new(t.outputs["Color"], bb.inputs["Emission Color"]); bb.inputs["Emission Strength"].default_value = peak
+        bb.inputs["Base Color"].default_value = (0, 0, 0, 1)
+        bb.inputs["Roughness"].default_value = 1.0 if MODE == "full" else rough
+        bb.inputs["Specular IOR Level"].default_value = 0.0 if MODE == "full" else 0.5
         o.data.materials.clear(); o.data.materials.append(nm)
+        report_bake[mname] = len(objs)
+    print("BAKED", len(groups), "materials:", report_bake)
 
 # 5. what survives glTF: a Principled BSDF fed by image textures (or plain values); anything procedural is lost
 def survives(m):

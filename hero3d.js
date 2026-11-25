@@ -63,7 +63,7 @@
         const ext = document.createElement("video").canPlayType('video/webm; codecs="vp9"') ? ".webm" : ".mp4";
         const tex = el.createVideoTexture(src + ext);
         m.emissiveTexture.setTexture(tex);
-        s.videos.push(tex.source?.element || tex.source);
+        s.videos.push(tex);
       }
       // the model shows only once it has drawn a frame, so the still is never swapped for a blank canvas
       requestAnimationFrame(() => requestAnimationFrame(() => { s.ready = true; if (room.classList.contains("on")) on(room); }));
@@ -71,13 +71,23 @@
     return s;
   }
 
+  // the <video> behind a model-viewer video texture (3.5.0 keeps it on the three.js texture its wrapper correlates)
+  function videoOf(tex) {
+    const src = tex && tex.source; if (!src) return null;
+    const sym = Object.getOwnPropertySymbols(src).find(k => k.description === "correlatedObjects");
+    for (const o of (sym && src[sym]) || []) { const v = o && o.source && o.source.data; if (v instanceof HTMLVideoElement) return v; }
+    return null;
+  }
+  const play = tex => { const v = videoOf(tex); if (v) v.play().catch(() => {}); };
+  const pause = tex => { const v = videoOf(tex); if (v) v.pause(); };
+
   function on(room) {
     const s = state.get(room); if (!s || !s.ready || !room.classList.contains("on")) return;
-    s.wrap.classList.add("live"); s.videos.forEach(v => v && v.play && v.play().catch(() => {}));
+    s.wrap.classList.add("live"); s.videos.forEach(play);
   }
   function off(room) {
     const s = state.get(room); if (!s || !s.wrap) return;
-    s.wrap.classList.remove("live"); s.videos.forEach(v => v && v.pause && v.pause());
+    s.wrap.classList.remove("live"); s.videos.forEach(pause);
     if (s.cam) s.el.cameraOrbit = orbit(s.cam);
   }
 
