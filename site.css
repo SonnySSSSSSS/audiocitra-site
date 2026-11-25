@@ -607,3 +607,9 @@ body.pale .slide::before,body.pale .slide::after{background-image:radial-gradien
   .room-copy{padding:6px 16px 104px}
   .room-peek{bottom:auto;height:calc((100cqw - 28px) * 9 / 16)}
 }
+
+/* hero3d.js: the unit as a real-time model over its still (fades in once drawn) */
+.room>.h3d{position:absolute;overflow:hidden;opacity:0;transition:opacity .6s;pointer-events:none}
+.room>.h3d.live{opacity:1}
+.room>.h3d model-viewer{position:absolute;background:transparent;--poster-color:transparent;--progress-bar-height:0}
+@media (prefers-reduced-motion:reduce){.room>.h3d{display:none}}
