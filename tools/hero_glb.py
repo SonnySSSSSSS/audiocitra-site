@@ -90,6 +90,9 @@ if os.environ.get("ENV") == "1":
     for o in sc.objects:                                                # the reflector cards light the still only by reflection
         mn = [m.name.lower() for m in getattr(o.data, "materials", []) if m] if o.type == "MESH" else []
         if any(n.startswith(r) for n in mn for r in RIG): o.visible_camera = True; o.hide_render = False
+    for o in sc.objects:                                                # the lamps themselves, as the metals would mirror them
+        if o.type == "LIGHT" and o.data.type in ("AREA", "POINT", "SPOT") and os.environ.get("ENV_LAMPS", "1") == "1":
+            o.visible_camera = True
     pc = bpy.data.cameras.new("env"); pc.type = "PANO"; pc.panorama_type = "EQUIRECTANGULAR"
     po = bpy.data.objects.new("env", pc); sc.collection.objects.link(po)
     po.location = centre; po.rotation_euler = (math.radians(90), 0, math.radians(-90))     # glTF +z (the unit's front) at the map's centre
