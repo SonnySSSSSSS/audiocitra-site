@@ -53,9 +53,32 @@ target = cam.matrix_world.translation + fwd * dist
 asp = sc.render.resolution_x / sc.render.resolution_y
 vfov = 2 * math.atan(math.tan(cam.data.angle_x / 2) / asp) if cam.data.sensor_fit != "VERTICAL" else cam.data.angle_y
 
+RIG = ("softbox", "card", "reflector", "lightcard", "cyc", "sweep")
+
+# 2b. ENV=1: the environment the viewer lights metals with: an equirect HDR of this scene's lights and room, seen from the
+# unit's centre with the unit hidden and the reflector cards made visible (they light the still only by reflection)
+if os.environ.get("ENV") == "1":
+    ex, ey = (int(v) for v in os.environ.get("ENV_RES", "2048x1024").split("x"))
+    unit_r = float(os.environ.get("ENV_UNIT_R", "12"))                  # objects whose centre is this close to the target = the unit
+    keepn = tuple(os.environ.get("ENV_KEEP", "ground,desk,oak,floor,wall,room,backdrop").split(","))
+    for o in sc.objects:
+        if o.type not in ("MESH", "CURVE", "FONT"): continue
+        mn = [m.name.lower() for m in getattr(o.data, "materials", []) if m]
+        if any(n.startswith(r) for n in mn for r in RIG): o.visible_camera = True; o.hide_render = False; continue
+        c = sum((o.matrix_world @ Vector(b) for b in o.bound_box), Vector()) / 8
+        if (c - target).length < unit_r and not any(n.startswith(k) for n in mn for k in keepn): o.hide_render = True
+    pc = bpy.data.cameras.new("env"); pc.type = "PANO"; pc.panorama_type = "EQUIRECTANGULAR"
+    po = bpy.data.objects.new("env", pc); sc.collection.objects.link(po)
+    po.location = target; po.rotation_euler = (math.radians(90), 0, math.radians(-90))     # glTF +z (the unit's front) at the map's centre
+    sc.camera = po; sc.render.resolution_x, sc.render.resolution_y = ex, ey; sc.render.resolution_percentage = 100
+    sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("ENV_SAMPLES", "128"))
+    sc.render.image_settings.file_format = "HDR"; sc.render.filepath = os.path.splitext(OUT)[0] + "_env.hdr"
+    sc.view_settings.view_transform = "Standard"; sc.view_settings.look = "None"; sc.view_settings.exposure = 0
+    _real_render(write_still=True)
+    print("HERO_ENV", sc.render.filepath); sys.exit(0)
+
 # 3. what to keep: meshes that render, near the unit; never the light rig (area-light cards, softboxes, reflectors)
 KEEP_DIST = float(os.environ.get("KEEP_DIST", "60"))
-RIG = ("softbox", "card", "reflector", "lightcard", "cyc", "sweep")
 drop = []
 for o in list(sc.objects):
     if o.type in ("LIGHT", "LIGHT_PROBE", "SPEAKER"): continue
@@ -80,13 +103,16 @@ for o in sc.objects:
 for m in bpy.data.materials:
     if not m.name.startswith("LIVE_") or not m.use_nodes: continue
     nt = m.node_tree; im = next((n.image for n in nt.nodes if n.bl_idname == "ShaderNodeTexImage" and n.image), None)
+    glow = max([n.inputs["Strength"].default_value for n in nt.nodes if n.bl_idname == "ShaderNodeEmission"] +
+               [n.inputs["Emission Strength"].default_value for n in nt.nodes if n.bl_idname == "ShaderNodeBsdfPrincipled"
+                and n.inputs["Emission Strength"].default_value > 0] or [1.0])          # the scene's own glow (the VFD: 6.0)
     nt.nodes.clear()                                   # node references go stale as nodes go: rebuild from the image alone
     out = nt.nodes.new("ShaderNodeOutputMaterial"); b = nt.nodes.new("ShaderNodeBsdfPrincipled")
     tex = None
     if im: tex = nt.nodes.new("ShaderNodeTexImage"); tex.image = im; tex.extension = "CLIP"
     nt.links.new(b.outputs[0], out.inputs["Surface"]); b.inputs["Base Color"].default_value = (0, 0, 0, 1)
     b.inputs["Roughness"].default_value = 1.0; b.inputs["Specular IOR Level"].default_value = 0.0
-    if tex: nt.links.new(tex.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = 1.0
+    if tex: nt.links.new(tex.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = glow
 
 # glass and see-through sheets (a transparent BSDF in a mix): glTF has no such mix, so a dark low-alpha blend that keeps a highlight
 for m in bpy.data.materials:
@@ -156,18 +182,21 @@ if BAKE:
         bpy.ops.object.mode_set(mode="OBJECT")
         img = bpy.data.images.new("bake_" + mname, px, px, float_buffer=True)
         n = m.node_tree.nodes.new("ShaderNodeTexImage"); n.image = img; m.node_tree.nodes.active = n
-        if MODE == "full":
-            bpy.ops.object.bake(type="COMBINED")
-        else:
-            sc.render.bake.use_pass_direct = sc.render.bake.use_pass_indirect = sc.render.bake.use_pass_color = True
-            bpy.ops.object.bake(type="DIFFUSE")
+        # COMBINED in both modes, so lamps and other emitters keep their glow; diffuse leaves the highlights (glossy) and glass
+        # (transmission) to the viewer, full bakes them as the render camera sees them
+        bk = sc.render.bake
+        bk.use_pass_direct = bk.use_pass_indirect = bk.use_pass_diffuse = bk.use_pass_emit = True
+        bk.use_pass_glossy = bk.use_pass_transmission = MODE == "full"
+        bk.view_from = "ACTIVE_CAMERA" if MODE == "full" else "ABOVE_SURFACE"
+        bpy.ops.object.bake(type="COMBINED")
         img.filepath_raw = os.path.join(outdir, img.name + ".exr"); img.file_format = "OPEN_EXR"; img.save()
         # into 0..1 for an 8-bit texture: divide by the bright end, carried back as the emission strength
         # (glTF KHR_materials_emissive_strength), so baked light above 1 is not clipped
         import numpy as np
         pix = np.empty(px * px * 4, np.float32); img.pixels.foreach_get(pix); pix = pix.reshape(-1, 4)
         peak = max(1.0, float(np.percentile(pix[:, :3].max(1), 99.9)))
-        pix[:, :3] = np.clip(pix[:, :3] / peak, 0, 1); pix[:, 3] = 1
+        lin = np.clip(pix[:, :3] / peak, 0, 1)                    # glTF reads emissive textures as sRGB: encode
+        pix[:, :3] = np.where(lin <= 0.0031308, lin * 12.92, 1.055 * np.power(lin, 1 / 2.4) - 0.055); pix[:, 3] = 1
         ldr = bpy.data.images.new("bake_" + mname + "_ldr", px, px); ldr.pixels.foreach_set(pix.ravel())
         ldr.filepath_raw = os.path.join(outdir, ldr.name + ".png"); ldr.file_format = "PNG"; ldr.save(); img = ldr
         b = principled(m); rough = b.inputs["Roughness"].default_value if b else 0.5
@@ -178,8 +207,11 @@ if BAKE:
         bb.inputs["Roughness"].default_value = 1.0 if MODE == "full" else rough
         bb.inputs["Specular IOR Level"].default_value = 0.0 if MODE == "full" else 0.5
         o.data.materials.clear(); o.data.materials.append(nm)
-        report_bake[mname] = len(objs)
-    print("BAKED", len(groups), "materials:", report_bake)
+        report_bake[mname] = {"objects": len(objs), "metallic": round(b.inputs["Metallic"].default_value, 3) if b else None, "peak": round(peak, 3)}
+    skipped = sorted({o.name for o in sc.objects if o.type == "MESH" and not o.name.startswith("baked_")
+                      and len({s.material for s in o.material_slots if s.material}) > 1})
+    print("BAKED", len(groups), "materials:", report_bake, "| multi-material objects left unbaked:", skipped)
+    report_baked, report_unbaked = report_bake, skipped
 
 # 5. what survives glTF: a Principled BSDF fed by image textures (or plain values); anything procedural is lost
 def survives(m):
@@ -215,6 +247,7 @@ report["camera"] = {"position": yup(cp), "target": yup(target), "radius": round(
                     "exposure": sc.view_settings.exposure}
 report["live"] = list(live_mats.values()) or [m for m in report["materials"] if m.startswith("LIVE_")]
 report["bake"] = MODE if BAKE else "none"
+if BAKE: report["baked"], report["multi_material_unbaked"] = report_baked, report_unbaked
 report["glb_bytes"] = os.path.getsize(OUT)
 json.dump(report, open(os.path.splitext(OUT)[0] + ".json", "w"), indent=1)
 print("HERO_GLB", OUT, report["glb_bytes"], "bytes;", sum(v != "ok" and v != "plain" for v in report["materials"].values()), "materials lose detail")
