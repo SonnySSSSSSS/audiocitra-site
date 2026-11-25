@@ -70,7 +70,7 @@ def planar_uv(o):
 def upd(o): bpy.context.view_layer.update(); planar_uv(o); return o
 
 # ---------- the panel (built face up at z = 0; the rig tilts it onto the case below) ----------
-M_FACE = print_mat("face", (0.02, 0.016, 0.03), rough=0.55, coat=0.03, emit=0.1)
+M_FACE = print_mat("face", (0.018, 0.012, 0.008), rough=0.55, coat=0.03, emit=0.1)
 M_FACE.node_tree.nodes["Principled BSDF"].inputs["Specular IOR Level"].default_value = 0.3   # a satin panel: the softbox must not grey it
 PANEL = ring_col_rect(4, 4, W - 4, 10)
 M_EDGE = mat("panel_edge", tuple(v / 0.8 for v in PANEL), rough=0.42, coat=0.4)
@@ -81,7 +81,8 @@ face.scale = (W / 100, H / 100, 1); bpy.ops.object.transform_apply(scale=True); 
 
 # ---------- the knobs: a gold skirt (the printed gold ring stands with it) under a black glass cap ----------
 M_GOLD_SIDE = (0.55, 0.36, 0.14)
-for cid, (fr, fc) in (("trim", (0.50, 0.37)), ("out", (0.50, 0.37)), ("target", (0.50, 0.37)), ("width", (0.50, 0.37)), ("pan", (0.50, 0.37))):
+# Citra v2 (build 114): a wide black cap inside a thin bronze rim, measured on the capture: rim 0.87-0.955 of the knob's radius
+for cid, (fr, fc) in (("trim", (0.555, 0.505)), ("out", (0.555, 0.505)), ("target", (0.555, 0.505)), ("width", (0.555, 0.505)), ("pan", (0.555, 0.505))):
     x0, y0, x1, y1 = rect(cid); x, y = (x0 + x1) / 2, (y0 + y1) / 2; d = x1 - x0
     rs, rc = d * fr * 0.86, d * fc * 0.86           # the gold ring's outer edge, the black cap's
     top = knob_h(2 * rs); hs = min(top * 0.3, 4 * MMU)
@@ -107,15 +108,14 @@ def ring(cx_, cy_, r0, r1, h_mm, metal=0.0, rough=0.3, side=None):
     o.location = (*P(cx_, cy_), 0); o.data.materials.append(print_mat("ringm", side, rough, 0.5, metal)); bevel(o, 0.5 * MMU, 3, 40); smooth(o, 40)
     return upd(o)
 
-for cid in ("listen", "listen_all", "match", "mono", "link", "ab", "pan_law_button", "pan_adv_button", "host", "phase", "map"):
+# v2: LAW, ADV, FX, PHASE and MAP are bare words on the panel, printed flat
+for cid in ("listen", "listen_all", "match", "mono", "link", "ab"):
     x0, y0, x1, y1 = rect(cid); key(x0 + 1, y0 + 1, x1 - 1, y1 - 1, 4.0)
 for cid in ("detection", "pan_shape"):                     # the selector tracks stand low; their lit segment is printed on top
     x0, y0, x1, y1 = rect(cid)
-    if cid == "pan_shape": x0 = 388                         # the track starts at OFF; SHAPE is printed on the panel
     key(x0, y0, x1, y1, 2.0)
-x0, y0, x1, y1 = rect("menu"); mc = ((x0 + x1) / 2, (y0 + y1) / 2)   # the lotus menu key: round
-ring(*mc, 13.5, 16.0, 3.0, metal=1.0, rough=0.25, side=M_GOLD_SIDE)
-bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=13.5 / 100, depth=4 * MMU, location=(*P(*mc), 2 * MMU)); mk = bpy.context.object
+x0, y0, x1, y1 = rect("menu"); mc = ((x0 + x1) / 2, (y0 + y1) / 2)   # the lotus menu key: a round black key, no rim in v2
+bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=(x1 - x0) / 2 / 100, depth=4 * MMU, location=(*P(*mc), 2 * MMU)); mk = bpy.context.object
 mk.data.materials.append(print_mat("menukey", (0.02, 0.018, 0.026), 0.3, 0.6)); bevel(mk, 0.8 * MMU, 3); smooth(mk); upd(mk)
 for cid in ("mono_lamp", "link_lamp"):
     x0, y0, x1, y1 = rect(cid); dome((x0 + x1) / 2, (y0 + y1) / 2, (x1 - x0) / 2 + 0.5, 2.0, emit=0.4)
