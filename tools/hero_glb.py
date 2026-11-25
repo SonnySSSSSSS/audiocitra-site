@@ -114,15 +114,18 @@ if os.environ.get("PLATE") == "1":
 
 # 3. what to keep: meshes that render, near the unit; never the light rig (area-light cards, softboxes, reflectors)
 KEEP_DIST = float(os.environ.get("KEEP_DIST", "60"))
-drop = []
+drop, rig_objs = [], []
 for o in list(sc.objects):
     if o.type in ("LIGHT", "LIGHT_PROBE", "SPEAKER"): continue
     if o.type == "CAMERA": continue
     if o.type not in ("MESH", "CURVE", "FONT", "SURFACE", "META"):
         continue
     mn = [m.name.lower() for m in getattr(o.data, "materials", []) if m]
-    if o.hide_render or not o.visible_camera or any(n.startswith(r) for n in [o.name.lower(), *mn] for r in RIG):
-        drop.append(o); continue
+    if o.hide_render: drop.append(o); continue
+    if not o.visible_camera or any(n.startswith(r) for n in [o.name.lower(), *mn] for r in RIG):
+        # the light rig (cards, softboxes, reflectors) lights the bake and is mirrored by the brass and lacquer: it stays through
+        # the bake, out of every bake group, and is deleted before export
+        (rig_objs.append(o) if BAKE else drop.append(o)); o["hero_rig"] = True; continue
     c = sum((o.matrix_world @ Vector(b) for b in o.bound_box), Vector()) / 8
     if (c - target).length > KEEP_DIST: drop.append(o)
 # the kept meshes' modifiers are applied first: their boolean cutters are hidden objects about to be dropped, and a boolean
@@ -215,7 +218,8 @@ if BAKE:
         if b and not b.inputs["Metallic"].is_linked and b.inputs["Metallic"].default_value >= 0.5: return False
         return True
     groups = {}
-    for o in [o for o in sc.objects if o.type == "MESH"]:
+    print("HERO_BAKE_RIG", len(rig_objs), "rig meshes kept for the bake:", sorted({o.name for o in rig_objs})[:12])
+    for o in [o for o in sc.objects if o.type == "MESH" and not o.get("hero_rig")]:
         ms = {s.material for s in o.material_slots if s.material}
         if len(ms) == 1 and bakeable(next(iter(ms))): groups.setdefault(next(iter(ms)).name, []).append(o)
     report_bake = {}
@@ -282,6 +286,7 @@ for o in sc.objects:
     for s in o.material_slots:
         if s.material: report["materials"][s.material.name] = survives(s.material)
 
+for o in rig_objs: bpy.data.objects.remove(o, do_unlink=True)
 bpy.ops.object.select_all(action="DESELECT")
 for o in sc.objects:
     if o.type in ("MESH", "CAMERA"): o.select_set(True)
