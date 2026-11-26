@@ -48,7 +48,7 @@
     el.setAttribute("min-field-of-view", cam.vfov_deg + "deg"); el.setAttribute("max-field-of-view", cam.vfov_deg + "deg");
     el.setAttribute("min-camera-orbit", "auto auto " + cam.radius * 0.5 + "m"); el.setAttribute("max-camera-orbit", "auto auto " + cam.radius * 2 + "m");
     el.setAttribute("interpolation-decay", "140");
-    el.setAttribute("tone-mapping", "agx");
+    el.setAttribute("tone-mapping", /agx/i.test(cam.view_transform || "AgX") ? "agx" : "neutral");   // the scene's own view: AgX, or Standard
     el.setAttribute("exposure", String(Math.pow(2, cam.exposure || 0)));
     el.setAttribute("environment-image", room.dataset.hero3dEnv || base + "_env.hdr");
     el.setAttribute("shadow-intensity", "0"); el.setAttribute("interaction-prompt", "none");

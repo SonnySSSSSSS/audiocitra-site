@@ -182,13 +182,17 @@ for m in bpy.data.materials:
     m["hero_glass"] = True
 
 # LIVE_CROP=<hero_frames.py's .crop.json>: the live parts' video holds only the crop of the full layer, so their UVs move onto it
+# one crop for every live part (a path), or one per part: "vfd=a.crop.json,meter=b.crop.json" (the LIVE name, without LIVE_)
 crop = os.environ.get("LIVE_CROP")
-if crop:
+crops = dict(c.split("=", 1) for c in crop.split(",")) if crop and "=" in crop else ({"*": crop} if crop else {})
+done = set()
+for o in sc.objects:
+    if o.type != "MESH" or o.data in done or not o.active_material or not o.active_material.name.startswith("LIVE_"): continue
+    crop = crops.get(o.active_material.name[5:], crops.get("*"))
+    if not crop: continue
     cj = json.load(open(crop)); (cx0, cy0, cx1, cy1), (CW, CH) = cj["crop"], cj["size"]
     u0, u1, v0, v1 = cx0 / CW, cx1 / CW, 1 - cy1 / CH, 1 - cy0 / CH          # Blender UV: v up from the image's bottom
-    done = set()
-    for o in sc.objects:
-        if o.type != "MESH" or o.data in done or not o.active_material or not o.active_material.name.startswith("LIVE_"): continue
+    if True:
         done.add(o.data)
         if len(o.data.vertices) == 4:
             # a layer plane: cut it down to the crop, so no part of it shows the video outside the crop (tiled, the turned model
@@ -230,6 +234,11 @@ if BAKE:
         b = principled(m)
         if b and not b.inputs["Metallic"].is_linked and b.inputs["Metallic"].default_value >= 0.5: return False
         return True
+    for o in [o for o in sc.objects if o.type == "MESH" and not o.get("hero_rig")]:
+        if len({p.material_index for p in o.data.polygons}) > 1:          # one object, several materials (a plate with its print):
+            bpy.ops.object.select_all(action="DESELECT"); o.select_set(True); bpy.context.view_layer.objects.active = o   # split it,
+            bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.select_all(action="SELECT")                               # so each part
+            bpy.ops.mesh.separate(type="MATERIAL"); bpy.ops.object.mode_set(mode="OBJECT")                               # bakes with its material
     groups = {}
     print("HERO_BAKE_RIG", len(rig_objs), "rig meshes kept for the bake:", sorted({o.name for o in rig_objs})[:12])
     for o in [o for o in sc.objects if o.type == "MESH" and not o.get("hero_rig")]:
