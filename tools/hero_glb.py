@@ -8,15 +8,18 @@ pose matches the still) and, with BAKE=1, bakes the scene's lighting into the te
 
 Env:
   BAKE=0|1        0 (default): export the scene's materials as they are (a quick check of what survives glTF).
-                  1: Cycles-bake each kept object's look into a texture (needs the GPU and the render lock: a heavy job).
-  BAKE_MODE       full: the whole look baked (unlit in the viewer, highlights fixed)
-                  diffuse (default): colour and light baked; roughness and metal kept so the viewer's environment moves the
-                  highlights as the unit turns
-  BAKE_PX         texture size per object (default 1024; the face takes FACE_PX, default 2048)
-  BAKE_SAMPLES    default 64
-  LIVE            comma list of object-name prefixes that carry live video on the page (their material is renamed
-                  LIVE_<n> and keeps its image as the poster frame; the page swaps a video into it)
-  KEEP_DIST       objects whose bounds sit further than this from the camera's target are dropped (scene units, default 60)
+                  1: Cycles-bake one texture per material (GPU, render lock: a heavy job; ~3 min for the Limiter at 2048 / 128)
+  BAKE_MODE       full (default, chosen in the Limiter pilot): everything baked from the camera, the closest match to the still
+                  diffuse: diffuse light baked, gloss left to the viewer (darker at rest; the A/B alternate)
+  BAKE_PX         texture size per material group (2048 in the pilot); BAKE_SAMPLES (128 in the pilot)
+  LIVE            comma list of object or material base names that carry live video on the page (exact match; renamed
+                  LIVE_<name>, emission over black); LIVE_CROP=<hero_frames.py .crop.json> cuts their plane to the video's crop
+  ENV=1           render the viewer's environment map (<out>_env.hdr) from the unit's centre, unit hidden, lamps and rig visible;
+                  ENV_RES (1024x512), ENV_SAMPLES (128), ENV_GAIN (0.6: the still's brightness), ENV_LAMPS (1)
+  PLATE=1         render the still's frame without the unit (<out>_plate.png); PLATE_DRY=1 only lists what the unit finder
+                  hides and the unit's materials (seconds, no render: run it first on every new scene)
+  UNIT_REACH      the unit finder's reach from the camera target (40); room and rig are told by material name (ENV_KEEP)
+  KEEP_DIST       objects further than this from the camera's target are dropped (scene units, default 60)
   + whatever the scene script reads (CAP, LAYOUT, LAYERDIR, CYCLES_DEVICE, ...)
 """
 import bpy, json, math, os, sys
@@ -26,7 +29,7 @@ argv = sys.argv[sys.argv.index("--") + 1:]
 SCENE, OUT = os.path.abspath(argv[0]), os.path.abspath(argv[1])
 SCENE_ARGS = argv[2:]
 BAKE = os.environ.get("BAKE", "0") == "1"
-MODE = os.environ.get("BAKE_MODE", "diffuse")
+MODE = os.environ.get("BAKE_MODE", "full")
 LIVE = [p for p in os.environ.get("LIVE", "").split(",") if p]
 
 # 1. build the scene, its render switched off (the scripts end in bpy.ops.render.render; some exec others)
@@ -101,7 +104,12 @@ if os.environ.get("ENV") == "1":
     sc.render.image_settings.file_format = "HDR"; sc.render.filepath = os.path.splitext(OUT)[0] + "_env.hdr"
     sc.view_settings.view_transform = "Standard"; sc.view_settings.look = "None"; sc.view_settings.exposure = 0
     _real_render(write_still=True)
-    print("HERO_ENV", sc.render.filepath); sys.exit(0)
+    gain = float(os.environ.get("ENV_GAIN", "0.6"))          # the page's metals at 1.0 lift the unit above the still (Limiter pilot: 0.6)
+    if gain != 1.0:
+        import numpy as np
+        im = bpy.data.images.load(sc.render.filepath); px = np.empty(len(im.pixels), np.float32); im.pixels.foreach_get(px)
+        px[0::4] *= gain; px[1::4] *= gain; px[2::4] *= gain; im.pixels.foreach_set(px); im.filepath_raw = sc.render.filepath; im.file_format = "HDR"; im.save()
+    print("HERO_ENV", sc.render.filepath, "gain", gain); sys.exit(0)
 
 # 2c. PLATE=1: the still's own frame with the unit hidden (<out>_plate.png at the scene's resolution and colour settings). The
 # page shows it under the model while the model is live, so a turned unit never uncovers the still's unit behind it
@@ -109,7 +117,9 @@ if os.environ.get("PLATE") == "1":
     unit = unit_objects()
     for o in unit: o.hide_render = True
     print("HERO_PLATE hidden", len(unit), "of", len(sc.objects), "shown:", sorted({m.name for o in sc.objects if o.type == "MESH" and not o.hide_render for m in o.data.materials if m}))
-    if os.environ.get("PLATE_DRY"): sys.exit(0)
+    if os.environ.get("PLATE_DRY"):
+        print("HERO_UNIT_MATERIALS", sorted({m.name for o in unit if o.type == "MESH" for m in o.data.materials if m}))
+        sys.exit(0)
     sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("PLATE_SAMPLES", "128"))
     sc.render.image_settings.file_format = "PNG"; sc.render.filepath = os.path.splitext(OUT)[0] + "_plate.png"
     _real_render(write_still=True)
