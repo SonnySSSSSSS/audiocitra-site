@@ -1,0 +1,434 @@
+{
+ "scene": "lahari_rack.py",
+ "kept": [
+  "baked_panel_edge",
+  "baked_face",
+  "disp",
+  "mt_l",
+  "mt_r",
+  "Cylinder",
+  "baked_knob",
+  "Cylinder.002",
+  "baked_knob.001",
+  "Cylinder.004",
+  "baked_knob.002",
+  "Cylinder.006",
+  "baked_knob.003",
+  "Cylinder.008",
+  "baked_knob.004",
+  "Cylinder.010",
+  "baked_knob.005",
+  "Cylinder.012",
+  "baked_knob.006",
+  "Cylinder.014",
+  "baked_knob.007",
+  "baked_keym",
+  "baked_keym.001",
+  "baked_keym.002",
+  "baked_keym.003",
+  "baked_domem",
+  "baked_domem.001",
+  "baked_ringm",
+  "ring.001",
+  "Sphere.002",
+  "baked_domem.002",
+  "baked_domem.003",
+  "baked_domem.004",
+  "baked_domem.005",
+  "baked_domem.006",
+  "baked_domem.007",
+  "baked_keym.004",
+  "baked_keym.005",
+  "baked_keym.006",
+  "baked_keym.007",
+  "baked_keym.008",
+  "baked_bezel",
+  "baked_bezel.001",
+  "baked_bezel.002",
+  "baked_bezel.003",
+  "Cube.005",
+  "baked_bezel.004",
+  "baked_bezel.005",
+  "baked_bezel.006",
+  "baked_bezel.007",
+  "Cube.010",
+  "baked_keym.009",
+  "baked_keym.010",
+  "baked_keym.011",
+  "baked_keym.012",
+  "baked_keym.013",
+  "baked_keym.014",
+  "baked_keym.015",
+  "baked_keym.016",
+  "baked_lacquer",
+  "baked_hole",
+  "Cylinder.016",
+  "Cylinder.017",
+  "Cylinder.018",
+  "Cylinder.019",
+  "Sphere.009",
+  "Cylinder.020",
+  "Cylinder.021",
+  "Sphere.010",
+  "Cylinder.022",
+  "Cylinder.023",
+  "Cylinder.024",
+  "Cylinder.025",
+  "Cylinder.026",
+  "Sphere.011",
+  "Cylinder.027",
+  "Cylinder.028",
+  "Sphere.012",
+  "Cylinder.029",
+  "baked_crinkle",
+  "baked_rubber",
+  "Plane.001",
+  "baked_ground",
+  "Plane.003",
+  "Plane.004"
+ ],
+ "materials": {
+  "baked_panel_edge": "ok",
+  "baked_face": "ok",
+  "LIVE_disp": "ok",
+  "LIVE_mt_l": "ok",
+  "LIVE_mt_r": "ok",
+  "skirt": "lost: MapRange,TexCoord",
+  "baked_knob": "ok",
+  "skirt.001": "lost: MapRange,TexCoord",
+  "baked_knob.001": "ok",
+  "skirt.002": "lost: MapRange,TexCoord",
+  "baked_knob.002": "ok",
+  "skirt.003": "lost: MapRange,TexCoord",
+  "baked_knob.003": "ok",
+  "skirt.004": "lost: MapRange,TexCoord",
+  "baked_knob.004": "ok",
+  "skirt.005": "lost: MapRange,TexCoord",
+  "baked_knob.005": "ok",
+  "skirt.006": "lost: MapRange,TexCoord",
+  "baked_knob.006": "ok",
+  "skirt.007": "lost: MapRange,TexCoord",
+  "baked_knob.007": "ok",
+  "baked_keym": "ok",
+  "baked_keym.001": "ok",
+  "baked_keym.002": "ok",
+  "baked_keym.003": "ok",
+  "baked_domem": "ok",
+  "baked_domem.001": "ok",
+  "baked_ringm": "ok",
+  "ringm.001": "lost: MapRange,TexCoord",
+  "glass": "ok",
+  "baked_domem.002": "ok",
+  "baked_domem.003": "ok",
+  "baked_domem.004": "ok",
+  "baked_domem.005": "ok",
+  "baked_domem.006": "ok",
+  "baked_domem.007": "ok",
+  "baked_keym.004": "ok",
+  "baked_keym.005": "ok",
+  "baked_keym.006": "ok",
+  "baked_keym.007": "ok",
+  "baked_keym.008": "ok",
+  "baked_bezel": "ok",
+  "baked_bezel.001": "ok",
+  "baked_bezel.002": "ok",
+  "baked_bezel.003": "ok",
+  "baked_bezel.004": "ok",
+  "baked_bezel.005": "ok",
+  "baked_bezel.006": "ok",
+  "baked_bezel.007": "ok",
+  "baked_keym.009": "ok",
+  "baked_keym.010": "ok",
+  "baked_keym.011": "ok",
+  "baked_keym.012": "ok",
+  "baked_keym.013": "ok",
+  "baked_keym.014": "ok",
+  "baked_keym.015": "ok",
+  "baked_keym.016": "ok",
+  "baked_lacquer": "ok",
+  "baked_hole": "ok",
+  "chrome": "ok",
+  "trim": "ok",
+  "baked_crinkle": "ok",
+  "baked_rubber": "ok",
+  "room": "ok",
+  "baked_ground": "ok",
+  "card": "ok",
+  "card.001": "ok"
+ },
+ "camera": {
+  "position": [
+   -11.95312,
+   9.84375,
+   20.39062
+  ],
+  "target": [
+   1.43609,
+   2.21003,
+   -3.19266
+  ],
+  "radius": 28.17297,
+  "theta_deg": -29.585,
+  "phi_deg": 74.279,
+  "vfov_deg": 22.8952,
+  "aspect": 1.77778,
+  "view_transform": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 0.3499999940395355
+ },
+ "live": [
+  "LIVE_disp",
+  "LIVE_mt_l",
+  "LIVE_mt_r"
+ ],
+ "bake": "full",
+ "baked": {
+  "panel_edge": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "face": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob.007": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "ringm": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.114
+  },
+  "domem.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem.007": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.007": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.008": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bezel": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bezel.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bezel.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bezel.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bezel.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bezel.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bezel.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bezel.007": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.009": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.010": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.011": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.012": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.013": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.014": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.015": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.016": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "lacquer": {
+   "objects": 2,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hole": {
+   "objects": 58,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "crinkle": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "rubber": {
+   "objects": 4,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "ground": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  }
+ },
+ "multi_material_unbaked": [],
+ "glb_bytes": 1530548
+}
