@@ -60,6 +60,9 @@ target = cam.matrix_world.translation + fwd * dist
 asp = sc.render.resolution_x / sc.render.resolution_y
 vfov = 2 * math.atan(math.tan(cam.data.angle_x / 2) / asp) if cam.data.sensor_fit != "VERTICAL" else cam.data.angle_y
 
+def _still_output():   # a scene that renders a video (Akasa's demo) leaves the output on FFMPEG, where HDR / PNG are not offered
+    if hasattr(sc.render.image_settings, "media_type"): sc.render.image_settings.media_type = "IMAGE"
+
 RIG = ("softbox", "card", "reflector", "lightcard", "cyc", "sweep")
 
 # the unit: every rendered mesh near the camera's target that is not the room (desk, floor, walls) or the light rig. The target
@@ -105,7 +108,7 @@ if os.environ.get("ENV") == "1":
     po.location = centre; po.rotation_euler = (math.radians(90), 0, math.radians(-90))     # glTF +z (the unit's front) at the map's centre
     sc.camera = po; sc.render.resolution_x, sc.render.resolution_y = ex, ey; sc.render.resolution_percentage = 100
     sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("ENV_SAMPLES", "128"))
-    sc.render.image_settings.file_format = "HDR"; sc.render.filepath = os.path.splitext(OUT)[0] + "_env.hdr"
+    _still_output(); sc.render.image_settings.file_format = "HDR"; sc.render.filepath = os.path.splitext(OUT)[0] + "_env.hdr"
     sc.view_settings.view_transform = "Standard"; sc.view_settings.look = "None"; sc.view_settings.exposure = 0
     _real_render(write_still=True)
     gain = float(os.environ.get("ENV_GAIN", "0.6"))          # the page's metals at 1.0 lift the unit above the still (Limiter pilot: 0.6)
@@ -125,7 +128,7 @@ if os.environ.get("PLATE") == "1":
         print("HERO_UNIT_MATERIALS", sorted({m.name for o in unit if o.type == "MESH" for m in o.data.materials if m}))
         sys.exit(0)
     sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("PLATE_SAMPLES", "128"))
-    sc.render.image_settings.file_format = "PNG"; sc.render.filepath = os.path.splitext(OUT)[0] + "_plate.png"
+    _still_output(); sc.render.image_settings.file_format = "PNG"; sc.render.filepath = os.path.splitext(OUT)[0] + "_plate.png"
     _real_render(write_still=True)
     print("HERO_PLATE", sc.render.filepath); sys.exit(0)
 
@@ -186,10 +189,26 @@ for m in bpy.data.materials:
         if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
 
 DECAL = [p for p in os.environ.get("DECAL", "").split(",") if p]
+def _object_mapped_uvs(m, tex):
+    """a decal whose image is placed by object coordinates through a Mapping node (Akasa's text layers) has no UVs, and glTF
+    needs them: write that mapping into a UV layer on every object using the material"""
+    v = tex.inputs["Vector"]
+    if not v.is_linked or v.links[0].from_node.bl_idname != "ShaderNodeMapping": return
+    mp = v.links[0].from_node
+    if not mp.inputs["Vector"].is_linked or mp.inputs["Vector"].links[0].from_socket.name != "Object": return
+    loc = Vector(mp.inputs["Location"].default_value); scl = Vector(mp.inputs["Scale"].default_value)
+    for o in sc.objects:
+        if o.type != "MESH" or m.name not in [x.name for x in o.data.materials if x]: continue
+        uv = o.data.uv_layers.active or o.data.uv_layers.new()
+        for li, lp in enumerate(o.data.loops):
+            co = o.data.vertices[lp.vertex_index].co
+            uv.data[li].uv = (co.x * scl.x + loc.x, co.y * scl.y + loc.y)
 for m in bpy.data.materials:
     if base(m.name) not in DECAL or not m.use_nodes: continue
     nt = m.node_tree; old = nt.nodes["Principled BSDF"]; img = old.inputs["Base Color"].links[0].from_node.image
-    k = old.inputs["Emission Strength"].default_value
+    _object_mapped_uvs(m, old.inputs["Base Color"].links[0].from_node)
+    k = old.inputs["Emission Strength"].default_value if old.inputs["Emission Color"].is_linked else 0.0
+    k = k or 1.0                    # an unlit print layer (Akasa's) is exported as its own colours, not black
     nt.nodes.clear()
     out = nt.nodes.new("ShaderNodeOutputMaterial"); b = nt.nodes.new("ShaderNodeBsdfPrincipled"); t = nt.nodes.new("ShaderNodeTexImage"); t.image = img
     nt.links.new(b.outputs[0], out.inputs["Surface"]); b.inputs["Base Color"].default_value = (0, 0, 0, 1)
@@ -216,10 +235,24 @@ for m in bpy.data.materials:
 
 # metals stay unbaked, and glTF has no "this colour on the sides, that image on top" mix: the exporter took the image for all of
 # it, so a gold ring came out in the print's dim colours. A metal fed by such a mix (one plain colour, one image) keeps the colour
+def _plain_colour(n, depth=0):
+    """a metal's colour built from plain colours through Mix nodes (a noise between two shades, times a light map: Akasa's
+    oxblood plate): the mean of the first Mix whose two colours are plain, else None. glTF keeps none of it, so it came out white"""
+    if n is None or depth > 6 or n.bl_idname != "ShaderNodeMix" or n.data_type != "RGBA": return None
+    a, b_ = n.inputs[6], n.inputs[7]
+    if not a.is_linked and not b_.is_linked: return tuple((x + y) / 2 for x, y in zip(a.default_value, b_.default_value))
+    for i in (a, b_):
+        if i.is_linked:
+            c = _plain_colour(i.links[0].from_node, depth + 1)
+            if c: return c
+    return None
 for m in bpy.data.materials:
     b = m.node_tree.nodes.get("Principled BSDF") if m.use_nodes else None
     if not b or b.inputs["Metallic"].is_linked or b.inputs["Metallic"].default_value < 0.5 or not b.inputs["Base Color"].is_linked: continue
     mix = b.inputs["Base Color"].links[0].from_node
+    pc = _plain_colour(mix) if mix.bl_idname == "ShaderNodeMix" and mix.data_type == "RGBA" and (mix.inputs[6].is_linked or not mix.inputs[7].is_linked) else None
+    if pc:
+        m.node_tree.links.remove(b.inputs["Base Color"].links[0]); b.inputs["Base Color"].default_value = pc; continue
     if mix.bl_idname != "ShaderNodeMix" or mix.data_type != "RGBA" or mix.inputs[6].is_linked or not mix.inputs[7].is_linked: continue
     colour = tuple(mix.inputs[6].default_value)
     m.node_tree.links.remove(b.inputs["Base Color"].links[0]); b.inputs["Base Color"].default_value = colour
