@@ -1,0 +1,207 @@
+{
+ "scene": "console_noir3d_rack.py",
+ "kept": [
+  "baked_obsidian",
+  "baked_fan_floor",
+  "fan_glass",
+  "Cube.001",
+  "Cube.002",
+  "Cube.003",
+  "Cube.004",
+  "Cube.005",
+  "Cube.006",
+  "Cube.007",
+  "Cube.008",
+  "Cube.009",
+  "Cube.010",
+  "Cube.011",
+  "Cube.012",
+  "Cube.013",
+  "arc",
+  "arc.001",
+  "Cube.014",
+  "Cube.015",
+  "Cube.016",
+  "Cube.017",
+  "Cube.018",
+  "Cube.019",
+  "Cube.020",
+  "baked_nameplate_glass",
+  "Plane",
+  "baked_hole",
+  "baked_rubber",
+  "Cylinder.013",
+  "Cylinder.015",
+  "Cylinder.017",
+  "Cylinder.019",
+  "Cylinder.020",
+  "Cylinder.021",
+  "Sphere",
+  "Cylinder.022",
+  "Cylinder.023",
+  "Sphere.001",
+  "Cylinder.024",
+  "Cylinder.025",
+  "Cylinder.026",
+  "Sphere.002",
+  "Cylinder.027",
+  "Cylinder.028",
+  "Sphere.003",
+  "Cylinder.029",
+  "Cylinder.030",
+  "Cylinder.031",
+  "Cylinder.032",
+  "Cylinder.033",
+  "baked_crinkle",
+  "Cylinder.034",
+  "Cylinder.035",
+  "Cylinder.036",
+  "Cylinder.037",
+  "Cylinder.038",
+  "Cylinder.039",
+  "Cylinder.040",
+  "Cylinder.041",
+  "Cylinder.042",
+  "Cylinder.043",
+  "Cylinder.044",
+  "Cylinder.045",
+  "Cylinder.046",
+  "Cylinder.047",
+  "Cylinder.048",
+  "Plane.001",
+  "baked_brass_inlay_dim",
+  "Cylinder.053",
+  "baked_lamp_off",
+  "baked_seat",
+  "Cone",
+  "Cylinder.055",
+  "baked_brass_inlay",
+  "Cone.001",
+  "Cylinder.057",
+  "Cone.002",
+  "Cylinder.059",
+  "Cone.003",
+  "Cylinder.061",
+  "Cone.004",
+  "Cylinder.063",
+  "Cone.005",
+  "Cylinder.065",
+  "baked_cut",
+  "baked_ground",
+  "Plane.003",
+  "Plane.004",
+  "meter"
+ ],
+ "materials": {
+  "baked_obsidian": "ok",
+  "baked_fan_floor": "ok",
+  "smoked_sheet": "ok",
+  "brass": "ok",
+  "baked_nameplate_glass": "ok",
+  "room": "ok",
+  "baked_hole": "ok",
+  "baked_rubber": "ok",
+  "chrome": "ok",
+  "baked_crinkle": "ok",
+  "live": "ok",
+  "baked_brass_inlay_dim": "ok",
+  "baked_lamp_off": "ok",
+  "baked_seat": "ok",
+  "brass_polish": "ok",
+  "brass_cap": "ok",
+  "baked_brass_inlay": "ok",
+  "baked_cut": "ok",
+  "baked_ground": "ok",
+  "card": "ok",
+  "card.001": "ok",
+  "LIVE_meter": "ok"
+ },
+ "camera": {
+  "position": [
+   -19.0,
+   15.0,
+   31.0
+  ],
+  "target": [
+   1.76825,
+   2.84324,
+   -4.66264
+  ],
+  "radius": 43.02244,
+  "theta_deg": -30.215,
+  "phi_deg": 73.586,
+  "vfov_deg": 22.8952,
+  "aspect": 1.77778,
+  "view_transform": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 0.3499999940395355
+ },
+ "live": [
+  "LIVE_meter"
+ ],
+ "bake": "full",
+ "baked": {
+  "obsidian": {
+   "objects": 3,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "fan_floor": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "nameplate_glass": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hole": {
+   "objects": 76,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "rubber": {
+   "objects": 8,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "crinkle": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "brass_inlay_dim": {
+   "objects": 74,
+   "metallic": 0.45,
+   "peak": 1.0
+  },
+  "lamp_off": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "seat": {
+   "objects": 6,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "brass_inlay": {
+   "objects": 22,
+   "metallic": 0.45,
+   "peak": 1.0
+  },
+  "cut": {
+   "objects": 6,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "ground": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  }
+ },
+ "multi_material_unbaked": [],
+ "glb_bytes": 1607500
+}

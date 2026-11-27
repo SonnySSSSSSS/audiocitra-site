@@ -14,6 +14,10 @@ Env:
   BAKE_PX         texture size per material group (2048 in the pilot); BAKE_SAMPLES (128 in the pilot)
   LIVE            comma list of object or material base names that carry live video on the page (exact match; renamed
                   LIVE_<name>, emission over black); LIVE_CROP=<hero_frames.py .crop.json> cuts their plane to the video's crop
+  DECAL           comma list of materials that are see-through print layers (the console's L_live): left out of the bake, exported
+                  as their own colour (emission) with their own alpha
+  GLOW=new=mat    a second sheet just above the layer plane that uses <mat>, with its own material <new> (list it in LIVE): a
+                  glow-only video, exported fully transparent; the page adds its light over the model (data-glow in hero3d.js)
   ENV=1           render the viewer's environment map (<out>_env.hdr) from the unit's centre, unit hidden, lamps and rig visible;
                   ENV_RES (1024x512), ENV_SAMPLES (128), ENV_GAIN (0.6: the still's brightness), ENV_LAMPS (1)
   PLATE=1         render the still's frame without the unit (<out>_plate.png); PLATE_DRY=1 only lists what the unit finder
@@ -149,9 +153,16 @@ for o in [o for o in sc.objects if o.type == "MESH" and o.modifiers and o not in
     o.modifiers.clear(); o.data = me
 for o in drop: bpy.data.objects.remove(o, do_unlink=True)
 
+base = lambda n: n.split(".")[0]
+for spec in filter(None, os.environ.get("GLOW", "").split(",")):
+    new, under = spec.split("=")
+    src = next(o for o in sc.objects if o.type == "MESH" and o.active_material and base(o.active_material.name) == under)
+    g = src.copy(); g.data = src.data.copy(); g.name = new; sc.collection.objects.link(g); g.location.z += 0.0006
+    m = src.active_material.copy(); m.name = new; m["hero_glow"] = True
+    g.data.materials.clear(); g.data.materials.append(m)
+
 # live parts (object or material name equal to a LIVE entry, ignoring Blender's .001 suffixes): renamed LIVE_<name> for the page's
 # video swap; unlit, their image (the poster frame) as emission over a black base, so nothing lit shows under the video
-base = lambda n: n.split(".")[0]
 live_mats = {}
 for o in sc.objects:
     m = o.active_material if o.type == "MESH" else None
@@ -170,6 +181,23 @@ for m in bpy.data.materials:
     nt.links.new(b.outputs[0], out.inputs["Surface"]); b.inputs["Base Color"].default_value = (0, 0, 0, 1)
     b.inputs["Roughness"].default_value = 1.0; b.inputs["Specular IOR Level"].default_value = 0.0
     if tex: nt.links.new(tex.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = glow
+    if m.get("hero_glow"):          # glTF has no additive blend: it ships invisible, and hero3d.js switches it to adding light
+        b.inputs["Alpha"].default_value = 0.0; b.inputs["Emission Strength"].default_value = 1.0
+        if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
+
+DECAL = [p for p in os.environ.get("DECAL", "").split(",") if p]
+for m in bpy.data.materials:
+    if base(m.name) not in DECAL or not m.use_nodes: continue
+    nt = m.node_tree; old = nt.nodes["Principled BSDF"]; img = old.inputs["Base Color"].links[0].from_node.image
+    k = old.inputs["Emission Strength"].default_value
+    nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputMaterial"); b = nt.nodes.new("ShaderNodeBsdfPrincipled"); t = nt.nodes.new("ShaderNodeTexImage"); t.image = img
+    nt.links.new(b.outputs[0], out.inputs["Surface"]); b.inputs["Base Color"].default_value = (0, 0, 0, 1)
+    b.inputs["Roughness"].default_value = 1.0; b.inputs["Specular IOR Level"].default_value = 0.0
+    nt.links.new(t.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = k
+    nt.links.new(t.outputs["Alpha"], b.inputs["Alpha"])
+    if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
+    m["hero_decal"] = True
 
 # glass and see-through sheets (a transparent BSDF in a mix): glTF has no such mix, so a dark low-alpha blend that keeps a highlight
 for m in bpy.data.materials:
@@ -240,7 +268,7 @@ if BAKE:
     def principled(m):
         return m.node_tree.nodes.get("Principled BSDF") if m and m.use_nodes else None
     def bakeable(m):
-        if not m or m.name.startswith("LIVE_") or m.get("hero_glass"): return False
+        if not m or m.name.startswith("LIVE_") or m.get("hero_glass") or m.get("hero_decal"): return False
         b = principled(m)
         if b and not b.inputs["Metallic"].is_linked and b.inputs["Metallic"].default_value >= 0.5: return False
         return True

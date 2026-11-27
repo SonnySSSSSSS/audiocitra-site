@@ -1,7 +1,8 @@
 // Front-page heroes as real-time 3D: a room whose <article> carries data-hero3d="3d/hero/<name>" gets that unit as a model
 // (<name>.glb, framed by <name>.json from tools/hero_glb.py) over its still, on <name>_plate.webp (the still's frame without the unit). The unit turns a few degrees toward the pointer
 // and eases back when it leaves; on touch screens it sways gently. Live parts (a VFD, meters, a lotus) play the videos named in
-// data-live ('{"LIVE_vfd":"3d/hero/lim-vfd"}': .webm and .mp4 beside it) on their emissive texture.
+// data-live ('{"LIVE_vfd":"3d/hero/lim-vfd"}': .webm and .mp4 beside it) on their emissive texture. A material also named in
+// data-glow is a glow-only layer (black where nothing is lit): its video's light is added over the model behind it.
 // The still stays the page's image: the model fades in over it only once it has drawn, only in the room that is on, and never
 // for reduced motion, without WebGL, or on a slow connection. One model is live at a time; leaving a room pauses its videos.
 (() => {
@@ -72,6 +73,7 @@
         const smp = m.emissiveTexture.texture && m.emissiveTexture.texture.sampler;          // never tile the video
         if (smp) { smp.setWrapS(33071); smp.setWrapT(33071); }
         unflip(tex); s.videos.push(tex);
+        if ((room.dataset.glow || "").split(" ").includes(mat)) additive(m);
       }
       // the model shows only once it has drawn a frame, so the still is never swapped for a blank canvas
       requestAnimationFrame(() => requestAnimationFrame(() => { s.ready = true; if (room.classList.contains("on")) on(room); }));
@@ -90,6 +92,23 @@
   function unflip(tex) {
     const src = tex && tex.source, sym = src && Object.getOwnPropertySymbols(src).find(k => k.description === "correlatedObjects");
     for (const o of (sym && src[sym]) || []) if (o && "flipY" in o) { o.flipY = false; o.needsUpdate = true; }
+  }
+  // a glow-only layer ships fully transparent (hero_glb.py GLOW); here its three.js material is set to add the video's own
+  // colours, untouched by tone mapping. If model-viewer's internals ever change, the layer just stays invisible
+  function additive(m) {
+    const sym = Object.getOwnPropertySymbols(m).find(k => k.description === "correlatedObjects");
+    for (const o of (sym && m[sym]) || []) if (o && "blending" in o)
+    {
+      Object.assign(o, { blending: 2, transparent: true, opacity: 1, depthWrite: false, toneMapped: false });
+      // three.js (as model-viewer 3.5.0 ships it) takes a video on the emissive slot as linear light, which lifts and yellows
+      // it; its values are sRGB, so they are decoded here
+      o.onBeforeCompile = sh => { sh.fragmentShader = sh.fragmentShader.replace("#include <emissivemap_fragment>",
+        `#ifdef USE_EMISSIVEMAP
+ vec3 g = texture2D( emissiveMap, vEmissiveMapUv ).rgb;
+ totalEmissiveRadiance *= mix( pow( ( g + 0.055 ) / 1.055, vec3( 2.4 ) ), g / 12.92, vec3( lessThanEqual( g, vec3( 0.04045 ) ) ) );
+#endif`); };
+      o.customProgramCacheKey = () => "glow"; o.needsUpdate = true;
+    }
   }
   const play = tex => { const v = videoOf(tex); if (v) v.play().catch(() => {}); };
   const pause = tex => { const v = videoOf(tex); if (v) v.pause(); };
