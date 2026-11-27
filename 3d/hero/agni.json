@@ -1,0 +1,322 @@
+{
+ "scene": "agni_noir_rack.py",
+ "kept": [
+  "baked_ember_obsidian",
+  "baked_floor",
+  "Grid",
+  "bezel",
+  "baked_slotfloor",
+  "bezel.001",
+  "bezel.002",
+  "bezel.003",
+  "bezel.004",
+  "bezel.005",
+  "bezel.006",
+  "bezel.007",
+  "bezel.008",
+  "bezel.009",
+  "Cube.011",
+  "Cube.012",
+  "Cube.013",
+  "Cube.014",
+  "Cube.015",
+  "Cube.016",
+  "Cube.017",
+  "baked_seat",
+  "Cylinder.001",
+  "baked_cap_live",
+  "baked_jewel",
+  "Cylinder.024",
+  "Cylinder.026",
+  "Cylinder.028",
+  "Cylinder.030",
+  "Cylinder.032",
+  "Cylinder.034",
+  "Cylinder.036",
+  "Cylinder.038",
+  "Cylinder.040",
+  "Cylinder.042",
+  "Cylinder.044",
+  "Cylinder.067",
+  "Cylinder.069",
+  "Cylinder.071",
+  "Cylinder.073",
+  "Cylinder.075",
+  "Cylinder.077",
+  "Cylinder.079",
+  "Cylinder.081",
+  "Cylinder.083",
+  "Cylinder.085",
+  "Cylinder.087",
+  "Cylinder.089",
+  "Cylinder.091",
+  "Cylinder.093",
+  "Cylinder.095",
+  "Cylinder.097",
+  "Cylinder.099",
+  "Cylinder.101",
+  "Cylinder.103",
+  "Cylinder.105",
+  "Cylinder.107",
+  "Cylinder.109",
+  "Cylinder.111",
+  "Cylinder.113",
+  "Cylinder.115",
+  "Cylinder.117",
+  "Cylinder.119",
+  "Cylinder.120",
+  "Cylinder.121",
+  "Cylinder.122",
+  "Cylinder.123",
+  "Cylinder.124",
+  "Cylinder.125",
+  "Cylinder.126",
+  "Cylinder.127",
+  "Cylinder.128",
+  "Cylinder.129",
+  "Plane",
+  "Plane.001",
+  "Plane.002",
+  "Plane.003",
+  "baked_hkeym",
+  "baked_hkeym.001",
+  "baked_hkeym.002",
+  "baked_hkeym.003",
+  "baked_hkeym.004",
+  "baked_hkeym.005",
+  "baked_hkeym.006",
+  "baked_hkeym.007",
+  "baked_hkeym.008",
+  "baked_hkeym.009",
+  "baked_hkeym.010",
+  "baked_hkeym.011",
+  "baked_hkeym.012",
+  "baked_hkeym.013",
+  "baked_hkeym.014",
+  "baked_hole",
+  "baked_rubber",
+  "Cylinder.131",
+  "Cylinder.133",
+  "Cylinder.134",
+  "Cylinder.135",
+  "Sphere.006",
+  "Cylinder.136",
+  "Cylinder.137",
+  "Sphere.007",
+  "Cylinder.138",
+  "Cylinder.140",
+  "Cylinder.142",
+  "Cylinder.143",
+  "Cylinder.144",
+  "Sphere.008",
+  "Cylinder.145",
+  "Cylinder.146",
+  "Sphere.009",
+  "Cylinder.147",
+  "baked_crinkle",
+  "Cylinder.148",
+  "Cylinder.149",
+  "Cylinder.150",
+  "Cylinder.151",
+  "Cylinder.152",
+  "Cylinder.153",
+  "Cylinder.154",
+  "Cylinder.155",
+  "Cylinder.156",
+  "baked_ground",
+  "Plane.005",
+  "Plane.006",
+  "Plane.007"
+ ],
+ "materials": {
+  "baked_ember_obsidian": "ok",
+  "baked_floor": "ok",
+  "glass": "ok",
+  "copper": "ok",
+  "baked_slotfloor": "ok",
+  "baked_seat": "ok",
+  "copper_satin": "ok",
+  "baked_cap_live": "ok",
+  "baked_jewel": "ok",
+  "room": "ok",
+  "live": "ok",
+  "LIVE_live_hero": "ok",
+  "live_slots": "ok",
+  "baked_hkeym": "ok",
+  "baked_hkeym.001": "ok",
+  "baked_hkeym.002": "ok",
+  "baked_hkeym.003": "ok",
+  "baked_hkeym.004": "ok",
+  "baked_hkeym.005": "ok",
+  "baked_hkeym.006": "ok",
+  "baked_hkeym.007": "ok",
+  "baked_hkeym.008": "ok",
+  "baked_hkeym.009": "ok",
+  "baked_hkeym.010": "ok",
+  "baked_hkeym.011": "ok",
+  "baked_hkeym.012": "ok",
+  "baked_hkeym.013": "ok",
+  "baked_hkeym.014": "ok",
+  "baked_hole": "ok",
+  "baked_rubber": "ok",
+  "chrome": "ok",
+  "baked_crinkle": "ok",
+  "baked_ground": "ok",
+  "card": "ok",
+  "card.001": "ok",
+  "card.002": "ok"
+ },
+ "camera": {
+  "position": [
+   -17.0,
+   14.0,
+   29.0
+  ],
+  "target": [
+   2.02576,
+   3.15749,
+   -4.51126
+  ],
+  "radius": 40.03179,
+  "theta_deg": -29.585,
+  "phi_deg": 74.285,
+  "vfov_deg": 22.8952,
+  "aspect": 1.77778,
+  "view_transform": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 0.3499999940395355
+ },
+ "live": [
+  "LIVE_live_hero"
+ ],
+ "bake": "full",
+ "baked": {
+  "ember_obsidian": {
+   "objects": 3,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "floor": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "slotfloor": {
+   "objects": 9,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "seat": {
+   "objects": 39,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "cap_live": {
+   "objects": 39,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "jewel": {
+   "objects": 48,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.007": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.008": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.009": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.010": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.011": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.012": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.013": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hkeym.014": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hole": {
+   "objects": 68,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "rubber": {
+   "objects": 8,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "crinkle": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "ground": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  }
+ },
+ "multi_material_unbaked": [],
+ "glb_bytes": 2784588
+}
