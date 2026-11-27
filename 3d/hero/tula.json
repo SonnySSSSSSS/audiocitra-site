@@ -1,0 +1,200 @@
+{
+ "scene": "tula_desk.py",
+ "kept": [
+  "baked_panel_edge",
+  "baked_face",
+  "Cylinder",
+  "baked_knob",
+  "Cylinder.002",
+  "baked_knob.001",
+  "Cylinder.004",
+  "baked_knob.002",
+  "Cylinder.006",
+  "baked_knob.003",
+  "Cylinder.008",
+  "baked_knob.004",
+  "baked_keym",
+  "baked_keym.001",
+  "baked_keym.002",
+  "baked_keym.003",
+  "baked_keym.004",
+  "baked_keym.005",
+  "baked_keym.006",
+  "baked_keym.007",
+  "baked_menukey",
+  "baked_domem",
+  "baked_domem.001",
+  "ring",
+  "Circle",
+  "Sphere.002",
+  "baked_crinkle",
+  "baked_rubber",
+  "Plane.001",
+  "baked_ground"
+ ],
+ "materials": {
+  "baked_panel_edge": "ok",
+  "baked_face": "ok",
+  "skirt": "lost: MapRange,TexCoord",
+  "baked_knob": "ok",
+  "skirt.001": "lost: MapRange,TexCoord",
+  "baked_knob.001": "ok",
+  "skirt.002": "lost: MapRange,TexCoord",
+  "baked_knob.002": "ok",
+  "skirt.003": "lost: MapRange,TexCoord",
+  "baked_knob.003": "ok",
+  "skirt.004": "lost: MapRange,TexCoord",
+  "baked_knob.004": "ok",
+  "baked_keym": "ok",
+  "baked_keym.001": "ok",
+  "baked_keym.002": "ok",
+  "baked_keym.003": "ok",
+  "baked_keym.004": "ok",
+  "baked_keym.005": "ok",
+  "baked_keym.006": "ok",
+  "baked_keym.007": "ok",
+  "baked_menukey": "ok",
+  "baked_domem": "ok",
+  "baked_domem.001": "ok",
+  "ringm": "lost: MapRange,TexCoord",
+  "LIVE_display": "ok",
+  "glass": "ok",
+  "baked_crinkle": "ok",
+  "baked_rubber": "ok",
+  "room": "ok",
+  "baked_ground": "ok"
+ },
+ "camera": {
+  "position": [
+   -5.6,
+   10.13791,
+   14.5
+  ],
+  "target": [
+   0.15987,
+   1.6734,
+   -0.0249
+  ],
+  "radius": 17.77067,
+  "theta_deg": -21.631,
+  "phi_deg": 61.555,
+  "vfov_deg": 22.8952,
+  "aspect": 1.77778,
+  "view_transform": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 0.3499999940395355
+ },
+ "live": [
+  "LIVE_display"
+ ],
+ "bake": "full",
+ "baked": {
+  "panel_edge": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "face": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.026
+  },
+  "knob": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.688
+  },
+  "knob.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.022
+  },
+  "knob.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.063
+  },
+  "knob.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "knob.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "keym.007": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "menukey": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "domem.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.065
+  },
+  "crinkle": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "rubber": {
+   "objects": 4,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "ground": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  }
+ },
+ "multi_material_unbaked": [],
+ "glb_bytes": 727156
+}

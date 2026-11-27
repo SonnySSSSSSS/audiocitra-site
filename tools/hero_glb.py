@@ -181,6 +181,16 @@ for m in bpy.data.materials:
     if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
     m["hero_glass"] = True
 
+# metals stay unbaked, and glTF has no "this colour on the sides, that image on top" mix: the exporter took the image for all of
+# it, so a gold ring came out in the print's dim colours. A metal fed by such a mix (one plain colour, one image) keeps the colour
+for m in bpy.data.materials:
+    b = m.node_tree.nodes.get("Principled BSDF") if m.use_nodes else None
+    if not b or b.inputs["Metallic"].is_linked or b.inputs["Metallic"].default_value < 0.5 or not b.inputs["Base Color"].is_linked: continue
+    mix = b.inputs["Base Color"].links[0].from_node
+    if mix.bl_idname != "ShaderNodeMix" or mix.data_type != "RGBA" or mix.inputs[6].is_linked or not mix.inputs[7].is_linked: continue
+    colour = tuple(mix.inputs[6].default_value)
+    m.node_tree.links.remove(b.inputs["Base Color"].links[0]); b.inputs["Base Color"].default_value = colour
+
 # LIVE_CROP=<hero_frames.py's .crop.json>: the live parts' video holds only the crop of the full layer, so their UVs move onto it
 # one crop for every live part (a path), or one per part: "vfd=a.crop.json,meter=b.crop.json" (the LIVE name, without LIVE_)
 crop = os.environ.get("LIVE_CROP")
@@ -255,8 +265,12 @@ if BAKE:
         bpy.ops.object.parent_clear(type="CLEAR_KEEP_TRANSFORM")
         if len(objs) > 1: bpy.ops.object.join()
         o = bpy.context.view_layer.objects.active; o.name = "baked_" + mname
-        while o.data.uv_layers: o.data.uv_layers.remove(o.data.uv_layers[0])          # a fresh unwrap for the bake only
-        o.data.uv_layers.new(name="bake")
+        # a fresh unwrap for the bake, beside the object's own UVs: those stay the render layer until the bake is done, or a
+        # material that maps its print with them (Tula's face) bakes scrambled
+        uvs = o.data.uv_layers
+        if not uvs: uvs.new(name="UVMap")
+        own = next((u.name for u in uvs if u.active_render), uvs[0].name)
+        uvs.new(name="bake"); uvs.active = uvs["bake"]; uvs[own].active_render = True
         bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.select_all(action="SELECT")
         bpy.ops.uv.smart_project(angle_limit=math.radians(66), island_margin=0.003)
         bpy.ops.object.mode_set(mode="OBJECT")
@@ -268,7 +282,9 @@ if BAKE:
         bk.use_pass_direct = bk.use_pass_indirect = bk.use_pass_diffuse = bk.use_pass_emit = True
         bk.use_pass_glossy = bk.use_pass_transmission = MODE == "full"
         bk.view_from = "ACTIVE_CAMERA" if MODE == "full" else "ABOVE_SURFACE"
-        bpy.ops.object.bake(type="COMBINED")
+        bpy.ops.object.bake(type="COMBINED", uv_layer="bake")
+        for name in [u.name for u in o.data.uv_layers if u.name != "bake"]: o.data.uv_layers.remove(o.data.uv_layers[name])
+        o.data.uv_layers["bake"].active_render = True
         img.filepath_raw = os.path.join(outdir, img.name + ".exr"); img.file_format = "OPEN_EXR"; img.save()
         # into 0..1 for an 8-bit texture: divide by the bright end, carried back as the emission strength
         # (glTF KHR_materials_emissive_strength), so baked light above 1 is not clipped
