@@ -13,7 +13,11 @@ from PIL import Image
 ap = argparse.ArgumentParser(); ap.add_argument("frames"); ap.add_argument("out")
 ap.add_argument("--mask"); ap.add_argument("--crop"); ap.add_argument("--fps", type=float, default=25); ap.add_argument("--width", type=int, default=1024)
 ap.add_argument("--xfade", type=int, default=0, help="blend the last N frames toward the first N, so the loop has no seam")
+ap.add_argument("--agx", type=float, default=2.6, help="saturation boost against the viewer's AgX tone mapping (1 = off)")
 a = ap.parse_args()
+# The viewer shows the video as emission through AgX, which washes bright colours to cream (Tula's orange petals came out cream,
+# the Limiter's VFD whiter). Boost the saturation ahead of it and pull the darks down so the boost doesn't lift a dark background.
+GRADE = "" if a.agx == 1 else f",eq=saturation={a.agx},curves=all='0/0 0.2/0.06 0.5/0.42 1/1'"
 fs = sorted(f for f in os.listdir(a.frames) if f.lower().endswith(".png"))
 if not fs: sys.exit("no frames in " + a.frames)
 W, H = Image.open(os.path.join(a.frames, fs[0])).size
@@ -41,7 +45,7 @@ for i in range(n - N):
     Image.fromarray(im[y0:y1, x0:x1].clip(0, 255).astype(np.uint8)).save(os.path.join(tmp, "c_%04d.png" % i))
     if i == N: Image.fromarray(im[y0:y1, x0:x1].clip(0, 255).astype(np.uint8)).save(a.out + ".png")   # an unblended frame
 w = min(a.width, x1 - x0); w -= w % 2
-vf = f"scale={w}:-2:flags=lanczos,format=yuv420p"
+vf = f"scale={w}:-2:flags=lanczos{GRADE},format=yuv420p"
 src = ["-framerate", str(a.fps), "-i", os.path.join(tmp, "c_%04d.png")]
 subprocess.run(["ffmpeg", "-v", "error", "-y", *src, "-vf", vf, "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "34", "-row-mt", "1", "-an", a.out + ".webm"], check=True)
 subprocess.run(["ffmpeg", "-v", "error", "-y", *src, "-vf", vf, "-c:v", "libx264", "-crf", "24", "-preset", "slow", "-movflags", "+faststart", "-an", a.out + ".mp4"], check=True)
