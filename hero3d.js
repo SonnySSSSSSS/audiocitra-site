@@ -83,6 +83,7 @@
         if (smp) { smp.setWrapS(33071); smp.setWrapT(33071); }
         unflip(tex); s.videos.push(tex);
         if ((room.dataset.glow || "").split(" ").includes(mat)) additive(m);
+        else if ((room.dataset.srgb || "").split(" ").includes(mat)) decoded(m);
       }
       // the model shows only once it has drawn a frame, so the still is never swapped for a blank canvas
       requestAnimationFrame(() => requestAnimationFrame(() => { s.ready = true; if (room.classList.contains("on")) on(room); }));
@@ -111,13 +112,22 @@
       Object.assign(o, { blending: 2, transparent: true, opacity: 1, depthWrite: false, toneMapped: false });
       // three.js (as model-viewer 3.5.0 ships it) takes a video on the emissive slot as linear light, which lifts and yellows
       // it; its values are sRGB, so they are decoded here
-      o.onBeforeCompile = sh => { sh.fragmentShader = sh.fragmentShader.replace("#include <emissivemap_fragment>",
-        `#ifdef USE_EMISSIVEMAP
+      srgbDecode(o, "glow");
+    }
+  }
+  function srgbDecode(o, key) {
+    o.onBeforeCompile = sh => { sh.fragmentShader = sh.fragmentShader.replace("#include <emissivemap_fragment>",
+      `#ifdef USE_EMISSIVEMAP
  vec3 g = texture2D( emissiveMap, vEmissiveMapUv ).rgb;
  totalEmissiveRadiance *= mix( pow( ( g + 0.055 ) / 1.055, vec3( 2.4 ) ), g / 12.92, vec3( lessThanEqual( g, vec3( 0.04045 ) ) ) );
 #endif`); };
-      o.customProgramCacheKey = () => "glow"; o.needsUpdate = true;
-    }
+    o.customProgramCacheKey = () => key; o.needsUpdate = true;
+  }
+  // data-srgb: an opaque live window (a display drawn on black) whose video is decoded from sRGB like the glow, but drawn
+  // normally; without it its darks show lifted (Galana's CRT floor read pale tan)
+  function decoded(m) {
+    const sym = Object.getOwnPropertySymbols(m).find(k => k.description === "correlatedObjects");
+    for (const o of (sym && m[sym]) || []) if (o && "blending" in o) srgbDecode(o, "srgb");
   }
   const play = tex => { const v = videoOf(tex); if (v) v.play().catch(() => {}); };
   const pause = tex => { const v = videoOf(tex); if (v) v.pause(); };

@@ -199,9 +199,14 @@ for m in bpy.data.materials:
     if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
     m["hero_decal"] = True
 
-# glass and see-through sheets (a transparent BSDF in a mix): glTF has no such mix, so a dark low-alpha blend that keeps a highlight
+# glass and see-through sheets (a transparent BSDF in a mix, or a Principled with transmission: Galana's window glass): glTF has
+# no such mix and a bake makes them opaque, so a dark low-alpha blend that keeps a highlight
+def _glassy(m):
+    if any(n.bl_idname == "ShaderNodeBsdfTransparent" for n in m.node_tree.nodes): return True
+    b = m.node_tree.nodes.get("Principled BSDF"); t = b and b.inputs.get("Transmission Weight")
+    return bool(t) and not t.is_linked and t.default_value >= 0.5
 for m in bpy.data.materials:
-    if not m.use_nodes or not any(n.bl_idname == "ShaderNodeBsdfTransparent" for n in m.node_tree.nodes): continue
+    if not m.use_nodes or not _glassy(m): continue
     nt = m.node_tree; nt.nodes.clear()
     b = nt.nodes.new("ShaderNodeBsdfPrincipled"); out = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(b.outputs[0], out.inputs["Surface"])
     b.inputs["Base Color"].default_value = (0.01, 0.01, 0.012, 1); b.inputs["Roughness"].default_value = 0.06
