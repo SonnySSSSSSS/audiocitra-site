@@ -318,7 +318,11 @@ if BAKE:
     groups = {}
     print("HERO_BAKE_RIG", len(rig_objs), "rig meshes kept for the bake:", sorted({o.name for o in rig_objs})[:12])
     for o in [o for o in sc.objects if o.type == "MESH" and not o.get("hero_rig")]:
-        ms = {s.material for s in o.material_slots if s.material}
+        used = {p.material_index for p in o.data.polygons}      # a boolean can leave an unused slot (Shunya's tube): count faces
+        ms = {s.material for i, s in enumerate(o.material_slots) if s.material and i in used}
+        if len(ms) == 1 and len(o.material_slots) > 1:
+            keep = next(iter(ms)); o.data.materials.clear(); o.data.materials.append(keep)
+            for p in o.data.polygons: p.material_index = 0
         if len(ms) == 1 and bakeable(next(iter(ms))): groups.setdefault(next(iter(ms)).name, []).append(o)
     report_bake = {}
     for mname, objs in groups.items():
