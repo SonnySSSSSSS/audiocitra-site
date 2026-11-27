@@ -30,7 +30,15 @@
     const w = k * a, h = k, [px, py] = cs.objectPosition.split(" ").map(v => parseFloat(v) / 100);
     const box = { width: w + "px", height: h + "px", left: (ir.width - w) * (isNaN(px) ? .5 : px) + "px",
       top: (ir.height - h) * (isNaN(py) ? .5 : py) + "px" };
-    Object.assign(s.el.style, box); if (s.plate) Object.assign(s.plate.style, box);
+    Object.assign(s.el.style, box); if (s.plate) Object.assign(s.plate.style, box); if (s.sheen) Object.assign(s.sheen.style, box);
+  }
+  // data-sheen="x,y,rx,ry,r,g,b": a soft reflection the still has and the model's environment can't mirror (the console's
+  // vertical streak), added over the model as light: centre and radii in the still's 1280x720 pixels, colour 0..255
+  function sheen(spec) {
+    const [x, y, rx, ry, r, g, b] = spec.split(",").map(Number), d = document.createElement("div");
+    d.className = "h3d-sheen";
+    d.style.backgroundImage = `radial-gradient(${rx / 12.8}% ${ry / 7.2}% at ${x / 12.8}% ${y / 7.2}%, rgb(${r},${g},${b}), rgba(${r},${g},${b},.45) 45%, transparent)`;
+    return d;
   }
 
   const orbit = (c, dt = 0, dp = 0) => `${c.theta_deg + dt}deg ${c.phi_deg + dp}deg ${c.radius}m`;
@@ -61,6 +69,7 @@
       s.plate.src = room.dataset.hero3dPlate || base + "_plate.webp"; s.wrap.append(s.plate);
     }
     s.wrap.append(el);
+    if (room.dataset.sheen) s.wrap.append(s.sheen = sheen(room.dataset.sheen));
     room.querySelector(":scope > img").after(s.wrap);
     fit(room, s);
     el.addEventListener("load", async () => {
