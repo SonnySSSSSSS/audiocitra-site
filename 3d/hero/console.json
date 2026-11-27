@@ -96,12 +96,13 @@
   "baked_obsidian": "ok",
   "baked_fan_floor": "ok",
   "smoked_sheet": "ok",
-  "brass": "ok",
+  "brass_glow": "ok",
   "baked_nameplate_glass": "ok",
   "room": "ok",
   "baked_hole": "ok",
   "baked_rubber": "ok",
   "chrome": "ok",
+  "brass": "ok",
   "baked_crinkle": "ok",
   "live": "ok",
   "baked_brass_inlay_dim": "ok",
@@ -203,5 +204,5 @@
   }
  },
  "multi_material_unbaked": [],
- "glb_bytes": 1294268
+ "glb_bytes": 1300668
 }
