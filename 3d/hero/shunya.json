@@ -1,0 +1,196 @@
+{
+ "scene": "shunya_eclipse3d.py",
+ "kept": [
+  "baked_void",
+  "baked_well_floor",
+  "Sphere.001",
+  "Cylinder.003",
+  "Cylinder.005",
+  "Cylinder.007",
+  "baked_jewel_dark",
+  "Cylinder.008",
+  "Cylinder.009",
+  "Cylinder.010",
+  "Cylinder.011",
+  "Cylinder.012",
+  "Cylinder.013",
+  "Cylinder.014",
+  "Cylinder.015",
+  "Cylinder.016",
+  "Cylinder.017",
+  "Cylinder.018",
+  "Cylinder.019",
+  "Cylinder.020",
+  "Cylinder.021",
+  "Cylinder.022",
+  "Cylinder.023",
+  "Cylinder.024",
+  "Cylinder.025",
+  "Cylinder.026",
+  "Cylinder.027",
+  "Cylinder.028",
+  "Cylinder.029",
+  "Cylinder.030",
+  "Cylinder.031",
+  "Cylinder.032",
+  "Cylinder.033",
+  "Cylinder.034",
+  "Cylinder.035",
+  "Cylinder.036",
+  "Cylinder.037",
+  "Cylinder.038",
+  "Cylinder.039",
+  "Cylinder.040",
+  "Cylinder.041",
+  "Cylinder.042",
+  "Cylinder.043",
+  "Cylinder.044",
+  "Cylinder.045",
+  "Cylinder.046",
+  "Cylinder.047",
+  "Cylinder.048",
+  "Cylinder.049",
+  "Cylinder.050",
+  "Cylinder.051",
+  "Cylinder.052",
+  "Cylinder.053",
+  "Cylinder.054",
+  "bezel",
+  "Cylinder.055",
+  "Cube.002",
+  "baked_case",
+  "Cube.004",
+  "baked_foot",
+  "baked_foot.001",
+  "baked_foot.002",
+  "baked_foot.003",
+  "Sphere.050",
+  "Sphere.051",
+  "Sphere.052",
+  "Sphere.053",
+  "print",
+  "lens_disc",
+  "baked_seat",
+  "Cylinder.060",
+  "baked_satin_obsidian",
+  "baked_pointer",
+  "Cylinder.062",
+  "Cylinder.064",
+  "Cylinder.066",
+  "Cylinder.068",
+  "Cylinder.070",
+  "Cylinder.072",
+  "Cylinder.074",
+  "Cylinder.076",
+  "baked_desk",
+  "Plane.001"
+ ],
+ "materials": {
+  "baked_void": "ok",
+  "baked_well_floor": "ok",
+  "lens": "ok",
+  "brass_satin": "ok",
+  "brass": "ok",
+  "baked_jewel_dark": "ok",
+  "baked_case": "ok",
+  "baked_foot": "ok",
+  "baked_foot.001": "ok",
+  "baked_foot.002": "ok",
+  "baked_foot.003": "ok",
+  "print": "ok",
+  "LIVE_lens_live": "ok",
+  "baked_seat": "ok",
+  "baked_satin_obsidian": "ok",
+  "baked_pointer": "ok",
+  "baked_desk": "ok",
+  "softbox": "lost: TexCoord"
+ },
+ "camera": {
+  "position": [
+   1.6,
+   7.4,
+   10.2
+  ],
+  "target": [
+   0.22052,
+   -0.46812,
+   -0.12053
+  ],
+  "radius": 13.05081,
+  "theta_deg": 7.613,
+  "phi_deg": 52.923,
+  "vfov_deg": 29.1071,
+  "aspect": 1.77778,
+  "view_transform": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 0.0
+ },
+ "live": [
+  "LIVE_lens_live"
+ ],
+ "bake": "full",
+ "baked": {
+  "void": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.025
+  },
+  "well_floor": {
+   "objects": 2,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "jewel_dark": {
+   "objects": 48,
+   "metallic": 0.0,
+   "peak": 4.815
+  },
+  "case": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "foot": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "foot.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "foot.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "foot.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "seat": {
+   "objects": 9,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "satin_obsidian": {
+   "objects": 9,
+   "metallic": 0.0,
+   "peak": 1.645
+  },
+  "pointer": {
+   "objects": 9,
+   "metallic": 0.0,
+   "peak": 3.714
+  },
+  "desk": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  }
+ },
+ "multi_material_unbaked": [],
+ "glb_bytes": 1167096
+}

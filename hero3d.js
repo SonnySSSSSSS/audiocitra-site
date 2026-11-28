@@ -1,7 +1,8 @@
 // Front-page heroes as real-time 3D: a room whose <article> carries data-hero3d="3d/hero/<name>" gets that unit as a model
 // (<name>.glb, framed by <name>.json from tools/hero_glb.py) over its still, on <name>_plate.webp (the still's frame without the unit). The unit turns a few degrees toward the pointer
 // and eases back when it leaves; on touch screens it sways gently. Live parts (a VFD, meters, a lotus) play the videos named in
-// data-live ('{"LIVE_vfd":"3d/hero/lim-vfd"}': .webm and .mp4 beside it) on their emissive texture.
+// data-live ('{"LIVE_vfd":"3d/hero/lim-vfd"}': .webm and .mp4 beside it) on their emissive texture. A material also named in
+// data-glow is a glow-only layer (black where nothing is lit): its video's light is added over the model behind it.
 // The still stays the page's image: the model fades in over it only once it has drawn, only in the room that is on, and never
 // for reduced motion, without WebGL, or on a slow connection. One model is live at a time; leaving a room pauses its videos.
 (() => {
@@ -29,7 +30,15 @@
     const w = k * a, h = k, [px, py] = cs.objectPosition.split(" ").map(v => parseFloat(v) / 100);
     const box = { width: w + "px", height: h + "px", left: (ir.width - w) * (isNaN(px) ? .5 : px) + "px",
       top: (ir.height - h) * (isNaN(py) ? .5 : py) + "px" };
-    Object.assign(s.el.style, box); if (s.plate) Object.assign(s.plate.style, box);
+    Object.assign(s.el.style, box); if (s.plate) Object.assign(s.plate.style, box); if (s.sheen) Object.assign(s.sheen.style, box);
+  }
+  // data-sheen="x,y,rx,ry,r,g,b": a soft reflection the still has and the model's environment can't mirror (the console's
+  // vertical streak), added over the model as light: centre and radii in the still's 1280x720 pixels, colour 0..255
+  function sheen(spec) {
+    const [x, y, rx, ry, r, g, b] = spec.split(",").map(Number), d = document.createElement("div");
+    d.className = "h3d-sheen";
+    d.style.backgroundImage = `radial-gradient(${rx / 12.8}% ${ry / 7.2}% at ${x / 12.8}% ${y / 7.2}%, rgb(${r},${g},${b}), rgba(${r},${g},${b},.45) 45%, transparent)`;
+    return d;
   }
 
   const orbit = (c, dt = 0, dp = 0) => `${c.theta_deg + dt}deg ${c.phi_deg + dp}deg ${c.radius}m`;
@@ -60,6 +69,7 @@
       s.plate.src = room.dataset.hero3dPlate || base + "_plate.webp"; s.wrap.append(s.plate);
     }
     s.wrap.append(el);
+    if (room.dataset.sheen) s.wrap.append(s.sheen = sheen(room.dataset.sheen));
     room.querySelector(":scope > img").after(s.wrap);
     fit(room, s);
     el.addEventListener("load", async () => {
@@ -72,6 +82,8 @@
         const smp = m.emissiveTexture.texture && m.emissiveTexture.texture.sampler;          // never tile the video
         if (smp) { smp.setWrapS(33071); smp.setWrapT(33071); }
         unflip(tex); s.videos.push(tex);
+        if ((room.dataset.glow || "").split(" ").includes(mat)) additive(m);
+        else if ((room.dataset.srgb || "").split(" ").includes(mat)) decoded(m);
       }
       // the model shows only once it has drawn a frame, so the still is never swapped for a blank canvas
       requestAnimationFrame(() => requestAnimationFrame(() => { s.ready = true; if (room.classList.contains("on")) on(room); }));
@@ -90,6 +102,32 @@
   function unflip(tex) {
     const src = tex && tex.source, sym = src && Object.getOwnPropertySymbols(src).find(k => k.description === "correlatedObjects");
     for (const o of (sym && src[sym]) || []) if (o && "flipY" in o) { o.flipY = false; o.needsUpdate = true; }
+  }
+  // a glow-only layer ships fully transparent (hero_glb.py GLOW); here its three.js material is set to add the video's own
+  // colours, untouched by tone mapping. If model-viewer's internals ever change, the layer just stays invisible
+  function additive(m) {
+    const sym = Object.getOwnPropertySymbols(m).find(k => k.description === "correlatedObjects");
+    for (const o of (sym && m[sym]) || []) if (o && "blending" in o)
+    {
+      Object.assign(o, { blending: 2, transparent: true, opacity: 1, depthWrite: false, toneMapped: false });
+      // three.js (as model-viewer 3.5.0 ships it) takes a video on the emissive slot as linear light, which lifts and yellows
+      // it; its values are sRGB, so they are decoded here
+      srgbDecode(o, "glow");
+    }
+  }
+  function srgbDecode(o, key) {
+    o.onBeforeCompile = sh => { sh.fragmentShader = sh.fragmentShader.replace("#include <emissivemap_fragment>",
+      `#ifdef USE_EMISSIVEMAP
+ vec3 g = texture2D( emissiveMap, vEmissiveMapUv ).rgb;
+ totalEmissiveRadiance *= mix( pow( ( g + 0.055 ) / 1.055, vec3( 2.4 ) ), g / 12.92, vec3( lessThanEqual( g, vec3( 0.04045 ) ) ) );
+#endif`); };
+    o.customProgramCacheKey = () => key; o.needsUpdate = true;
+  }
+  // data-srgb: an opaque live window (a display drawn on black) whose video is decoded from sRGB like the glow, but drawn
+  // normally; without it its darks show lifted (Galana's CRT floor read pale tan)
+  function decoded(m) {
+    const sym = Object.getOwnPropertySymbols(m).find(k => k.description === "correlatedObjects");
+    for (const o of (sym && m[sym]) || []) if (o && "blending" in o) srgbDecode(o, "srgb");
   }
   const play = tex => { const v = videoOf(tex); if (v) v.play().catch(() => {}); };
   const pause = tex => { const v = videoOf(tex); if (v) v.pause(); };

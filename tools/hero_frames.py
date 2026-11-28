@@ -13,7 +13,26 @@ from PIL import Image
 ap = argparse.ArgumentParser(); ap.add_argument("frames"); ap.add_argument("out")
 ap.add_argument("--mask"); ap.add_argument("--crop"); ap.add_argument("--fps", type=float, default=25); ap.add_argument("--width", type=int, default=1024)
 ap.add_argument("--xfade", type=int, default=0, help="blend the last N frames toward the first N, so the loop has no seam")
+ap.add_argument("--agx", type=float, default=1.0, help="saturation boost against the viewer's AgX tone mapping (1 = off); match it to the still")
+ap.add_argument("--tint", default="1,1,1", help="r,g,b gains before the --agx boost, to match the still's hue")
+ap.add_argument("--gloss", help="angle,offset,soft,amount: a soft grey sheen added over the part (the still's glass reflection the model can't mirror)")
 a = ap.parse_args()
+# The viewer shows the video as emission through AgX, which pulls bright colours toward cream. --agx boosts the saturation ahead of
+# it and pulls the darks down so the boost doesn't lift a dark background; pick the value whose model shot matches the still.
+TINT = np.float32([float(v) for v in a.tint.split(",")])
+def grade(im):
+    lum = (im @ np.float32([0.2126, 0.7152, 0.0722]))[..., None] / 255
+    im = im * (1 + (TINT - 1) * np.clip(lum * 3, 0, 1))   # tint the lit parts only, so a dark background keeps its own colour
+    if a.agx != 1:
+        y = im @ np.float32([0.2126, 0.7152, 0.0722])
+        im = y[..., None] + (im - y[..., None]) * a.agx
+        im = np.interp(im.clip(0, 255) / 255, [0, 0.2, 0.5, 1], [0, 0.06, 0.42, 1]).astype(np.float32) * 255
+    if a.gloss:   # a reflection the still has and the model's environment can't give: a soft band of grey across the part
+        ang, off, soft, amt = map(float, a.gloss.split(","))
+        h, w = im.shape[:2]; v, u = np.mgrid[-1:1:h * 1j, -1:1:w * 1j]
+        d = u * np.cos(np.radians(ang)) + v * np.sin(np.radians(ang)) - off
+        t = np.clip((d + soft) / (2 * soft), 0, 1); im = im + (amt * t * t * (3 - 2 * t))[..., None]
+    return im
 fs = sorted(f for f in os.listdir(a.frames) if f.lower().endswith(".png"))
 if not fs: sys.exit("no frames in " + a.frames)
 W, H = Image.open(os.path.join(a.frames, fs[0])).size
@@ -38,7 +57,7 @@ for i in range(n - N):
     if i < N:
         t = (i + 1) / (N + 1); im = load(fs[n - N + i]) * (1 - t) + im * t
     if mask is not None: im = im * mask
-    Image.fromarray(im[y0:y1, x0:x1].clip(0, 255).astype(np.uint8)).save(os.path.join(tmp, "c_%04d.png" % i))
+    Image.fromarray(grade(im[y0:y1, x0:x1]).clip(0, 255).astype(np.uint8)).save(os.path.join(tmp, "c_%04d.png" % i))
     if i == N: Image.fromarray(im[y0:y1, x0:x1].clip(0, 255).astype(np.uint8)).save(a.out + ".png")   # an unblended frame
 w = min(a.width, x1 - x0); w -= w % 2
 vf = f"scale={w}:-2:flags=lanczos,format=yuv420p"

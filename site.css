@@ -613,5 +613,6 @@ body.pale .slide::before,body.pale .slide::after{background-image:radial-gradien
 .room>.h3d.live{opacity:1}
 .room:has(>.h3d.live)>img{opacity:0;transition:opacity .3s .7s}   /* the model carries the still's mask: the still under it would show through the mask's soft edge */
 .room>.h3d>img{position:absolute;display:block;max-width:none}
+.room>.h3d>.h3d-sheen{position:absolute;pointer-events:none;mix-blend-mode:plus-lighter}
 .room>.h3d model-viewer{position:absolute;background:transparent;--poster-color:transparent;--progress-bar-height:0}
 @media (prefers-reduced-motion:reduce){.room>.h3d{display:none}}

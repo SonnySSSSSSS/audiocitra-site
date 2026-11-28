@@ -14,6 +14,10 @@ Env:
   BAKE_PX         texture size per material group (2048 in the pilot); BAKE_SAMPLES (128 in the pilot)
   LIVE            comma list of object or material base names that carry live video on the page (exact match; renamed
                   LIVE_<name>, emission over black); LIVE_CROP=<hero_frames.py .crop.json> cuts their plane to the video's crop
+  DECAL           comma list of materials that are see-through print layers (the console's L_live): left out of the bake, exported
+                  as their own colour (emission) with their own alpha
+  GLOW=new=mat    a second sheet just above the layer plane that uses <mat>, with its own material <new> (list it in LIVE): a
+                  glow-only video, exported fully transparent; the page adds its light over the model (data-glow in hero3d.js)
   ENV=1           render the viewer's environment map (<out>_env.hdr) from the unit's centre, unit hidden, lamps and rig visible;
                   ENV_RES (1024x512), ENV_SAMPLES (128), ENV_GAIN (0.6: the still's brightness), ENV_LAMPS (1)
   PLATE=1         render the still's frame without the unit (<out>_plate.png); PLATE_DRY=1 only lists what the unit finder
@@ -55,6 +59,9 @@ dist = (loc - cam.matrix_world.translation).length if hit else (cam.data.dof.foc
 target = cam.matrix_world.translation + fwd * dist
 asp = sc.render.resolution_x / sc.render.resolution_y
 vfov = 2 * math.atan(math.tan(cam.data.angle_x / 2) / asp) if cam.data.sensor_fit != "VERTICAL" else cam.data.angle_y
+
+def _still_output():   # a scene that renders a video (Akasa's demo) leaves the output on FFMPEG, where HDR / PNG are not offered
+    if hasattr(sc.render.image_settings, "media_type"): sc.render.image_settings.media_type = "IMAGE"
 
 RIG = ("softbox", "card", "reflector", "lightcard", "cyc", "sweep")
 
@@ -101,7 +108,7 @@ if os.environ.get("ENV") == "1":
     po.location = centre; po.rotation_euler = (math.radians(90), 0, math.radians(-90))     # glTF +z (the unit's front) at the map's centre
     sc.camera = po; sc.render.resolution_x, sc.render.resolution_y = ex, ey; sc.render.resolution_percentage = 100
     sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("ENV_SAMPLES", "128"))
-    sc.render.image_settings.file_format = "HDR"; sc.render.filepath = os.path.splitext(OUT)[0] + "_env.hdr"
+    _still_output(); sc.render.image_settings.file_format = "HDR"; sc.render.filepath = os.path.splitext(OUT)[0] + "_env.hdr"
     sc.view_settings.view_transform = "Standard"; sc.view_settings.look = "None"; sc.view_settings.exposure = 0
     _real_render(write_still=True)
     gain = float(os.environ.get("ENV_GAIN", "0.6"))          # the page's metals at 1.0 lift the unit above the still (Limiter pilot: 0.6)
@@ -121,7 +128,7 @@ if os.environ.get("PLATE") == "1":
         print("HERO_UNIT_MATERIALS", sorted({m.name for o in unit if o.type == "MESH" for m in o.data.materials if m}))
         sys.exit(0)
     sc.render.engine = "CYCLES"; sc.cycles.samples = int(os.environ.get("PLATE_SAMPLES", "128"))
-    sc.render.image_settings.file_format = "PNG"; sc.render.filepath = os.path.splitext(OUT)[0] + "_plate.png"
+    _still_output(); sc.render.image_settings.file_format = "PNG"; sc.render.filepath = os.path.splitext(OUT)[0] + "_plate.png"
     _real_render(write_still=True)
     print("HERO_PLATE", sc.render.filepath); sys.exit(0)
 
@@ -149,9 +156,16 @@ for o in [o for o in sc.objects if o.type == "MESH" and o.modifiers and o not in
     o.modifiers.clear(); o.data = me
 for o in drop: bpy.data.objects.remove(o, do_unlink=True)
 
+base = lambda n: n.split(".")[0]
+for spec in filter(None, os.environ.get("GLOW", "").split(",")):
+    new, under = spec.split("=")
+    src = next(o for o in sc.objects if o.type == "MESH" and o.active_material and base(o.active_material.name) == under)
+    g = src.copy(); g.data = src.data.copy(); g.name = new; sc.collection.objects.link(g); g.location.z += 0.0006
+    m = src.active_material.copy(); m.name = new; m["hero_glow"] = True
+    g.data.materials.clear(); g.data.materials.append(m)
+
 # live parts (object or material name equal to a LIVE entry, ignoring Blender's .001 suffixes): renamed LIVE_<name> for the page's
 # video swap; unlit, their image (the poster frame) as emission over a black base, so nothing lit shows under the video
-base = lambda n: n.split(".")[0]
 live_mats = {}
 for o in sc.objects:
     m = o.active_material if o.type == "MESH" else None
@@ -170,16 +184,78 @@ for m in bpy.data.materials:
     nt.links.new(b.outputs[0], out.inputs["Surface"]); b.inputs["Base Color"].default_value = (0, 0, 0, 1)
     b.inputs["Roughness"].default_value = 1.0; b.inputs["Specular IOR Level"].default_value = 0.0
     if tex: nt.links.new(tex.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = glow
+    if m.get("hero_glow"):          # glTF has no additive blend: it ships invisible, and hero3d.js switches it to adding light
+        b.inputs["Alpha"].default_value = 0.0; b.inputs["Emission Strength"].default_value = 1.0
+        if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
 
-# glass and see-through sheets (a transparent BSDF in a mix): glTF has no such mix, so a dark low-alpha blend that keeps a highlight
+DECAL = [p for p in os.environ.get("DECAL", "").split(",") if p]
+def _object_mapped_uvs(m, tex):
+    """a decal whose image is placed by object coordinates through a Mapping node (Akasa's text layers) has no UVs, and glTF
+    needs them: write that mapping into a UV layer on every object using the material"""
+    v = tex.inputs["Vector"]
+    if not v.is_linked or v.links[0].from_node.bl_idname != "ShaderNodeMapping": return
+    mp = v.links[0].from_node
+    if not mp.inputs["Vector"].is_linked or mp.inputs["Vector"].links[0].from_socket.name != "Object": return
+    loc = Vector(mp.inputs["Location"].default_value); scl = Vector(mp.inputs["Scale"].default_value)
+    for o in sc.objects:
+        if o.type != "MESH" or m.name not in [x.name for x in o.data.materials if x]: continue
+        uv = o.data.uv_layers.active or o.data.uv_layers.new()
+        for li, lp in enumerate(o.data.loops):
+            co = o.data.vertices[lp.vertex_index].co
+            uv.data[li].uv = (co.x * scl.x + loc.x, co.y * scl.y + loc.y)
 for m in bpy.data.materials:
-    if not m.use_nodes or not any(n.bl_idname == "ShaderNodeBsdfTransparent" for n in m.node_tree.nodes): continue
+    if base(m.name) not in DECAL or not m.use_nodes: continue
+    nt = m.node_tree; old = nt.nodes["Principled BSDF"]; img = old.inputs["Base Color"].links[0].from_node.image
+    _object_mapped_uvs(m, old.inputs["Base Color"].links[0].from_node)
+    k = old.inputs["Emission Strength"].default_value if old.inputs["Emission Color"].is_linked else 0.0
+    k = k or 1.0                    # an unlit print layer (Akasa's) is exported as its own colours, not black
+    nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputMaterial"); b = nt.nodes.new("ShaderNodeBsdfPrincipled"); t = nt.nodes.new("ShaderNodeTexImage"); t.image = img
+    nt.links.new(b.outputs[0], out.inputs["Surface"]); b.inputs["Base Color"].default_value = (0, 0, 0, 1)
+    b.inputs["Roughness"].default_value = 1.0; b.inputs["Specular IOR Level"].default_value = 0.0
+    nt.links.new(t.outputs["Color"], b.inputs["Emission Color"]); b.inputs["Emission Strength"].default_value = k
+    nt.links.new(t.outputs["Alpha"], b.inputs["Alpha"])
+    if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
+    m["hero_decal"] = True
+
+# glass and see-through sheets (a transparent BSDF in a mix, or a Principled with transmission: Galana's window glass): glTF has
+# no such mix and a bake makes them opaque, so a dark low-alpha blend that keeps a highlight
+def _glassy(m):
+    if any(n.bl_idname == "ShaderNodeBsdfTransparent" for n in m.node_tree.nodes): return True
+    b = m.node_tree.nodes.get("Principled BSDF"); t = b and b.inputs.get("Transmission Weight")
+    return bool(t) and not t.is_linked and t.default_value >= 0.5
+for m in bpy.data.materials:
+    if not m.use_nodes or not _glassy(m): continue
     nt = m.node_tree; nt.nodes.clear()
     b = nt.nodes.new("ShaderNodeBsdfPrincipled"); out = nt.nodes.new("ShaderNodeOutputMaterial"); nt.links.new(b.outputs[0], out.inputs["Surface"])
     b.inputs["Base Color"].default_value = (0.01, 0.01, 0.012, 1); b.inputs["Roughness"].default_value = 0.06
     b.inputs["Alpha"].default_value = float(os.environ.get("GLASS_ALPHA", "0.22"))
     if hasattr(m, "surface_render_method"): m.surface_render_method = "BLENDED"
     m["hero_glass"] = True
+
+# metals stay unbaked, and glTF has no "this colour on the sides, that image on top" mix: the exporter took the image for all of
+# it, so a gold ring came out in the print's dim colours. A metal fed by such a mix (one plain colour, one image) keeps the colour
+def _plain_colour(n, depth=0):
+    """a metal's colour built from plain colours through Mix nodes (a noise between two shades, times a light map: Akasa's
+    oxblood plate): the mean of the first Mix whose two colours are plain, else None. glTF keeps none of it, so it came out white"""
+    if n is None or depth > 6 or n.bl_idname != "ShaderNodeMix" or n.data_type != "RGBA": return None
+    a, b_ = n.inputs[6], n.inputs[7]
+    if not a.is_linked and not b_.is_linked: return tuple((x + y) / 2 for x, y in zip(a.default_value, b_.default_value))
+    for i in (a, b_):
+        if i.is_linked:
+            c = _plain_colour(i.links[0].from_node, depth + 1)
+            if c: return c
+    return None
+for m in bpy.data.materials:
+    b = m.node_tree.nodes.get("Principled BSDF") if m.use_nodes else None
+    if not b or b.inputs["Metallic"].is_linked or b.inputs["Metallic"].default_value < 0.5 or not b.inputs["Base Color"].is_linked: continue
+    mix = b.inputs["Base Color"].links[0].from_node
+    pc = _plain_colour(mix) if mix.bl_idname == "ShaderNodeMix" and mix.data_type == "RGBA" and (mix.inputs[6].is_linked or not mix.inputs[7].is_linked) else None
+    if pc:
+        m.node_tree.links.remove(b.inputs["Base Color"].links[0]); b.inputs["Base Color"].default_value = pc; continue
+    if mix.bl_idname != "ShaderNodeMix" or mix.data_type != "RGBA" or mix.inputs[6].is_linked or not mix.inputs[7].is_linked: continue
+    colour = tuple(mix.inputs[6].default_value)
+    m.node_tree.links.remove(b.inputs["Base Color"].links[0]); b.inputs["Base Color"].default_value = colour
 
 # LIVE_CROP=<hero_frames.py's .crop.json>: the live parts' video holds only the crop of the full layer, so their UVs move onto it
 # one crop for every live part (a path), or one per part: "vfd=a.crop.json,meter=b.crop.json" (the LIVE name, without LIVE_)
@@ -230,7 +306,7 @@ if BAKE:
     def principled(m):
         return m.node_tree.nodes.get("Principled BSDF") if m and m.use_nodes else None
     def bakeable(m):
-        if not m or m.name.startswith("LIVE_") or m.get("hero_glass"): return False
+        if not m or m.name.startswith("LIVE_") or m.get("hero_glass") or m.get("hero_decal"): return False
         b = principled(m)
         if b and not b.inputs["Metallic"].is_linked and b.inputs["Metallic"].default_value >= 0.5: return False
         return True
@@ -242,7 +318,11 @@ if BAKE:
     groups = {}
     print("HERO_BAKE_RIG", len(rig_objs), "rig meshes kept for the bake:", sorted({o.name for o in rig_objs})[:12])
     for o in [o for o in sc.objects if o.type == "MESH" and not o.get("hero_rig")]:
-        ms = {s.material for s in o.material_slots if s.material}
+        used = {p.material_index for p in o.data.polygons}      # a boolean can leave an unused slot (Shunya's tube): count faces
+        ms = {s.material for i, s in enumerate(o.material_slots) if s.material and i in used}
+        if len(ms) == 1 and len(o.material_slots) > 1:
+            keep = next(iter(ms)); o.data.materials.clear(); o.data.materials.append(keep)
+            for p in o.data.polygons: p.material_index = 0
         if len(ms) == 1 and bakeable(next(iter(ms))): groups.setdefault(next(iter(ms)).name, []).append(o)
     report_bake = {}
     for mname, objs in groups.items():
@@ -255,8 +335,12 @@ if BAKE:
         bpy.ops.object.parent_clear(type="CLEAR_KEEP_TRANSFORM")
         if len(objs) > 1: bpy.ops.object.join()
         o = bpy.context.view_layer.objects.active; o.name = "baked_" + mname
-        while o.data.uv_layers: o.data.uv_layers.remove(o.data.uv_layers[0])          # a fresh unwrap for the bake only
-        o.data.uv_layers.new(name="bake")
+        # a fresh unwrap for the bake, beside the object's own UVs: those stay the render layer until the bake is done, or a
+        # material that maps its print with them (Tula's face) bakes scrambled
+        uvs = o.data.uv_layers
+        if not uvs: uvs.new(name="UVMap")
+        own = next((u.name for u in uvs if u.active_render), uvs[0].name)
+        uvs.new(name="bake"); uvs.active = uvs["bake"]; uvs[own].active_render = True
         bpy.ops.object.mode_set(mode="EDIT"); bpy.ops.mesh.select_all(action="SELECT")
         bpy.ops.uv.smart_project(angle_limit=math.radians(66), island_margin=0.003)
         bpy.ops.object.mode_set(mode="OBJECT")
@@ -268,7 +352,9 @@ if BAKE:
         bk.use_pass_direct = bk.use_pass_indirect = bk.use_pass_diffuse = bk.use_pass_emit = True
         bk.use_pass_glossy = bk.use_pass_transmission = MODE == "full"
         bk.view_from = "ACTIVE_CAMERA" if MODE == "full" else "ABOVE_SURFACE"
-        bpy.ops.object.bake(type="COMBINED")
+        bpy.ops.object.bake(type="COMBINED", uv_layer="bake")
+        for name in [u.name for u in o.data.uv_layers if u.name != "bake"]: o.data.uv_layers.remove(o.data.uv_layers[name])
+        o.data.uv_layers["bake"].active_render = True
         img.filepath_raw = os.path.join(outdir, img.name + ".exr"); img.file_format = "OPEN_EXR"; img.save()
         # into 0..1 for an 8-bit texture: divide by the bright end, carried back as the emission strength
         # (glTF KHR_materials_emissive_strength), so baked light above 1 is not clipped

@@ -1,0 +1,501 @@
+{
+ "scene": "blender_rack_b.py",
+ "kept": [
+  "unit",
+  "unit.001",
+  "unit.002",
+  "baked_bez",
+  "baked_glass",
+  "baked_bez.001",
+  "vglass",
+  "baked_bez.002",
+  "baked_glass.002",
+  "baked_bez.003",
+  "baked_glass.003",
+  "baked_bez.004",
+  "baked_glass.004",
+  "sink",
+  "screw",
+  "baked_sock",
+  "sink.001",
+  "screw.001",
+  "baked_sock.001",
+  "sink.002",
+  "screw.002",
+  "baked_sock.002",
+  "sink.003",
+  "screw.003",
+  "baked_sock.003",
+  "sink.004",
+  "screw.004",
+  "baked_sock.004",
+  "sink.005",
+  "screw.005",
+  "baked_sock.005",
+  "sink.006",
+  "screw.006",
+  "baked_sock.006",
+  "sink.007",
+  "screw.007",
+  "baked_sock.007",
+  "sink.008",
+  "screw.008",
+  "baked_sock.008",
+  "sink.009",
+  "screw.009",
+  "baked_sock.009",
+  "sink.010",
+  "screw.010",
+  "baked_sock.010",
+  "sink.011",
+  "screw.011",
+  "baked_sock.011",
+  "baked_paint",
+  "baked_dink",
+  "scbez",
+  "baked_cap_off",
+  "baked_cap_ink2",
+  "jring",
+  "baked_jewel",
+  "scbez.001",
+  "baked_cap_off.001",
+  "baked_cap_ink2.001",
+  "jring.001",
+  "baked_jewel.001",
+  "scbez.002",
+  "baked_cap_lit",
+  "baked_cap_ink",
+  "jring.002",
+  "baked_jewel.002",
+  "twasher",
+  "tnut",
+  "tbush",
+  "tlever",
+  "baked_kcs",
+  "kccap",
+  "baked_kcink",
+  "baked_kcs.001",
+  "kccap.001",
+  "baked_kcink.001",
+  "hpost",
+  "hpost.001",
+  "hbar",
+  "hpost.002",
+  "hpost.003",
+  "hbar.001",
+  "baked_hous",
+  "mglass",
+  "baked_scale",
+  "baked_kcs.002",
+  "kccap.002",
+  "baked_kcink.002",
+  "splate",
+  "rivet",
+  "rivet.001",
+  "baked_kcs.003",
+  "kccap.003",
+  "baked_kcink.003",
+  "baked_kcs.004",
+  "kccap.004",
+  "baked_kcink.004",
+  "baked_kcs.005",
+  "kccap.005",
+  "baked_kcink.005",
+  "baked_kcs.006",
+  "kccap.006",
+  "baked_kcink.006",
+  "print",
+  "stamp",
+  "baked_powder",
+  "baked_desk",
+  "unit.003",
+  "unit.004",
+  "unit.005"
+ ],
+ "materials": {
+  "dcut": "ok",
+  "dcut.001": "ok",
+  "dcut.002": "ok",
+  "baked_bez": "ok",
+  "baked_glass": "ok",
+  "baked_bez.001": "ok",
+  "LIVE_vfdglass": "ok",
+  "baked_bez.002": "ok",
+  "baked_glass.002": "ok",
+  "baked_bez.003": "ok",
+  "baked_glass.003": "ok",
+  "baked_bez.004": "ok",
+  "baked_glass.004": "ok",
+  "sink": "ok",
+  "screw": "ok",
+  "baked_sock": "ok",
+  "sink.001": "ok",
+  "screw.001": "ok",
+  "baked_sock.001": "ok",
+  "sink.002": "ok",
+  "screw.002": "ok",
+  "baked_sock.002": "ok",
+  "sink.003": "ok",
+  "screw.003": "ok",
+  "baked_sock.003": "ok",
+  "sink.004": "ok",
+  "screw.004": "ok",
+  "baked_sock.004": "ok",
+  "sink.005": "ok",
+  "screw.005": "ok",
+  "baked_sock.005": "ok",
+  "sink.006": "ok",
+  "screw.006": "ok",
+  "baked_sock.006": "ok",
+  "sink.007": "ok",
+  "screw.007": "ok",
+  "baked_sock.007": "ok",
+  "sink.008": "ok",
+  "screw.008": "ok",
+  "baked_sock.008": "ok",
+  "sink.009": "ok",
+  "screw.009": "ok",
+  "baked_sock.009": "ok",
+  "sink.010": "ok",
+  "screw.010": "ok",
+  "baked_sock.010": "ok",
+  "sink.011": "ok",
+  "screw.011": "ok",
+  "baked_sock.011": "ok",
+  "baked_paint": "ok",
+  "baked_dink": "ok",
+  "scbm": "ok",
+  "baked_cap_off": "ok",
+  "baked_cap_ink2": "ok",
+  "jchrome": "ok",
+  "baked_jewel": "ok",
+  "scbm.001": "ok",
+  "baked_cap_off.001": "ok",
+  "baked_cap_ink2.001": "ok",
+  "jchrome.001": "ok",
+  "baked_jewel.001": "ok",
+  "scbm.002": "ok",
+  "baked_cap_lit": "ok",
+  "baked_cap_ink": "ok",
+  "jchrome.002": "ok",
+  "baked_jewel.002": "ok",
+  "twm": "ok",
+  "tchrome": "ok",
+  "baked_kcs": "ok",
+  "alu": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_kcink": "ok",
+  "baked_kcs.001": "ok",
+  "alu.001": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_kcink.001": "ok",
+  "hal": "lost: Bump,MapRange,TexCoord,TexNoise,ValToRGB",
+  "hal.001": "lost: Bump,MapRange,TexCoord,TexNoise,ValToRGB",
+  "baked_hous": "ok",
+  "LIVE_glass": "ok",
+  "baked_scale": "ok",
+  "baked_kcs.002": "ok",
+  "alu.002": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_kcink.002": "ok",
+  "splate": "lost: Bump,MapRange,TexCoord,TexNoise,ValToRGB",
+  "rv": "ok",
+  "rv.001": "ok",
+  "baked_kcs.003": "ok",
+  "alu.003": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_kcink.003": "ok",
+  "baked_kcs.004": "ok",
+  "alu.004": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_kcink.004": "ok",
+  "baked_kcs.005": "ok",
+  "alu.005": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_kcink.005": "ok",
+  "baked_kcs.006": "ok",
+  "alu.006": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_kcink.006": "ok",
+  "print": "ok",
+  "stamp": "ok",
+  "baked_powder": "ok",
+  "baked_desk": "ok",
+  "br": "lost: Bump,MapRange,TexCoord,TexNoise,TexVoronoi,ValToRGB",
+  "br.001": "lost: Bump,MapRange,TexCoord,TexNoise,TexVoronoi,ValToRGB",
+  "br.002": "lost: Bump,MapRange,TexCoord,TexNoise,TexVoronoi,ValToRGB"
+ },
+ "camera": {
+  "position": [
+   -0.2785,
+   0.41778,
+   0.86
+  ],
+  "target": [
+   0.30348,
+   0.1213,
+   -0.08435
+  ],
+  "radius": 1.14822,
+  "theta_deg": -31.645,
+  "phi_deg": 75.036,
+  "vfov_deg": 22.8952,
+  "aspect": 1.77778,
+  "view_transform": "Standard",
+  "look": "None",
+  "exposure": 0.0
+ },
+ "live": [
+  "LIVE_vfdglass",
+  "LIVE_glass"
+ ],
+ "bake": "full",
+ "baked": {
+  "bez": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "glass": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bez.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bez.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "glass.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bez.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "glass.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bez.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "glass.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.007": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.008": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.009": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.010": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "sock.011": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "paint": {
+   "objects": 192,
+   "metallic": 0.0,
+   "peak": 3.438
+  },
+  "dink": {
+   "objects": 4,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "cap_off": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "cap_ink2": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 2.102
+  },
+  "jewel": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 4.98
+  },
+  "cap_off.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "cap_ink2.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 2.081
+  },
+  "jewel.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 4.918
+  },
+  "cap_lit": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.873
+  },
+  "cap_ink": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "jewel.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 2.935
+  },
+  "kcs": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcink": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.186
+  },
+  "kcs.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcink.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hous": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "scale": {
+   "objects": 52,
+   "metallic": 0.0,
+   "peak": 2.696
+  },
+  "kcs.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcink.002": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcs.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcink.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcs.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcink.004": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 2.175
+  },
+  "kcs.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcink.005": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.881
+  },
+  "kcs.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "kcink.006": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "powder": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "desk": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.864
+  }
+ },
+ "multi_material_unbaked": [],
+ "glb_bytes": 2024508,
+ "patched": "candy-apple: br, br.001, br.002 base 0.30/0.012/0.02 metallic 0.85 roughness 0.30, clearcoat 1 / 0.04; baked_* emissive x1.35/1.71/1.89, baked_glass x2.0/2.1/2.2, print/stamp x2.2 (tools/glb_mat.py, emis_gain.py)"
+}

@@ -76,6 +76,14 @@ M_EDGE = mat("panel_edge", ring_col(450, 548, 0, 6) if SKIN == "analog" else (0.
 edge = box(0, 0, PW, PH, -0.2, -0.002); edge.data.materials.append(M_EDGE); bevel(edge, 0.02, 3, 40)
 bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 0, 0)); face = bpy.context.object
 face.scale = (W / 100, H / 100, 1); bpy.ops.object.transform_apply(scale=True); face.data.materials.append(M_FACE); planar_uv(face)
+# LIVE_VU=1 (for the site's live 3D hero, tools/hero_glb.py LIVE=<these names>): a copy of the panel just above it per live
+# window, so each can carry the plug-in's own video (hero_glb.py's LIVE_CROP cuts each plane down to its window).
+# analog: vu_l, vu_r (the VU meters); fantasy: disp (the round display under the dome), mt_l, mt_r (the LED meter columns)
+if os.environ.get("LIVE_VU") == "1":
+    for nm in (("vu_l", "vu_r") if SKIN == "analog" else ("disp", "mt_l", "mt_r")):
+        bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 0, 0.0008)); o = bpy.context.object; o.name = nm
+        o.scale = (W / 100, H / 100, 1)      # scale left unapplied, UVs 0..1: the layer-plane shape hero_glb.py's crop expects
+        o.data.materials.append(print_mat(nm, (0.01, 0.01, 0.012), rough=0.42, coat=0.1, emit=1.0)); o.visible_shadow = False
 
 # ---------- the knobs ----------
 for (x, y, rs, rc, deg) in KN:
