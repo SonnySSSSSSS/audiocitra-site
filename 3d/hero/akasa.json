@@ -4,15 +4,15 @@
   "unit",
   "unit.001",
   "unit.002",
-  "bezel",
+  "baked_bez",
   "baked_glass",
-  "bezel.001",
-  "baked_glass.001",
-  "bezel.002",
+  "baked_bez.001",
+  "vglass",
+  "baked_bez.002",
   "baked_glass.002",
-  "bezel.003",
+  "baked_bez.003",
   "baked_glass.003",
-  "bezel.004",
+  "baked_bez.004",
   "baked_glass.004",
   "sink",
   "screw",
@@ -83,7 +83,7 @@
   "hpost.002",
   "hpost.003",
   "hbar.001",
-  "housing",
+  "baked_hous",
   "mglass",
   "baked_scale",
   "baked_kcs.002",
@@ -116,20 +116,15 @@
   "dcut": "ok",
   "dcut.001": "ok",
   "dcut.002": "ok",
-  "bez": "ok",
-  "c.001": "ok",
+  "baked_bez": "ok",
   "baked_glass": "ok",
-  "bez.001": "ok",
-  "c.005": "ok",
-  "baked_glass.001": "ok",
-  "bez.002": "ok",
-  "c.006": "ok",
+  "baked_bez.001": "ok",
+  "LIVE_vfdglass": "ok",
+  "baked_bez.002": "ok",
   "baked_glass.002": "ok",
-  "bez.003": "ok",
-  "c.007": "ok",
+  "baked_bez.003": "ok",
   "baked_glass.003": "ok",
-  "bez.004": "ok",
-  "c.009": "ok",
+  "baked_bez.004": "ok",
   "baked_glass.004": "ok",
   "sink": "ok",
   "screw": "ok",
@@ -194,8 +189,7 @@
   "baked_kcink.001": "ok",
   "hal": "lost: Bump,MapRange,TexCoord,TexNoise,ValToRGB",
   "hal.001": "lost: Bump,MapRange,TexCoord,TexNoise,ValToRGB",
-  "hous": "ok",
-  "c.010": "ok",
+  "baked_hous": "ok",
   "LIVE_glass": "ok",
   "baked_scale": "ok",
   "baked_kcs.002": "ok",
@@ -245,16 +239,27 @@
   "exposure": 0.0
  },
  "live": [
+  "LIVE_vfdglass",
   "LIVE_glass"
  ],
  "bake": "full",
  "baked": {
+  "bez": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
   "glass": {
    "objects": 1,
    "metallic": 0.0,
    "peak": 1.0
   },
-  "glass.001": {
+  "bez.001": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bez.002": {
    "objects": 1,
    "metallic": 0.0,
    "peak": 1.0
@@ -264,7 +269,17 @@
    "metallic": 0.0,
    "peak": 1.0
   },
+  "bez.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
   "glass.003": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
+  "bez.004": {
    "objects": 1,
    "metallic": 0.0,
    "peak": 1.0
@@ -377,7 +392,7 @@
   "cap_lit": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.874
+   "peak": 1.873
   },
   "cap_ink": {
    "objects": 1,
@@ -409,10 +424,15 @@
    "metallic": 0.0,
    "peak": 1.0
   },
+  "hous": {
+   "objects": 1,
+   "metallic": 0.0,
+   "peak": 1.0
+  },
   "scale": {
    "objects": 52,
    "metallic": 0.0,
-   "peak": 2.695
+   "peak": 2.696
   },
   "kcs.002": {
    "objects": 1,
@@ -452,7 +472,7 @@
   "kcink.005": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.887
+   "peak": 1.888
   },
   "kcs.006": {
    "objects": 1,
@@ -472,17 +492,10 @@
   "desk": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.863
+   "peak": 1.862
   }
  },
- "multi_material_unbaked": [
-  "bezel",
-  "bezel.001",
-  "bezel.002",
-  "bezel.003",
-  "bezel.004",
-  "housing"
- ],
- "glb_bytes": 1918432,
+ "multi_material_unbaked": [],
+ "glb_bytes": 1999104,
  "patched": "br* base 0.33/0.095/0.105 metallic 0.55; baked_* emissive x1.35/1.45/1.6, baked_glass x2.0/2.1/2.2, print/stamp x2.2 (tools/emis_gain.py, AKASA_SHUNYA_COLOUR.md)"
 }
