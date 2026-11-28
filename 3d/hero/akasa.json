@@ -496,6 +496,6 @@
   }
  },
  "multi_material_unbaked": [],
- "glb_bytes": 2278744,
+ "glb_bytes": 2279136,
  "patched": "br, br.001, br.002: base 0.30/0.012/0.02 metallic 0.85 roughness 0.30, clearcoat 1 / 0.04 (tools/glb_mat.py)"
 }
