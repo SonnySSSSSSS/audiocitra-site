@@ -305,8 +305,13 @@ if BAKE:
         bpy.ops.object.convert(target="MESH")
     def principled(m):
         return m.node_tree.nodes.get("Principled BSDF") if m and m.use_nodes else None
+    # BAKE_METAL=alu,hal: these metals bake anyway, as the render camera sees them (sheen and rings fixed in place): the
+    # viewer's dark environment drew Akasa's machined knob caps flat grey
+    FORCE = tuple(x for x in os.environ.get("BAKE_METAL", "").split(",") if x)
+    forced = lambda m: bool(m) and m.name.split(".")[0] in FORCE
     def bakeable(m):
         if not m or m.name.startswith("LIVE_") or m.get("hero_glass") or m.get("hero_decal"): return False
+        if forced(m): return True
         b = principled(m)
         if b and not b.inputs["Metallic"].is_linked and b.inputs["Metallic"].default_value >= 0.5: return False
         return True
@@ -350,8 +355,9 @@ if BAKE:
         # (transmission) to the viewer, full bakes them as the render camera sees them
         bk = sc.render.bake
         bk.use_pass_direct = bk.use_pass_indirect = bk.use_pass_diffuse = bk.use_pass_emit = True
-        bk.use_pass_glossy = bk.use_pass_transmission = MODE == "full"
-        bk.view_from = "ACTIVE_CAMERA" if MODE == "full" else "ABOVE_SURFACE"
+        full = MODE == "full" or forced(m)
+        bk.use_pass_glossy = bk.use_pass_transmission = full
+        bk.view_from = "ACTIVE_CAMERA" if full else "ABOVE_SURFACE"
         bpy.ops.object.bake(type="COMBINED", uv_layer="bake")
         for name in [u.name for u in o.data.uv_layers if u.name != "bake"]: o.data.uv_layers.remove(o.data.uv_layers[name])
         o.data.uv_layers["bake"].active_render = True
@@ -370,8 +376,8 @@ if BAKE:
         t = nt.nodes.new("ShaderNodeTexImage"); t.image = img
         nt.links.new(t.outputs["Color"], bb.inputs["Emission Color"]); bb.inputs["Emission Strength"].default_value = peak
         bb.inputs["Base Color"].default_value = (0, 0, 0, 1)
-        bb.inputs["Roughness"].default_value = 1.0 if MODE == "full" else rough
-        bb.inputs["Specular IOR Level"].default_value = 0.0 if MODE == "full" else 0.5
+        bb.inputs["Roughness"].default_value = 1.0 if full else rough
+        bb.inputs["Specular IOR Level"].default_value = 0.0 if full else 0.5
         o.data.materials.clear(); o.data.materials.append(nm)
         report_bake[mname] = {"objects": len(objs), "metallic": round(b.inputs["Metallic"].default_value, 3) if b else None, "peak": round(peak, 3)}
     skipped = sorted({o.name for o in sc.objects if o.type == "MESH" and not o.name.startswith("baked_")

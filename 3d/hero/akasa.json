@@ -72,37 +72,33 @@
   "tbush",
   "tlever",
   "baked_kcs",
-  "kccap",
+  "baked_alu",
   "baked_kcink",
   "baked_kcs.001",
-  "kccap.001",
+  "baked_alu.001",
   "baked_kcink.001",
-  "hpost",
-  "hpost.001",
-  "hbar",
-  "hpost.002",
-  "hpost.003",
-  "hbar.001",
+  "baked_hal",
+  "baked_hal.001",
   "baked_hous",
   "mglass",
   "baked_scale",
   "baked_kcs.002",
-  "kccap.002",
+  "baked_alu.002",
   "baked_kcink.002",
   "splate",
   "rivet",
   "rivet.001",
   "baked_kcs.003",
-  "kccap.003",
+  "baked_alu.003",
   "baked_kcink.003",
   "baked_kcs.004",
-  "kccap.004",
+  "baked_alu.004",
   "baked_kcink.004",
   "baked_kcs.005",
-  "kccap.005",
+  "baked_alu.005",
   "baked_kcink.005",
   "baked_kcs.006",
-  "kccap.006",
+  "baked_alu.006",
   "baked_kcink.006",
   "print",
   "stamp",
@@ -182,33 +178,33 @@
   "twm": "ok",
   "tchrome": "ok",
   "baked_kcs": "ok",
-  "alu": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_alu": "ok",
   "baked_kcink": "ok",
   "baked_kcs.001": "ok",
-  "alu.001": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_alu.001": "ok",
   "baked_kcink.001": "ok",
-  "hal": "lost: Bump,MapRange,TexCoord,TexNoise,ValToRGB",
-  "hal.001": "lost: Bump,MapRange,TexCoord,TexNoise,ValToRGB",
+  "baked_hal": "ok",
+  "baked_hal.001": "ok",
   "baked_hous": "ok",
   "LIVE_glass": "ok",
   "baked_scale": "ok",
   "baked_kcs.002": "ok",
-  "alu.002": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_alu.002": "ok",
   "baked_kcink.002": "ok",
   "splate": "lost: Bump,MapRange,TexCoord,TexNoise,ValToRGB",
   "rv": "ok",
   "rv.001": "ok",
   "baked_kcs.003": "ok",
-  "alu.003": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_alu.003": "ok",
   "baked_kcink.003": "ok",
   "baked_kcs.004": "ok",
-  "alu.004": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_alu.004": "ok",
   "baked_kcink.004": "ok",
   "baked_kcs.005": "ok",
-  "alu.005": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_alu.005": "ok",
   "baked_kcink.005": "ok",
   "baked_kcs.006": "ok",
-  "alu.006": "lost: Bump,MapRange,TexCoord,TexNoise,TexWave,ValToRGB",
+  "baked_alu.006": "ok",
   "baked_kcink.006": "ok",
   "print": "ok",
   "stamp": "ok",
@@ -409,6 +405,11 @@
    "metallic": 0.0,
    "peak": 1.0
   },
+  "alu": {
+   "objects": 1,
+   "metallic": 1.0,
+   "peak": 34.262
+  },
   "kcink": {
    "objects": 1,
    "metallic": 0.0,
@@ -419,9 +420,24 @@
    "metallic": 0.0,
    "peak": 1.0
   },
+  "alu.001": {
+   "objects": 1,
+   "metallic": 1.0,
+   "peak": 16.957
+  },
   "kcink.001": {
    "objects": 1,
    "metallic": 0.0,
+   "peak": 1.0
+  },
+  "hal": {
+   "objects": 3,
+   "metallic": 1.0,
+   "peak": 1.0
+  },
+  "hal.001": {
+   "objects": 3,
+   "metallic": 1.0,
    "peak": 1.0
   },
   "hous": {
@@ -432,22 +448,32 @@
   "scale": {
    "objects": 52,
    "metallic": 0.0,
-   "peak": 1.851
+   "peak": 1.881
   },
   "kcs.002": {
    "objects": 1,
    "metallic": 0.0,
    "peak": 1.0
   },
+  "alu.002": {
+   "objects": 1,
+   "metallic": 1.0,
+   "peak": 2.918
+  },
   "kcink.002": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.013
+   "peak": 1.0
   },
   "kcs.003": {
    "objects": 1,
    "metallic": 0.0,
    "peak": 1.0
+  },
+  "alu.003": {
+   "objects": 1,
+   "metallic": 1.0,
+   "peak": 2.036
   },
   "kcink.003": {
    "objects": 1,
@@ -459,25 +485,40 @@
    "metallic": 0.0,
    "peak": 1.0
   },
+  "alu.004": {
+   "objects": 1,
+   "metallic": 1.0,
+   "peak": 2.465
+  },
   "kcink.004": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.946
+   "peak": 1.745
   },
   "kcs.005": {
    "objects": 1,
    "metallic": 0.0,
    "peak": 1.0
   },
+  "alu.005": {
+   "objects": 1,
+   "metallic": 1.0,
+   "peak": 1.861
+  },
   "kcink.005": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 2.032
+   "peak": 1.457
   },
   "kcs.006": {
    "objects": 1,
    "metallic": 0.0,
    "peak": 1.0
+  },
+  "alu.006": {
+   "objects": 1,
+   "metallic": 1.0,
+   "peak": 1.528
   },
   "kcink.006": {
    "objects": 1,
@@ -496,6 +537,6 @@
   }
  },
  "multi_material_unbaked": [],
- "glb_bytes": 2279136,
+ "glb_bytes": 4751772,
  "patched": "br, br.001, br.002: base 0.30/0.012/0.02 metallic 0.85 roughness 0.30, clearcoat 1 / 0.04 (tools/glb_mat.py)"
 }
