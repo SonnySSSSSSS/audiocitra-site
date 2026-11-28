@@ -352,7 +352,7 @@
   "paint": {
    "objects": 192,
    "metallic": 0.0,
-   "peak": 3.837
+   "peak": 3.835
   },
   "dink": {
    "objects": 4,
@@ -432,7 +432,7 @@
   "scale": {
    "objects": 52,
    "metallic": 0.0,
-   "peak": 1.872
+   "peak": 1.851
   },
   "kcs.002": {
    "objects": 1,
@@ -442,7 +442,7 @@
   "kcink.002": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.0
+   "peak": 1.013
   },
   "kcs.003": {
    "objects": 1,
@@ -462,7 +462,7 @@
   "kcink.004": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.866
+   "peak": 1.946
   },
   "kcs.005": {
    "objects": 1,
@@ -472,7 +472,7 @@
   "kcink.005": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.83
+   "peak": 2.032
   },
   "kcs.006": {
    "objects": 1,
@@ -496,6 +496,6 @@
   }
  },
  "multi_material_unbaked": [],
- "glb_bytes": 1830864,
- "patched": "br, br.001, br.002: base 0.30/0.012/0.02 metallic 0.85 roughness 0.30, clearcoat 1 / 0.04 (tools/glb_mat.py); no emissive gains"
+ "glb_bytes": 2278744,
+ "patched": "br, br.001, br.002: base 0.30/0.012/0.02 metallic 0.85 roughness 0.30, clearcoat 1 / 0.04 (tools/glb_mat.py)"
 }
