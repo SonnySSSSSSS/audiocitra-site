@@ -293,5 +293,6 @@
   }
  },
  "multi_material_unbaked": [],
- "glb_bytes": 3944876
+ "glb_bytes": 3946408,
+ "patched": "baked_* emissive x1.6/1.55/1.6 (tools/emis_gain.py, AKASA_SHUNYA_COLOUR.md)"
 }
