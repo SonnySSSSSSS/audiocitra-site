@@ -352,7 +352,7 @@
   "paint": {
    "objects": 192,
    "metallic": 0.0,
-   "peak": 3.316
+   "peak": 3.438
   },
   "dink": {
    "objects": 4,
@@ -372,7 +372,7 @@
   "jewel": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 4.978
+   "peak": 4.98
   },
   "cap_off.001": {
    "objects": 1,
@@ -387,7 +387,7 @@
   "jewel.001": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 4.917
+   "peak": 4.918
   },
   "cap_lit": {
    "objects": 1,
@@ -402,7 +402,7 @@
   "jewel.002": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 2.934
+   "peak": 2.935
   },
   "kcs": {
    "objects": 1,
@@ -462,7 +462,7 @@
   "kcink.004": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 2.176
+   "peak": 2.175
   },
   "kcs.005": {
    "objects": 1,
@@ -472,7 +472,7 @@
   "kcink.005": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.888
+   "peak": 1.881
   },
   "kcs.006": {
    "objects": 1,
@@ -492,10 +492,10 @@
   "desk": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.862
+   "peak": 1.864
   }
  },
  "multi_material_unbaked": [],
- "glb_bytes": 1999104,
- "patched": "br* base 0.33/0.095/0.105 metallic 0.55; baked_* emissive x1.35/1.45/1.6, baked_glass x2.0/2.1/2.2, print/stamp x2.2 (tools/emis_gain.py, AKASA_SHUNYA_COLOUR.md)"
+ "glb_bytes": 2024508,
+ "patched": "candy-apple: br, br.001, br.002 base 0.30/0.012/0.02 metallic 0.85 roughness 0.30, clearcoat 1 / 0.04; baked_* emissive x1.35/1.71/1.89, baked_glass x2.0/2.1/2.2, print/stamp x2.2 (tools/glb_mat.py, emis_gain.py)"
 }
