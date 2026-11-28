@@ -234,8 +234,8 @@
   "phi_deg": 75.036,
   "vfov_deg": 22.8952,
   "aspect": 1.77778,
-  "view_transform": "Standard",
-  "look": "None",
+  "view_transform": "AgX",
+  "look": "AgX - Medium High Contrast",
   "exposure": 0.0
  },
  "live": [
@@ -352,7 +352,7 @@
   "paint": {
    "objects": 192,
    "metallic": 0.0,
-   "peak": 3.438
+   "peak": 3.837
   },
   "dink": {
    "objects": 4,
@@ -367,12 +367,12 @@
   "cap_ink2": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 2.102
+   "peak": 2.075
   },
   "jewel": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 4.98
+   "peak": 5.02
   },
   "cap_off.001": {
    "objects": 1,
@@ -382,17 +382,17 @@
   "cap_ink2.001": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 2.081
+   "peak": 2.049
   },
   "jewel.001": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 4.918
+   "peak": 4.747
   },
   "cap_lit": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.873
+   "peak": 1.302
   },
   "cap_ink": {
    "objects": 1,
@@ -402,7 +402,7 @@
   "jewel.002": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 2.935
+   "peak": 14.674
   },
   "kcs": {
    "objects": 1,
@@ -412,7 +412,7 @@
   "kcink": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.186
+   "peak": 1.0
   },
   "kcs.001": {
    "objects": 1,
@@ -432,7 +432,7 @@
   "scale": {
    "objects": 52,
    "metallic": 0.0,
-   "peak": 2.696
+   "peak": 1.872
   },
   "kcs.002": {
    "objects": 1,
@@ -462,7 +462,7 @@
   "kcink.004": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 2.175
+   "peak": 1.866
   },
   "kcs.005": {
    "objects": 1,
@@ -472,7 +472,7 @@
   "kcink.005": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.881
+   "peak": 1.83
   },
   "kcs.006": {
    "objects": 1,
@@ -492,10 +492,10 @@
   "desk": {
    "objects": 1,
    "metallic": 0.0,
-   "peak": 1.864
+   "peak": 1.418
   }
  },
  "multi_material_unbaked": [],
- "glb_bytes": 2024508,
- "patched": "candy-apple: br, br.001, br.002 base 0.30/0.012/0.02 metallic 0.85 roughness 0.30, clearcoat 1 / 0.04; baked_* emissive x1.35/1.71/1.89, baked_glass x2.0/2.1/2.2, print/stamp x2.2 (tools/glb_mat.py, emis_gain.py)"
+ "glb_bytes": 1830864,
+ "patched": "br, br.001, br.002: base 0.30/0.012/0.02 metallic 0.85 roughness 0.30, clearcoat 1 / 0.04 (tools/glb_mat.py); no emissive gains"
 }
